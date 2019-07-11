@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="LVM,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="1. LVM简介 LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM利用Linux内核的device-mapper来实现存储系统的虚拟化（系统分区独立于底层硬件）。 通过LVM，你可以实现存储空间的抽象化并在上面建立虚拟分区（virtual partitions），可以更简便地扩大和缩小分区，可以">
+<meta name="keywords" content="LVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4.10 - 4.13 LVM学习">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/4.10 - 4.13 LVM学习/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="1. LVM简介 LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM利用Linux内核的device-mapper来实现存储系统的虚拟化（系统分区独立于底层硬件）。 通过LVM，你可以实现存储空间的抽象化并在上面建立虚拟分区（virtual partitions），可以更简便地扩大和缩小分区，可以">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/005Mk4Aygy1fgqw9fcsq8j30hp09yt99.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/005Mk4Aygy1fgqwjqp2isj311y0lcmxi.jpg">
+<meta property="og:updated_time" content="2019-07-11T10:16:52.740Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4.10 - 4.13 LVM学习">
+<meta name="twitter:description" content="1. LVM简介 LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM利用Linux内核的device-mapper来实现存储系统的虚拟化（系统分区独立于底层硬件）。 通过LVM，你可以实现存储空间的抽象化并在上面建立虚拟分区（virtual partitions），可以更简便地扩大和缩小分区，可以">
+<meta name="twitter:image" content="http://wx2.sinaimg.cn/large/005Mk4Aygy1fgqw9fcsq8j30hp09yt99.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/4.10 - 4.13 LVM学习/">
+
+
+
+
+
+  <title>4.10 - 4.13 LVM学习 | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/4.10 - 4.13 LVM学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">4.10 - 4.13 LVM学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-LVM简介"><a href="#1-LVM简介" class="headerlink" title="1. LVM简介"></a>1. LVM简介</h1><ul>
+<li>LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM利用Linux内核的device-mapper来实现存储系统的虚拟化（系统分区独立于底层硬件）。</li>
+<li>通过LVM，你可以实现存储空间的抽象化并在上面建立虚拟分区（virtual partitions），可以更简便地扩大和缩小分区，可以增删分区时无需担心某个硬盘上没有足够的连续空间，而不会被卷入使用中的磁盘的问题（并且想知道内核是使用旧的还是新的分区表），而不必将其他分区移开。</li>
+<li>LVM是用来方便管理的，不会提供额外的数据安全保证。 </li>
+</ul>
+<h1 id="2-LVM的基本组"><a href="#2-LVM的基本组" class="headerlink" title="2. LVM的基本组"></a>2. LVM的基本组</h1><ul>
+<li>物理卷Physical volume -  (PV)：可以在上面建立卷组的媒介，可以是硬盘分区，也可以是硬盘本身或者回环文件（loopback file）。<ul>
+<li>物理卷包括一个特殊的header，其余部分被切割为一块块物理区域（physical extents）。</li>
+</ul>
+</li>
+<li>卷组Volume group (VG)：<br>将一组物理卷收集为一个管理单元。<ul>
+<li>逻辑卷Logical volume (LV)：虚拟分区，由物理区域（physical extents）组成。</li>
+<li>物理区域Physical extent (PE)：硬盘可供指派给逻辑卷的最小单位（通常为4MB）。</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://wx2.sinaimg.cn/large/005Mk4Aygy1fgqw9fcsq8j30hp09yt99.jpg" alt="LVM结构图"></p>
+<ul>
+<li><p>物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。</p>
+</li>
+<li><p>物理卷（physical volume）：物理卷就是指硬盘分区或从逻辑上与磁盘分区具有同样功能的设备(如RAID)，是LVM的基本存储逻辑块，但和基本的物理存储介质（如分区、磁盘等）比较，却包含有与LVM相关的管理参数。</p>
+</li>
+<li><p>卷组（Volume Group）：LVM卷组类似于非LVM系统中的物理硬盘，其由物理卷组成。可以在卷组上创建一个或多个“LVM分区”（逻辑卷），LVM卷组由一个或多个物理卷组成。</p>
+</li>
+<li><p>逻辑卷（logical volume）：LVM的逻辑卷类似于非LVM系统中的硬盘分区，在逻辑卷之上可以建立文件系统(比如/home或者/usr等)。</p>
+</li>
+<li><p>PE（physical extent）：每一个物理卷被划分为称为PE(Physical Extents)的基本单元，具有唯一编号的PE是可以被LVM寻址的最小单元。PE的大小是可配置的，默认为4MB。</p>
+</li>
+<li><p>LE（logical extent）：逻辑卷也被划分为被称为LE(Logical Extents) 的可被寻址的基本单位。在同一个卷组中，LE的大小和PE是相同的，并且一一对应。</p>
+</li>
+</ul>
+<p>简单来说就是：</p>
+<ul>
+<li><p>PV:是物理的磁盘分区</p>
+</li>
+<li><p>VG:LVM中的物理的磁盘分区，也就是PV，必须加入VG，可以将VG理解为一个仓库或者是几个大的硬盘。</p>
+</li>
+<li><p>LV：也就是从VG中划分的逻辑分区</p>
+</li>
+</ul>
+<h1 id="3-使用LVM的基本步骤"><a href="#3-使用LVM的基本步骤" class="headerlink" title="3. 使用LVM的基本步骤"></a>3. 使用LVM的基本步骤</h1><h2 id="3-1-准备磁盘分区"><a href="#3-1-准备磁盘分区" class="headerlink" title="3.1 准备磁盘分区"></a>3.1 准备磁盘分区</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-fdisk /dev/sdb</span><br><span class="line"></span><br><span class="line">-n 创建三个新分区，分别1G</span><br><span class="line"></span><br><span class="line">-t 改变分区类型为8e</span><br><span class="line"></span><br><span class="line">设备 Boot      Start        End      Blocks  Id  System</span><br><span class="line">/dev/sdb1            2048    2099199    1048576  8e  Linux LVM</span><br><span class="line">/dev/sdb2        2099200    4196351    1048576  8e  Linux LVM</span><br><span class="line">/dev/sdb3        4196352    6293503    1048576  8e  Linux LVM</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">partprobe 将磁盘分区表变化信息通知内核，请求操作系统重新加载分区表</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-准备物理卷"><a href="#3-2-准备物理卷" class="headerlink" title="3.2 准备物理卷"></a>3.2 准备物理卷</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-pvcreate /dev/sdb1</span><br><span class="line">WARNING: xfs signature detected on /dev/sdb1 at -offset 0. Wipe it? [y/n]: y</span><br><span class="line">  Wiping xfs signature on /dev/sdb1.</span><br><span class="line">  Physical volume &quot;/dev/sdb1&quot; successfully created.</span><br><span class="line">-pvcreate /dev/sdb2</span><br><span class="line">  Physical volume &quot;/dev/sdb2&quot; successfully created.</span><br><span class="line">-pvcreate /dev/sdb3</span><br><span class="line">  Physical volume &quot;/dev/sdb3&quot; successfully created.</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">pvdisplay 列出当前的物理卷</span><br><span class="line">pvs 列出当前的物理卷(更直观)</span><br><span class="line">pvremove /dev/sdb3 删除物理卷</span><br><span class="line">yun -y install lvm 安装lvm包</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-准备卷组"><a href="#3-3-准备卷组" class="headerlink" title="3.3 准备卷组"></a>3.3 准备卷组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-vgcreate vg1 /dev/sdb1 /dev/sdb2</span><br><span class="line">  Volume group &quot;vg1&quot; successfully created</span><br><span class="line">-vgs</span><br><span class="line">  VG  #PV #LV #SN Attr  VSize  VFree</span><br><span class="line">  cl    1  2  0 wz--n- 19.00g    0 </span><br><span class="line">  vg1  2  0  0 wz--n-  1.99g 1.99g</span><br><span class="line"></span><br><span class="line">vgdisplay列出卷组 / vgs 列出卷组（更直观）</span><br><span class="line">vgrmove vg1 删除物理卷</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-创建逻辑卷"><a href="#3-4-创建逻辑卷" class="headerlink" title="3.4 创建逻辑卷"></a>3.4 创建逻辑卷</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">-lvcreate -L 100M -n lv1 vg1</span><br><span class="line">Logical volume &quot;lv1&quot; created.</span><br><span class="line">-lva 列出逻辑卷</span><br><span class="line">  LV  VG  Attr      LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span><br><span class="line">  root cl  -wi-ao----  17.00g                                            </span><br><span class="line">  swap cl  -wi-ao----  2.00g                                </span><br><span class="line">  lv1  vg1 -wi-a----- 100.00m    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-mkfs.xfs /dev/vg1/lv1 格式化,再挂载(实际上，格式化为ext4更好，后面会讲到)</span><br><span class="line">meta-data=/dev/vg1/lv1          isize=512    agcount=4, agsize=6400 blks</span><br><span class="line">        =                      sectsz=512  attr=2, projid32bit=1</span><br><span class="line">        =                      crc=1        finobt=0, sparse=0</span><br><span class="line">data    =                      bsize=4096  blocks=25600, imaxpct=25</span><br><span class="line">        =                      sunit=0      swidth=0 blks</span><br><span class="line">naming  =version 2              bsize=4096  ascii-ci=0 ftype=1</span><br><span class="line">log      =internal log          bsize=4096  blocks=855, version=2</span><br><span class="line">        =                      sectsz=512  sunit=0 blks, lazy-count=1</span><br><span class="line">realtime =none                  extsz=4096  blocks=0, rtextents=0</span><br><span class="line"></span><br><span class="line">-mount /dev/vg1/lv1 /mnt/ 挂载逻辑卷lv1到mnt目录下</span><br><span class="line">-ls -l /dev/vg1/lv1</span><br><span class="line">lrwxrwxrwx 1 root root 7 6月  19 22:07 /dev/vg1/lv1 -&gt; ../dm-2</span><br><span class="line">-df -h</span><br><span class="line">文件系统            容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/mapper/cl-root  17G  4.5G  13G  27% /</span><br><span class="line">devtmpfs            906M    0  906M    0% /dev</span><br><span class="line">tmpfs                916M  84K  916M    1% /dev/shm</span><br><span class="line">tmpfs                916M  9.0M  907M    1% /run</span><br><span class="line">tmpfs                916M    0  916M    0% /sys/fs/cgroup</span><br><span class="line">/dev/sda1          1014M  139M  876M  14% /boot</span><br><span class="line">tmpfs                184M  16K  184M    1% /run/user/42</span><br><span class="line">tmpfs                184M    0  184M    0% /run/user/0</span><br><span class="line">/dev/mapper/vg1-lv1  97M  5.2M  92M    6% /mnt</span><br><span class="line"></span><br><span class="line">写开机启动挂载</span><br><span class="line">vi /etc/fstab</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">lvremove /dev/vg1/lv1 删除逻辑卷</span><br><span class="line">lvdisplay列出逻辑卷 / lvs 列出逻辑卷（更直观）</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-5-扩容逻辑卷"><a href="#3-5-扩容逻辑卷" class="headerlink" title="3.5 扩容逻辑卷"></a>3.5 扩容逻辑卷</h2><p>针对ext2,3,4格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-umount /mnt/ 规范操作是先把挂载点卸掉</span><br><span class="line">-lvresize -L 300M  /dev/vg1/lv1  重新设置卷大小</span><br><span class="line">-e2fsck -f /dev/vg1/lv1 检查磁盘错误  (ext执行)</span><br><span class="line">-resize2fs /dev/vg1/lv1 更新逻辑卷信息，识别新的大小(ext执行)</span><br><span class="line">    </span><br><span class="line">xfs_growfs /dev/vg1/lv1  xfs文件系统需要执行</span><br></pre></td></tr></table></figure>
+
+<p>针对xfs格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-lvresize -L 300M  /dev/vg1/lv1  重新设置卷大小</span><br><span class="line">-xfs_growfs /dev/vg1/lv1        xfs文件系统需要执行</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-6-缩减逻辑卷（xfs不支持）"><a href="#3-6-缩减逻辑卷（xfs不支持）" class="headerlink" title="3.6 缩减逻辑卷（xfs不支持）"></a>3.6 缩减逻辑卷（xfs不支持）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-umount /mnt/  卸载挂载点</span><br><span class="line">-e2fsck -f /dev/vg1/lv1 检查磁盘错误（ext）</span><br><span class="line">-resize2fs /dev/vg1/lv1 100M 更新逻辑卷信息（ext）</span><br><span class="line">-lvresize -L 100M  /dev/vg1/lv1  重新设置卷大小</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-7-扩展卷组"><a href="#3-7-扩展卷组" class="headerlink" title="3.7 扩展卷组"></a>3.7 扩展卷组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-fdisk /dev/sdb  新增/dev/sdb5(逻辑分区8e) 1G</span><br><span class="line">-n</span><br><span class="line">-p</span><br><span class="line">-5</span><br><span class="line">+1G</span><br><span class="line">-t</span><br><span class="line">-8e</span><br><span class="line">-pvcreate /dev/sdb5              设置物理卷</span><br><span class="line">-vgextend vg1 /dev/sdb5          把该物理卷扩展到卷组</span><br><span class="line">-lvresize -L 100M  /dev/vg1/lv1  重新设置逻辑卷大小</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-磁盘故障小案例"><a href="#4-磁盘故障小案例" class="headerlink" title="4. 磁盘故障小案例"></a>4. 磁盘故障小案例</h1><p>当我们配置完LVM，并将lvm分区挂载文件写入到/etc/fstab后重启 <strong>（这种问题在生产环境有可能遇到）</strong>，开机会遇到如下问题</p>
+<p><img src="http://wx2.sinaimg.cn/large/005Mk4Aygy1fgqwjqp2isj311y0lcmxi.jpg" alt="image"><br>==解决方案==</p>
+<ol>
+<li>输入root密码</li>
+<li>进入系统，vim /etc/fstab</li>
+<li>dd 刚刚写入文件的那一行分区挂载命令</li>
+<li>保存并退出</li>
+<li>reboot重启</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LVM/" rel="tag"># LVM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/3.1 - 3.3 用户文件及管理/" rel="next" title="2.1-2.2 系统目录结构">
+                <i class="fa fa-chevron-left"></i> 2.1-2.2 系统目录结构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/4.5 - 4.9 磁盘格式化与挂载/" rel="prev" title="4.5 - 4.9 磁盘格式化与挂载">
+                4.5 - 4.9 磁盘格式化与挂载 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-LVM简介"><span class="nav-number">1.</span> <span class="nav-text">1. LVM简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-LVM的基本组"><span class="nav-number">2.</span> <span class="nav-text">2. LVM的基本组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-使用LVM的基本步骤"><span class="nav-number">3.</span> <span class="nav-text">3. 使用LVM的基本步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-准备磁盘分区"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 准备磁盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-准备物理卷"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 准备物理卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-准备卷组"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 准备卷组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-创建逻辑卷"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 创建逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-扩容逻辑卷"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 扩容逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-缩减逻辑卷（xfs不支持）"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 缩减逻辑卷（xfs不支持）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-扩展卷组"><span class="nav-number">3.7.</span> <span class="nav-text">3.7 扩展卷组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-磁盘故障小案例"><span class="nav-number">4.</span> <span class="nav-text">4. 磁盘故障小案例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

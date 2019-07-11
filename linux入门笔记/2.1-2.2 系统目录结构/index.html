@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="系统目录,">
+  <meta name="keywords" content="passwd,useradd,userdel,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="[toc] 1. / - 根每一个文件和目录从根目录开始。只有root用户具有该目录下的写权限。请注意，/root是root用户的主目录，这与/.不一样 2. /bin - 用户二进制文件包含二进制可执行文件。在单用户模式下，你需要使用的常见Linux命令都位于此目录下。系统的所有用户使用的命令都设在这里。例如：ps、ls、ping、grep、cp 3. /boot - 引导加载程序文件包含引导加">
-<meta name="keywords" content="系统目录">
+<meta name="description" content="3.1 用户配置文件和密码配置文件1. /etc/passwd 文件解释1234567891011[root@zhouqunic-01 ~]# cat /etc/passwd | headroot:x:0:0:root:/root:/bin/bashbin:x:1:1:bin:/bin:/sbin/nologindaemon:x:2:2:daemon:/sbin:/sbin/nologinadm:">
+<meta name="keywords" content="passwd,useradd,userdel">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2.1-2.2 系统目录结构">
+<meta property="og:title" content="3.1 - 3.3 用户文件及管理">
 <meta property="og:url" content="http://yoursite.com/linux入门笔记/2.1-2.2 系统目录结构/index.html">
 <meta property="og:site_name" content="Joking的Linux世界">
-<meta property="og:description" content="[toc] 1. / - 根每一个文件和目录从根目录开始。只有root用户具有该目录下的写权限。请注意，/root是root用户的主目录，这与/.不一样 2. /bin - 用户二进制文件包含二进制可执行文件。在单用户模式下，你需要使用的常见Linux命令都位于此目录下。系统的所有用户使用的命令都设在这里。例如：ps、ls、ping、grep、cp 3. /boot - 引导加载程序文件包含引导加">
+<meta property="og:description" content="3.1 用户配置文件和密码配置文件1. /etc/passwd 文件解释1234567891011[root@zhouqunic-01 ~]# cat /etc/passwd | headroot:x:0:0:root:/root:/bin/bashbin:x:1:1:bin:/bin:/sbin/nologindaemon:x:2:2:daemon:/sbin:/sbin/nologinadm:">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-11T09:54:02.405Z">
+<meta property="og:updated_time" content="2019-07-11T10:08:20.392Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2.1-2.2 系统目录结构">
-<meta name="twitter:description" content="[toc] 1. / - 根每一个文件和目录从根目录开始。只有root用户具有该目录下的写权限。请注意，/root是root用户的主目录，这与/.不一样 2. /bin - 用户二进制文件包含二进制可执行文件。在单用户模式下，你需要使用的常见Linux命令都位于此目录下。系统的所有用户使用的命令都设在这里。例如：ps、ls、ping、grep、cp 3. /boot - 引导加载程序文件包含引导加">
+<meta name="twitter:title" content="3.1 - 3.3 用户文件及管理">
+<meta name="twitter:description" content="3.1 用户配置文件和密码配置文件1. /etc/passwd 文件解释1234567891011[root@zhouqunic-01 ~]# cat /etc/passwd | headroot:x:0:0:root:/root:/bin/bashbin:x:1:1:bin:/bin:/sbin/nologindaemon:x:2:2:daemon:/sbin:/sbin/nologinadm:">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>2.1-2.2 系统目录结构 | Joking的Linux世界</title>
+  <title>3.1 - 3.3 用户文件及管理 | Joking的Linux世界</title>
   
 
 
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2.1-2.2 系统目录结构</h1>
+          <h1 class="post-title" itemprop="name headline">3.1 - 3.3 用户文件及管理</h1>
         
 
         <div class="post-meta">
@@ -376,26 +376,50 @@
       
 
       
-        <p>[toc]</p>
-<h1 id="1-根"><a href="#1-根" class="headerlink" title="1. / - 根"></a>1. / - 根</h1><p>每一个文件和目录从根目录开始。<br>只有root用户具有该目录下的写权限。请注意，/root是root用户的主目录，这与/.不一样</p>
-<h1 id="2-bin-用户二进制文件"><a href="#2-bin-用户二进制文件" class="headerlink" title="2. /bin - 用户二进制文件"></a>2. /bin - 用户二进制文件</h1><p>包含二进制可执行文件。<br>在单用户模式下，你需要使用的常见Linux命令都位于此目录下。系统的所有用户使用的命令都设在这里。<br>例如：ps、ls、ping、grep、cp</p>
-<h1 id="3-boot-引导加载程序文件"><a href="#3-boot-引导加载程序文件" class="headerlink" title="3. /boot - 引导加载程序文件"></a>3. /boot - 引导加载程序文件</h1><p>包含引导加载程序相关的文件。<br>内核的initrd、vmlinux、grub文件位于/boot下。<br>例如：initrd.img-2.6.32-24-generic、vmlinuz-2.6.32-24-generic</p>
-<h1 id="4-dev-设备文件"><a href="#4-dev-设备文件" class="headerlink" title="4. /dev - 设备文件"></a>4. /dev - 设备文件</h1><p>包含设备文件。<br>这些包括终端设备、USB或连接到系统的任何设备。例如：/dev/tty1、/dev/usbmon0</p>
-<h1 id="5-etc-配置文件"><a href="#5-etc-配置文件" class="headerlink" title="5. /etc - 配置文件"></a>5. /etc - 配置文件</h1><p>包含所有程序所需的配置文件。<br>也包含了用于启动/停止单个程序的启动和关闭shell脚本。例如：/etc/resolv.conf、/etc/logrotate.conf</p>
-<h1 id="6-home-HOME目录"><a href="#6-home-HOME目录" class="headerlink" title="6. /home - HOME目录"></a>6. /home - HOME目录</h1><p>所有用户用home目录来存储他们的个人档案。<br>例如：/home/john、/home/nikita</p>
-<h1 id="7-lib-和-lib64-系统库"><a href="#7-lib-和-lib64-系统库" class="headerlink" title="7./lib 和 /lib64 - 系统库"></a>7./lib 和 /lib64 - 系统库</h1><p>包含支持位于/bin和/sbin下的二进制文件的库文件.<br>库文件名为 ld<em>或lib</em>.so.*<br>例如：ld-2.11.1.so，libncurses.so.5.7</p>
-<h1 id="8-media-可移动媒体设备"><a href="#8-media-可移动媒体设备" class="headerlink" title="8. /media - 可移动媒体设备"></a>8. /media - 可移动媒体设备</h1><p>用于挂载可移动设备的临时目录。<br>举例来说，挂载CD-ROM的/media/cdrom，挂载软盘驱动器的/media/floppy</p>
-<h1 id="9-mnt-挂载目录"><a href="#9-mnt-挂载目录" class="headerlink" title="9. /mnt - 挂载目录"></a>9. /mnt - 挂载目录</h1><p>临时安装目录，系统管理员可以挂载文件系统</p>
-<h1 id="10-opt-可选的附加应用程序"><a href="#10-opt-可选的附加应用程序" class="headerlink" title="10. /opt - 可选的附加应用程序"></a>10. /opt - 可选的附加应用程序</h1><p>opt代表可选的。<br>包含从个别厂商的附加应用程序。<br>附加应用程序应该安装在/opt/或者/opt/的子目录下</p>
-<h1 id="11-proc-进程信息"><a href="#11-proc-进程信息" class="headerlink" title="11. /proc - 进程信息"></a>11. /proc - 进程信息</h1><p>包含系统进程的相关信息。<br>这是一个虚拟的文件系统，包含有关正在运行的进程的信息。例如：/proc/{pid}目录中包含的与特定pid相关的信息。<br>这是一个虚拟的文件系统，系统资源以文本信息形式存在。例如：/proc/uptime</p>
-<h1 id="12-root-系统数据"><a href="#12-root-系统数据" class="headerlink" title="12. /root - 系统数据"></a>12. /root - 系统数据</h1><p>root根用户目录。<br>包含root配置文件。</p>
-<h1 id="13-run-运行数据"><a href="#13-run-运行数据" class="headerlink" title="13. /run  运行数据"></a>13. /run  运行数据</h1><p>run代表运行。<br>包含运行时相关的数据。<br>例如，ssid.pid、syslogs.pid等相关数据</p>
-<h1 id="14-sbin-系统二进制文件"><a href="#14-sbin-系统二进制文件" class="headerlink" title="14. /sbin   系统二进制文件"></a>14. /sbin   系统二进制文件</h1><p>二进制文件 = 可执行文件。<br>在这个目录下的linux命令通常由系统管理员使用，对系统进行维护。<br>例如：iptables、reboot、fdisk、ifconfig、swapon命令</p>
-<h1 id="15-srv-服务数据"><a href="#15-srv-服务数据" class="headerlink" title="15. /srv   服务数据"></a>15. /srv   服务数据</h1><p>srv代表服务。<br>包含服务器特定服务相关的数据。<br>例如，/srv/cvs/包含cvs相关的数据。</p>
-<h1 id="16-sys-系统数据"><a href="#16-sys-系统数据" class="headerlink" title="16. /sys   系统数据"></a>16. /sys   系统数据</h1><p>sys代表系统。<br>包含系统进程数据文件。<br>例如，/sys/fs/包含文件、/sys/bus/包含总线等相关数据</p>
-<h1 id="17-tmp-临时文件"><a href="#17-tmp-临时文件" class="headerlink" title="17. /tmp   临时文件"></a>17. /tmp   临时文件</h1><p>包含系统和用户创建的临时文件。<br>      当系统重新启动时，这个目录下的文件都将被删除。</p>
-<h1 id="18-usr-用户程序"><a href="#18-usr-用户程序" class="headerlink" title="18. /usr   用户程序"></a>18. /usr   用户程序</h1><p>包含二进制文件、库文件、文档和二级程序的源代码。<br>/usr/bin中包含用户程序的二进制文件。如果你在/bin中找不到用户二进制文件，到/usr/bin目录看看。<br>例如：at、awk、cd、less、scp。<br>/usr/sbin中包含系统管理员的二进制文件。如果在/sbin/中找不到系统二进制文件，到/usr/sbin目录看看。<br>例如：atd、cron、sshd、useradd、userdel。<br>/usr/lib中包含了/usr/bin和/usr/sbin用到的库。<br>/usr/local中包含了从源安装的用户程序。</p>
-<h1 id="19-var-变量文件"><a href="#19-var-变量文件" class="headerlink" title="19. /var   变量文件"></a>19. /var   变量文件</h1><p>包含变量文件<br>这个目录下可以找到内容可能增长的文件。<br>例如：系统日志文件（/var/log）;包和数据库文件（/var/lib）；电子邮件（/var/mail）；打印队列（/var/spool）；锁文件（var/lock）；多次重新启动需要的临时文件（/var/tmp）</p>
+        <h1 id="3-1-用户配置文件和密码配置文件"><a href="#3-1-用户配置文件和密码配置文件" class="headerlink" title="3.1 用户配置文件和密码配置文件"></a>3.1 用户配置文件和密码配置文件</h1><h2 id="1-etc-passwd-文件解释"><a href="#1-etc-passwd-文件解释" class="headerlink" title="1. /etc/passwd 文件解释"></a>1. /etc/passwd 文件解释</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# cat /etc/passwd | head</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line">sync:x:5:0:sync:/sbin:/bin/sync</span><br><span class="line">shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown</span><br><span class="line">halt:x:7:0:halt:/sbin:/sbin/halt</span><br><span class="line">mail:x:8:12:mail:/var/spool/mail:/sbin/nologin</span><br><span class="line">operator:x:11:0:operator:/root:/sbin/nologin</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>/etc/passwd 文件分7个字段</li>
+</ul>
+<ol>
+<li>用户名(login_name)</li>
+<li>密码(passwd)  实际密码数据放在/etc/shadow 中，所以此处显示为×</li>
+<li>UID  用户标识符</li>
+<li>GID  组名</li>
+<li>用户名(user_name)</li>
+<li>用户主目录(home_directory)</li>
+<li>命令解释程序(Shell)</li>
+</ol>
+<h1 id="2-etc-shadow-文件解释"><a href="#2-etc-shadow-文件解释" class="headerlink" title="2. /etc/shadow 文件解释"></a>2. /etc/shadow 文件解释</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# cat /etc/shadow | head</span><br><span class="line">root:$6$s8WMXWea$YBPEIrOm8djENWPVaXQizcZ5..aQkMn3r/tbeQLitob.p/4YyHN54FD9AJeCwfiS0a2wK8aubDrM7j1LZrpTj1:17318:0:99999:7:::</span><br><span class="line">bin:*:17110:0:99999:7:::</span><br><span class="line">daemon:*:17110:0:99999:7:::</span><br><span class="line">adm:*:17110:0:99999:7:::</span><br><span class="line">lp:*:17110:0:99999:7:::</span><br><span class="line">sync:*:17110:0:99999:7:::</span><br><span class="line">shutdown:*:17110:0:99999:7:::</span><br><span class="line">halt:*:17110:0:99999:7:::</span><br><span class="line">mail:*:17110:0:99999:7:::</span><br><span class="line">operator:*:17110:0:99999:7:::</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>/etc/shadow 文件分为9个字段</li>
+</ul>
+<ol>
+<li>用户名（也被称为登录名），在/etc/shadow中，用户名和/etc/passwd 是相同的，这样就把passwd 和shadow中用的用户记录联系在一起；这个字段是非空的；</li>
+<li>密码（已被加密），如果是有些用户在这段是x，表示这个用户不能登录到系统；这个字段是非空的；</li>
+<li>上次修改口令的时间；这个时间是从1970年01月01日算起到最近一次修改口令的时间间隔（天数），您可以通过passwd 来修改用户的密码，然后查看/etc/shadow中此字段的变化；</li>
+<li>两次修改口令间隔最少的天数；如果设置为0,则禁用此功能；也就是说用户必须经过多少天才能修改其口令；此项功能用处不是太大；默认值是通过/etc/login.defs文件定义中获取，PASS_MIN_DAYS 中有定义；</li>
+<li>两次修改口令间隔最多的天数；这个能增强管理员管理用户口令的时效性，应该说在增强了系统的安全性；如果是系统默认值，是在添加用户时由/etc/login.defs文件定义中获取，在PASS_MAX_DAYS 中定义；</li>
+<li>提前多少天警告用户口令将过期；当用户登录系统后，系统登录程序提醒用户口令将要作废；如果是系统默认值，是在添加用户时由/etc/login.defs文件定义中获取，在PASS_WARN_AGE 中定义；</li>
+<li>在口令过期之后多少天禁用此用户；此字段表示用户口令作废多少天后，系统会禁用此用户，也就是说系统会不能再让此用户登录，也不会提示用户过期，是完全禁用；</li>
+<li>用户过期日期；此字段指定了用户作废的天数（从1970年的1月1日开始的天数），如果这个字段的值为空，帐号永久可用；</li>
+<li>保留字段，目前为空，以备将来Linux发展之用。</li>
+</ol>
+<h1 id="3-2-用户组管理"><a href="#3-2-用户组管理" class="headerlink" title="3.2 用户组管理"></a>3.2 用户组管理</h1><h2 id="groupadd-用户组管理命令"><a href="#groupadd-用户组管理命令" class="headerlink" title="groupadd 用户组管理命令"></a>groupadd 用户组管理命令</h2><ul>
+<li><p>groupadd 增加组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# groupadd grouptest1</span><br><span class="line">[root@localhost ~]# tail -n1 /etc/group</span><br><span class="line">grouptest1:x:501:</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>groupadd -g uid groupname -g 指定所增加组的uid </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# groupadd -g 520 grouptest2</span><br><span class="line">[root@localhost ~]# tail -n1 /etc/group</span><br><span class="line">grouptest2:x:520:</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>groupdel 删除组<br>若组里含有用户则不可以删除该组。</p>
+</li>
+</ul>
+<h1 id="3-3-用户管理"><a href="#3-3-用户管理" class="headerlink" title="3.3 用户管理"></a>3.3 用户管理</h1><h2 id="1-useradd-增加用户命令"><a href="#1-useradd-增加用户命令" class="headerlink" title="1. useradd 增加用户命令"></a>1. useradd 增加用户命令</h2><p>-u  自定义UID<br>-g  使其属于已经存在的某个组，后面可跟组名or组id号<br>-d  自定义用户的家目录<br>-M  不建立家目录<br>-s  自定义shell  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# useradd user2</span><br><span class="line">[root@zhouqunic-01 ~]# tail -n2 /etc/passwd</span><br><span class="line">zhouqunic:x:1000:1000:zhouqunic:/home/zhouqunic:/bin/bash</span><br><span class="line">user2:x:1001:1001::/home/user2:/bin/bash</span><br><span class="line">[root@zhouqunic-01 ~]# groupadd grp2</span><br><span class="line">[root@zhouqunic-01 ~]# useradd -u 1004 -g grp2  user3</span><br><span class="line">[root@zhouqunic-01 ~]# tail -n3 /etc/passwd</span><br><span class="line">zhouqunic:x:1000:1000:zhouqunic:/home/zhouqunic:/bin/bash</span><br><span class="line">user2:x:1001:1001::/home/user2:/bin/bash</span><br><span class="line">user3:x:1004:1002::/home/user3:/bin/bash</span><br><span class="line">[root@zhouqunic-01 ~]# useradd -u 1009 -g grp2 -d /home/aming/ -s /sbin/nologin  user5</span><br><span class="line">[root@zhouqunic-01 ~]# tail -n5 /etc/passwd</span><br><span class="line">zhouqunic:x:1000:1000:zhouqunic:/home/zhouqunic:/bin/bash</span><br><span class="line">user2:x:1001:1001::/home/user2:/bin/bash</span><br><span class="line">user3:x:1004:1002::/home/user3:/bin/bash</span><br><span class="line">user4:x:1008:1002::/home/zhouqunic/:/sbin/nologin</span><br><span class="line">user5:x:1009:1002::/home/aming/:/sbin/nologin</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-userdel-删除用户"><a href="#2-userdel-删除用户" class="headerlink" title="2. userdel 删除用户"></a>2. userdel 删除用户</h2><p>-r 删除账户的时候，连带账户的家目录一起删除</p>
 
       
     </div>
@@ -413,7 +437,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/系统目录/" rel="tag"># 系统目录</a>
+            <a href="/tags/passwd/" rel="tag"># passwd</a>
+          
+            <a href="/tags/useradd/" rel="tag"># useradd</a>
+          
+            <a href="/tags/userdel/" rel="tag"># userdel</a>
           
         </div>
       
@@ -422,6 +450,26 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/new post/" rel="next" title="2.1-2.2 系统目录结构">
+                <i class="fa fa-chevron-left"></i> 2.1-2.2 系统目录结构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/5.5 - 5.7 Vim入门02/" rel="prev" title="5.5 - 5.7 Vim入门02">
+                5.5 - 5.7 Vim入门02 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -495,7 +543,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -517,7 +565,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -557,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-根"><span class="nav-number">1.</span> <span class="nav-text">1. / - 根</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-bin-用户二进制文件"><span class="nav-number">2.</span> <span class="nav-text">2. /bin - 用户二进制文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-boot-引导加载程序文件"><span class="nav-number">3.</span> <span class="nav-text">3. /boot - 引导加载程序文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-dev-设备文件"><span class="nav-number">4.</span> <span class="nav-text">4. /dev - 设备文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-etc-配置文件"><span class="nav-number">5.</span> <span class="nav-text">5. /etc - 配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-home-HOME目录"><span class="nav-number">6.</span> <span class="nav-text">6. /home - HOME目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-lib-和-lib64-系统库"><span class="nav-number">7.</span> <span class="nav-text">7./lib 和 /lib64 - 系统库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-media-可移动媒体设备"><span class="nav-number">8.</span> <span class="nav-text">8. /media - 可移动媒体设备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-mnt-挂载目录"><span class="nav-number">9.</span> <span class="nav-text">9. /mnt - 挂载目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-opt-可选的附加应用程序"><span class="nav-number">10.</span> <span class="nav-text">10. /opt - 可选的附加应用程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-proc-进程信息"><span class="nav-number">11.</span> <span class="nav-text">11. /proc - 进程信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-root-系统数据"><span class="nav-number">12.</span> <span class="nav-text">12. /root - 系统数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-run-运行数据"><span class="nav-number">13.</span> <span class="nav-text">13. /run  运行数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-sbin-系统二进制文件"><span class="nav-number">14.</span> <span class="nav-text">14. /sbin   系统二进制文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-srv-服务数据"><span class="nav-number">15.</span> <span class="nav-text">15. /srv   服务数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#16-sys-系统数据"><span class="nav-number">16.</span> <span class="nav-text">16. /sys   系统数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#17-tmp-临时文件"><span class="nav-number">17.</span> <span class="nav-text">17. /tmp   临时文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#18-usr-用户程序"><span class="nav-number">18.</span> <span class="nav-text">18. /usr   用户程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19-var-变量文件"><span class="nav-number">19.</span> <span class="nav-text">19. /var   变量文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-1-用户配置文件和密码配置文件"><span class="nav-number">1.</span> <span class="nav-text">3.1 用户配置文件和密码配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-etc-passwd-文件解释"><span class="nav-number">1.1.</span> <span class="nav-text">1. /etc/passwd 文件解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-etc-shadow-文件解释"><span class="nav-number">2.</span> <span class="nav-text">2. /etc/shadow 文件解释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-2-用户组管理"><span class="nav-number">3.</span> <span class="nav-text">3.2 用户组管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#groupadd-用户组管理命令"><span class="nav-number">3.1.</span> <span class="nav-text">groupadd 用户组管理命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-3-用户管理"><span class="nav-number">4.</span> <span class="nav-text">3.3 用户管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-useradd-增加用户命令"><span class="nav-number">4.1.</span> <span class="nav-text">1. useradd 增加用户命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-userdel-删除用户"><span class="nav-number">4.2.</span> <span class="nav-text">2. userdel 删除用户</span></a></li></ol></li></ol></div>
             
 
           </div>

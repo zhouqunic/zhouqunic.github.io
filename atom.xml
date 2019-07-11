@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-11T09:54:02.405Z</updated>
+  <updated>2019-07-11T10:19:10.874Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,18 +17,238 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2.1-2.2 系统目录结构</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/2.1-2.2%20%E7%B3%BB%E7%BB%9F%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/"/>
-    <id>http://yoursite.com/linux入门笔记/2.1-2.2 系统目录结构/</id>
+    <title>5.5 - 5.7 Vim入门02</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/5.5%20-%205.7%20Vim%E5%85%A5%E9%97%A802/"/>
+    <id>http://yoursite.com/linux入门笔记/5.5 - 5.7 Vim入门02/</id>
     <published>2017-08-18T04:49:11.000Z</published>
-    <updated>2019-07-11T09:54:02.405Z</updated>
+    <updated>2019-07-11T10:19:10.874Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;[toc]&lt;/p&gt;
-&lt;h1 id=&quot;1-根&quot;&gt;&lt;a href=&quot;#1-根&quot; class=&quot;headerlink&quot; title=&quot;1. / - 根&quot;&gt;&lt;/a&gt;1. / - 根&lt;/h1&gt;&lt;p&gt;每一个文件和目录从根目录开始。&lt;br&gt;只有root用户具有该目录下的写权限。请注意，/
+        &lt;h1 id=&quot;5-5-进入编辑模式&quot;&gt;&lt;a href=&quot;#5-5-进入编辑模式&quot; class=&quot;headerlink&quot; title=&quot;5.5 进入编辑模式&quot;&gt;&lt;/a&gt;5.5 进入编辑模式&lt;/h1&gt;&lt;h2 id=&quot;1-进入vim编辑模式&quot;&gt;&lt;a href=&quot;#1-进入vim编辑模
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>3.1 - 3.3 用户文件及管理</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/2.1-2.2%20%E7%B3%BB%E7%BB%9F%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/"/>
+    <id>http://yoursite.com/linux入门笔记/2.1-2.2 系统目录结构/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:08:20.392Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;3-1-用户配置文件和密码配置文件&quot;&gt;&lt;a href=&quot;#3-1-用户配置文件和密码配置文件&quot; class=&quot;headerlink&quot; title=&quot;3.1 用户配置文件和密码配置文件&quot;&gt;&lt;/a&gt;3.1 用户配置文件和密码配置文件&lt;/h1&gt;&lt;h2 id=&quot;1-etc
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="passwd" scheme="http://yoursite.com/tags/passwd/"/>
+    
+      <category term="useradd" scheme="http://yoursite.com/tags/useradd/"/>
+    
+      <category term="userdel" scheme="http://yoursite.com/tags/userdel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2.1-2.2 系统目录结构</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/new%20post/"/>
+    <id>http://yoursite.com/linux入门笔记/new post/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:07:28.746Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="passwd" scheme="http://yoursite.com/tags/passwd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2.1-2.2 系统目录结构</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/new%20post%20-%20%E5%89%AF%E6%9C%AC/"/>
+    <id>http://yoursite.com/linux入门笔记/new post - 副本/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:07:28.746Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="passwd" scheme="http://yoursite.com/tags/passwd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>4.1-4.4 磁盘管理</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/4.1-4.4%20%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/"/>
+    <id>http://yoursite.com/linux入门笔记/4.1-4.4 磁盘管理/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:13:27.370Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;4-1-df命令&quot;&gt;&lt;a href=&quot;#4-1-df命令&quot; class=&quot;headerlink&quot; title=&quot;4.1 df命令&quot;&gt;&lt;/a&gt;4.1 df命令&lt;/h1&gt;&lt;h2 id=&quot;1-df命令&quot;&gt;&lt;a href=&quot;#1-df命令&quot; class=&quot;headerli
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="df" scheme="http://yoursite.com/tags/df/"/>
+    
+      <category term="du" scheme="http://yoursite.com/tags/du/"/>
+    
+      <category term="fdisk" scheme="http://yoursite.com/tags/fdisk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>5.1 - 5.4 Vim命令入门01</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/5.1%20-%205.4%20Vim%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A801/"/>
+    <id>http://yoursite.com/linux入门笔记/5.1 - 5.4 Vim命令入门01/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:18:18.010Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;5-1-vim介绍&quot;&gt;&lt;a href=&quot;#5-1-vim介绍&quot; class=&quot;headerlink&quot; title=&quot;5.1 vim介绍&quot;&gt;&lt;/a&gt;5.1 vim介绍&lt;/h1&gt;&lt;h2 id=&quot;vi-和-vim-的区别&quot;&gt;&lt;a href=&quot;#vi-和-vim-的区别&quot;
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>3.7 -3.9 su和sudo用户切换</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/3.7%20-3.9%20su%E5%92%8Csudo%E7%94%A8%E6%88%B7%E5%88%87%E6%8D%A2/"/>
+    <id>http://yoursite.com/linux入门笔记/3.7 -3.9 su和sudo用户切换/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:11:43.464Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;3-7-su命令&quot;&gt;&lt;a href=&quot;#3-7-su命令&quot; class=&quot;headerlink&quot; title=&quot;3.7 su命令&quot;&gt;&lt;/a&gt;3.7 su命令&lt;/h1&gt;&lt;p&gt;su 命令就是切换用户的工具&lt;/p&gt;
+&lt;h2 id=&quot;1-su-命令的用法&quot;&gt;&lt;a href
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="su" scheme="http://yoursite.com/tags/su/"/>
+    
+      <category term="sudo" scheme="http://yoursite.com/tags/sudo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>4.5 - 4.9 磁盘格式化与挂载</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/4.5%20-%204.9%20%E7%A3%81%E7%9B%98%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%8E%E6%8C%82%E8%BD%BD/"/>
+    <id>http://yoursite.com/linux入门笔记/4.5 - 4.9 磁盘格式化与挂载/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:15:35.285Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;4-5-4-6-磁盘格式化&quot;&gt;&lt;a href=&quot;#4-5-4-6-磁盘格式化&quot; class=&quot;headerlink&quot; title=&quot;4.5/4.6 磁盘格式化&quot;&gt;&lt;/a&gt;4.5/4.6 磁盘格式化&lt;/h1&gt;&lt;h2 id=&quot;1-mke2fs命令&quot;&gt;&lt;a href=&quot;
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="blkid" scheme="http://yoursite.com/tags/blkid/"/>
+    
+      <category term="fstab" scheme="http://yoursite.com/tags/fstab/"/>
+    
+      <category term="LVM" scheme="http://yoursite.com/tags/LVM/"/>
+    
+      <category term="mke2fs" scheme="http://yoursite.com/tags/mke2fs/"/>
+    
+      <category term="mkfs" scheme="http://yoursite.com/tags/mkfs/"/>
+    
+      <category term="mount" scheme="http://yoursite.com/tags/mount/"/>
+    
+      <category term="UUID" scheme="http://yoursite.com/tags/UUID/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>4.10 - 4.13 LVM学习</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/4.10%20-%204.13%20LVM%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://yoursite.com/linux入门笔记/4.10 - 4.13 LVM学习/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:16:52.740Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-LVM简介&quot;&gt;&lt;a href=&quot;#1-LVM简介&quot; class=&quot;headerlink&quot; title=&quot;1. LVM简介&quot;&gt;&lt;/a&gt;1. LVM简介&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由He
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="LVM" scheme="http://yoursite.com/tags/LVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2.1-2.2 系统目录结构</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/3.1%20-%203.3%20%E7%94%A8%E6%88%B7%E6%96%87%E4%BB%B6%E5%8F%8A%E7%AE%A1%E7%90%86/"/>
+    <id>http://yoursite.com/linux入门笔记/3.1 - 3.3 用户文件及管理/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:03:55.659Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-根&quot;&gt;&lt;a href=&quot;#1-根&quot; class=&quot;headerlink&quot; title=&quot;1. / - 根&quot;&gt;&lt;/a&gt;1. / - 根&lt;/h1&gt;&lt;p&gt;每一个文件和目录从根目录开始。&lt;br&gt;只有root用户具有该目录下的写权限。请注意，/root是root用户的主
       
     
     </summary>
@@ -37,6 +257,201 @@
     
     
       <category term="系统目录" scheme="http://yoursite.com/tags/%E7%B3%BB%E7%BB%9F%E7%9B%AE%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>6.1 - 6.4 linux下压缩打包工具01-bzip2、xz、gzip</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/6.1%20-%206.4%20linux%E4%B8%8B%E5%8E%8B%E7%BC%A9%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B701-bzip2%E3%80%81xz%E3%80%81gzip/"/>
+    <id>http://yoursite.com/linux入门笔记/6.1 - 6.4 linux下压缩打包工具01-bzip2、xz、gzip/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:20:33.715Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;6-1-压缩打包介绍&quot;&gt;&lt;a href=&quot;#6-1-压缩打包介绍&quot; class=&quot;headerlink&quot; title=&quot;6.1 压缩打包介绍&quot;&gt;&lt;/a&gt;6.1 压缩打包介绍&lt;/h1&gt;&lt;h2 id=&quot;1-windows压缩工具&quot;&gt;&lt;a href=&quot;#1-window
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="bzip2" scheme="http://yoursite.com/tags/bzip2/"/>
+    
+      <category term="xz" scheme="http://yoursite.com/tags/xz/"/>
+    
+      <category term="gzip" scheme="http://yoursite.com/tags/gzip/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2.1-2.2 系统目录结构</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/new%20post%20-%20%E5%89%AF%E6%9C%AC%20(2)/"/>
+    <id>http://yoursite.com/linux入门笔记/new post - 副本 (2)/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:07:28.746Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="passwd" scheme="http://yoursite.com/tags/passwd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>6.5 - 6.7 linux下压缩打包工具02-zip、tar</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/6.5%20-%206.7%20linux%E4%B8%8B%E5%8E%8B%E7%BC%A9%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B702-zip%E3%80%81tar/"/>
+    <id>http://yoursite.com/linux入门笔记/6.5 - 6.7 linux下压缩打包工具02-zip、tar/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:21:53.922Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;6-5-zip压缩工具&quot;&gt;&lt;a href=&quot;#6-5-zip压缩工具&quot; class=&quot;headerlink&quot; title=&quot;6.5 zip压缩工具&quot;&gt;&lt;/a&gt;6.5 zip压缩工具&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;Windows 的zip文件传送到Linux时，是可以通
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="zip" scheme="http://yoursite.com/tags/zip/"/>
+    
+      <category term="unzip" scheme="http://yoursite.com/tags/unzip/"/>
+    
+      <category term="tar" scheme="http://yoursite.com/tags/tar/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2.1-2.2 系统目录结构</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/new%20post%20-%20%E5%89%AF%E6%9C%AC%20(3)/"/>
+    <id>http://yoursite.com/linux入门笔记/new post - 副本 (3)/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:07:28.746Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="passwd" scheme="http://yoursite.com/tags/passwd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2.1-2.2 系统目录结构</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/new%20post%20-%20%E5%89%AF%E6%9C%AC%20(4)/"/>
+    <id>http://yoursite.com/linux入门笔记/new post - 副本 (4)/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:07:28.746Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="passwd" scheme="http://yoursite.com/tags/passwd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2.1-2.2 系统目录结构</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/new%20post%20-%20%E5%89%AF%E6%9C%AC%20(5)/"/>
+    <id>http://yoursite.com/linux入门笔记/new post - 副本 (5)/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:07:28.746Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="passwd" scheme="http://yoursite.com/tags/passwd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2.1-2.2 系统目录结构</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/new%20post%20-%20%E5%89%AF%E6%9C%AC%20(6)/"/>
+    <id>http://yoursite.com/linux入门笔记/new post - 副本 (6)/</id>
+    <published>2017-08-18T04:49:11.000Z</published>
+    <updated>2019-07-11T10:07:28.746Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="passwd" scheme="http://yoursite.com/tags/passwd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>3.4 - 3.6 用户属性和密码管理</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/3.4%20-%203.6%20%E7%94%A8%E6%88%B7%E5%B1%9E%E6%80%A7%E5%92%8C%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86/"/>
+    <id>http://yoursite.com/linux入门笔记/3.4 - 3.6 用户属性和密码管理/</id>
+    <published>2017-08-18T04:22:01.000Z</published>
+    <updated>2019-07-11T10:10:37.189Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;3-4-usermod命令&quot;&gt;&lt;a href=&quot;#3-4-usermod命令&quot; class=&quot;headerlink&quot; title=&quot;3.4 usermod命令&quot;&gt;&lt;/a&gt;3.4 usermod命令&lt;/h1&gt;&lt;h2 id=&quot;usermod-更改用户的属性&quot;&gt;&lt;a h
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="mkpasswd" scheme="http://yoursite.com/tags/mkpasswd/"/>
+    
+      <category term="passwd" scheme="http://yoursite.com/tags/passwd/"/>
+    
+      <category term="usermod" scheme="http://yoursite.com/tags/usermod/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2.3 ls命令</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/2.3%20ls%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/linux入门笔记/2.3 ls命令/</id>
+    <published>2017-08-18T04:18:53.000Z</published>
+    <updated>2019-07-11T10:03:40.465Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;ls&quot;&gt;&lt;a href=&quot;#ls&quot; class=&quot;headerlink&quot; title=&quot;ls&quot;&gt;&lt;/a&gt;ls&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span 
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="ls" scheme="http://yoursite.com/tags/ls/"/>
     
   </entry>
   
