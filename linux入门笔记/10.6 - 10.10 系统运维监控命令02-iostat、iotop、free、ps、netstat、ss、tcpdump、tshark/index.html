@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iostat,iotop,free,ps,netstat,ss,tcpdump,tshark,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="10.6 监控io性能 iostat主要用于监控系统设备的IO负载情况，iostat首次运行时显示自系统启动开始的各项统计信息，之后运行iostat将显示自上次运行该命令以后的统计信息。用户可以通过指定统计的次数和时间来获得所需的统计信息。iotop是一个用来监视磁盘I/O使用状况的 top 类工具，可监测到哪一个程序使用的磁盘IO的信息.  1. iostat和iotop命令iostat的包和s">
+<meta name="keywords" content="iostat,iotop,free,ps,netstat,ss,tcpdump,tshark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10.6 - 10.10 系统运维监控命令02-iostat、iotop、free、ps、netstat、ss、tcpdump、tshark">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/10.6 - 10.10 系统运维监控命令02-iostat、iotop、free、ps、netstat、ss、tcpdump、tshark/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="10.6 监控io性能 iostat主要用于监控系统设备的IO负载情况，iostat首次运行时显示自系统启动开始的各项统计信息，之后运行iostat将显示自上次运行该命令以后的统计信息。用户可以通过指定统计的次数和时间来获得所需的统计信息。iotop是一个用来监视磁盘I/O使用状况的 top 类工具，可监测到哪一个程序使用的磁盘IO的信息.  1. iostat和iotop命令iostat的包和s">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-12T06:04:29.557Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="10.6 - 10.10 系统运维监控命令02-iostat、iotop、free、ps、netstat、ss、tcpdump、tshark">
+<meta name="twitter:description" content="10.6 监控io性能 iostat主要用于监控系统设备的IO负载情况，iostat首次运行时显示自系统启动开始的各项统计信息，之后运行iostat将显示自上次运行该命令以后的统计信息。用户可以通过指定统计的次数和时间来获得所需的统计信息。iotop是一个用来监视磁盘I/O使用状况的 top 类工具，可监测到哪一个程序使用的磁盘IO的信息.  1. iostat和iotop命令iostat的包和s">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/10.6 - 10.10 系统运维监控命令02-iostat、iotop、free、ps、netstat、ss、tcpdump、tshark/">
+
+
+
+
+
+  <title>10.6 - 10.10 系统运维监控命令02-iostat、iotop、free、ps、netstat、ss、tcpdump、tshark | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/10.6 - 10.10 系统运维监控命令02-iostat、iotop、free、ps、netstat、ss、tcpdump、tshark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">10.6 - 10.10 系统运维监控命令02-iostat、iotop、free、ps、netstat、ss、tcpdump、tshark</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="10-6-监控io性能"><a href="#10-6-监控io性能" class="headerlink" title="10.6 监控io性能"></a>10.6 监控io性能</h1><blockquote>
+<p>iostat主要用于监控系统设备的IO负载情况，iostat首次运行时显示自系统启动开始的各项统计信息，之后运行iostat将显示自上次运行该命令以后的统计信息。用户可以通过指定统计的次数和时间来获得所需的统计信息。iotop是一个用来监视磁盘I/O使用状况的 top 类工具，可监测到哪一个程序使用的磁盘IO的信息.</p>
+</blockquote>
+<h2 id="1-iostat和iotop命令"><a href="#1-iostat和iotop命令" class="headerlink" title="1. iostat和iotop命令"></a>1. iostat和iotop命令</h2><p>iostat的包和sar的包是一起的，已经和sar一起安装了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[zhouqun@localhost ~]$ iostat -d -x  显示和I/O相关的扩展信息</span><br><span class="line">Linux 3.10.0-514.el7.x86_64 (localhost.localdomain)    2017年07月11日    _x86_64_    (1 CPU)</span><br><span class="line"></span><br><span class="line">Device:        rrqm/s  wrqm/s    r/s    w/s  rsec/s  wsec/s avgrq-sz avgqu-sz  await  svctm  %util</span><br><span class="line">vda              0.00    1.06    0.01    1.16    0.27    17.77    15.41    0.01    4.28  1.45  0.17</span><br><span class="line">vdb              0.00    0.00    0.00    0.00    0.00    0.00    9.70    0.00    0.74  0.74  0.00</span><br><span class="line"></span><br><span class="line">[zhouqun@localhost ~]$ sudo iotop  动态显示磁盘I/O使用状况</span><br><span class="line">-bash: iotop: 未找到命令</span><br><span class="line">[zhouqun@localhost ~]$ yum install -y iotop</span><br><span class="line">[zhouqun@localhost ~]$ iotop</span><br><span class="line"></span><br><span class="line">Total DISK READ :  0.00 B/s | Total DISK WRITE :      0.00 B/s</span><br><span class="line">Actual DISK READ:  0.00 B/s | Actual DISK WRITE:      0.00 B/s</span><br><span class="line"></span><br><span class="line">*****总结*****</span><br><span class="line">rrqm/s：  每秒这个设备相关的读取请求有多少被Merge了</span><br><span class="line">wrqm/s：  每秒这个设备相关的写入请求有多少被Merge了</span><br><span class="line">r/s：    每秒读取的数据量</span><br><span class="line">w/s：    每秒写入的数据量</span><br><span class="line">rsec/s：  每秒读取的扇区数</span><br><span class="line">wsec/s：  每秒写入的扇区数</span><br><span class="line">avgrq-sz：平均请求扇区的大小</span><br><span class="line">avgqu-sz：平均请求队列的长度</span><br><span class="line">await：  I/O的响应时间（以毫秒为单位），这个时间包括了队列时间和服务时间</span><br><span class="line">svctm：  表示平均每次设备I/O操作的服务时间（以毫秒为单位）</span><br><span class="line">%util：  设备处理I/O的时间占命令统计总时间的百分比</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-如何通过这些值分析设备的I-O情况？"><a href="#2-如何通过这些值分析设备的I-O情况？" class="headerlink" title="2. 如何通过这些值分析设备的I/O情况？"></a>2. 如何通过这些值分析设备的I/O情况？</h2><ul>
+<li>avgqu-sz：平均请求的队列长度值，越小越好</li>
+<li>await：系统I/O的响应时间一般低于5ms，大于10ms就比较大了</li>
+<li>await和svctm的差值：<br>await &gt;&gt; svctm表示I/O队列等待时间过长，则系统运行应用程序会很慢<br>await ~~ svctm表示几乎没有等待时间，说明磁盘性能良好</li>
+<li>%util：该参数暗示了设备的繁忙程度。一般地，如果该参数是100%表示设备已经接近满负荷运行了（当然如果是多磁盘，即使%util是100%，因为磁盘的并发能力，所以磁盘使用未必就到了瓶颈）</li>
+</ul>
+<h1 id="10-7-free命令"><a href="#10-7-free命令" class="headerlink" title="10.7 free命令"></a>10.7 free命令</h1><blockquote>
+<p>free命令可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">语法：free [选项]</span><br><span class="line">选项：</span><br><span class="line">-b：以Byte为单位显示内存使用情况；</span><br><span class="line">-k：以KB为单位显示内存使用情况；</span><br><span class="line">-m：以MB为单位显示内存使用情况；</span><br><span class="line">-h：适当的单位显示</span><br><span class="line">-o：不显示缓冲区调节列；</span><br><span class="line">-s&lt;间隔秒数&gt;：持续观察内存使用状况；</span><br><span class="line">-t：显示内存总和列；</span><br><span class="line">-V：显示版本信息。</span><br><span class="line"></span><br><span class="line">[zhouqun@localhost ~]$ free  查看内存使用情况</span><br><span class="line">            total        used        free      shared  buff/cache  available</span><br><span class="line">Mem:        1530368      110844    1255360        8780      164164    1249284</span><br><span class="line">Swap:        819196          0      819196</span><br><span class="line"></span><br><span class="line">[zhouqun@localhost ~]$ free -m  查看内存使用情况，以兆M做单位</span><br><span class="line">              total        used        free      shared  buff/cache  available</span><br><span class="line">Mem:          1494        108        1225          8        160        1219</span><br><span class="line">Swap:          799          0        799</span><br><span class="line"></span><br><span class="line">[zhouqun@localhost ~]$ free -h  查看内存使用情况，以合适的单位做统计，并显示出来</span><br><span class="line">              total        used        free      shared  buff/cache  available</span><br><span class="line">Mem:          1.5G        108M        1.2G        8.6M        160M        1.2G</span><br><span class="line">Swap:          799M          0B        799M</span><br><span class="line"></span><br><span class="line">*****总结*****</span><br><span class="line">1. used+free 等于total, 是因为linux系统会预留部分内存给buff和catch</span><br><span class="line">2. buff 和catch 的区别：</span><br><span class="line">buff（缓冲）：当CPU向磁盘写入数据时，由于磁盘存储速率低于CPU，所以CPU工作时先将写好的数据存放在内存中，该部分内存即为缓冲内存。</span><br><span class="line">cache（缓存）：当CPU从磁盘读取数据时，由于磁盘输出速率低于CPU的读取速度，所以磁盘的数据会预先存放在内存中，该部分内存即为缓存内存。</span><br><span class="line">3. available 包含free 和buffer/catch 剩余部分</span><br><span class="line">4. 公式：total=used+free+buffer/catch</span><br><span class="line">5. Shared：多个进程共享的内存总额</span><br></pre></td></tr></table></figure>
+
+<h1 id="10-8-ps命令"><a href="#10-8-ps命令" class="headerlink" title="10.8 ps命令"></a>10.8 ps命令</h1><blockquote>
+<p>ps命令用于报告当前系统的进程状态。可以搭配kill指令随时中断、删除不必要的程序。ps命令是最基本同时也是非常强大的进程查看命令，使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵死、哪些进程占用了过多的资源等等，总之大部分信息都是可以通过执行该命令得到的。 </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">语法： ps [选项]</span><br><span class="line">选项：</span><br><span class="line">a：显示现行终端机下的所有程序，包括其他用户的程序。</span><br><span class="line">u：以用户为主的格式来显示系统状况。</span><br><span class="line">x：显示所有程序，包括历史进程。</span><br><span class="line">-e：显示所有进程（同a）</span><br><span class="line">-f：显示UID、PPIP、C与STIME栏</span><br><span class="line">-l：显示进程详细信息</span><br><span class="line"></span><br><span class="line">[zhouqun@localhost ~]# ps aux </span><br><span class="line">USER        PID %CPU %MEM    VSZ  RSS TTY      STAT START  TIME COMMAND</span><br><span class="line">root          1  0.0  0.2 125604  4140 ?        Ss  09:41  0:01 /usr/lib/systemd/systemd --switched-r</span><br><span class="line">root          2  0.0  0.0      0    0 ?        S    09:41  0:00 [kthreadd]</span><br><span class="line">root          3  0.0  0.0      0    0 ?        S    09:41  0:00 [ksoftirqd/0]</span><br><span class="line">root          5  0.0  0.0      0    0 ?        S&lt;  09:41  0:00 [kworker/0:0H]</span><br><span class="line">......</span><br><span class="line">STAT表示进程状态：</span><br><span class="line">D：不能中断的进程</span><br><span class="line">R：run状态的进程：在一个时间内使用的cpu进程，并不是一直运行的进程</span><br><span class="line">S：sleep状态的进程：使用完CPU后，先暂停，过一段时间后继续使用</span><br><span class="line">s：主进程</span><br><span class="line">T：暂停的进程</span><br><span class="line">Z：僵尸进程</span><br><span class="line">&lt;：高优先级进程</span><br><span class="line">N：低优先级进程</span><br><span class="line">L：内存中被锁定了内存分页</span><br><span class="line">l：多线程进程</span><br><span class="line">+：前台进程</span><br><span class="line"></span><br><span class="line">[zhouqun@localhost ~]$ ps elf</span><br><span class="line">F S UID        PID  PPID  C PRI  NI ADDR SZ WCHAN  STIME TTY          TIME CMD</span><br><span class="line">4 S root        1    0  0  80  0 - 32855 ep_pol 10:28 ?        00:00:01 /usr/lib/system</span><br><span class="line">1 S root        2    0  0  80  0 -    0 kthrea 10:28 ?        00:00:00 [kthreadd]</span><br><span class="line"></span><br><span class="line">关于PID进程序列号</span><br><span class="line">1. 杀死进程</span><br><span class="line">kill  1246    后面跟的是PID</span><br><span class="line">2. 假如系统被黑了，遇到不知道的进程，先要找到PID 在哪里启动的</span><br><span class="line">ls -l /proc/505/    每一个进程都有一个目录</span><br></pre></td></tr></table></figure>
+
+<h1 id="10-9-查看网络状态"><a href="#10-9-查看网络状态" class="headerlink" title="10.9 查看网络状态"></a>10.9 查看网络状态</h1><h2 id="1-netstat命令"><a href="#1-netstat命令" class="headerlink" title="1. netstat命令"></a>1. netstat命令</h2><blockquote>
+<p>netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">语法： netstat [选项]</span><br><span class="line">选项：</span><br><span class="line">-a：或--all      显示所有连线中的socket</span><br><span class="line">-l：或--listening 显示监控中的服务器的socket</span><br><span class="line">-n：或--numeric  直接使用IP地址</span><br><span class="line">-p：或--programs  显示正在使用socket的程序识别码和程序名称</span><br><span class="line">-t：或--tcp      显示tcp传输协议的连接状况</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# netstat -lnp  打印当前系统启动哪些端口</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address              Foreign Address    State      PID/Program name</span><br><span class="line">tcp        0      0 0.0.0.0:22                  0.0.0.0:*          LISTEN      929/sshd</span><br><span class="line">tcp        0      0 :::80                      :::*              LISTEN      25005/httpd</span><br><span class="line">tcp        0      0 :::22                      :::*              LISTEN      929/sshd</span><br><span class="line">udp        0      0 0.0.0.0:68                  0.0.0.0:*                      1597/dhclient</span><br><span class="line">Active UNIX domain sockets (only servers)</span><br><span class="line">Proto RefCnt Flags      Type      State        I-Node PID/Program name      Path</span><br><span class="line">unix  2      [ ACC ]    STREAM    LISTENING    6783  1/init                @/com/ubuntu/upstart</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# netstat -lutnp  只查看tcp</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address          Foreign Address        State      PID/Program name    </span><br><span class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*              LISTEN      1734/sshd          </span><br><span class="line">tcp        0      0 127.0.0.1:25            0.0.0.0:*              LISTEN      2599/master        </span><br><span class="line">tcp6      0      0 :::22                  :::*                    LISTEN      1734/sshd          </span><br><span class="line">tcp6      0      0 ::1:25    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@localhost ~]# netstat -an  打印网络连接状况</span><br><span class="line">Active Internet connections (servers and established)</span><br><span class="line">Proto Recv-Q Send-Q Local Address          Foreign Address        State      </span><br><span class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*              LISTEN    </span><br><span class="line">tcp        0      0 127.0.0.1:25            0.0.0.0:*              LISTEN    </span><br><span class="line">tcp        0    52 192.168.60.107:22      192.168.60.107:406    ESTABLISHED</span><br><span class="line">tcp6      0      0 :::22                  :::*                    LISTEN    </span><br><span class="line">tcp6      0      0 ::1:25                  :::*                    LISTEN    </span><br><span class="line">raw6      0      0 :::58                  :::*                    7          </span><br><span class="line">Active UNIX domain sockets (servers and established)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">netstat -an |grep 80</span><br><span class="line">如果你所管理的服务器是一台提供web服务（80端口）的服务器，查看当前连接web服务的有哪些IP.</span><br><span class="line"></span><br><span class="line">*****扩展****</span><br><span class="line">查看tcp协议状态的命令</span><br><span class="line">[root@localhost ~]#  netstat -an | awk &apos;/^tcp/ &#123;++sta[$NF]&#125; END &#123;for(key in sta) print key,&quot;\t&quot;,sta[key]&#125;&apos;  </span><br><span class="line">LISTEN      4</span><br><span class="line">ESTABLISHED      1</span><br><span class="line">与awk一起使用，可以查看tcp的状态的次数，需要关注established 状态，如果这个数字很大，说明系统很忙。</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-ss命令"><a href="#2-ss命令" class="headerlink" title="2. ss命令"></a>2. ss命令</h2><blockquote>
+<p>ss命令用来显示处于活动状态的套接字信息。ss命令可以用来获取socket统计信息，它可以显示和netstat类似的内容。但ss的优势在于它能够显示更多更详细的有关TCP和连接状态的信息，而且比netstat更快速更高效。 </p>
+</blockquote>
+<blockquote>
+<p>当服务器的socket连接数量变得非常大时，无论是使用netstat命令还是直接cat /proc/net/tcp，执行速度都会很慢。可能你不会有切身的感受，但请相信我，当服务器维持的连接达到上万个的时候，使用netstat等于浪费 生命，而用ss才是节省时间。 </p>
+</blockquote>
+<blockquote>
+<p>天下武功唯快不破。ss快的秘诀在于，它利用到了TCP协议栈中tcp_diag。tcp_diag是一个用于分析统计的模块，可以获得Linux 内核中第一手的信息，这就确保了ss的快捷高效。当然，如果你的系统中没有tcp_diag，ss也可以正常运行，只是效率会变得稍慢。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">语法： ss [选项]</span><br><span class="line">选项：</span><br><span class="line">-a：显示所有套接字（socket）</span><br><span class="line">-n：不解析服务器名称，以数字方式显示</span><br><span class="line">-h：显示帮助信息；</span><br><span class="line">-V：显示指令版本信息；</span><br><span class="line">-l：显示处于监听状态的套接字；</span><br><span class="line">-o：显示计时器信息；</span><br><span class="line">-m：显示套接字的内存使用情况；</span><br><span class="line">-p：显示使用套接字的进程信息；</span><br><span class="line">-i：显示内部的TCP信息；</span><br><span class="line">-4：只显示ipv4的套接字；</span><br><span class="line">-6：只显示ipv6的套接字；</span><br><span class="line">-t：只显示tcp套接字；</span><br><span class="line">-u：只显示udp套接字；</span><br><span class="line">-d：只显示DCCP套接字；</span><br><span class="line">-w：仅显示RAW套接字；</span><br><span class="line">-x：仅显示UNIX域套接字。</span><br><span class="line"></span><br><span class="line">[root@localhost ~]## ss -an    </span><br><span class="line">Netid State      Recv-Q Send-Q  Local Address:Port                Peer Address:Port              </span><br><span class="line">nl    UNCONN    0      0                  0:0                                *                  </span><br><span class="line">nl    UNCONN    0      0                  0:-1442840033                      *</span><br><span class="line"></span><br><span class="line">结合grep 命令查看Listen状态</span><br><span class="line">ss -an | grep -i Listen</span><br></pre></td></tr></table></figure>
+
+<h1 id="10-10-linux下抓包"><a href="#10-10-linux下抓包" class="headerlink" title="10.10 linux下抓包"></a>10.10 linux下抓包</h1><h2 id="1-tcpdump-命令"><a href="#1-tcpdump-命令" class="headerlink" title="1. tcpdump 命令"></a>1. tcpdump 命令</h2><blockquote>
+<p>tcpdump命令是一款sniffer工具，它可以打印所有经过网络接口的数据包的头信息，也可以使用-w选项将数据包保存到文件中，方便以后分析。 </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">语法： tcpdump [选项]</span><br><span class="line">选项：</span><br><span class="line">-i：指定网卡名，使用指定的网络送出数据包</span><br><span class="line">-c：指定数量</span><br><span class="line">-w：指定存放位置</span><br><span class="line">-r：=read，从指定文件查看数据包数据</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">有时候，也许你会有这样的需求，想看一下某个网卡上都有哪些数据包，尤其是当你初步判定你的服务器上有流量攻击。这时，使用抓包工具来抓一下数据包，就可以知道有哪些IP在攻击你了。</span><br><span class="line"></span><br><span class="line">eg：</span><br><span class="line">[root@localhost ~]# yum install -y tcpdump</span><br><span class="line">[root@localhost ~]# tcpdump -nn -i eth0</span><br><span class="line">tcpdump: verbose output suppressed, use -v or -vv for full protocol decode</span><br><span class="line">listening on eth0, link-type EN10MB (Ethernet), capture size 65535 bytes</span><br><span class="line">19:13:56.689147 IP 10.72.137.159.22 &gt; 10.72.137.53.50827: Flags [P.], seq 2793829986:2793830182, ack 1384443306, win 1067, length 196</span><br><span class="line">19:13:56.691389 IP 10.72.137.159.22 &gt; 10.72.137.53.50827: Flags [P.], seq 196:376, ack 1, win 1067, length 180</span><br><span class="line">19:13:56.691541 IP 10.72.137.53.50827 &gt; 10.72.137.159.22: Flags [.], ack 376, win 16266, length 0</span><br><span class="line">19:13:56.694499 IP 10.72.137.159.22 &gt; 10.72.137.53.50827: Flags [P.], seq 376:636, ack 1, win 1067, length 260</span><br><span class="line">19:13:56.695659 IP 10.72.137.159.22 &gt; 10.72.137.53.50827: Flags [P.], seq 636:800, ack 1, win 1067, length 164</span><br><span class="line">19:13:56.695793 IP 10.72.137.53.50827 &gt; 10.72.137.159.22: Flags [.], ack 800, win 16160, length 0</span><br><span class="line">19:13:56.698429 IP 10.72.137.159.22 &gt; 10.72.137.53.50827: Flags [P.], seq 800:1060, ack 1, win 1067, length 260</span><br><span class="line">19:13:56.700332 IP 10.72.137.159.22 &gt; 10.72.137.53.50827: Flags [P.], seq 1060:1224, ack 1, win 1067, length 164</span><br><span class="line">19:13:56.700419 IP 10.72.137.53.50827 &gt; 10.72.137.159.22: Flags [.], ack 1224, win 16425, length 0</span><br><span class="line"></span><br><span class="line">如果没有tcpdump 这个命令，需要用 yum install -y tcpdump 命令去安装一下。上例中第三列和第四列显示的信息为哪一个IP+port在连接哪一个IP+port，后面的信息是该数据包的相关信息，如果不懂也没有关系，毕竟我们不是专门搞网络的，而这里需要关注的只是第三列以及第四列。-i 选项后面跟设备名称，如果你想抓eth1网卡的包，后面则要跟eth1.至于-nn选项的作用是让第三列和第四列显示成IP+端口号的形式，如果不加-nn则显示的是主机名+服务名称。</span><br><span class="line"></span><br><span class="line">tcpdump -nn -i ens33 指定网卡的名字    - nn  第一个n表示ip 用数字的形式显示出来，如果不加n，会用主机名显示;</span><br><span class="line">tcpdump -nn ens33 port 80 指定端口为80的包</span><br><span class="line">tcpdump -nn ens33 not port 22 and host 192.168.8.1 可以排除，比如不要22端口，只要其中1个ip的包（host：主机，后面跟主机名或IP）</span><br><span class="line">tcpdump -nn -i ens33 -c 100 -w /tmp/1.cap 指定抓包数量和存放位置</span><br><span class="line">file /tmp/1.cap      查看1.cap文件，这个文件是从网卡捕获的数据包信息</span><br><span class="line">tcpdump -r /tmp/1.cap  查看这个文件,，显示的是数据流    -r  read</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-tshark命令"><a href="#2-tshark命令" class="headerlink" title="2. tshark命令"></a>2. tshark命令</h2><blockquote>
+<p>专门的抓包工具</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">语法：tshark [ -a &lt;capture autostop condition&gt; ] ... [ -b &lt;capture ring buffer option&gt;] ... [ -B &lt;capture buffer size (Win32 only)&gt; ]  [ -c &lt;capture packet count&gt; ] [ -d &lt;layer type&gt;==&lt;selector&gt;,&lt;decode-as protocol&gt; ] [ -D ] [ -f &lt;capture filter&gt; ] [ -F &lt;file format&gt; ] [ -h ] [ -i &lt;capture interface&gt;|- ] [ -l ] [ -L ] [ -n ] [ -N &lt;name resolving flags&gt; ] [ -o &lt;preference setting&gt; ] ... [ -p ] [ -q ] [ -r &lt;infile&gt; ] [ -R &lt;read (display) filter&gt; ] [ -s &lt;capture snaplen&gt; ] [ -S ] [ -t ad|a|r|d ] [ -T pdml|psml|ps|text ] [ -v ] [ -V ] [ -w &lt;outfile&gt;|- ] [ -x ] [ -X &lt;eXtension option&gt;] [ -y &lt;capture link type&gt; ] [ -z &lt;statistics&gt; ]</span><br><span class="line">根据试验，参数的书写有讲究。模仿tcpdump，可以把抓包过滤表达式写在命令的最后。 一般将抓包表达式用引号quote起来（在windows上是双引号&quot;），一是为了视觉方便，一是为了逃避其中字符和shell语法的冲突（如“&gt;”，“||”等）。抓包过滤表达式也可以写在-f参数的后面，注意，此时更应该使用引号或者将-f放在最后。否则，它们会认为-f（可省）后面 的参数都是表达式的一部分，而导致命令格式混乱。</span><br><span class="line"></span><br><span class="line">选项： </span><br><span class="line">1. 抓包接口类</span><br><span class="line">-i 设置抓包的网络接口，不设置则默认为第一个非自环接口。</span><br><span class="line">-D 列出当前存在的网络接口。在不了解OS所控制的网络设备时，一般先用“tshark -D”查看网络接口的编号以供-i参数使用。</span><br><span class="line">-f 设定抓包过滤表达式（capture filter expression）。抓包过滤表达式的写法雷同于tcpdump，可参考tcpdump man page的有关部分。</span><br><span class="line">-s 设置每个抓包的大小，默认为65535，多于这个大小的数据将不会被程序记入内存、写入文件。（这个参数相当于tcpdump的-s，tcpdump默认抓包的大小仅为68）</span><br><span class="line">-p 设置网络接口以非混合模式工作，即只关心和本机有关的流量。</span><br><span class="line">-B 设置内核缓冲区大小，仅对windows有效。</span><br><span class="line">-y 设置抓包的数据链路层协议，不设置则默认为-L找到的第一个协议，局域网一般是EN10MB等。</span><br><span class="line">-L 列出本机支持的数据链路层协议，供-y参数使用。  </span><br><span class="line">2. 抓包停止条件</span><br><span class="line">-c 抓取的packet数，在处理一定数量的packet后，停止抓取，程序退出。</span><br><span class="line">-a 设置tshark抓包停止向文件书写的条件，事实上是tshark在正常启动之后停止工作并返回的条件。条件写为test:value的形式，如“-a duration:5”表示tshark启动后在5秒内抓包然后停止；“-a filesize:10”表示tshark在输出文件达到10kB后停止；“-a files:n”表示tshark在写满n个文件后停止。（windows版的tshark0.99.3用参数“-a files:n”不起作用——会有无数多个文件生成。由于-b参数有自己的files参数，所谓“和-b的其它参数结合使用”无从说起。这也许是一个bug，或tshark的man page的书写有误。）</span><br><span class="line">3. 文件输出控制</span><br><span class="line">-b 设置ring buffer文件参数。ring buffer的文件名由-w参数决定。-b参数采用test:value的形式书写。“-b duration:5”表示每5秒写下一个ring buffer文件；“-b filesize:5”表示每达到5kB写下一个ring buffer文件；“-b files:7”表示ring buffer文件最多7个，周而复始地使用，如果这个参数不设定，tshark会将磁盘写满为止。</span><br><span class="line">4. 文件输入</span><br><span class="line">-r 设置tshark分析的输入文件。tshark既可以抓取分析即时的网络流量，又可以分析dump在文件中的数据。-r不能是命名管道和标准输入。</span><br><span class="line">5. 处理类</span><br><span class="line">-R 设置读取（显示）过滤表达式（read filter expression）。不符合此表达式的流量同样不会被写入文件。注意，读取（显示）过滤表达式的语法和底层相关的抓包过滤表达式语法不相同，它的语法表达要丰富得多，请参考http://www.ethereal.com/docs/dfref/和http://www.ethereal.com/docs/man-pages/ethereal-filter.4.html。类似于抓包过滤表达式，在命令行使用时最好将它们quote起来。</span><br><span class="line">-n 禁止所有地址名字解析（默认为允许所有）。</span><br><span class="line">-N 启用某一层的地址名字解析。“m”代表MAC层，“n”代表网络层，“t”代表传输层，“C”代表当前异步DNS查找。如果-n和-N参数同时存在，-n将被忽略。如果-n和-N参数都不写，则默认打开所有地址名字解析。</span><br><span class="line">-d 将指定的数据按有关协议解包输出。如要将tcp 8888端口的流量按http解包，应该写为“-d tcp.port==8888,http”。注意选择子和解包协议之间不能留空格。</span><br><span class="line">6. 输出类</span><br><span class="line">-w 设置raw数据的输出文件。这个参数不设置，tshark将会把解码结果输出到stdout。“-w-”表示把raw输出到stdout。如果要把解码结果输出到文件，使用重定向“&gt;”而不要-w参数。</span><br><span class="line">-F 设置输出raw数据的格式，默认为libpcap。“tshark -F”会列出所有支持的raw格式。</span><br><span class="line">-V 设置将解码结果的细节输出，否则解码结果仅显示一个packet一行的summary。</span><br><span class="line">-x 设置在解码输出结果中，每个packet后面以HEX dump的方式显示具体数据。</span><br><span class="line">-T 设置解码结果输出的格式，包括text,ps,psml和pdml，默认为text。</span><br><span class="line">-t 设置解码结果的时间格式。“ad”表示带日期的绝对时间，“a”表示不带日期的绝对时间，“r”表示从第一个包到现在的相对时间，“d”表示两个相邻包之间的增量时间（delta）。</span><br><span class="line">-S 在向raw文件输出的同时，将解码结果打印到控制台。</span><br><span class="line">-l 在处理每个包时即时刷新输出。</span><br><span class="line">-X 扩展项。</span><br><span class="line">-q 设置安静的stdout输出（例如做统计时）</span><br><span class="line">-z 设置统计参数。</span><br><span class="line">7. 其它</span><br><span class="line">-h 显示命令行帮助。</span><br><span class="line">-v 显示tshark的版本信息。</span><br><span class="line">-o 重载选项。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">yum install -y wireshark    安装</span><br><span class="line"></span><br><span class="line">1. 显示访问http请求的域名以及uri</span><br><span class="line">tshark -n -t a -R http.request -T fields -e &quot;frame.time&quot; -e &quot;ip.src&quot; -e &quot;http.host&quot; -e &quot;http.request.method&quot; -e &quot;http.request .uri&quot;</span><br><span class="line"></span><br><span class="line">2. 抓取mysql的查询</span><br><span class="line">tshark -n -i eth1 -R &apos;mysql.query&apos; -T fields -e &quot;ip.src&quot; -e &quot;mysql.query&quot;</span><br><span class="line">或者</span><br><span class="line">tshark -i eth1 port 3307 -d tcp.port==3307,mysql -z &quot;proto,colinfo,mysql.query,mysql.query&quot;</span><br><span class="line"></span><br><span class="line">3. 抓取指定类型的MySQL查询</span><br><span class="line">tshark -n -i eth1 -R &apos;mysql matches &quot;SELECT|INSERT|DELETE|UPDATE&quot;&apos; -T fields -e &quot;ip.src&quot; -e &quot;mysql.query&quot;</span><br><span class="line"></span><br><span class="line">4. 统计http的状态</span><br><span class="line">tshark -n -q -z http,stat, -z http,tree  这个命令，直到你ctrl + c 才会显示出结果</span><br><span class="line"></span><br><span class="line">5.  tshark 增加时间标签  </span><br><span class="line">tshark -t ad</span><br></pre></td></tr></table></figure>
+
+<h1 id="扩展tcp三次握手四次挥手"><a href="#扩展tcp三次握手四次挥手" class="headerlink" title="扩展tcp三次握手四次挥手"></a>扩展tcp三次握手四次挥手</h1><p><a href="http://www.doc88.com/p-9913773324388.html" target="_blank" rel="noopener">http://www.doc88.com/p-9913773324388.html</a></p>
+<h1 id="tshark几个用法"><a href="#tshark几个用法" class="headerlink" title="tshark几个用法"></a>tshark几个用法</h1><p><a href="http://www.aminglinux.com/bbs/thread-995-1-1.html" target="_blank" rel="noopener">http://www.aminglinux.com/bbs/thread-995-1-1.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iostat/" rel="tag"># iostat</a>
+          
+            <a href="/tags/iotop/" rel="tag"># iotop</a>
+          
+            <a href="/tags/free/" rel="tag"># free</a>
+          
+            <a href="/tags/ps/" rel="tag"># ps</a>
+          
+            <a href="/tags/netstat/" rel="tag"># netstat</a>
+          
+            <a href="/tags/ss/" rel="tag"># ss</a>
+          
+            <a href="/tags/tcpdump/" rel="tag"># tcpdump</a>
+          
+            <a href="/tags/tshark/" rel="tag"># tshark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/12.6 - 12.9 Nginx安装、默认虚拟主机、Nginx用户认证、Nginx域名重定向/" rel="next" title="12.6 - 12.9 Nginx安装、默认虚拟主机、Nginx用户认证、Nginx域名重定向">
+                <i class="fa fa-chevron-left"></i> 12.6 - 12.9 Nginx安装、默认虚拟主机、Nginx用户认证、Nginx域名重定向
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/10.1 - 10.5 系统运维监控命令01-w、uptime、vmstat、top、sar、nload/" rel="prev" title="10.1 - 10.5 系统运维监控命令01-w、uptime、vmstat、top、sar、nload">
+                10.1 - 10.5 系统运维监控命令01-w、uptime、vmstat、top、sar、nload <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#10-6-监控io性能"><span class="nav-number">1.</span> <span class="nav-text">10.6 监控io性能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-iostat和iotop命令"><span class="nav-number">1.1.</span> <span class="nav-text">1. iostat和iotop命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-如何通过这些值分析设备的I-O情况？"><span class="nav-number">1.2.</span> <span class="nav-text">2. 如何通过这些值分析设备的I/O情况？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-7-free命令"><span class="nav-number">2.</span> <span class="nav-text">10.7 free命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-8-ps命令"><span class="nav-number">3.</span> <span class="nav-text">10.8 ps命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-9-查看网络状态"><span class="nav-number">4.</span> <span class="nav-text">10.9 查看网络状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-netstat命令"><span class="nav-number">4.1.</span> <span class="nav-text">1. netstat命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-ss命令"><span class="nav-number">4.2.</span> <span class="nav-text">2. ss命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-10-linux下抓包"><span class="nav-number">5.</span> <span class="nav-text">10.10 linux下抓包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-tcpdump-命令"><span class="nav-number">5.1.</span> <span class="nav-text">1. tcpdump 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-tshark命令"><span class="nav-number">5.2.</span> <span class="nav-text">2. tshark命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展tcp三次握手四次挥手"><span class="nav-number">6.</span> <span class="nav-text">扩展tcp三次握手四次挥手</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tshark几个用法"><span class="nav-number">7.</span> <span class="nav-text">tshark几个用法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

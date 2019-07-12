@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="memcached,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="21.5 memcached命令行Memcached类似于mysql一样，同样支持类似于mysql中创建一个库，创建一个表，插入一个表，查看表数据等。 1 登录 Memcached12345678910111213141516171819202122232425262728293031323334353637[root@yt-01 ~]# telnet 127.0.0.1 11211   //测试">
+<meta name="keywords" content="memcached">
+<meta property="og:type" content="article">
+<meta property="og:title" content="21.5-21.8 memcached命令行、数据导出和导入、存储sessions">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/21.5-21.8 memcached命令行、数据导出和导入、存储sessions/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="21.5 memcached命令行Memcached类似于mysql一样，同样支持类似于mysql中创建一个库，创建一个表，插入一个表，查看表数据等。 1 登录 Memcached12345678910111213141516171819202122232425262728293031323334353637[root@yt-01 ~]# telnet 127.0.0.1 11211   //测试">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-12T07:24:58.676Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="21.5-21.8 memcached命令行、数据导出和导入、存储sessions">
+<meta name="twitter:description" content="21.5 memcached命令行Memcached类似于mysql一样，同样支持类似于mysql中创建一个库，创建一个表，插入一个表，查看表数据等。 1 登录 Memcached12345678910111213141516171819202122232425262728293031323334353637[root@yt-01 ~]# telnet 127.0.0.1 11211   //测试">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/21.5-21.8 memcached命令行、数据导出和导入、存储sessions/">
+
+
+
+
+
+  <title>21.5-21.8 memcached命令行、数据导出和导入、存储sessions | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/21.5-21.8 memcached命令行、数据导出和导入、存储sessions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">21.5-21.8 memcached命令行、数据导出和导入、存储sessions</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="21-5-memcached命令行"><a href="#21-5-memcached命令行" class="headerlink" title="21.5 memcached命令行"></a>21.5 memcached命令行</h1><p>Memcached类似于mysql一样，同样支持类似于mysql中创建一个库，创建一个表，插入一个表，查看表数据等。</p>
+<h2 id="1-登录-Memcached"><a href="#1-登录-Memcached" class="headerlink" title="1 登录 Memcached"></a>1 登录 Memcached</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# telnet 127.0.0.1 11211   //测试端口</span><br><span class="line">Trying 127.0.0.1...</span><br><span class="line">Connected to 127.0.0.1.</span><br><span class="line">Escape character is &apos;^]&apos;.</span><br><span class="line"># 进入memcached命令行</span><br><span class="line"></span><br><span class="line">stats     关于当前 memcached 实例的信息</span><br><span class="line">STAT pid 13412</span><br><span class="line">STAT uptime 1885</span><br><span class="line">STAT time 1522943511</span><br><span class="line">STAT version 1.4.24</span><br><span class="line">STAT libevent 2.0.21-stable</span><br><span class="line">STAT pointer_size 64</span><br><span class="line">STAT rusage_user 0.017423</span><br><span class="line">STAT rusage_system 0.046463</span><br><span class="line">……</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">set key2 0 30 2   //手动存储一个数据</span><br><span class="line"></span><br><span class="line">其中key2 代表着 key值</span><br><span class="line">0代表着 flags 标记</span><br><span class="line">30代表着 过期时间</span><br><span class="line">2代表着 2个字节</span><br><span class="line">---------------------------------------------</span><br><span class="line">set key2 0 30 2     //存储key2，标记为0，过期时间30s，2个字节的数据</span><br><span class="line">ab                          //输入数据，只能2个字节：ab</span><br><span class="line">STORED </span><br><span class="line">get key2               //获取key2数据（因为输入慢了，数据过期了）</span><br><span class="line">END</span><br><span class="line">set key2 0 30 2     //重新存</span><br><span class="line">ab</span><br><span class="line">STORED</span><br><span class="line">get key2               //获取成功</span><br><span class="line">VALUE key2 0 2</span><br><span class="line">ab</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Memcached语法规则"><a href="#2-Memcached语法规则" class="headerlink" title="2 Memcached语法规则"></a>2 Memcached语法规则</h2><ul>
+<li><code>&lt;command name&gt; &lt;key&gt; &lt;flags&gt; &lt;exptime&gt; &lt;bytes&gt;\r\n &lt;data block&gt;\r\n</code></li>
+<li>注：\r\n在windows下是Enter键</li>
+<li><code>&lt;command name&gt;</code>可以是set, add, replace</li>
+<li>set表示按照相应的<code>&lt;key&gt;</code>存储该数据，没有的时候增加，有的时候覆盖</li>
+<li>add表示按照相应的<code>&lt;key&gt;</code>添加该数据,但是如果该<code>&lt;key&gt;</code>已经存在则会操作失败</li>
+<li>replace表示按照相应的<code>&lt;key&gt;</code>替换数据,但是如果该<code>&lt;key&gt;</code>不存在则操作失败。</li>
+<li><code>&lt;key&gt;</code>客户端需要保存数据的key</li>
+<li><code>&lt;flags&gt;</code>是一个16位的无符号的整数(以十进制的方式表示)。该标志将和需要存储的数据一起存储,并在客户端get数据时返回。客户端可以将此标志用做特殊用途，此标志对服务器来说是不透明的。</li>
+<li><code>&lt;exptime&gt;</code> 为过期的时间。若为0表示存储的数据永远不过期(但可被服务器算法：LRU 等替换)。如果非0(unix时间或者距离此时的秒数),当过期后,服务器可以保证用户得不到该数据(以服务器时间为标准)。</li>
+<li><code>&lt;bytes&gt;</code> 需要存储的字节数，当用户希望存储空数据时<code>&lt;bytes&gt;</code>可以为0</li>
+<li><code>&lt;data block&gt;</code>需要存储的内容，输入完成后，最后客户端需要加上\r\n（直接点击Enter）作为结束标志。</li>
+</ul>
+<h2 id="3-Memcached数据示例"><a href="#3-Memcached数据示例" class="headerlink" title="3 Memcached数据示例"></a>3 Memcached数据示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">set key3 1 100 4         //存取一个4字节值</span><br><span class="line">abcd</span><br><span class="line">STORED</span><br><span class="line">get key3               //查询key3值</span><br><span class="line">VALUE key3 1 4</span><br><span class="line">abcd</span><br><span class="line">END</span><br><span class="line">replace key3 1 200 5         //替换key3的值</span><br><span class="line">abcdx</span><br><span class="line">STORED</span><br><span class="line">get key3                     //查询替换后的值</span><br><span class="line">VALUE key3 1 5       </span><br><span class="line">abcdx</span><br><span class="line">END</span><br><span class="line">delete key3    //删除key3的值</span><br><span class="line">DELETED</span><br><span class="line">get key3</span><br><span class="line">END</span><br><span class="line">quit           //退出</span><br><span class="line">Connection closed by foreign host.</span><br></pre></td></tr></table></figure>
+
+<h1 id="21-6-memcached数据导出和导入"><a href="#21-6-memcached数据导出和导入" class="headerlink" title="21.6 memcached数据导出和导入"></a>21.6 memcached数据导出和导入</h1><h2 id="1-导出"><a href="#1-导出" class="headerlink" title="1 导出"></a>1 导出</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# date -d &quot;+1 hour&quot; +%s    //显示当前时间加一个小时时间戳</span><br><span class="line">1522948361</span><br><span class="line">[root@yt-01 ~]# memcached-tool 127.0.0.1:11211 dump &gt;data.txt      //导出</span><br><span class="line">Dumping memcache contents</span><br><span class="line">  Number of buckets: 1</span><br><span class="line">  Number of items : 4</span><br><span class="line">Dumping bucket 1 - 4 total items</span><br><span class="line">[root@yt-01 ~]# cat data.txt</span><br><span class="line">add key1 1 1522948361 3</span><br><span class="line">asd</span><br><span class="line">add name 1 1522948361 5</span><br><span class="line">justi</span><br><span class="line">add sex 1 1522948361 3</span><br><span class="line">man</span><br><span class="line">add age 1 1522948361 2</span><br><span class="line">27</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-导入"><a href="#2-导入" class="headerlink" title="2 导入"></a>2 导入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# nc 127.0.0.1 11211 &lt; data.txt</span><br><span class="line">若nc命令不存在，yum install nc</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：导出的数据是带有一个时间戳的，这个时间戳就是该条数据过期的时间点，如果当前时间已经超过该时间戳，那么是导入不进去的。</strong><br>如果仅仅是为了测试，这样可以办到，因为memcached是缓存在内存中的，只要重启机器或者重启memcached服务缓存数据就会丢失，然后我们再次使用nc 导入就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# systemctl restart memcached</span><br><span class="line">[root@yt-01 ~]# nc 127.0.0.1 11211 &lt;data.txt</span><br><span class="line">STORED</span><br><span class="line">STORED</span><br><span class="line">STORED</span><br><span class="line">STORED</span><br></pre></td></tr></table></figure>
+
+<h1 id="21-7-php连接memcached"><a href="#21-7-php连接memcached" class="headerlink" title="21.7 php连接memcached"></a>21.7 php连接memcached</h1><h2 id="1-先安装php的memcache扩展"><a href="#1-先安装php的memcache扩展" class="headerlink" title="1 先安装php的memcache扩展"></a>1 先安装php的memcache扩展</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# cd /usr/local/src/</span><br><span class="line">[root@yt-01 src]# wget http://www.apelearn.com/bbs/data/attachment/forum/memcache-2.2.3.tgz </span><br><span class="line">[root@yt-01 src]# tar zxf memcache-2.2.3.tgz</span><br><span class="line">[root@yt-01 src]# cd memcache-2.2.3</span><br><span class="line">[root@yt-01 memcache-2.2.3]# ls</span><br><span class="line">config9.m4 config.w32 example.php memcache_consistent_hash.c memcache_queue.c memcache_session.c php_memcache.h</span><br><span class="line">config.m4 CREDITS memcache.c memcache.dsp memcache_queue.h memcache_standard_hash.c README</span><br><span class="line">[root@yt-01 memcache-2.2.3]# /usr/local/php/bin/phpize     //nginx的php目录是/usr/local/php-fpm/bin/phpize</span><br><span class="line">Configuring for:</span><br><span class="line">PHP Api Version: 20131106</span><br><span class="line">Zend Module Api No: 20131226</span><br><span class="line">Zend Extension Api No: 220131226</span><br><span class="line">[root@yt-01 memcache-2.2.3]# ./configure --with-php-config=/usr/local/php/bin/php-config</span><br><span class="line">[root@yt-01 memcache-2.2.3]# echo $?</span><br><span class="line">0</span><br><span class="line">[root@yt-01 src]# make &amp; make install</span><br><span class="line"># 报错</span><br><span class="line">/usr/local/src/memcache-2.2.3/memcache.c: 在函数‘php_mmc_connect&apos;中:</span><br><span class="line">/usr/local/src/memcache-2.2.3/memcache.c:1902: 错误：提供给函数‘zend_list_insert&apos;的实参太少</span><br><span class="line">/usr/local/src/memcache-2.2.3/memcache.c:1919: 错误：提供给函数‘zend_list_insert&apos;的实参太少</span><br><span class="line">/usr/local/src/memcache-2.2.3/memcache.c: 在函数‘zif_memcache_add_server&apos;中:</span><br><span class="line">/usr/local/src/memcache-2.2.3/memcache.c:1975: 错误：提供给函数‘zend_is_callable&apos;的实参太少</span><br><span class="line">/usr/local/src/memcache-2.2.3/memcache.c:2003: 错误：提供给函数‘zend_list_insert&apos;的实参太少</span><br><span class="line">/usr/local/src/memcache-2.2.3/memcache.c: 在函数‘zif_memcache_set_server_params&apos;中:</span><br><span class="line">/usr/local/src/memcache-2.2.3/memcache.c:2059: 错误：提供给函数‘zend_is_callable&apos;的实参太少</span><br><span class="line">/usr/local/src/memcache-2.2.3/memcache.c: 在函数‘mmc_find_persistent&apos;中:</span><br><span class="line">/usr/local/src/memcache-2.2.3/memcache.c:2159: 错误：提供给函数‘zend_list_insert&apos;的实参太少</span><br><span class="line">/usr/local/src/memcache-2.2.3/memcache.c:2177: 错误：提供给函数‘zend_list_insert&apos;的实参太少</span><br><span class="line">make: *** [memcache.lo] 错误 1</span><br><span class="line"></span><br><span class="line"># 解决方法</span><br><span class="line"># vim memcache.c</span><br><span class="line">将所有的：zend_list_insert(pool, le_memcache_pool);</span><br><span class="line">改为：zend_list_insert(pool, le_memcache_pool TSRMLS_CC);</span><br><span class="line">将所有的：zend_list_insert(mmc, le_pmemcache);</span><br><span class="line">改为：zend_list_insert(mmc, le_pmemcache TSRMLS_CC);</span><br><span class="line"></span><br><span class="line">讲所有的：if (!zend_is_callable(failure_callback, 0, NULL))</span><br><span class="line">改为：if (!zend_is_callable(failure_callback, 0, NULL, NULL))</span><br><span class="line"></span><br><span class="line">修改完成后，重新make编译；</span><br><span class="line"></span><br><span class="line">[root@yt-01 memcache-2.2.3]# make &amp; make install</span><br><span class="line">Installing shared extensions: /usr/local/php/lib/php/extensions/no-debug-zts-20131226/</span><br><span class="line">[root@yt-01 memcache-2.2.3]# ls /usr/local/php/lib/php/extensions/no-debug-zts-20131226/</span><br><span class="line">memcache.so opcache.so</span><br><span class="line"></span><br><span class="line">[root@yt-01 memcache-2.2.3]# vim /usr/local/php/etc/php.ini</span><br><span class="line">搜索extension，在extension模块行的最后加上： extension=&quot;memcache.so&quot;</span><br><span class="line">[root@yt-01 memcache-2.2.3]# /usr/local/php/bin/php -m</span><br><span class="line">有memcache 模块就可以了</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-测试"><a href="#2-测试" class="headerlink" title="2 测试"></a>2 测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 memcache-2.2.3]# vim 1.php  //编辑测试脚本</span><br><span class="line">&lt;?php</span><br><span class="line">//连接Memcache Memcache</span><br><span class="line">$mem = new Memcache;</span><br><span class="line">$mem-&gt;connect(&quot;localhost&quot;, 11211);</span><br><span class="line">//保存数据</span><br><span class="line">$mem-&gt;set(&apos;key1&apos;, &apos;This is first value&apos;, 0, 60);</span><br><span class="line">$val = $mem-&gt;get(&apos;key1&apos;);</span><br><span class="line">echo &quot;Get key1 value: &quot; . $val .&quot;&lt;br&gt;&quot;;</span><br><span class="line">//替换数据</span><br><span class="line">$mem-&gt;replace(&apos;key1&apos;, &apos;This is replace value&apos;, 0, 60);</span><br><span class="line">$val = $mem-&gt;get(&apos;key1&apos;);</span><br><span class="line">echo &quot;Get key1 value: &quot; . $val . &quot;&lt;br&gt;&quot;;</span><br><span class="line">//保存数组数据</span><br><span class="line">$arr = array(&apos;aaa&apos;, &apos;bbb&apos;, &apos;ccc&apos;, &apos;ddd&apos;);</span><br><span class="line">$mem-&gt;set(&apos;key2&apos;, $arr, 0, 60);</span><br><span class="line">$val2 = $mem-&gt;get(&apos;key2&apos;);</span><br><span class="line">echo &quot;Get key2 value: &quot;;</span><br><span class="line">print_r($val2);</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">//删除数据</span><br><span class="line">$mem-&gt;delete(&apos;key1&apos;);</span><br><span class="line">$val = $mem-&gt;get(&apos;key1&apos;);</span><br><span class="line">echo &quot;Get key1 value: &quot; . $val . &quot;&lt;br&gt;&quot;;</span><br><span class="line">//清除所有数据</span><br><span class="line">$mem-&gt;flush();</span><br><span class="line">$val2 = $mem-&gt;get(&apos;key2&apos;);</span><br><span class="line">echo &quot;Get key2 value: &quot;;</span><br><span class="line">print_r($val2);</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">//关闭连接</span><br><span class="line">$mem-&gt;close();</span><br><span class="line">?&gt;</span><br><span class="line"># 脚本意为： 连接memcache set一个数据， 保存 替换删除 关闭 等。</span><br><span class="line"></span><br><span class="line">[root@yt-01 memcache-2.2.3]# /usr/local/php/bin/php 1.php   //测试php脚本</span><br><span class="line">Get key1 value: This is first value&lt;br&gt;Get key1 value: This is replace value&lt;br&gt;Get key2 value: Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; aaa</span><br><span class="line">    [1] =&gt; bbb</span><br><span class="line">    [2] =&gt; ccc</span><br><span class="line">    [3] =&gt; ddd</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或者，将1.php放到某个虚拟主机的根目录下，在浏览器测试</span><br><span class="line">显示如上内容就表示没问题</span><br></pre></td></tr></table></figure>
+
+<h1 id="21-8-memcached中存储sessions"><a href="#21-8-memcached中存储sessions" class="headerlink" title="21.8 memcached中存储sessions"></a>21.8 memcached中存储sessions</h1><p>本节应用场景为LNMP架构下做的负载均衡。假如第一次登录是在A服务器上，第二次登录是在B服务器上，假如使用的是nginx代理upstream可以使用ip_hash；如果使用LVS呢？解决方法是：把session不存在服务器的磁盘上，而是存在memcached上去。memcached作为一个公共的服务器，任何web服务器都可以连接！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">本实例是在lamp/lnmp环境下实现</span><br><span class="line">编辑php.ini添加两行（待测试）</span><br><span class="line">session.save_handler = memcache</span><br><span class="line">session.save_path = &quot;tcp://192.168.0.9:11211&quot;</span><br><span class="line">或者httpd.conf中对应的虚拟主机中添加</span><br><span class="line">php_value session.save_handler &quot;memcache&quot;</span><br><span class="line">php_value session.save_path &quot;tcp://192.168.0.9:11211&quot;</span><br><span class="line">或者php-fpm.conf对应的pool中添加</span><br><span class="line">php_value[session.save_handler] = memcache</span><br><span class="line">php_value[session.save_path] = &quot;tcp://192.168.0.9:11211 &quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-下载测试文件"><a href="#1-下载测试文件" class="headerlink" title="1 下载测试文件"></a>1 下载测试文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">wget http://study.lishiming.net/.mem_se.txt</span><br><span class="line">将其移动到虚拟主机目录中：</span><br><span class="line">mv /root/.mem_se.txt /data/wwwroot/www.111.com</span><br><span class="line"></span><br><span class="line">cp .mem_se.txt 1.php</span><br><span class="line">在php-fpm.conf对应的pool中添加：</span><br><span class="line"></span><br><span class="line">vim /usr/local/php-fpm/etc/php-fpm.conf</span><br><span class="line"></span><br><span class="line">添加：</span><br><span class="line">php_value[session.save_handler] = memcache</span><br><span class="line">php_value[session.save_path] = &quot;tcp://192.168.122.130:11211&quot;</span><br><span class="line"></span><br><span class="line">注：如上要是有专门的memcache服务器，这儿就需要配置独立memcache的地址。</span><br><span class="line"></span><br><span class="line">/etc/init.d/php-fpm restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-测试-1"><a href="#2-测试-1" class="headerlink" title="2 测试"></a>2 测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 www.111.com]# curl localhost/1.php</span><br><span class="line">1507648188&lt;br&gt;&lt;br&gt;1507648188&lt;br&gt;&lt;br&gt;41026no8snqjq81phrl7ukovc6</span><br><span class="line">[root@yt-01 www.111.com]# curl localhost/1.php</span><br><span class="line">1507648268&lt;br&gt;&lt;br&gt;1507648268&lt;br&gt;&lt;br&gt;e2apbv2kkibntt4r59llfj52r1</span><br><span class="line">[root@yt-01 www.111.com]# curl localhost/1.php</span><br><span class="line">1507648269&lt;br&gt;&lt;br&gt;1507648269&lt;br&gt;&lt;br&gt;4mjm7v7thjldh413kuebcbjbe0</span><br><span class="line">[root@yt-01 www.111.com]# curl localhost/1.php</span><br><span class="line">1507648270&lt;br&gt;&lt;br&gt;1507648270&lt;br&gt;&lt;br&gt;1if2vpeut27r1siebjlv87ik92</span><br><span class="line">登录 查看值：</span><br><span class="line">[root@yt-01 www.111.com]# telnet 127.0.0.1 11211</span><br><span class="line">Trying 127.0.0.1...</span><br><span class="line">Connected to 127.0.0.1.</span><br><span class="line">Escape character is &apos;^]&apos;.</span><br><span class="line">get i7vddchc2jdjpedsvck2tppra2</span><br><span class="line">VALUE i7vddchc2jdjpedsvck2tppra2 0 37</span><br><span class="line">TEST|i:1507648271;TEST3|i:1507648271;</span><br><span class="line">END</span><br><span class="line">如上使用get 去查看一个值！ 可以查询到相关的数据。</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/memcached/" rel="tag"># memcached</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/21.1-21.4 NoSQL和memcached介绍/" rel="next" title="21.1-21.4 NoSQL和memcached介绍">
+                <i class="fa fa-chevron-left"></i> 21.1-21.4 NoSQL和memcached介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/21.13-21.17 redis常用操作、操作键值、安全设置/" rel="prev" title="21.13-21.17 redis常用操作、操作键值、安全设置">
+                21.13-21.17 redis常用操作、操作键值、安全设置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#21-5-memcached命令行"><span class="nav-number">1.</span> <span class="nav-text">21.5 memcached命令行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-登录-Memcached"><span class="nav-number">1.1.</span> <span class="nav-text">1 登录 Memcached</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Memcached语法规则"><span class="nav-number">1.2.</span> <span class="nav-text">2 Memcached语法规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Memcached数据示例"><span class="nav-number">1.3.</span> <span class="nav-text">3 Memcached数据示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-6-memcached数据导出和导入"><span class="nav-number">2.</span> <span class="nav-text">21.6 memcached数据导出和导入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-导出"><span class="nav-number">2.1.</span> <span class="nav-text">1 导出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-导入"><span class="nav-number">2.2.</span> <span class="nav-text">2 导入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-7-php连接memcached"><span class="nav-number">3.</span> <span class="nav-text">21.7 php连接memcached</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-先安装php的memcache扩展"><span class="nav-number">3.1.</span> <span class="nav-text">1 先安装php的memcache扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-测试"><span class="nav-number">3.2.</span> <span class="nav-text">2 测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-8-memcached中存储sessions"><span class="nav-number">4.</span> <span class="nav-text">21.8 memcached中存储sessions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-下载测试文件"><span class="nav-number">4.1.</span> <span class="nav-text">1 下载测试文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-测试-1"><span class="nav-number">4.2.</span> <span class="nav-text">2 测试</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

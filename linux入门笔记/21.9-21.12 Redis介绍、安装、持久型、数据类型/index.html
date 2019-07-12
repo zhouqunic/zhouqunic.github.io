@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="redis,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="21.9 redis介绍 Redis和Memcached类似，也属于k-v数据存储 ，但是功能和操作性要比Memcached好很多。 Redis官网 redis.io,当前最新稳定版4.0.9，支持更多value类型，除了和string外，还支持hash、lists（链表）、sets（集合）和sorted sets（有序集合） redis使用了两种文件格式：全量数据(RDB)和增量请求(aof)。">
+<meta name="keywords" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="21.9-21.12 Redis介绍、安装、持久型、数据类型">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/21.9-21.12 Redis介绍、安装、持久型、数据类型/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="21.9 redis介绍 Redis和Memcached类似，也属于k-v数据存储 ，但是功能和操作性要比Memcached好很多。 Redis官网 redis.io,当前最新稳定版4.0.9，支持更多value类型，除了和string外，还支持hash、lists（链表）、sets（集合）和sorted sets（有序集合） redis使用了两种文件格式：全量数据(RDB)和增量请求(aof)。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-12T07:25:50.826Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="21.9-21.12 Redis介绍、安装、持久型、数据类型">
+<meta name="twitter:description" content="21.9 redis介绍 Redis和Memcached类似，也属于k-v数据存储 ，但是功能和操作性要比Memcached好很多。 Redis官网 redis.io,当前最新稳定版4.0.9，支持更多value类型，除了和string外，还支持hash、lists（链表）、sets（集合）和sorted sets（有序集合） redis使用了两种文件格式：全量数据(RDB)和增量请求(aof)。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/21.9-21.12 Redis介绍、安装、持久型、数据类型/">
+
+
+
+
+
+  <title>21.9-21.12 Redis介绍、安装、持久型、数据类型 | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/21.9-21.12 Redis介绍、安装、持久型、数据类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">21.9-21.12 Redis介绍、安装、持久型、数据类型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="21-9-redis介绍"><a href="#21-9-redis介绍" class="headerlink" title="21.9 redis介绍"></a>21.9 redis介绍</h1><ul>
+<li>Redis和Memcached类似，也属于k-v数据存储 ，但是功能和操作性要比Memcached好很多。</li>
+<li>Redis官网 redis.io,当前最新稳定版4.0.9，支持更多value类型，除了和string外，<strong>还支持hash、lists（链表）、sets（集合）和sorted sets（有序集合）</strong></li>
+<li>redis使用了两种文件格式：全量数据(RDB)和增量请求(aof)。<ul>
+<li><strong>全量数据格式</strong>是把内存中的数据写入磁盘，便于下次读取文件进行加载。</li>
+<li><strong>增量请求文件</strong>则是把内存中的数据序列化为操作请求，用于读取文件进行replay得到数据，这种类似于mysql binlog。</li>
+</ul>
+</li>
+<li>为了节省资源，当我们手动保存一次全量数据，就可以删除当前的所有增量数据了，有些增量数据其实早就过期了，也可定期利用脚本做一些优化 。</li>
+<li>redis的存储分为<strong>内存存储、磁盘存储和log文件</strong>三部分</li>
+</ul>
+<h1 id="21-10-redis安装"><a href="#21-10-redis安装" class="headerlink" title="21.10 redis安装"></a>21.10 redis安装</h1><h2 id="1-下载"><a href="#1-下载" class="headerlink" title="1 下载"></a>1 下载</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">官网地址 redis.io</span><br><span class="line">[root@yt-01 ~]# cd /usr/local/src</span><br><span class="line">[root@yt-01 src]# wget http://download.redis.io/releases/redis-4.0.9.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2 安装"></a>2 安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 src]# tar zxvf redis-4.0.9.tar.gz   //解压</span><br><span class="line">[root@yt-01 src]# cd redis-4.0.9                    //进入redis目录</span><br><span class="line">[root@yt-01 redis-4.0.9]# make &amp;&amp; make install    //和其他软件不同，redis安装直接就可以编译</span><br><span class="line">[root@yt-01 redis-4.0.9]# echo $?      //确认编译是否成功</span><br><span class="line">0</span><br><span class="line">[root@yt-01 redis-4.0.9]# redis-      //用tab查看redis的命令，确认是否安装成功</span><br><span class="line">redis-benchmark redis-check-aof redis-check-rdb redis-cli redis-sentinel redis-server</span><br><span class="line">[root@yt-01 redis-4.0.9]# which redis-cli    //查看redis的启动文件地址</span><br><span class="line">/usr/local/bin/redis-cli</span><br><span class="line">[root@yt-01 redis-4.0.9]# ls    //查看redis安装后的文件</span><br><span class="line">00-RELEASENOTES BUGS CONTRIBUTING COPYING deps INSTALL Makefile MANIFESTO README.md redis.conf runtest runtest-cluster runtest-sentinel sentinel.conf src tests utils</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-配置文件"><a href="#3-配置文件" class="headerlink" title="3 配置文件"></a>3 配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 redis-4.0.9]# cp redis.conf /etc/redis.conf</span><br><span class="line">[root@yt-01 redis-4.0.9]# vim /etc/redis.conf    //修改配置文件</span><br><span class="line">……</span><br><span class="line">daemonize yes     #yes表示后台启动；no表示前台启动</span><br><span class="line">pidfile /var/run/redis_6379.pid      #pid存放位置</span><br><span class="line">loglevel notice</span><br><span class="line">#指定日志级别：debug（调试，排错）、verbose（冗长的）、notice、warning</span><br><span class="line">#debug适合排查错误时使用，错误排查完毕后要换到notice，避免产生大量日志浪费系统空间</span><br><span class="line">logfile &quot;/var/log/redis.log&quot; #定义日志存放路径</span><br><span class="line">databases 16</span><br><span class="line">#Redis有库的概念，默认在0库</span><br><span class="line">dir /data/redis #定义rdb、aof文件的存放位置</span><br><span class="line">appendonly yes #开启aof日志，开启后会在dir定义的目录生成appendonly.aof文件</span><br><span class="line">appendfsync everysec #指定记录日志的规则：always（只要有变动就记录）、everysec（每秒记录一次）、no（不记录）</span><br><span class="line"></span><br><span class="line">创建rdb、aof文件的存放文件夹</span><br><span class="line">[root@yt-01 redis-4.0.9]# mkdir /data/redis</span><br><span class="line"></span><br><span class="line">启动redis</span><br><span class="line">[root@yt-01 redis-4.0.9]# redis-server /etc/redis.conf</span><br><span class="line"></span><br><span class="line">查看redis进程（因为虚拟机还运行着gitlab网站服务，所以进程会多几个）</span><br><span class="line">[root@yt-01 redis-4.0.9]# ps aux |grep redis</span><br><span class="line">root 5526 0.0 0.0 4184 16 ? Ss 10:10 0:00 runsv redis</span><br><span class="line">root 5527 0.0 0.0 4328 56 ? S 10:10 0:00 svlogd -tt /var/log/gitlab/redis</span><br><span class="line">gitlab-+ 5528 0.2 0.1 41484 3740 ? Ssl 10:10 0:36 /opt/gitlab/embedded/bin/redis-server 127.0.0.1:0</span><br><span class="line">root 6041 0.0 0.0 4184 0 ? Ss 10:11 0:00 runsv redis-exporter</span><br><span class="line">root 6042 0.0 0.0 4328 36 ? S 10:11 0:00 svlogd -tt /var/log/gitlab/redis-exporter</span><br><span class="line">gitlab-+ 6043 0.0 0.4 53424 7976 ? Ssl 10:11 0:04 /opt/gitlab/embedded/bin/redis_exporter -web.listen-address=localhost:9121 -redis.addr=unix:///var/opt/gitlab/redis/redis.socket</span><br><span class="line">root 36317 0.0 0.1 145260 2184 ? Ssl 13:33 0:00 redis-server 127.0.0.1:6379               //默认监听端口是6379</span><br><span class="line"></span><br><span class="line">查看redis日志</span><br><span class="line">[root@yt-01 redis-4.0.9]# less /var/log/redis.log</span><br><span class="line"># 2条warning，提醒我们有2个内核参数需要调整</span><br><span class="line">……</span><br><span class="line">36317:M 06 Apr 13:33:51.922 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add &apos;vm.overcommit_memory = 1&apos; to /etc/sysctl.conf and then reboot or run the command &apos;sysctl vm.overcommit_memory=1&apos; for this to take effect.</span><br><span class="line">36317:M 06 Apr 13:33:51.922 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command &apos;echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled&apos; as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.</span><br><span class="line">36317:M 06 Apr 13:33:51.922 * Ready to accept connections</span><br><span class="line">/var/log/redis.log (END)</span><br><span class="line"></span><br><span class="line">配置内核参数</span><br><span class="line">[root@yt-01 redis-4.0.9]# sysctl vm.overcommit_memory=1</span><br><span class="line">[root@yt-01 redis-4.0.9]# echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled</span><br><span class="line"></span><br><span class="line">加入开机启动</span><br><span class="line">[root@yt-01 redis-4.0.9]# vim /etc/rc.local</span><br><span class="line">sysctl vm.overcommit_memory=1</span><br><span class="line">echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled</span><br><span class="line"></span><br><span class="line">启动</span><br><span class="line">[root@yt-01 redis-4.0.9]# redis-server /etc/redis.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-关闭redis服务的方法"><a href="#4-关闭redis服务的方法" class="headerlink" title="4 关闭redis服务的方法"></a>4 关闭redis服务的方法</h2><ul>
+<li><p>方法1：<br>查询到PID，kill -9 pid。<br>该方式相当于断电，非正常关闭，一般不用，会造成数据丢失</p>
+</li>
+<li><p>方法2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 redis-4.0.9]# redis-cli shutdown</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="21-11-redis持久化"><a href="#21-11-redis持久化" class="headerlink" title="21.11 redis持久化"></a>21.11 redis持久化</h1><blockquote>
+<p>和Memcached服务一样，如果关闭RDB和aof数据就会存储在内存中，当重启服务或者重启机器 存储的数据就会丢失。如果数据很重要，我们就需要做持久化。</p>
+</blockquote>
+<ul>
+<li>Redis提供了两种持久化的方式，分别是<strong>RDB（Redis DataBase）和AOF（Append Only File）</strong><ul>
+<li>RDB，简而言之，就是在不同的时间点，将redis存储的数据生成快照并存储到磁盘等介质上。</li>
+<li>AOF，则是换了一个角度来实现持久化，那就是将redis执行过的所有写指令记录下来，在下次redis重新启动时，只要把这些写指令从前到后再重复执行一遍，就可以实现数据恢复了。</li>
+</ul>
+</li>
+<li>其实RDB和AOF两种方式也可以同时使用，在这种情况下，如果redis重启的话，则会优先采用AOF方式来进行数据恢复，这是因为AOF方式的数据恢复完整度更高。</li>
+<li>如果你没有数据持久化的需求，也完全可以关闭RDB和AOF方式，这样的话，redis将变成一个纯内存数据库，就像memcache一样。</li>
+</ul>
+<h2 id="1-redis持久化相关的参数"><a href="#1-redis持久化相关的参数" class="headerlink" title="1 redis持久化相关的参数"></a>1 redis持久化相关的参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">save 900 1          //表示每15分钟且至少有1个key改变，就触发一次持久化</span><br><span class="line">save 300 10        //表示每5分钟且至少有10个key改变，就触发一次持久化</span><br><span class="line">save 60 10000    //表示每60秒至少有10000个key改变，就触发一次持久</span><br><span class="line">save &quot; &quot;                //这样可以禁用rdb持久化</span><br><span class="line">appendonly yes   //如果是yes，则开启aof持久化</span><br><span class="line">appendfilename “appendonly.aof”   //指定aof文件名字</span><br><span class="line">appendfsync everysec  //每一秒写入aof文件，并完成磁盘同步。</span><br><span class="line"># 指定fsync()调用模式，有三种</span><br><span class="line"># no(不调用fsync),always(每次写都会调用fsync),everysec(每秒钟调用一次fsync)。</span><br><span class="line"># 第一种最快，第二种数据最安全，但会占用磁盘I/O会差一些，第三种为这种方案最恰当，默认选第三种。</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-开启和关闭持久化"><a href="#2-开启和关闭持久化" class="headerlink" title="2 开启和关闭持久化"></a>2 开启和关闭持久化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">开启</span><br><span class="line">[root@yt-01 ~]# vim /etc/redis.conf</span><br><span class="line">……</span><br><span class="line"># save &quot; &quot;</span><br><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br><span class="line"></span><br><span class="line">关闭</span><br><span class="line">[root@yt-01 ~]# vim /etc/redis.conf</span><br><span class="line">……</span><br><span class="line">save &quot; &quot;</span><br><span class="line"># save 900 1</span><br><span class="line"># save 300 10</span><br><span class="line"># save 60 10000</span><br><span class="line"></span><br><span class="line">设置完后，重启服务</span><br><span class="line"># redis-cli -p 127.0.0.1 shutdown </span><br><span class="line"># redis-server  /etc/redis.conf</span><br></pre></td></tr></table></figure>
+
+<h1 id="21-12-redis数据类型"><a href="#21-12-redis数据类型" class="headerlink" title="21.12 redis数据类型"></a>21.12 redis数据类型</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string</span><br><span class="line">list</span><br><span class="line">set</span><br><span class="line">sort set</span><br><span class="line">hash</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-Redis数据类型-string"><a href="#1-Redis数据类型-string" class="headerlink" title="1 Redis数据类型-string"></a>1 Redis数据类型-string</h2><p>string为最简单的类型，与Memcached一样的类型，一个key对应一个value，其支持的操作与Memcached的操作类似，它的功能更丰富。设置可以存二进制的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# redis-cli</span><br><span class="line">127.0.0.1:6379&gt; set mykey 123</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get mykey</span><br><span class="line">&quot;123&quot;</span><br><span class="line">127.0.0.1:6379&gt; mset k1 a k2 b k3 c</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; mget k1 k2 k3</span><br><span class="line">1) &quot;a&quot;</span><br><span class="line">2) &quot;b&quot;</span><br><span class="line">3) &quot;c&quot;</span><br><span class="line">127.0.0.1:6379&gt; quit</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Redis数据类型-list"><a href="#2-Redis数据类型-list" class="headerlink" title="2 Redis数据类型-list"></a>2 Redis数据类型-list</h2><ul>
+<li><p>list是一个链表结构，主要功能是push、pop、获取一个范围的所有值等等。操作中key理解为链表的名字。</p>
+</li>
+<li><p>使用 list 结构，我们可以轻松地实现最新消息排行等功能（比如新浪微博的 TimeLine ）。list 的另一个应用就是消息队列，可以利用 list 的 push操作，将任务存在 list 中，然后工作线程再用pop操作将任务取出进行执行。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 redis-4.0.9]# redis-cli</span><br><span class="line"># 添加一条list数据</span><br><span class="line">127.0.0.1:6379&gt; lpush list1 &quot;yuntai&quot;</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; lpush list1 &quot;yuntai1&quot;</span><br><span class="line">(integer) 2</span><br><span class="line">127.0.0.1:6379&gt; lpush list1 &quot;yuntai2&quot;</span><br><span class="line">(integer) 3</span><br><span class="line"></span><br><span class="line"># 查看指定list的数据</span><br><span class="line">127.0.0.1:6379&gt; lrange list1 0 -1</span><br><span class="line">1) &quot;yuntai2&quot;</span><br><span class="line">2) &quot;yuntai1&quot;</span><br><span class="line">3) &quot;yuntai&quot;</span><br><span class="line"></span><br><span class="line"># 取出（pop挤出）一条数据，挤出就没有了</span><br><span class="line">127.0.0.1:6379&gt; lpop list1</span><br><span class="line">&quot;yuntai2&quot;</span><br><span class="line"># 取出数据list 从0到1</span><br><span class="line">127.0.0.1:6379&gt; lrange list1 0 -1</span><br><span class="line">1) &quot;yuntai1&quot;</span><br><span class="line">2) &quot;yuntai&quot;</span><br><span class="line">127.0.0.1:6379&gt; quit</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Redis数据类型-set"><a href="#3-Redis数据类型-set" class="headerlink" title="3 Redis数据类型-set"></a>3 Redis数据类型-set</h2><ul>
+<li>set是集合，和我们数学中的集合概念相似，对集合的操作有添加删除元素，有对多个集合求交并差等操作。操作中key理解为集合的名字。比如在微博应用中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合。因为 Redis 非常人性化的为集合提供了求交集、并集、差集等操作，那么就可以非常方便的实现如共同关注、共同喜好、二度好友等功能，对上面的所有集合操作，你还可以使用不同的命令选择将结果返回给客户端还是存集到一个新的集合中。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 redis-4.0.9]# redis-cli</span><br><span class="line"># 添加一条set数据</span><br><span class="line">127.0.0.1:6379&gt; SADD set1 a</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SADD set1 b</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SADD set1 c</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SADD set1 d</span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line"># 查看set数据</span><br><span class="line">127.0.0.1:6379&gt; SMEMBERS set1</span><br><span class="line">1) &quot;d&quot;</span><br><span class="line">2) &quot;c&quot;</span><br><span class="line">3) &quot;a&quot;</span><br><span class="line">4) &quot;b&quot;</span><br><span class="line">127.0.0.1:6379&gt; SREM set1 c</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SADD set2 a 2 b</span><br><span class="line">(integer) 3</span><br><span class="line">127.0.0.1:6379&gt; SINTER set1 set2</span><br><span class="line">1) &quot;a&quot;</span><br><span class="line">2) &quot;b&quot;</span><br><span class="line">127.0.0.1:6379&gt; SUNION set1 set2</span><br><span class="line">1) &quot;d&quot;</span><br><span class="line">2) &quot;a&quot;</span><br><span class="line">3) &quot;2&quot;</span><br><span class="line">4) &quot;b&quot;</span><br><span class="line">127.0.0.1:6379&gt; SDIFF set1 set2</span><br><span class="line">1) &quot;d&quot;</span><br><span class="line">127.0.0.1:6379&gt; quit</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Redis数据类型-sort-set"><a href="#4-Redis数据类型-sort-set" class="headerlink" title="4 Redis数据类型-sort set"></a>4 Redis数据类型-sort set</h2><ul>
+<li>sorted set是有序集合，它比set多了一个权重参数score，使得集合中的元素能够按score进行有序排列，比如一个存储全班同学成绩的Sorted Sets，其集合value可以是同学的学号，而score就可以是其考试得分，这样在数据插入集合的时候，就已经进行了天然的排序。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 redis-4.0.9]# redis-cli</span><br><span class="line"># 添加sort set数据</span><br><span class="line">127.0.0.1:6379&gt; ZADD set3 12 abc</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; ZADD set3 2 &quot;cde 123&quot;</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; ZADD set3 24 &quot;123-aaa&quot;</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; ZADD set3 4 &quot;a123a&quot;</span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line"># 查看数据set3</span><br><span class="line">127.0.0.1:6379&gt; ZRANGE set3 0 -1</span><br><span class="line">1) &quot;cde 123&quot;</span><br><span class="line">2) &quot;a123a&quot;</span><br><span class="line">3) &quot;abc&quot;</span><br><span class="line">4) &quot;123-aaa&quot;</span><br><span class="line">#数据的value根据score大小排序</span><br><span class="line"></span><br><span class="line"># 倒序查看数据set3</span><br><span class="line">127.0.0.1:6379&gt; ZREVRANGE set3 0 -1</span><br><span class="line">1) &quot;123-aaa&quot;</span><br><span class="line">2) &quot;abc&quot;</span><br><span class="line">3) &quot;a123a&quot;</span><br><span class="line">4) &quot;cde 123&quot;</span><br><span class="line">127.0.0.1:6379&gt; quit</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-Redis数据类型-hash"><a href="#5-Redis数据类型-hash" class="headerlink" title="5 Redis数据类型- hash"></a>5 Redis数据类型- hash</h2><p>在 Memcached 中，我们经常将一些结构化的信息打包成hashmap，在客户端序列化后存储为一个字符串的值（一般是JSON格式），比如用户的昵称、年龄、性别、积分等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 redis-4.0.9]# redis-cli</span><br><span class="line"># 添加一条hash数据hash1 k值为name，v值为yuntai</span><br><span class="line">127.0.0.1:6379&gt; hset hash1 name yuntai</span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line"># 查询数据hash1 k值为name的v值</span><br><span class="line">127.0.0.1:6379&gt; hget hash1 name</span><br><span class="line">&quot;yuntai&quot;</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; hset hash1 age 27</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; hget hash1 age</span><br><span class="line">&quot;27&quot;</span><br><span class="line"></span><br><span class="line"># 查询hash1的所有值</span><br><span class="line">127.0.0.1:6379&gt; hgetall hash1</span><br><span class="line">1) &quot;name&quot;</span><br><span class="line">2) &quot;yuntai&quot;</span><br><span class="line">3) &quot;age&quot;</span><br><span class="line">4) &quot;27&quot;</span><br><span class="line">127.0.0.1:6379&gt; quit</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/22.9-22.12 git分支管理、远程分支管理、标签管理、git别名/" rel="next" title="22.9-22.12 git分支管理、远程分支管理、标签管理、git别名">
+                <i class="fa fa-chevron-left"></i> 22.9-22.12 git分支管理、远程分支管理、标签管理、git别名
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/21.1-21.4 NoSQL和memcached介绍/" rel="prev" title="21.1-21.4 NoSQL和memcached介绍">
+                21.1-21.4 NoSQL和memcached介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#21-9-redis介绍"><span class="nav-number">1.</span> <span class="nav-text">21.9 redis介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-10-redis安装"><span class="nav-number">2.</span> <span class="nav-text">21.10 redis安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-下载"><span class="nav-number">2.1.</span> <span class="nav-text">1 下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装"><span class="nav-number">2.2.</span> <span class="nav-text">2 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-配置文件"><span class="nav-number">2.3.</span> <span class="nav-text">3 配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关闭redis服务的方法"><span class="nav-number">2.4.</span> <span class="nav-text">4 关闭redis服务的方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-11-redis持久化"><span class="nav-number">3.</span> <span class="nav-text">21.11 redis持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-redis持久化相关的参数"><span class="nav-number">3.1.</span> <span class="nav-text">1 redis持久化相关的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-开启和关闭持久化"><span class="nav-number">3.2.</span> <span class="nav-text">2 开启和关闭持久化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-12-redis数据类型"><span class="nav-number">4.</span> <span class="nav-text">21.12 redis数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Redis数据类型-string"><span class="nav-number">4.1.</span> <span class="nav-text">1 Redis数据类型-string</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Redis数据类型-list"><span class="nav-number">4.2.</span> <span class="nav-text">2 Redis数据类型-list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Redis数据类型-set"><span class="nav-number">4.3.</span> <span class="nav-text">3 Redis数据类型-set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Redis数据类型-sort-set"><span class="nav-number">4.4.</span> <span class="nav-text">4 Redis数据类型-sort set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Redis数据类型-hash"><span class="nav-number">4.5.</span> <span class="nav-text">5 Redis数据类型- hash</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

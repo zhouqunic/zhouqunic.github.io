@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="LVS,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="18.6 负载均衡集群介绍 主流开源软件LVS、keepalived、haproxy、nginx等   其中LVS属于4层（网络OSI 7层模型），nginx属于7层，haproxy既可以认为是4层，也可以当做7层使用  keepalived的负载均衡功能其实就是lvs   lvs这种4层的负载均衡是可以分发除80外的其他端口通信的，比如MySQL的，而nginx仅仅支持http，https，ma">
+<meta name="keywords" content="LVS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="18.6-18.10 负载均衡集群介绍、LVS和LVS NAT搭建">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/18.6-18.10 负载均衡集群介绍、LVS和LVS NAT搭建/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="18.6 负载均衡集群介绍 主流开源软件LVS、keepalived、haproxy、nginx等   其中LVS属于4层（网络OSI 7层模型），nginx属于7层，haproxy既可以认为是4层，也可以当做7层使用  keepalived的负载均衡功能其实就是lvs   lvs这种4层的负载均衡是可以分发除80外的其他端口通信的，比如MySQL的，而nginx仅仅支持http，https，ma">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-12T06:59:08.348Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="18.6-18.10 负载均衡集群介绍、LVS和LVS NAT搭建">
+<meta name="twitter:description" content="18.6 负载均衡集群介绍 主流开源软件LVS、keepalived、haproxy、nginx等   其中LVS属于4层（网络OSI 7层模型），nginx属于7层，haproxy既可以认为是4层，也可以当做7层使用  keepalived的负载均衡功能其实就是lvs   lvs这种4层的负载均衡是可以分发除80外的其他端口通信的，比如MySQL的，而nginx仅仅支持http，https，ma">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/18.6-18.10 负载均衡集群介绍、LVS和LVS NAT搭建/">
+
+
+
+
+
+  <title>18.6-18.10 负载均衡集群介绍、LVS和LVS NAT搭建 | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/18.6-18.10 负载均衡集群介绍、LVS和LVS NAT搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">18.6-18.10 负载均衡集群介绍、LVS和LVS NAT搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="18-6-负载均衡集群介绍"><a href="#18-6-负载均衡集群介绍" class="headerlink" title="18.6 负载均衡集群介绍"></a>18.6 负载均衡集群介绍</h2><ul>
+<li><p>主流开源软件LVS、keepalived、haproxy、nginx等 </p>
+</li>
+<li><p>其中LVS属于4层（网络OSI 7层模型），nginx属于7层，haproxy既可以认为是4层，也可以当做7层使用</p>
+</li>
+<li><p>keepalived的负载均衡功能其实就是lvs </p>
+</li>
+<li><p>lvs这种4层的负载均衡是可以分发除80外的其他端口通信的，比如MySQL的，而nginx仅仅支持http，https，mail，haproxy也支持MySQL这种</p>
+</li>
+<li><p>相比较来说，LVS这种4层的更稳定，能承受更多的请求，而nginx这种7层的更加灵活，能实现更多的个性化需求 。</p>
+</li>
+</ul>
+<p>这里写图片描述</p>
+<h2 id="18-7-LVS介绍"><a href="#18-7-LVS介绍" class="headerlink" title="18.7 LVS介绍"></a>18.7 LVS介绍</h2><ul>
+<li><p>LVS是由国人章文嵩开发  </p>
+</li>
+<li><p>流行度不亚于apache的httpd，基于TCP/IP做的路由和转发，稳定性和效率很高  </p>
+</li>
+<li><p>LVS最新版本基于Linux内核2.6，有好多年不更新了  </p>
+</li>
+<li><p>LVS有三种常见的模式：NAT、DR、IP Tunnel  </p>
+</li>
+<li><p>LVS架构中有一个核心角色叫做分发器（Load balance），它用来分发用户的请求，还有诸多处理用户请求的服务器（Real Server，简称rs） </p>
+</li>
+<li><p>在调度器的实现技术中，IP负载均衡技术是效率最高的。</p>
+</li>
+<li><p>在已有的IP负载均衡技术中有通过网络地址转换（Network Address Translation）将一组服务器构成一个高性能的、高可用的虚拟服务器，我们称之为VS/NAT技术（Virtual Server via Network Address Translation），大多数商品化的IP负载均衡调度器产品都是使用此方法，如Cisco的LocalDirector、F5的Big/IP和 Alteon的ACEDirector。</p>
+</li>
+<li><p>在分析VS/NAT的缺点和网络服务的非对称性的基础上，我们提出通过IP隧道实现虚拟服务器的方法VS/TUN （Virtual Server via IP Tunneling），和通过直接路由实现虚拟服务器的方法VS/DR（Virtual Server via Direct Routing），它们可以极大地提高系统的伸缩性。</p>
+</li>
+<li><p>所以，IPVS软件实现了这三种IP负载均衡技术，它们的大致原理如下（我们将在其他章节对其工作原 理进行详细描述）：</p>
+</li>
+</ul>
+<p><strong>LVS有三种常见的模式：NAT、DR、IP Tunnel，其实企业中最常用的是 DR 实现方式，而 NAT 配置上比较简单和方便，后边实践中会总结 DR 和 NAT 具体使用配置过程。</strong></p>
+<h3 id="LVS-NAT模式"><a href="#LVS-NAT模式" class="headerlink" title="LVS NAT模式"></a>LVS NAT模式</h3><p>工作原理：Virtual Server via Network Address Translation(VS/NAT)  网络地址转换<br><strong>调度器将请求的目标 ip 即 vip 地址改为 Real server 的 ip, 返回的数据包也经过调度器，调度器再把源地址修改为 vip</strong></p>
+<ul>
+<li>这种模式借助iptables的nat表来实现  </li>
+<li>用户的请求到分发器后，通过预设的iptables规则，把请求的数据包转发到后端的rs上去  </li>
+<li>rs需要设定网关为分发器的内网ip  </li>
+<li>用户请求的数据包和返回给用户的数据包全部经过分发器，所以分发器成为瓶颈  </li>
+<li>在nat模式中，只需要分发器有公网ip即可，所以比较节省公网ip资源 </li>
+</ul>
+<p>NAT模式优缺点：</p>
+<ol>
+<li>NAT技术将请求的报文和响应的报文都需要通过LB进行地址改写，因此网站访问量比较大的时候LB负载均衡调度器有比较大的瓶颈，一般要求最多之能10-20台节点</li>
+<li>只需要在LB上配置一个公网IP地址就可以了。</li>
+<li>每台内部的节点服务器的网关地址必须是调度器LB的内网地址。</li>
+<li>NAT模式支持对IP地址和端口进行转换。即用户请求的端口和真实服务器的端口可以不一致。</li>
+</ol>
+<h3 id="LVS-IP-Tunnel模式"><a href="#LVS-IP-Tunnel模式" class="headerlink" title="LVS IP Tunnel模式"></a>LVS IP Tunnel模式</h3><p>工作原理：Virtual Server via IP Tunneling IP隧道封装<br><strong>调度器将请求来的数据包封装加密通过 ip 隧道转发到后端的 real server 上，而 real server 会直接把数据返回给客户端，而不再经过调度器</strong></p>
+<ul>
+<li>这种模式，需要有一个公共的IP配置在分发器和所有rs上，我们把它叫做vip  </li>
+<li>客户端请求的目标IP为vip，分发器接收到请求数据包后，会对数据包做一个加工，会把目标IP改为rs的IP，这样数据包就到了rs上  </li>
+<li>rs接收数据包后，会还原原始数据包，这样目标IP为vip，因为所有rs上配置了这个vip，所以它会认为是它自己 </li>
+</ul>
+<h3 id="LVS-DR模式"><a href="#LVS-DR模式" class="headerlink" title="LVS DR模式"></a>LVS DR模式</h3><p>工作原理：Virtual Server via Director Server 分发器封装<br><strong>分发器将请求来的数据包的MAC地址改为后端的 real server的MAC地址，然后直接原封不动地把数据包发到后端的 real server上，而 real server 会直接把数据返回给客户端，也不再经过调度器，客户端接受的IP信息还是显示的是分发器的IP</strong></p>
+<ul>
+<li>这种模式，也需要有一个公共的IP配置在分发器和所有rs上，也就是vip  </li>
+<li>和IP Tunnel不同的是，它会把数据包的MAC地址修改为rs的MAC地址  </li>
+<li>rs接收数据包后，会还原原始数据包，这样目标IP为vip，因为所有rs上配置了这个vip，所以它会认为是它自己 </li>
+</ul>
+<p>官方三种负载均衡技术比较总结表：</p>
+<h2 id="18-8-LVS调度算法"><a href="#18-8-LVS调度算法" class="headerlink" title="18.8 LVS调度算法"></a>18.8 LVS调度算法</h2><p>在这8种算法中，rr、wrr、lc、wlc四种算法是最最常用的，需要记住。</p>
+<ol>
+<li><p>轮询 Round-Robin  rr<br>这种算法是最简单的，就是按依次循环的方式将请求调度到不同的服务器上，该算法最大的特点就是简单。轮询算法假设所有的服务器处理请求的能力都是一样的，调度器会将所有的请求平均分配给每个真实服务器，不管后端 RS 配置和处理能力，非常均衡地分发下去。</p>
+</li>
+<li><p>加权轮询 Weight Round-Robin wrr<br>这种算法比 rr 的算法多了一个权重的概念，可以给 RS 设置权重，权重越高，那么分发的请求数越多，权重的取值范围 0 – 100。主要是对rr算法的一种优化和补充， LVS 会考虑每台服务器的性能，并给每台服务器添加要给权值，如果服务器A的权值为1，服务器B的权值为2，则调度到服务器B的请求会是服务器A的2倍。权值越高的服务器，处理的请求越多。</p>
+</li>
+<li><p>最小连接 Least-Connection lc<br>这个算法会根据后端 RS 的连接数来决定把请求分发给谁，比如 RS1 连接数比 RS2 连接数少，那么请求就优先发给 RS1</p>
+</li>
+<li><p>加权最小连接 Weight Least-Connection wlc<br>这个算法比 lc 多了一个权重的概念。</p>
+</li>
+<li><p>基于局部性的最小连接 Locality-Based Least Connections lblc<br>这个算法是请求数据包的目标 IP 地址的一种调度算法，该算法先根据请求的目标 IP 地址寻找最近的该目标 IP 地址所有使用的服务器，如果这台服务器依然可用，并且有能力处理该请求，调度器会尽量选择相同的服务器，否则会继续选择其它可行的服务器</p>
+</li>
+<li><p>带复制的基于局部性最小连接 Locality-Based Least Connections with Replication  lblcr<br>记录的不是要给目标 IP 与一台服务器之间的连接记录，它会维护一个目标 IP 到一组服务器之间的映射关系，防止单点服务器负载过高。</p>
+</li>
+<li><p>目标地址散列调度 Destination Hashing dh<br>该算法是根据目标 IP 地址通过散列函数将目标 IP 与服务器建立映射关系，出现服务器不可用或负载过高的情况下，发往该目标 IP 的请求会固定发给该服务器。</p>
+</li>
+<li><p>源地址散列调度 Source Hashing  sh<br>与目标地址散列调度算法类似，但它是根据源地址散列算法进行静态分配固定的服务器资源。</p>
+</li>
+</ol>
+<h2 id="18-9-18-10-LVS-NAT模式搭建"><a href="#18-9-18-10-LVS-NAT模式搭建" class="headerlink" title="18.9/18.10 LVS NAT模式搭建"></a>18.9/18.10 LVS NAT模式搭建</h2><p>NAT模式就是通过iptables模式实现的，我们配置一些规则在上面就可以实现了。</p>
+<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1.准备工作"></a>1.准备工作</h3><h4 id="1-1-三台服务器"><a href="#1-1-三台服务器" class="headerlink" title="1.1 三台服务器"></a>1.1 三台服务器</h4><table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>IP地址</th>
+<th>角色</th>
+<th>网关</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>yt-01</td>
+<td>192.168.2.111</td>
+<td>Director</td>
+<td>公网IP （虚拟机的原因，公网IP同内网IP，生产环境中是不同的）</td>
+</tr>
+<tr>
+<td>yt-02</td>
+<td>192.168.2.112</td>
+<td>Real server A</td>
+<td>192.168.2.111（即DR的内网IP地址）</td>
+</tr>
+<tr>
+<td>yt-03</td>
+<td>192.168.2.113</td>
+<td>Real server B</td>
+<td>192.168.2.111（即DR的内网IP地址）</td>
+</tr>
+</tbody></table>
+<p>配置完成后，最好 <code>route -n</code> 再确认下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-02 ~]# route -n</span><br><span class="line">Kernel IP routing table</span><br><span class="line">Destination    Gateway        Genmask        Flags Metric Ref    Use Iface</span><br><span class="line">0.0.0.0        192.168.2.111 0.0.0.0        UG    0      0        0 ens33</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-三台机器上都关闭掉防火墙，重置iptables规则"><a href="#1-2-三台机器上都关闭掉防火墙，重置iptables规则" class="headerlink" title="1.2 三台机器上都关闭掉防火墙，重置iptables规则"></a>1.2 三台机器上都关闭掉防火墙，重置iptables规则</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# systemctl stop firewalld</span><br><span class="line">[root@yt-01 ~]# systemctl disable firewalld</span><br><span class="line">[root@yt-01 ~]# systemctl start  iptables-services; iptables -F; service iptables save </span><br><span class="line">[root@yt-01 ~]# getenforce </span><br><span class="line">Enforcing</span><br><span class="line">[root@yt-01 ~]# vim /etc/sysconfig/selinux </span><br><span class="line"></span><br><span class="line"># This file controls the state of SELinux on the system.</span><br><span class="line"># SELINUX= can take one of these three values:</span><br><span class="line">#    enforcing - SELinux security policy is enforced.</span><br><span class="line">#    permissive - SELinux prints warnings instead of enforcing.</span><br><span class="line">#    disabled - No SELinux policy is loaded.</span><br><span class="line">SELINUX=disabled</span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# yum install -y iptables-services  </span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# systemctl start iptables</span><br><span class="line">[root@yt-01 ~]# systemctl enable iptables</span><br><span class="line">Created symlink from /etc/systemd/system/basic.target.wants/iptables.service to /usr/lib/systemd/system/iptables.service.</span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# iptables -F</span><br><span class="line">[root@yt-01 ~]# service iptables save</span><br><span class="line">iptables: Saving firewall rules to /etc/sysconfig/iptables:[  OK  ]</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-测试内外之间是否可以ping同"><a href="#1-3-测试内外之间是否可以ping同" class="headerlink" title="1.3 测试内外之间是否可以ping同"></a>1.3 测试内外之间是否可以ping同</h4><p>Windows主机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping 192.168.2.111</span><br></pre></td></tr></table></figure>
+
+<p>yt-01</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping www.qq.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-安装和配置"><a href="#2-安装和配置" class="headerlink" title="2.安装和配置"></a>2.安装和配置</h3><h4 id="2-1-在两个RS上面安装nginx"><a href="#2-1-在两个RS上面安装nginx" class="headerlink" title="2.1 在两个RS上面安装nginx"></a>2.1 在两个RS上面安装nginx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-02 ~]# yum install -y nginx</span><br><span class="line">[root@yt-03 ~]# yum install -y nginx</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-在Director上安装ipvsadm"><a href="#2-2-在Director上安装ipvsadm" class="headerlink" title="2.2 在Director上安装ipvsadm"></a>2.2 在Director上安装ipvsadm</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# yum install -y ipvsadm</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-给Director编辑一个实现nat的脚本"><a href="#2-3-给Director编辑一个实现nat的脚本" class="headerlink" title="2.3 给Director编辑一个实现nat的脚本"></a>2.3 给Director编辑一个实现nat的脚本</h4><p>编写脚本 /usr/local/sbin/lvs_nat.sh，LVS架构几乎都是以脚本的形式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# /usr/local/sbin/lvs_nat.sh</span><br><span class="line"></span><br><span class="line">#! /bin/bash</span><br><span class="line"># director 服务器上开启路由转发功能</span><br><span class="line">echo 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line"># 关闭icmp的重定向</span><br><span class="line">echo 0 &gt; /proc/sys/net/ipv4/conf/all/send_redirects</span><br><span class="line">echo 0 &gt; /proc/sys/net/ipv4/conf/default/send_redirects</span><br><span class="line"># 注意区分网卡名字，两个网卡分别为ens33和ens37</span><br><span class="line">echo 0 &gt; /proc/sys/net/ipv4/conf/ens33/send_redirects</span><br><span class="line">echo 0 &gt; /proc/sys/net/ipv4/conf/ens37/send_redirects</span><br><span class="line"># director 设置nat防火墙</span><br><span class="line">iptables -t nat -F</span><br><span class="line">iptables -t nat -X</span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.2.0/24  -j MASQUERADE</span><br><span class="line"># director设置ipvsadm</span><br><span class="line">IPVSADM=&apos;/usr/sbin/ipvsadm&apos;</span><br><span class="line">$IPVSADM -C</span><br><span class="line">$IPVSADM -A -t 192.168.138.128:80 -s wlc -p 3</span><br><span class="line"># -s wlc -p 3 这就是IPVSADM算法，超时3s，Director服务器会自动分发到不同的Real Server服务器</span><br><span class="line">$IPVSADM -a -t 192.168.138.128:80 -r 192.168.2.112:80 -m -w 1</span><br><span class="line">$IPVSADM -a -t 192.168.138.128:80 -r 192.168.2.113:80 -m -w 1</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-执行DR上的lvs-nat-sh脚本"><a href="#2-4-执行DR上的lvs-nat-sh脚本" class="headerlink" title="2.4 执行DR上的lvs_nat.sh脚本"></a>2.4 执行DR上的lvs_nat.sh脚本</h4><p>保存后，运行脚本，LVS NAT模式就配置成功了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# sh /usr/local/sbin/lvs_nat.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-测试"><a href="#3-测试" class="headerlink" title="3.测试"></a>3.测试</h3><h4 id="3-1-修改2个RS的nginx主页内容，以便区分"><a href="#3-1-修改2个RS的nginx主页内容，以便区分" class="headerlink" title="3.1 修改2个RS的nginx主页内容，以便区分"></a>3.1 修改2个RS的nginx主页内容，以便区分</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-02 ~]# echo &quot;rs1rs1&quot; &gt;/usr/share/nginx/html/index.html</span><br><span class="line">[root@yt-03 ~]# echo &quot;rs2rs2&quot; &gt;/usr/share/nginx/html/index.html</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-用浏览器测试两台机器上的web内容"><a href="#3-2-用浏览器测试两台机器上的web内容" class="headerlink" title="3.2 用浏览器测试两台机器上的web内容"></a>3.2 用浏览器测试两台机器上的web内容</h4><h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="lvs-三种模式详解"><a href="#lvs-三种模式详解" class="headerlink" title="lvs 三种模式详解"></a>lvs 三种模式详解</h3><p><a href="http://www.it165.net/admin/html/201401/2248.html" target="_blank" rel="noopener">http://www.it165.net/admin/html/201401/2248.html</a> </p>
+<h3 id="lvs几种算法"><a href="#lvs几种算法" class="headerlink" title="lvs几种算法"></a>lvs几种算法</h3><p><a href="http://www.aminglinux.com/bbs/thread-7407-1-1.html" target="_blank" rel="noopener">http://www.aminglinux.com/bbs/thread-7407-1-1.html</a></p>
+<h3 id="关于arp-ignore和-arp-announce"><a href="#关于arp-ignore和-arp-announce" class="headerlink" title="关于arp_ignore和 arp_announce"></a>关于arp_ignore和 arp_announce</h3><p><a href="http://www.cnblogs.com/lgfeng/archive/2012/10/16/2726308.html" target="_blank" rel="noopener">http://www.cnblogs.com/lgfeng/archive/2012/10/16/2726308.html</a></p>
+<h3 id="lvs原理相关的"><a href="#lvs原理相关的" class="headerlink" title="lvs原理相关的"></a>lvs原理相关的</h3><p><a href="http://blog.csdn.net/pi9nc/article/details/23380589" target="_blank" rel="noopener">http://blog.csdn.net/pi9nc/article/details/23380589</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LVS/" rel="tag"># LVS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/21.13-21.17 redis常用操作、操作键值、安全设置/" rel="next" title="21.13-21.17 redis常用操作、操作键值、安全设置">
+                <i class="fa fa-chevron-left"></i> 21.13-21.17 redis常用操作、操作键值、安全设置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/19.1-19.6 Linux监控平台介绍、zabbix监控介绍、安装、忘记密码怎么办/" rel="prev" title="19.1-19.6 Linux监控平台介绍、zabbix监控介绍、安装、忘记密码怎么办">
+                19.1-19.6 Linux监控平台介绍、zabbix监控介绍、安装、忘记密码怎么办 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#18-6-负载均衡集群介绍"><span class="nav-number">1.</span> <span class="nav-text">18.6 负载均衡集群介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-7-LVS介绍"><span class="nav-number">2.</span> <span class="nav-text">18.7 LVS介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LVS-NAT模式"><span class="nav-number">2.1.</span> <span class="nav-text">LVS NAT模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LVS-IP-Tunnel模式"><span class="nav-number">2.2.</span> <span class="nav-text">LVS IP Tunnel模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LVS-DR模式"><span class="nav-number">2.3.</span> <span class="nav-text">LVS DR模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-8-LVS调度算法"><span class="nav-number">3.</span> <span class="nav-text">18.8 LVS调度算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-9-18-10-LVS-NAT模式搭建"><span class="nav-number">4.</span> <span class="nav-text">18.9/18.10 LVS NAT模式搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-准备工作"><span class="nav-number">4.1.</span> <span class="nav-text">1.准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-三台服务器"><span class="nav-number">4.1.1.</span> <span class="nav-text">1.1 三台服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-三台机器上都关闭掉防火墙，重置iptables规则"><span class="nav-number">4.1.2.</span> <span class="nav-text">1.2 三台机器上都关闭掉防火墙，重置iptables规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-测试内外之间是否可以ping同"><span class="nav-number">4.1.3.</span> <span class="nav-text">1.3 测试内外之间是否可以ping同</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装和配置"><span class="nav-number">4.2.</span> <span class="nav-text">2.安装和配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-在两个RS上面安装nginx"><span class="nav-number">4.2.1.</span> <span class="nav-text">2.1 在两个RS上面安装nginx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-在Director上安装ipvsadm"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.2 在Director上安装ipvsadm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-给Director编辑一个实现nat的脚本"><span class="nav-number">4.2.3.</span> <span class="nav-text">2.3 给Director编辑一个实现nat的脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-执行DR上的lvs-nat-sh脚本"><span class="nav-number">4.2.4.</span> <span class="nav-text">2.4 执行DR上的lvs_nat.sh脚本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-测试"><span class="nav-number">4.3.</span> <span class="nav-text">3.测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-修改2个RS的nginx主页内容，以便区分"><span class="nav-number">4.3.1.</span> <span class="nav-text">3.1 修改2个RS的nginx主页内容，以便区分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-用浏览器测试两台机器上的web内容"><span class="nav-number">4.3.2.</span> <span class="nav-text">3.2 用浏览器测试两台机器上的web内容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展"><span class="nav-number">5.</span> <span class="nav-text">扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lvs-三种模式详解"><span class="nav-number">5.1.</span> <span class="nav-text">lvs 三种模式详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lvs几种算法"><span class="nav-number">5.2.</span> <span class="nav-text">lvs几种算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于arp-ignore和-arp-announce"><span class="nav-number">5.3.</span> <span class="nav-text">关于arp_ignore和 arp_announce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lvs原理相关的"><span class="nav-number">5.4.</span> <span class="nav-text">lvs原理相关的</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

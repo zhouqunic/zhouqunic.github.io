@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="svn,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="22.1 代码管理平台介绍1.关于代码管理平台的常识当大家谈论到代码管理平台的时候，会简单的把它认为就是一个放代码的地方，类似于FTP直接上传到指定位置就可以了。对于一个网站来说，这样理解没问题的。但是对于一个业务来说，每天都有很多代码需要不断的去更新，当然此过程不是想象的那么简单，上传即可，这个是需要开发组一点点去编辑（当然开发不是一个人去完成的是一个团队，不同的成员去编辑去修改，这个就是所谓的">
+<meta name="keywords" content="svn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="22.1-22.4 代码管理平台介绍和svn的安装和使用">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/22.1-22.4 代码管理平台介绍和svn的安装和使用/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="22.1 代码管理平台介绍1.关于代码管理平台的常识当大家谈论到代码管理平台的时候，会简单的把它认为就是一个放代码的地方，类似于FTP直接上传到指定位置就可以了。对于一个网站来说，这样理解没问题的。但是对于一个业务来说，每天都有很多代码需要不断的去更新，当然此过程不是想象的那么简单，上传即可，这个是需要开发组一点点去编辑（当然开发不是一个人去完成的是一个团队，不同的成员去编辑去修改，这个就是所谓的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-12T07:30:37.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="22.1-22.4 代码管理平台介绍和svn的安装和使用">
+<meta name="twitter:description" content="22.1 代码管理平台介绍1.关于代码管理平台的常识当大家谈论到代码管理平台的时候，会简单的把它认为就是一个放代码的地方，类似于FTP直接上传到指定位置就可以了。对于一个网站来说，这样理解没问题的。但是对于一个业务来说，每天都有很多代码需要不断的去更新，当然此过程不是想象的那么简单，上传即可，这个是需要开发组一点点去编辑（当然开发不是一个人去完成的是一个团队，不同的成员去编辑去修改，这个就是所谓的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/22.1-22.4 代码管理平台介绍和svn的安装和使用/">
+
+
+
+
+
+  <title>22.1-22.4 代码管理平台介绍和svn的安装和使用 | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/22.1-22.4 代码管理平台介绍和svn的安装和使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">22.1-22.4 代码管理平台介绍和svn的安装和使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="22-1-代码管理平台介绍"><a href="#22-1-代码管理平台介绍" class="headerlink" title="22.1 代码管理平台介绍"></a>22.1 代码管理平台介绍</h1><h2 id="1-关于代码管理平台的常识"><a href="#1-关于代码管理平台的常识" class="headerlink" title="1.关于代码管理平台的常识"></a>1.关于代码管理平台的常识</h2><p>当大家谈论到代码管理平台的时候，会简单的把它认为就是一个放代码的地方，类似于FTP直接上传到指定位置就可以了。对于一个网站来说，这样理解没问题的。但是对于一个业务来说，每天都有很多代码需要不断的去更新，当然此过程不是想象的那么简单，上传即可，这个是需要开发组一点点去编辑（当然开发不是一个人去完成的是一个团队，不同的成员去编辑去修改，这个就是所谓的协同开发）。测试、（第一版，第二版，第三版……）合成，最后推送到指定的业务中去。 我们如果没有详细的工作日志，那么很难记得这些变更，代码管理平台就是一个帮助我们管理代码版本变更的一个工具。</p>
+<ul>
+<li>版本控制，记录若干文件内容变化，以便将来查阅特定版本修订情况</li>
+<li>版本管理工具发展简史，cvs -&gt; svn -&gt; git        参考  <a href="http://luckypoem14.github.io/test/2012/04/24/scm-history/" target="_blank" rel="noopener">http://luckypoem14.github.io/test/2012/04/24/scm-history/</a></li>
+<li>svn全称subversion，是一个开源版本控制系统，始于2000年</li>
+<li>git是yt-01创始人linus发起的，2005年发布，最初目的是更好管理yt-01内核代码</li>
+<li>git和svn不同在于git不需要依赖服务端就可以工作，即git是分布式的</li>
+<li>github是基于git的在线web页面代码托管平台，可以选择付费服务</li>
+<li>gitlab可以认为是一个开源的github，两者没有直接关系</li>
+</ul>
+<h2 id="2-svn和git的对比"><a href="#2-svn和git的对比" class="headerlink" title="2. svn和git的对比"></a>2. svn和git的对比</h2><p><strong>优点：</strong><br>1.对于某些项目的核心代码或者是一些重要的保密性要求较高的项目，svn比git更适合。<br>2.svn支持空目录<br>3.svn有更好的windows平台支持<br>4.svn可以check out/clone一个子树（sub-tree）<br>5.svn支持特权访问控制svn lock，在处理很难合并的文件时非常有用<br>6.svn支持二进制文件，更容易处理大文件（不需要把老版本拷来拷去）<br>7.学习简单、使用简单</p>
+<p><strong>缺点：</strong><br>1.无网的情况下：无法提交代码，无法查看代码的历史版本、无法同步代码<br>2.代码要定期做备份（所有的代码数据及版本变更记录）<br>3.分支切换缓慢<br>4.由于每次提交都会保留一个原始副本，因此SVN的数据库容量会暴增。尤其是在开发人员非常多的情况下。</p>
+<p>mark</p>
+<h1 id="22-2-安装svn"><a href="#22-2-安装svn" class="headerlink" title="22.2 安装svn"></a>22.2 安装svn</h1><h2 id="服务端安装和配置SVN-yt-01"><a href="#服务端安装和配置SVN-yt-01" class="headerlink" title="服务端安装和配置SVN(yt-01)"></a>服务端安装和配置SVN(yt-01)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">安装</span><br><span class="line">[root@yt-01 ~]# yum install -y subversion</span><br><span class="line"></span><br><span class="line">创建版本库</span><br><span class="line">[root@yt-01 ~]# mkdir -p /data/svnroot/myproject</span><br><span class="line"></span><br><span class="line">版本库初始化</span><br><span class="line">root@yt-01 ~]# svnadmin create /data/svnroot/myproject</span><br><span class="line">[root@yt-01 ~]# ll /data/svnroot/myproject/</span><br><span class="line">总用量 8</span><br><span class="line">drwxr-xr-x 2 root root 54 4月 3 11:43 conf</span><br><span class="line">drwxr-sr-x 6 root root 233 4月 3 11:43 db</span><br><span class="line">-r--r--r-- 1 root root 2 4月 3 11:43 format</span><br><span class="line">drwxr-xr-x 2 root root 231 4月 3 11:43 hooks</span><br><span class="line">drwxr-xr-x 2 root root 41 4月 3 11:43 locks</span><br><span class="line">-rw-r--r-- 1 root root 229 4月 3 11:43 README.txt</span><br><span class="line"></span><br><span class="line">进入配置文件目录：</span><br><span class="line">[root@yt-01 ~]# cd /data/svnroot/myproject/conf/</span><br><span class="line">[root@yt-01 conf]# ls</span><br><span class="line">authz passwd svnserve.conf</span><br><span class="line">#authz：控制权限</span><br><span class="line">#passwd：密码文件</span><br><span class="line">#svnserve.conf：仓库配置文件</span><br><span class="line"></span><br><span class="line">配置用户及权限：</span><br><span class="line">[root@yt-01 conf]# vim authz</span><br><span class="line">[groups]</span><br><span class="line">admins = yuntai,user1</span><br><span class="line"># admin:组名</span><br><span class="line"># yuntai，user1：两个用户</span><br><span class="line">[/]                    // [/]:指定目录，“/”代表仓库的根目录，即/data/svnroot/myproject/</span><br><span class="line">@admins = rw   //指定admins组所对应的权限</span><br><span class="line">* = r                 //指定其他所有用户对应的权限</span><br><span class="line">[myproject:/] </span><br><span class="line"># myproject：项目名称，该方法适合SVN有多个项目（或有多个子项目）时使用</span><br><span class="line">user1 = rw</span><br><span class="line"></span><br><span class="line">配置用户密码：</span><br><span class="line">[root@yt-01 conf]# vim passwd</span><br><span class="line">[users]</span><br><span class="line">yuntai = 123456</span><br><span class="line">user1 = 123456</span><br><span class="line">#为了提高安全性，真是环境要设置复杂密码</span><br><span class="line"></span><br><span class="line">配置仓库文件：</span><br><span class="line">[root@yt-01 conf]# vim svnserve.conf</span><br><span class="line">[general]</span><br><span class="line">anon-access = none  </span><br><span class="line">#指定匿名用户权限</span><br><span class="line"></span><br><span class="line">auth-access = write  </span><br><span class="line">#指定认证用户权限</span><br><span class="line"></span><br><span class="line">password-db = passwd</span><br><span class="line">#指定用户密码文件</span><br><span class="line"></span><br><span class="line">authz-db = authz</span><br><span class="line">#指定用户权限文件</span><br><span class="line"></span><br><span class="line">realm = /data/svnroot/myproject</span><br><span class="line">#指定对用的仓库文件（绝对路径）</span><br><span class="line"></span><br><span class="line">启动SVN：</span><br><span class="line">[root@yt-01 conf]# svnserve -d -r /data/svnroot/</span><br><span class="line"># -d：表示后台运行</span><br><span class="line"># -r：=restrict（限制、约束）限制只输出指定路径下的版本库</span><br><span class="line"></span><br><span class="line">查看进程及端口：</span><br><span class="line">[root@yt-01 conf]# ps aux |grep svn</span><br><span class="line">root 2543 0.0 0.1 162188 656 ? Ss 19:30 0:00 svnserve -d -r /data/svnroot/</span><br><span class="line">[root@yt-01 conf]# netstat -lntp |grep svn</span><br><span class="line">tcp 0 0 0.0.0.0:3690 0.0.0.0:* LISTEN 2543/svnserve</span><br></pre></td></tr></table></figure>
+
+<h1 id="22-3-客户端上使用svn（yt-02）"><a href="#22-3-客户端上使用svn（yt-02）" class="headerlink" title="22.3 客户端上使用svn（yt-02）"></a>22.3 客户端上使用svn（yt-02）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">安装：</span><br><span class="line">[root@yt-02 ~]# yum install -y subversion</span><br><span class="line"></span><br><span class="line">进入测试目录：</span><br><span class="line">[root@yt-02 ~]# mkdir -p /home/svntest/</span><br><span class="line">[root@yt-02 ~]# cd !$</span><br><span class="line">cd /home/svntest/</span><br><span class="line"></span><br><span class="line">取出代码（从客户端1）：</span><br><span class="line">[root@yt-02 svntest]# svn checkout svn://192.168.122.130/myproject --username=yuntai</span><br><span class="line"></span><br><span class="line">认证领域: &lt;svn://192.168.122.130:3690&gt; /data/svnroot/myproject</span><br><span class="line">“yuntai”的密码:</span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">注意! 你的密码，对于认证域:</span><br><span class="line">   &lt;svn://192.168.122.130:3690&gt; /data/svnroot/myproject</span><br><span class="line">只能明文保存在磁盘上! 如果可能的话，请考虑配置你的系统，让 Subversion</span><br><span class="line">可以保存加密后的密码。请参阅文档以获得详细信息。</span><br><span class="line">你可以通过在“/root/.subversion/servers”中设置选项“store-plaintext-passwords”为“yes”或“no”，</span><br><span class="line">来避免再次出现此警告。</span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">保存未加密的密码(yes/no)?n</span><br><span class="line">取出版本 0。</span><br><span class="line"></span><br><span class="line">[root@yt-02 svntest]# ls</span><br><span class="line">myproject</span><br><span class="line">[root@yt-02 svntest]# ls myproject/</span><br><span class="line">[root@yt-02 svntest]# ls -a</span><br><span class="line">. .. myproject</span><br><span class="line">[root@yt-02 svntest]# ls -a myproject/</span><br><span class="line">. .. .svn</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">客户端1项目中增加一份文件</span><br><span class="line">[root@yt-02 svntest]# cd myproject/</span><br><span class="line">[root@yt-02 myproject]# ls</span><br><span class="line">[root@yt-02 myproject]# cp /etc/fstab ./       </span><br><span class="line">[root@yt-02 myproject]# ls</span><br><span class="line">fstab</span><br><span class="line"></span><br><span class="line">客户端1上传本地文件到服务端：</span><br><span class="line">[root@yt-02 myproject]# svn add ./fstab     //打上标记</span><br><span class="line">A                  fstab</span><br><span class="line">[root@yt-02 myproject]# svn commit -m &quot;add fstab&quot;     //正式上传，提交项目， -m：=mark，做标记</span><br><span class="line">正在增加 fstab</span><br><span class="line">传输文件数据.</span><br><span class="line">提交后的版本为 1。</span><br><span class="line"></span><br><span class="line">在服务端使用user1作为用户登录，作为客户端2，取出服务端项目文件</span><br><span class="line">[root@yt-01 myproject]# mkdir /home/svntest2/</span><br><span class="line">[root@yt-01 myprojec]# cd !$</span><br><span class="line">cd /home/svntest2/</span><br><span class="line">[root@yt-01 svntest2]# svn checkout svn://192.168.122.130/myproject --username=user1</span><br><span class="line">A myproject/fstab</span><br><span class="line">取出版本 1。</span><br><span class="line">[root@yt-01 svntest2]# ls</span><br><span class="line">myproject</span><br><span class="line">[root@yt-01 svntest2]# cd myproject/</span><br><span class="line">[root@yt-01 myproject]# ls</span><br><span class="line">fstab</span><br><span class="line"># 此时，在客户端1中提交的文件被同步到客户端2中</span><br><span class="line"># 再次上传新文件后可以使用命令：svn update进行同步</span><br><span class="line"></span><br><span class="line">客户端1：</span><br><span class="line">[root@yt-02 myproject]# vim test.txt</span><br><span class="line">[root@yt-02 myproject]# ls</span><br><span class="line">fstab test.txt</span><br><span class="line">[root@yt-02 myproject]# svn add ./test.txt</span><br><span class="line">A test.txt</span><br><span class="line">[root@yt-02 myproject]# svn commit -m &quot;add test.txt&quot;</span><br><span class="line">正在增加 test.txt</span><br><span class="line">传输文件数据.</span><br><span class="line">提交后的版本为 2。</span><br><span class="line"></span><br><span class="line">客户端2：</span><br><span class="line">[root@yt-01 myproject]# ls</span><br><span class="line">fstab</span><br><span class="line">[root@yt-01 myproject]# svn update</span><br><span class="line">正在升级 &apos;.&apos;:</span><br><span class="line">已还原“test.txt”</span><br><span class="line">版本 2。</span><br><span class="line">[root@yt-01 myproject]# ls</span><br><span class="line">fstab test.txt</span><br><span class="line">#注：此处update可以简写为up</span><br><span class="line"></span><br><span class="line">客户端密码文件保存位置：</span><br><span class="line">[root@yt-02 myproject]# cd /root/.subversion/auth/svn.simple</span><br><span class="line">[root@yt-02 svn.simple]# ls</span><br><span class="line">60b825fc1cf60a306eb7e67ad30c922d</span><br><span class="line">[root@yt-02 svn.simple]# cat 60b825fc1cf60a306eb7e67ad30c922d</span><br><span class="line">K 8</span><br><span class="line">passtype</span><br><span class="line">V 6</span><br><span class="line">simple</span><br><span class="line">K 8</span><br><span class="line">password</span><br><span class="line">V 6</span><br><span class="line">123456</span><br><span class="line">K 15</span><br><span class="line">svn:realmstring</span><br><span class="line">V 52</span><br><span class="line">&lt;svn://192.168.122.130:3690&gt; /data/svnroot/myproject</span><br><span class="line">K 8</span><br><span class="line">username</span><br><span class="line">V 6</span><br><span class="line">yuntai</span><br><span class="line">END</span><br><span class="line"></span><br><span class="line"># 如果在某客户端删除该文件，再次使用svn update进行同步时会提示输入root用户名和密码</span><br><span class="line"># 在此，直接回车，然后输入svn指定的用户和密码即可</span><br></pre></td></tr></table></figure>
+
+<h2 id="SVN命令总结"><a href="#SVN命令总结" class="headerlink" title="SVN命令总结"></a>SVN命令总结</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># svn delete filename //在本地删除</span><br><span class="line"></span><br><span class="line"># svn commit -m “delete filename” //在服务器上删除</span><br><span class="line"></span><br><span class="line"># svn update //把当前目录下的文件都更新到最新版</span><br><span class="line"></span><br><span class="line"># svn log //查看变更日志</span><br><span class="line"></span><br><span class="line"># svn add . //添加到版本控制中心</span><br><span class="line"></span><br><span class="line"># svn commit -m “add file” //把文件上传到服务器</span><br><span class="line"></span><br><span class="line"># svn checkout svn://192.168.133.130/myproject --username=yuntai</span><br></pre></td></tr></table></figure>
+
+<h1 id="22-4-客户端上使用svn（windows）"><a href="#22-4-客户端上使用svn（windows）" class="headerlink" title="22.4 客户端上使用svn（windows）"></a>22.4 客户端上使用svn（windows）</h1><ul>
+<li>官网 <a href="https://tortoisesvn.net/index.zh.html" target="_blank" rel="noopener">https://tortoisesvn.net/index.zh.html</a></li>
+<li>下载TortoiseSVN 并安装</li>
+<li>简明教程 <a href="http://www.jianshu.com/p/6b3b7b915332" target="_blank" rel="noopener">http://www.jianshu.com/p/6b3b7b915332</a></li>
+</ul>
+<h1 id="扩展内容"><a href="#扩展内容" class="headerlink" title="扩展内容"></a>扩展内容</h1><h2 id="svn-多仓库管理-http-elim-iteye-com-blog-1171108"><a href="#svn-多仓库管理-http-elim-iteye-com-blog-1171108" class="headerlink" title="svn 多仓库管理 http://elim.iteye.com/blog/1171108"></a>svn 多仓库管理 <a href="http://elim.iteye.com/blog/1171108" target="_blank" rel="noopener">http://elim.iteye.com/blog/1171108</a></h2><h2 id="svn-ssh-http-www-linuxfly-org-post-450"><a href="#svn-ssh-http-www-linuxfly-org-post-450" class="headerlink" title="svn+ssh http://www.linuxfly.org/post/450/"></a>svn+ssh <a href="http://www.linuxfly.org/post/450/" target="_blank" rel="noopener">http://www.linuxfly.org/post/450/</a></h2><h2 id="svn清除保存的用户名和密码-http-holy2010-blog-51cto-com-1086044-645944"><a href="#svn清除保存的用户名和密码-http-holy2010-blog-51cto-com-1086044-645944" class="headerlink" title="svn清除保存的用户名和密码 http://holy2010.blog.51cto.com/1086044/645944"></a>svn清除保存的用户名和密码 <a href="http://holy2010.blog.51cto.com/1086044/645944" target="_blank" rel="noopener">http://holy2010.blog.51cto.com/1086044/645944</a></h2><h2 id="svn命令详解-http-blog-sina-com-cn-s-blog-963453200101eiuq-html"><a href="#svn命令详解-http-blog-sina-com-cn-s-blog-963453200101eiuq-html" class="headerlink" title="svn命令详解 http://blog.sina.com.cn/s/blog_963453200101eiuq.html"></a>svn命令详解 <a href="http://blog.sina.com.cn/s/blog_963453200101eiuq.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_963453200101eiuq.html</a></h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/svn/" rel="tag"># svn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/22.5-22.8 单机上使用git、建立远程仓库、克隆远程仓库/" rel="next" title="22.5-22.8 单机上使用git、建立远程仓库、克隆远程仓库">
+                <i class="fa fa-chevron-left"></i> 22.5-22.8 单机上使用git、建立远程仓库、克隆远程仓库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/22.9-22.12 git分支管理、远程分支管理、标签管理、git别名/" rel="prev" title="22.9-22.12 git分支管理、远程分支管理、标签管理、git别名">
+                22.9-22.12 git分支管理、远程分支管理、标签管理、git别名 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#22-1-代码管理平台介绍"><span class="nav-number">1.</span> <span class="nav-text">22.1 代码管理平台介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-关于代码管理平台的常识"><span class="nav-number">1.1.</span> <span class="nav-text">1.关于代码管理平台的常识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-svn和git的对比"><span class="nav-number">1.2.</span> <span class="nav-text">2. svn和git的对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#22-2-安装svn"><span class="nav-number">2.</span> <span class="nav-text">22.2 安装svn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端安装和配置SVN-yt-01"><span class="nav-number">2.1.</span> <span class="nav-text">服务端安装和配置SVN(yt-01)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#22-3-客户端上使用svn（yt-02）"><span class="nav-number">3.</span> <span class="nav-text">22.3 客户端上使用svn（yt-02）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">3.1.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVN命令总结"><span class="nav-number">3.2.</span> <span class="nav-text">SVN命令总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#22-4-客户端上使用svn（windows）"><span class="nav-number">4.</span> <span class="nav-text">22.4 客户端上使用svn（windows）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展内容"><span class="nav-number">5.</span> <span class="nav-text">扩展内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#svn-多仓库管理-http-elim-iteye-com-blog-1171108"><span class="nav-number">5.1.</span> <span class="nav-text">svn 多仓库管理 http://elim.iteye.com/blog/1171108</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#svn-ssh-http-www-linuxfly-org-post-450"><span class="nav-number">5.2.</span> <span class="nav-text">svn+ssh http://www.linuxfly.org/post/450/</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#svn清除保存的用户名和密码-http-holy2010-blog-51cto-com-1086044-645944"><span class="nav-number">5.3.</span> <span class="nav-text">svn清除保存的用户名和密码 http://holy2010.blog.51cto.com/1086044/645944</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#svn命令详解-http-blog-sina-com-cn-s-blog-963453200101eiuq-html"><span class="nav-number">5.4.</span> <span class="nav-text">svn命令详解 http://blog.sina.com.cn/s/blog_963453200101eiuq.html</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

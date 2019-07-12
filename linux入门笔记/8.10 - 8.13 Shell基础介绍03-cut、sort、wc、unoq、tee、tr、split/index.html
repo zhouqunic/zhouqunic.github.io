@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="cut,sort,wc,unoq,tee,tr,split,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="8.10 shell特殊符号cut命令8.11 sort_wc_uniq命令8.12 tee_tr_split命令8.13 shell特殊符号下1. 特殊符号123456789101112131415* 通配，任意多个任意字符? 通配，任意一个字符# 注释字符\ 脱义字符| 管道符  $ 变量前缀，!$组合，正则里面表示行尾；多条命令写到一行，用分号分割，不管前面的命令执行成功与否，后面的命令都执">
+<meta name="keywords" content="cut,sort,wc,unoq,tee,tr,split">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8.10 - 8.13 Shell基础介绍03-cut、sort、wc、unoq、tee、tr、split">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/8.10 - 8.13 Shell基础介绍03-cut、sort、wc、unoq、tee、tr、split/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="8.10 shell特殊符号cut命令8.11 sort_wc_uniq命令8.12 tee_tr_split命令8.13 shell特殊符号下1. 特殊符号123456789101112131415* 通配，任意多个任意字符? 通配，任意一个字符# 注释字符\ 脱义字符| 管道符  $ 变量前缀，!$组合，正则里面表示行尾；多条命令写到一行，用分号分割，不管前面的命令执行成功与否，后面的命令都执">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-11T10:32:39.662Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8.10 - 8.13 Shell基础介绍03-cut、sort、wc、unoq、tee、tr、split">
+<meta name="twitter:description" content="8.10 shell特殊符号cut命令8.11 sort_wc_uniq命令8.12 tee_tr_split命令8.13 shell特殊符号下1. 特殊符号123456789101112131415* 通配，任意多个任意字符? 通配，任意一个字符# 注释字符\ 脱义字符| 管道符  $ 变量前缀，!$组合，正则里面表示行尾；多条命令写到一行，用分号分割，不管前面的命令执行成功与否，后面的命令都执">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/8.10 - 8.13 Shell基础介绍03-cut、sort、wc、unoq、tee、tr、split/">
+
+
+
+
+
+  <title>8.10 - 8.13 Shell基础介绍03-cut、sort、wc、unoq、tee、tr、split | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/8.10 - 8.13 Shell基础介绍03-cut、sort、wc、unoq、tee、tr、split/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">8.10 - 8.13 Shell基础介绍03-cut、sort、wc、unoq、tee、tr、split</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="8-10-shell特殊符号cut命令"><a href="#8-10-shell特殊符号cut命令" class="headerlink" title="8.10 shell特殊符号cut命令"></a>8.10 shell特殊符号cut命令</h1><h1 id="8-11-sort-wc-uniq命令"><a href="#8-11-sort-wc-uniq命令" class="headerlink" title="8.11 sort_wc_uniq命令"></a>8.11 sort_wc_uniq命令</h1><h1 id="8-12-tee-tr-split命令"><a href="#8-12-tee-tr-split命令" class="headerlink" title="8.12 tee_tr_split命令"></a>8.12 tee_tr_split命令</h1><h1 id="8-13-shell特殊符号下"><a href="#8-13-shell特殊符号下" class="headerlink" title="8.13 shell特殊符号下"></a>8.13 shell特殊符号下</h1><h1 id="1-特殊符号"><a href="#1-特殊符号" class="headerlink" title="1. 特殊符号"></a>1. 特殊符号</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">* 通配，任意多个任意字符</span><br><span class="line">? 通配，任意一个字符</span><br><span class="line"># 注释字符</span><br><span class="line">\ 脱义字符</span><br><span class="line">| 管道符  </span><br><span class="line">$ 变量前缀，</span><br><span class="line">!$组合，正则里面表示行尾</span><br><span class="line">；多条命令写到一行，用分号分割，不管前面的命令执行成功与否，后面的命令都执行</span><br><span class="line">~ 用户家目录，后面正则表达式表示匹配符</span><br><span class="line">&amp; 放到命令后面，会把命令丢到后台</span><br><span class="line">&gt; &gt;&gt; 2&gt; 2&gt;&gt; &amp;&gt;（&amp;&gt;表示把正确和错误结果都定向出来）</span><br><span class="line">[ ] 指定字符中的一个，[0-9],[a-zA-Z],[abc]</span><br><span class="line">|| 和 &amp;&amp; ，用于命令之间</span><br><span class="line">|| 只有前面的命令执行失败，后面命令才执行</span><br><span class="line">&amp;&amp; 只有后面的命令执行成功，后面命令才执行</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-和管道符相关的命令"><a href="#2-和管道符相关的命令" class="headerlink" title="2. 和管道符相关的命令"></a>2. 和管道符相关的命令</h1><h2 id="cut"><a href="#cut" class="headerlink" title="cut"></a>cut</h2><p>一般用来截取字符串</p>
+<ul>
+<li>-d 分隔符  </li>
+<li>-f 指定段号，可以是号码，中间用<code>1,2</code>隔开，也可以是区间<code>1-3</code>  </li>
+<li>-c 指定第几个字符,同上，可以是号码，中间用<code>1,2</code>隔开，也可以是区间<code>1-3</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd | head                              显示passwd的前10行（默认10）</span><br><span class="line">cat /etc/passwd | haed -3                          显示passwd的前3行（指定）</span><br><span class="line">cat /etc/passwd | haed -2 | cut -c 1-10    显示/etc/passwd前2行，1到10个字符</span><br><span class="line">cat /etc/passwd | haed -2 | cut -d “:” -f 1，2      显示passwd的第一段和第二段</span><br><span class="line">cat /etc/passwd | haed -2 | cut -d “:” -f 1-3      显示passwd的第一段到第三段</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><blockquote>
+<p>sort命令是在Linux里非常有用，一般sort会和uniq合用。它将文件进行排序，并将排序结果标准输出。sort命令既可以从特定的文件，也可以从stdin中获取输入。- 来自 <a href="http://man.linuxde.net/sort" target="_blank" rel="noopener">http://man.linuxde.net/sort</a></p>
+</blockquote>
+<p>sort将文件的每一行作为一个单位，相互比较，比较原则是从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。</p>
+<p>参数</p>
+<ul>
+<li>-n 以数字大小排序，字母和特殊符号默认为0</li>
+<li>-r 反向排序</li>
+<li>-t 指定分隔符</li>
+<li>-k 指定需要排序的栏位</li>
+<li>（-t 不经常用）</li>
+</ul>
+<p>例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># cat sort.txt    </span><br><span class="line">AAA:BB:CC </span><br><span class="line">aaa:30:1.6 </span><br><span class="line">ccc:50:3.3 </span><br><span class="line">ddd:20:4.2 </span><br><span class="line">bbb:10:2.5 </span><br><span class="line">eee:40:5.4 </span><br><span class="line">eee:60:5.1</span><br><span class="line"># sort -nk 2 -t: sort.txt    将BB列按照数字从小到大顺序排列</span><br><span class="line">AAA:BB:CC </span><br><span class="line">bbb:10:2.5 </span><br><span class="line">ddd:20:4.2 </span><br><span class="line">aaa:30:1.6 </span><br><span class="line">eee:40:5.4 </span><br><span class="line">ccc:50:3.3 </span><br><span class="line">eee:60:5.1</span><br><span class="line"># sort -nrk 3 -t: sort.txt    将CC列数字从大到小顺序排列</span><br><span class="line">eee:40:5.4 </span><br><span class="line">eee:60:5.1 </span><br><span class="line">ddd:20:4.2 </span><br><span class="line">ccc:50:3.3 </span><br><span class="line">bbb:10:2.5 </span><br><span class="line">aaa:30:1.6 </span><br><span class="line">AAA:BB:CC</span><br></pre></td></tr></table></figure>
+
+<h2 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h2><blockquote>
+<p>wc命令用来计算数字。利用wc指令我们可以计算文件的Byte数、字数或是列数，若不指定文件名称，或是所给予的文件名为“-”，则wc指令会从标准输入设备读取数据。</p>
+</blockquote>
+<ul>
+<li>-l 统计行数  </li>
+<li>-m 统计字符数 </li>
+<li>-w 统计词数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># wc -l 1.txt    统计行数 </span><br><span class="line">11 1.txt</span><br><span class="line"># wc -w 1.txt    统计词数</span><br><span class="line">22 1.txt</span><br><span class="line"># wc -m 1.txt    统计字符数 </span><br><span class="line">620 1.txt</span><br><span class="line"># wc 1.txt        统计行数 词数 字符数 </span><br><span class="line">  11  22 620 1.txt</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h2><blockquote>
+<p>uniq命令用于报告或忽略文件中的重复行，一般与sort命令结合使用</p>
+<ul>
+<li>-c 统计行数</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">删除重复行</span><br><span class="line">uniq file.txt </span><br><span class="line">sort file.txt | uniq </span><br><span class="line">sort -u file.txt</span><br><span class="line"></span><br><span class="line">sort file.txt | uniq -c          统计各行在文件中出现的次数</span><br><span class="line">sort file.txt | uniq -d          在文件中找出重复的行</span><br></pre></td></tr></table></figure>
+
+<h2 id="tee"><a href="#tee" class="headerlink" title="tee"></a>tee</h2><blockquote>
+<p>tee命令用于将数据重定向到文件，另一方面还可以提供一份重定向数据的副本作为后续命令的stdin。简单的说就是把数据重定向到给定文件和屏幕上。</p>
+<ul>
+<li>-a 追加重定向</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ls | tee out.txt | cat -n  显示行号并打印out.txt，同时重定向到文件中</span><br><span class="line">1  1.sh </span><br><span class="line">2  1.txt </span><br><span class="line">3  2.txt </span><br><span class="line">4  eee.tst </span><br><span class="line">5  EEE.tst </span><br><span class="line">6  one </span><br><span class="line">7  out.txt </span><br><span class="line">8  string2 </span><br><span class="line">9  www.pdf </span><br><span class="line">10  WWW.pdf </span><br><span class="line">11  WWW.pef</span><br></pre></td></tr></table></figure>
+
+<h2 id="tr"><a href="#tr" class="headerlink" title="tr"></a>tr</h2><blockquote>
+<p>tr命令可以对来自标准输入的字符进行替换、压缩和删除。它可以将一组字符变成另一组字符，经常用来编写优美的单行命令，作用很强大。常用来处理文档中出现的特殊符号。</p>
+<ul>
+<li>-c：取代所有不属于第一字符集的字符； </li>
+<li>-d：删除所有属于第一字符集的字符； </li>
+<li>-s：把连续重复的字符以单独一个字符表示； </li>
+<li>-t：先删除第一字符集较第二字符集多出的字符；</li>
+<li>字符集：指定要转换或删除的原字符集。当执行转换操作时，必须使用参数“字符集2”指定转换的目标字符集。但执行删除操作时，不需要参数“字符集2”。</li>
+</ul>
+</blockquote>
+<p>来自: <a href="http://man.linuxde.net/tr" target="_blank" rel="noopener">http://man.linuxde.net/tr</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;HELLO WORLD&quot; | tr &apos;A-Z&apos; &apos;a-z&apos;  将输入字符HELLO WORLD由大写转换为小写</span><br><span class="line">hello world                          &apos;A-Z&apos; 和 &apos;a-z&apos;都是集合，集合是可以自己制定的，例如：&apos;ABD-&#125;&apos;、&apos;bB.,&apos;、&apos;a-de-h&apos;、&apos;a-c0-9&apos;都属于集合，</span><br><span class="line">                                      集合里可以使用&apos;\n&apos;、&apos;\t&apos;，可以可以使用其他ASCII字符。</span><br><span class="line"></span><br><span class="line">echo &quot;thissss is a text linnnnnnne.&quot; | tr -s &apos; sn&apos;  压缩输入中重复的字符</span><br><span class="line">this is a text line.</span><br><span class="line"></span><br><span class="line">echo aa.,a 1 b#$bb 2 c*/cc 3 ddd 4 | tr -d -c &apos;0-9 \n&apos;  字符集补集，从输入文本中将不在补集中的所有字符删除</span><br><span class="line">1 2 3 4</span><br></pre></td></tr></table></figure>
+
+<h2 id="split"><a href="#split" class="headerlink" title="split"></a>split</h2><blockquote>
+<p>split命令可以将一个大文件分割成很多个小文件，有时需要将文件分割成更小的片段，比如为提高可读性，生成日志等。</p>
+<ul>
+<li>-b：值为每一输出档案的大小，单位为 byte。 </li>
+<li>-l：值为每一输出档的列数大小。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero bs=100k count=1 of=date.file  生成一个大小为100KB的测试文件</span><br><span class="line">split -b 10k date.file                        将date.file文件分割成大小为10KB的小文件</span><br><span class="line">ls</span><br><span class="line">date.file xaa xab xac xad xae xaf xag xah xai xaj</span><br><span class="line"></span><br><span class="line">split -l 10 date.file                          把文件分割成每个包含10行的小文件</span><br><span class="line"></span><br><span class="line">split -b 50k date.file new_                    把文件分割成每个50k的小文件，切割成的文件以new_开头命名</span><br><span class="line">ls</span><br><span class="line">new_aa  new_ab  new_ac  date.file</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cut/" rel="tag"># cut</a>
+          
+            <a href="/tags/sort/" rel="tag"># sort</a>
+          
+            <a href="/tags/wc/" rel="tag"># wc</a>
+          
+            <a href="/tags/unoq/" rel="tag"># unoq</a>
+          
+            <a href="/tags/tee/" rel="tag"># tee</a>
+          
+            <a href="/tags/tr/" rel="tag"># tr</a>
+          
+            <a href="/tags/split/" rel="tag"># split</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/9.1 - 9.3 grep学习笔记/" rel="next" title="9.1 - 9.3 grep学习笔记">
+                <i class="fa fa-chevron-left"></i> 9.1 - 9.3 grep学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/9.8 正则拓展1/" rel="prev" title="9.8 正则拓展1">
+                9.8 正则拓展1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#8-10-shell特殊符号cut命令"><span class="nav-number">1.</span> <span class="nav-text">8.10 shell特殊符号cut命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-11-sort-wc-uniq命令"><span class="nav-number">2.</span> <span class="nav-text">8.11 sort_wc_uniq命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-12-tee-tr-split命令"><span class="nav-number">3.</span> <span class="nav-text">8.12 tee_tr_split命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-13-shell特殊符号下"><span class="nav-number">4.</span> <span class="nav-text">8.13 shell特殊符号下</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-特殊符号"><span class="nav-number">5.</span> <span class="nav-text">1. 特殊符号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-和管道符相关的命令"><span class="nav-number">6.</span> <span class="nav-text">2. 和管道符相关的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cut"><span class="nav-number">6.1.</span> <span class="nav-text">cut</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort"><span class="nav-number">6.2.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wc"><span class="nav-number">6.3.</span> <span class="nav-text">wc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uniq"><span class="nav-number">6.4.</span> <span class="nav-text">uniq</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tee"><span class="nav-number">6.5.</span> <span class="nav-text">tee</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tr"><span class="nav-number">6.6.</span> <span class="nav-text">tr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#split"><span class="nav-number">6.7.</span> <span class="nav-text">split</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

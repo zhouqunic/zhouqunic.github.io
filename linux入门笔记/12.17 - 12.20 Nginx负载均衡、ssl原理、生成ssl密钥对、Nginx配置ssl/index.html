@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nginx,ssl,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="#12.17 Nginx负载均衡Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。 ##负载均衡配置 ###配置参数 1234567891011121314151617181920212223[root@host ~]# vim /usr/local/nginx/conf">
+<meta name="keywords" content="nginx,ssl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="#12.17 Nginx负载均衡Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。 ##负载均衡配置 ###配置参数 1234567891011121314151617181920212223[root@host ~]# vim /usr/local/nginx/conf">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-12T06:37:43.055Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl">
+<meta name="twitter:description" content="#12.17 Nginx负载均衡Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。 ##负载均衡配置 ###配置参数 1234567891011121314151617181920212223[root@host ~]# vim /usr/local/nginx/conf">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl/">
+
+
+
+
+
+  <title>12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#12.17 Nginx负载均衡<br>Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。</p>
+<p>##负载均衡配置</p>
+<p>###配置参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/nginx/conf/vhost/load.conf</span><br><span class="line">upstream qq</span><br><span class="line">#自定义域名</span><br><span class="line">&#123;</span><br><span class="line">    ip_hash;</span><br><span class="line">#目的是为了保证同一个用户始终保持在同一台机器上</span><br><span class="line">#还有就是为了当域名指向多个IP时，保证每个用户始终解析到同一IP</span><br><span class="line">    server 61.135.157.156:80;</span><br><span class="line">    server 125.39.240.113:80;</span><br><span class="line">#指定web服务器的IP</span><br><span class="line">&#125;</span><br><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name www.qq.com;</span><br><span class="line">    location /</span><br><span class="line">    &#123;</span><br><span class="line">        proxy_pass      http://qq;</span><br><span class="line">        proxy_set_header Host  $host;</span><br><span class="line">        proxy_set_header X-Real-IP      $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>###检测</p>
+<p>代理前</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# curl -x127.0.0.1:80 www.qq.com </span><br><span class="line">This is the default directory.</span><br><span class="line"></span><br><span class="line">#没使用代理时，会直接解析到默认的虚拟主机。</span><br></pre></td></tr></table></figure>
+
+<p>代理后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# /usr/local/nginx/sbin/nginx -t</span><br><span class="line">nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful</span><br><span class="line">[root@host ~]# /usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">[root@host ~]# curl -x127.0.0.1:80 www.qq.com</span><br><span class="line">……</span><br><span class="line">#使用代理后，会解析到代理服务器所指向的IP的网页代码</span><br></pre></td></tr></table></figure>
+
+<p>##dig命令</p>
+<p>dig命令是常用域名的解析工具，可以寻找域名的全部IP。</p>
+<p>如果服务器中没有安装命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# yum install -y bind-utils</span><br></pre></td></tr></table></figure>
+
+<p>解析qq网站的全部IP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# dig www.qq.com</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">www.qq.com.        138    IN    A    61.135.157.156</span><br><span class="line">www.qq.com.        138    IN    A    125.39.240.113</span><br><span class="line"></span><br><span class="line">;; Query time: 12 msec</span><br><span class="line">;; SERVER: 119.29.29.29#53(119.29.29.29)</span><br><span class="line">;; WHEN: 二 9月 12 22:44:23 CST 2017</span><br><span class="line">;; MSG SIZE  rcvd: 61</span><br></pre></td></tr></table></figure>
+
+<p>#12.18 ssl原理</p>
+<blockquote>
+<p>SSL(Secure Sockets Layer 安全套接层)协议,及其继任者TLS（Transport Layer Security传输层安全）协议，是为网络通信提供安全及数据完整性的一种安全协议。</p>
+</blockquote>
+<p>##http、https、tcp</p>
+<ul>
+<li>HTTP超文本传输协议（HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。</li>
+<li>HTTPS(全称:Hyper Text Transfer Protocol over Secure Socket Layer)，简单讲是HTTP的安全加密版。</li>
+<li>HTTP默认的端口号为80，HTTPS的端口号为443。</li>
+<li>TCP(Transmission Control Protocol 传输控制协议)是一种面向连接的、可靠的、基于字节流的传输层通信协议。默认监听80端口。</li>
+<li>http是应用层协议， tcp是传输层。 http使用tcp传输文本数据； http只是定义了tcp数据的解析方式</li>
+</ul>
+<p>##SSL工作流程</p>
+<ul>
+<li>浏览器发送一个https的请求给服务器；</li>
+<li>服务器要有一套数字证书，可以自己制作（后面的操作就是阿铭自己制作的证书），也可以向组织申请，区别就是自己颁发的证书需要客户端验证通过，才可以继续访问，而使用受信任的公司申请的证书则不会弹出&gt;提示页面，这套证书其实就是一对公钥和私钥；</li>
+<li>服务器会把公钥传输给客户端；</li>
+<li>客户端（浏览器）收到公钥后，会验证其是否合法有效，无效会有警告提醒，有效则会生成一串随机数，并用收到的公钥加密；</li>
+<li>客户端把加密后的随机字符串传输给服务器；</li>
+<li>服务器收到加密随机字符串后，先用私钥解密（公钥加密，私钥解密），获取到这一串随机数后，再用这串随机字符串加密传输的数据（该加密为对称加密，所谓对称加密，就是将数据和私钥也就是这个随机字符串&gt;通过某种算法混合在一起，这样除非知道私钥，否则无法获取数据内容）；</li>
+<li>服务器把加密后的数据传输给客户端；</li>
+<li>客户端收到数据后，再用自己的私钥也就是那个随机字符串解密；</li>
+</ul>
+<p>#12.19 生成ssl密钥对</p>
+<p>##SSL工作流程</p>
+<p>如果虚拟机中没有此工具，手动安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# yum install -y openssl</span><br></pre></td></tr></table></figure>
+
+<p>##SSL证书就是一对公钥和私钥。</p>
+<p>###创建私钥</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# cd /usr/local/nginx/conf/</span><br><span class="line"></span><br><span class="line">[root@host conf]# openssl genrsa -des3 -out tmp.key 2048  //生成SSL密钥</span><br><span class="line">Generating RSA private key, 2048 bit long modulus</span><br><span class="line">....................................................................................+++</span><br><span class="line">...............................................................+++</span><br><span class="line">e is 65537 (0x10001)</span><br><span class="line">Enter pass phrase for tmp.key:</span><br><span class="line">Verifying - Enter pass phrase for tmp.key:   //密钥需要我们设置密码，一般我们都不需要再设置密码，所以要转换一下key，取消密码</span><br><span class="line"></span><br><span class="line">[root@host conf]# openssl rsa -in tmp.key -out host.key  //转换一下key，将tmp.key 转换为没密码的host.key</span><br><span class="line"></span><br><span class="line">Enter pass phrase for tmp.key:</span><br><span class="line">writing RSA key</span><br><span class="line"></span><br><span class="line">[root@host conf]# rm -f tmp.key  //删除tmp.key</span><br></pre></td></tr></table></figure>
+
+<p>##自己生成证书</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# openssl req -new -key host.key -out host.csr   //自己生成证书请求文件，需要拿这个私钥一起生成证书</span><br><span class="line">You are about to be asked to enter information that will be incorporated</span><br><span class="line">into your certificate request.</span><br><span class="line">What you are about to enter is what is called a Distinguished Name or a DN.</span><br><span class="line">There are quite a few fields but you can leave some blank</span><br><span class="line">For some fields there will be a default value,</span><br><span class="line">If you enter &apos;.&apos;, the field will be left blank.</span><br><span class="line">-----</span><br><span class="line">Country Name (2 letter code) [XX]:11</span><br><span class="line">State or Province Name (full name) []:BeiJing</span><br><span class="line">Locality Name (eg, city) [Default City]:BeiJing</span><br><span class="line">Organization Name (eg, company) [Default Company Ltd]:BeiJing</span><br><span class="line">Organizational Unit Name (eg, section) []:BeiJing</span><br><span class="line">Common Name (eg, your name or your server&apos;s hostname) []:host</span><br><span class="line">Email Address []:zhouqunic@qq.com</span><br><span class="line">#以上是配置证书信息，因为是自己颁发给自己的证书，就随意瞎填或者干脆Enter跳过，如果是正式应用在自己的网站上，最好规范填写。</span><br><span class="line"></span><br><span class="line">Please enter the following &apos;extra&apos; attributes</span><br><span class="line">to be sent with your certificate request</span><br><span class="line">A challenge password []:123456</span><br><span class="line">An optional company name []:123456</span><br></pre></td></tr></table></figure>
+
+<p>创建公钥：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# openssl x509 -req -days 365 -in host.csr -signkey host.key -out host.crt  //这里的aminglinux.crt为公钥</span><br><span class="line"></span><br><span class="line">Signature ok</span><br><span class="line">subject=/C=11/ST=BeiJing/L=BeiJing/O=BeiJing/OU=BeiJing/CN=host/emailAddress=zhouqunic@qq.com</span><br><span class="line">Getting Private key</span><br></pre></td></tr></table></figure>
+
+<p>#12.20 Nginx配置ssl</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# cd vhost/</span><br><span class="line"></span><br><span class="line">[root@host vhost]# vim ssl.conf</span><br><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    listen 443;</span><br><span class="line">    server_name zhouqun.com;</span><br><span class="line">    index index.html index.php;</span><br><span class="line">    root /data/wwwroot/zhouquncom;</span><br><span class="line">    ssl on;      //开启ssl</span><br><span class="line">    ssl_certificate host.crt;     //配置公钥</span><br><span class="line">    ssl_certificate_key host.key;        //配置私钥</span><br><span class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;      ///配置协议</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[root@host vhost]# mkdir /data/wwwroot/zhouqun.com</span><br></pre></td></tr></table></figure>
+
+<p>检测</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# /usr/local/nginx/sbin/nginx -t</span><br><span class="line">nginx: [emerg] unknown directive &quot;ssl&quot; in /usr/local/nginx/conf/vhost/ssl.conf:7       //报错了</span><br><span class="line">nginx: configuration file /usr/local/nginx/conf/nginx.conf test failed</span><br></pre></td></tr></table></figure>
+
+<p>报错 unknown directive “ssl”   未识别ssl配置，需要重新编译nginx，加上–with-http_ssl_module</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# cd /usr/local/src/nginx-1.12.1/</span><br><span class="line"></span><br><span class="line">[root@host nginx-1.12.1]# ./configure --prefix=/usr/local/nginx --with-http_ssl_module  </span><br><span class="line"></span><br><span class="line">[root@host conf]# make</span><br><span class="line">[root@host conf]# make install</span><br><span class="line"></span><br><span class="line">[root@host nginx-1.12.1]# /usr/local/nginx/sbin/nginx -t</span><br><span class="line">nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful</span><br><span class="line"></span><br><span class="line">[root@host nginx-1.12.1]# /etc/init.d/nginx restart</span><br><span class="line">Restarting nginx (via systemctl):                          [  OK  ]</span><br><span class="line"></span><br><span class="line">[root@host nginx-1.12.1]# netstat -lntp</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address          Foreign Address        State      PID/Program name    </span><br><span class="line">tcp        0      0 0.0.0.0:80              0.0.0.0:*              LISTEN      5991/nginx: master  </span><br><span class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*              LISTEN      1735/sshd          </span><br><span class="line">tcp        0      0 127.0.0.1:25            0.0.0.0:*              LISTEN      2040/master        </span><br><span class="line">tcp        0      0 0.0.0.0:443            0.0.0.0:*              LISTEN      5991/nginx: master  </span><br><span class="line">tcp6      0      0 :::3306                :::*                    LISTEN      1990/mysqld        </span><br><span class="line">tcp6      0      0 :::22                  :::*                    LISTEN      1735/sshd          </span><br><span class="line">tcp6      0      0 ::1:25                  :::*                    LISTEN      2040/master</span><br></pre></td></tr></table></figure>
+
+<p>nginx监听80和443端口。</p>
+<p>测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host nginx-1.12.1]# cd /data/wwwroot/zhouqun.com/</span><br><span class="line"></span><br><span class="line">[root@host adai.com]# vim index.html</span><br><span class="line"></span><br><span class="line">This is ssl.</span><br></pre></td></tr></table></figure>
+
+<p>添加本地域名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@host adai.com]# vim /etc/hosts</span><br><span class="line">127.0.0.1  zhouqun.com</span><br><span class="line"></span><br><span class="line">[root@host vhost]# curl https://zhouqun.com/</span><br><span class="line">curl: (60) Peer&apos;s certificate issuer has been marked as not trusted by the user.</span><br><span class="line">More details here: http://curl.haxx.se/docs/sslcerts.html</span><br><span class="line"></span><br><span class="line">curl performs SSL certificate verification by default, using a &quot;bundle&quot;</span><br><span class="line">of Certificate Authority (CA) public keys (CA certs). If the default</span><br><span class="line">bundle file isn&apos;t adequate, you can specify an alternate file</span><br><span class="line">using the --cacert option.</span><br><span class="line">If this HTTPS server uses a certificate signed by a CA represented in</span><br><span class="line">the bundle, the certificate verification probably failed due to a</span><br><span class="line">problem with the certificate (it might be expired, or the name might</span><br><span class="line">not match the domain name in the URL).</span><br><span class="line">If you&apos;d like to turn off curl&apos;s verification of the certificate, use</span><br><span class="line">the -k (or --insecure) option.</span><br></pre></td></tr></table></figure>
+
+<p>因为该证书是自己创建的，没有符合https组织的规范，不能被正确识别，如果换上正规的证书，就没问题了。</p>
+<p>所以，如果要使用浏览器检测，那么进行该测试之前，需要更改Windows的hosts文件，不然就会证书出错的。</p>
+<p>#扩展 </p>
+<p>##针对请求的uri来代理<br><a href="http://ask.apelearn.com/question/1049" target="_blank" rel="noopener">http://ask.apelearn.com/question/1049</a></p>
+<p>##根据访问的目录来区分后端的web<br><a href="http://ask.apelearn.com/question/920" target="_blank" rel="noopener">http://ask.apelearn.com/question/920</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+            <a href="/tags/ssl/" rel="tag"># ssl</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/13.4 - 13.6 mysql用户管理、常用sql语句、mysql数据库备份恢复/" rel="next" title="13.4 - 13.6 mysql用户管理、常用sql语句、mysql数据库备份恢复">
+                <i class="fa fa-chevron-left"></i> 13.4 - 13.6 mysql用户管理、常用sql语句、mysql数据库备份恢复
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/12.1 - 12.5 LNMP架构介绍、MySQL安装、PHP安装、Nginx介绍/" rel="prev" title="12.1 - 12.5 LNMP架构介绍、MySQL安装、PHP安装、Nginx介绍">
+                12.1 - 12.5 LNMP架构介绍、MySQL安装、PHP安装、Nginx介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

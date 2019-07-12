@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="正则,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="1. awk 中使用外部shell变量123456789101112131415161718192021222324252627如：A=44echo &amp;quot;ABCD&amp;quot; | awk -v GET_A=$A ’&amp;#123;print GET_A&amp;#125;’说明：-v选项用于定义参数，这里表示将变量A的值赋予GET_A。有多少个变量需要赋值，就需要多少个-v选项。与之等价的：应用于脚本">
+<meta name="keywords" content="正则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9.9 正则拓展2">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/9.9 正则拓展2/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="1. awk 中使用外部shell变量123456789101112131415161718192021222324252627如：A=44echo &amp;quot;ABCD&amp;quot; | awk -v GET_A=$A ’&amp;#123;print GET_A&amp;#125;’说明：-v选项用于定义参数，这里表示将变量A的值赋予GET_A。有多少个变量需要赋值，就需要多少个-v选项。与之等价的：应用于脚本">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-11T10:38:17.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="9.9 正则拓展2">
+<meta name="twitter:description" content="1. awk 中使用外部shell变量123456789101112131415161718192021222324252627如：A=44echo &amp;quot;ABCD&amp;quot; | awk -v GET_A=$A ’&amp;#123;print GET_A&amp;#125;’说明：-v选项用于定义参数，这里表示将变量A的值赋予GET_A。有多少个变量需要赋值，就需要多少个-v选项。与之等价的：应用于脚本">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/9.9 正则拓展2/">
+
+
+
+
+
+  <title>9.9 正则拓展2 | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/9.9 正则拓展2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">9.9 正则拓展2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-awk-中使用外部shell变量"><a href="#1-awk-中使用外部shell变量" class="headerlink" title="1. awk 中使用外部shell变量"></a>1. awk 中使用外部shell变量</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">如：</span><br><span class="line">A=44echo &quot;ABCD&quot; | awk -v GET_A=$A ’&#123;print GET_A&#125;’</span><br><span class="line">说明：-v选项用于定义参数，这里表示将变量A的值赋予GET_A。</span><br><span class="line">有多少个变量需要赋值，就需要多少个-v选项。与之等价的：应用于脚本中：</span><br><span class="line"></span><br><span class="line">#! /bin/bash</span><br><span class="line">sort -n filename |awk -F &apos;:&apos; &apos;&#123;print $1&#125;&apos;|uniq &gt;id.txt</span><br><span class="line">for id in `cat id.txt`; do</span><br><span class="line">        echo &quot;[$id]&quot;</span><br><span class="line">        awk -v id2=$id -F &apos;:&apos; &apos;$1==id2 &#123;print $2&#125;&apos; filename  // 另外的方式为: awk -F &apos;:&apos; &apos;$1==&quot;&apos;$id&apos;&quot; &#123;print $2&#125;&apos; filename  </span><br><span class="line">done</span><br><span class="line">附件：</span><br><span class="line">cat filename</span><br><span class="line">1111111:13443253456</span><br><span class="line">2222222:13211222122</span><br><span class="line">1111111:13643543544</span><br><span class="line">3333333:12341243123</span><br><span class="line">2222222:12123123123</span><br><span class="line">运行脚本后结果为：</span><br><span class="line">[1111111]</span><br><span class="line">13443253456</span><br><span class="line">13643543544</span><br><span class="line">[2222222]</span><br><span class="line">13211222122</span><br><span class="line">12123123123</span><br><span class="line">[3333333]</span><br><span class="line">12341243123</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-awk-合并一个文件"><a href="#2-awk-合并一个文件" class="headerlink" title="2. awk 合并一个文件"></a>2. awk 合并一个文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">需要把两个文件中，第一列相同的行合并到同一行中。举个例子，有两个文件，内容如下</span><br><span class="line">cat 1.txt</span><br><span class="line">1 aa</span><br><span class="line">2 bb</span><br><span class="line">3 ee</span><br><span class="line">4 ss</span><br><span class="line"></span><br><span class="line">cat 2.txt</span><br><span class="line">1 ab</span><br><span class="line">2 cd</span><br><span class="line">3 ad</span><br><span class="line">4 bd</span><br><span class="line">5 de</span><br><span class="line"></span><br><span class="line">合并后的结果为：</span><br><span class="line"></span><br><span class="line">1 ab aa</span><br><span class="line">2 cd bb</span><br><span class="line">3 ad ee</span><br><span class="line">4 bd ss</span><br><span class="line">5 de</span><br><span class="line"></span><br><span class="line">实现的命令为：</span><br><span class="line">awk &apos;NR==FNR&#123;a[$1]=$2&#125;NR&gt;FNR&#123;print $0,a[$1]&#125;&apos;  1.txt  2.txt</span><br><span class="line"></span><br><span class="line">解释：NR表示读取的行数，FNR表示读取的当前行数</span><br><span class="line">所以其实NR==FNR 就表示读取2.txt的时候。 同理NR&gt;FNR表示读取1.txt的时候</span><br><span class="line">数组a其实就相当于一个map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">总结： 完全不懂</span><br><span class="line">$1 当前记录的第1个字段，比如n为1表示第一个字段，n为2表示第二个字段</span><br><span class="line">$0 这个变量包含执行过程中当前行的文本内容</span><br><span class="line">FNR 同NR，表示行号，但相对于当前文件</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-把一个文件多行连接成一行-不懂"><a href="#3-把一个文件多行连接成一行-不懂" class="headerlink" title="3. 把一个文件多行连接成一行 - 不懂"></a>3. 把一个文件多行连接成一行 - 不懂</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">例子1：</span><br><span class="line">a=`cat file`;echo $a </span><br><span class="line">awk &apos;&#123;printf(&quot;%s &quot;,$0)&#125;&apos; file  ## %s 后记得要有一空格，否则出来就是完全连在一起的，中间连空格都没有</span><br><span class="line">cat file |xargs</span><br><span class="line"></span><br><span class="line">例子2：</span><br><span class="line">一个文件每行都有一个数字，现在需要把每行的数字用“+”连接起来。</span><br><span class="line">cat a</span><br><span class="line">96</span><br><span class="line">1093</span><br><span class="line">1855</span><br><span class="line">1253</span><br><span class="line">1364</span><br><span class="line">1332</span><br><span class="line">2308</span><br><span class="line">2589</span><br><span class="line">2531</span><br><span class="line">1239</span><br><span class="line">2164</span><br><span class="line">2826</span><br><span class="line">2787</span><br><span class="line">2145</span><br><span class="line">2617</span><br><span class="line">4311</span><br><span class="line">1810</span><br><span class="line">2115</span><br><span class="line">1235</span><br><span class="line"></span><br><span class="line">awk &apos;&#123;printf (&quot;%s+&quot;,$0)&#125;&apos;  a; echo &quot;&quot;</span><br><span class="line">96+1093+1855+1253+1364+1332+2308+2589+2531+1239+2164+2826+2787+2145+2617+4311+1810+2115+1235+</span><br><span class="line">这里注意，最后一个是带“+”的。echo &quot;&quot;  的作用是换行。</span><br><span class="line"></span><br><span class="line">另外的方法是 </span><br><span class="line">cat a|xargs|sed &apos;s/ /+/g&apos;</span><br><span class="line">96+1093+1855+1253+1364+1332+2308+2589+2531+1239+2164+2826+2787+2145+2617+4311+1810+2115+1235</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-awk中gsub函数的使用"><a href="#4-awk中gsub函数的使用" class="headerlink" title="4. awk中gsub函数的使用"></a>4. awk中gsub函数的使用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;gsub(/www/,&quot;abc&quot;)&apos; /etc/passwd                      passwd文件中把所有www替换为abc</span><br><span class="line">awk -F &apos;:&apos; &apos;gsub(/www/,&quot;abc&quot;,$1) &#123;print $0&#125;&apos; /etc/passwd  替换$1中的www为abc</span><br><span class="line"></span><br><span class="line">总结：</span><br><span class="line">gsub函数则使得在所有正则表达式被匹配的时候都发生替换</span><br><span class="line">gsub匹配所有的符合模式的字符串，相当于 sed &apos;s//g&apos; 。</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-awk-截取指定多个域为一行"><a href="#5-awk-截取指定多个域为一行" class="headerlink" title="5. awk 截取指定多个域为一行"></a>5. awk 截取指定多个域为一行</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for j in `seq 0 20`; do</span><br><span class="line">        let x=100*$j</span><br><span class="line">        let y=$x+1</span><br><span class="line">        let z=$x+100</span><br><span class="line">        for i in `seq $y $z` ; do</span><br><span class="line">                awk  -v a=$i &apos;&#123;printf $a &quot; &quot;&#125;&apos; example.txt &gt;&gt;/tmp/test.txt</span><br><span class="line">                echo &quot; &quot; &gt;&gt;/tmp/test.txt</span><br><span class="line">        done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-过滤两个或多个关键词"><a href="#6-过滤两个或多个关键词" class="headerlink" title="6. 过滤两个或多个关键词"></a>6. 过滤两个或多个关键词</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grep -E &apos;123|abc&apos; filename  找出文件（filename）中包含123或者包含abc的行</span><br><span class="line">egrep &apos;123|abc&apos; filename    用egrep同样可以实现</span><br><span class="line">awk &apos;/123|abc/&apos;  filename    awk 的实现方式</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-用awk生成以下结构文件"><a href="#7-用awk生成以下结构文件" class="headerlink" title="7. 用awk生成以下结构文件"></a>7. 用awk生成以下结构文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">用awk编写生成以下结构文件的程序。( 最后列使用现在的时间，时间格式为YYYYMMDDHHMISS)  各列的值应如下所示，每增加一行便加1，共500万行。</span><br><span class="line"></span><br><span class="line">1,1,0000000001,0000000001,0000000001,0000000001,0000000001,0000000001,2005100110101</span><br><span class="line">2,2,0000000002,0000000002,0000000002,0000000002,0000000002,0000000002,2005100110101</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">用shell搞起。</span><br><span class="line">#! /bin/bash</span><br><span class="line"></span><br><span class="line">for i in `seq 1 5000000`; do</span><br><span class="line">    n=`echo &quot;$i&quot;|awk &apos;&#123;print length($0)&#125;&apos;`</span><br><span class="line">    export m=$[10-$n]</span><br><span class="line">    export o=`perl -e &apos;$a=&apos;0&apos;; $b=$a x $ENV&#123;&quot;m&quot;&#125;; print $b;&apos;`</span><br><span class="line">    export j=$i</span><br><span class="line">    p=`perl -e &apos;$c=$ENV&#123;&quot;o&quot;&#125;.$ENV&#123;&quot;j&quot;&#125;; print $c;&apos;`</span><br><span class="line">    echo &quot;$i,$i,$p,$p,$p,$p,$p,$p,`date +%Y%m%d%H%M%S`&quot;</span><br><span class="line">done</span><br><span class="line">其中用到了perl，所以脚本整体看起来比较啰嗦，希望能找到更好的解决办法。</span><br><span class="line">PS: shell 执行效率很低，so 该脚本运行时间会很漫长！</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">awk搞起</span><br><span class="line">awk &apos;BEGIN&#123;for(i=1;i&lt;=10;i++)printf(&quot;%d,%d,%010d,%010d,%010d,%010d,%010d,%010d,%d\n&quot;,i,i,i,i,i,i,i,i,strftime(&quot;%Y%m%d%H%M&quot;))&#125;&apos;</span><br><span class="line"></span><br><span class="line">python搞起</span><br><span class="line">#!/usr/bin/python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import datetime</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def get_data(num, time_now):</span><br><span class="line"></span><br><span class="line">    list_num = [num]*8</span><br><span class="line">    list_num.append(time_now)</span><br><span class="line">    return &quot;%d,%d,0d,0d,0d,0d,0d,0d,%s&quot; % tuple(list_num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def loop_count(times):</span><br><span class="line"></span><br><span class="line">    for i in xrange(times):</span><br><span class="line">        time_now = datetime.datetime.now().strftime(&quot;%Y%m%d%H%M%S&quot;)</span><br><span class="line">        write_file(get_data(i+1, time_now))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def write_file(string):</span><br><span class="line">    with open(&quot;output&quot;, &apos;a+&apos;) as filename:</span><br><span class="line">        filename.write(string+&apos;\n&apos;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line"></span><br><span class="line">    loop_count(1000*1000)</span><br></pre></td></tr></table></figure>
+
+<h1 id="8-awk用print打印单引号"><a href="#8-awk用print打印单引号" class="headerlink" title="8. awk用print打印单引号"></a>8. awk用print打印单引号</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123;print &quot;This is a &apos;&quot;&apos;&quot;&apos;&quot;$1&#125; filename </span><br><span class="line">解释一下：在awk中使用脱义字符\是起不到作用的，如果想打印特殊字符，只能使用&apos;&quot;&quot;&apos; 这样的组合才可以。</span><br><span class="line"></span><br><span class="line">这里自左至右为单引号 双引号 双引号</span><br><span class="line">单引号其中两个单引号为一对，两个双引号为一对。想脱义$那就是&apos;&quot;$&quot;&apos;</span><br><span class="line">脱义单引号那就是 &apos;&quot;&apos;&quot;&apos;</span><br></pre></td></tr></table></figure>
+
+<h1 id="9-合并两个文件"><a href="#9-合并两个文件" class="headerlink" title="9. 合并两个文件"></a>9. 合并两个文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">paste  filename1  filename2 </span><br><span class="line"></span><br><span class="line">这样就可以实现了。举个例子。</span><br><span class="line">cat  a.txt</span><br><span class="line">1 2 3 </span><br><span class="line">4 5 6 </span><br><span class="line">a b c</span><br><span class="line"></span><br><span class="line">cat b.txt</span><br><span class="line">3 2 1 </span><br><span class="line">6 5 4 </span><br><span class="line">c b a </span><br><span class="line"></span><br><span class="line">则  paste  a.txt  b.txt  结果为</span><br><span class="line">1 2 3  3 2 1</span><br><span class="line">4 5 6  6 5 4</span><br><span class="line">a b c  c b a</span><br><span class="line"></span><br><span class="line">如果，你想在两个文件连接处用一个指定的字符连接，还可以用-d来指定</span><br><span class="line">paste -d &apos;+&apos;  a.txt b.txt</span><br><span class="line">结果为</span><br><span class="line">1 2 3+3 2 1</span><br><span class="line">4 5 6+6 5 4</span><br><span class="line">a b c+c b a</span><br></pre></td></tr></table></figure>
+
+<h1 id="10-awk的参考教程"><a href="#10-awk的参考教程" class="headerlink" title="10. awk的参考教程"></a>10. awk的参考教程</h1><p>地址[<a href="http://www.cnblogs.com/emanlee/p/3327576.html]" target="_blank" rel="noopener">http://www.cnblogs.com/emanlee/p/3327576.html]</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#awk -F \| &apos;NR==FNR&#123;a[$2]=$0;next&#125;&#123;print a[$1]&quot;|&quot;$2&#125;&apos; account cdr</span><br><span class="line"></span><br><span class="line">注释:</span><br><span class="line"></span><br><span class="line">由NR=FNR为真时,判断当前读入的是第一个文件account,然后使用&#123;a[$2]=$0;next&#125;循环将account文件的每行记录都存入数组a,并使用$2第2个字段作为下标引用.</span><br><span class="line"></span><br><span class="line">由NR=FNR为假时,判断当前读入了第二个文件cdr,然后跳过&#123;a[$2]=$0;next&#125;,对第二个文件cdr的每一行都无条件执行 &#123;print a[$1]&quot;|&quot;$2&#125;,此时变量$1为第二个文件的第一个字段,与读入第一个文件时,采用第一个文件第二个字段$2为数组下标相同.因此可以在此使用 a[$1]引用数组。</span><br></pre></td></tr></table></figure>
+
+<p>awk运算符</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>= += -= <em>= /= %= ^= *</em>=</td>
+<td>赋值</td>
+</tr>
+<tr>
+<td>?:</td>
+<td>C条件表达式</td>
+</tr>
+<tr>
+<td>双竖线</td>
+<td>逻辑或</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>逻辑与</td>
+</tr>
+<tr>
+<td>~      ~!</td>
+<td>匹配正则表达式和不匹配正则表达式</td>
+</tr>
+<tr>
+<td>&lt; &lt;= &gt; &gt;= != ==</td>
+<td>关系运算符</td>
+</tr>
+<tr>
+<td>空格</td>
+<td>连接</td>
+</tr>
+<tr>
+<td>+ -</td>
+<td>加，减</td>
+</tr>
+<tr>
+<td>* / &amp;</td>
+<td>乘，除与求余</td>
+</tr>
+<tr>
+<td>+ - !</td>
+<td>一元加，减和逻辑非</td>
+</tr>
+<tr>
+<td>^ ***</td>
+<td>求幂</td>
+</tr>
+<tr>
+<td>++ –</td>
+<td>增加或减少，作为前缀或后缀</td>
+</tr>
+<tr>
+<td>$</td>
+<td>字段引用</td>
+</tr>
+<tr>
+<td>in</td>
+<td>数组成员</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/正则/" rel="tag"># 正则</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/9.4 - 9.5 sed命令学习笔记/" rel="next" title="9.4 - 9.5 sed命令学习笔记">
+                <i class="fa fa-chevron-left"></i> 9.4 - 9.5 sed命令学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/9.1 - 9.3 grep学习笔记/" rel="prev" title="9.1 - 9.3 grep学习笔记">
+                9.1 - 9.3 grep学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-awk-中使用外部shell变量"><span class="nav-number">1.</span> <span class="nav-text">1. awk 中使用外部shell变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-awk-合并一个文件"><span class="nav-number">2.</span> <span class="nav-text">2. awk 合并一个文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-把一个文件多行连接成一行-不懂"><span class="nav-number">3.</span> <span class="nav-text">3. 把一个文件多行连接成一行 - 不懂</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-awk中gsub函数的使用"><span class="nav-number">4.</span> <span class="nav-text">4. awk中gsub函数的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-awk-截取指定多个域为一行"><span class="nav-number">5.</span> <span class="nav-text">5. awk 截取指定多个域为一行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-过滤两个或多个关键词"><span class="nav-number">6.</span> <span class="nav-text">6. 过滤两个或多个关键词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-用awk生成以下结构文件"><span class="nav-number">7.</span> <span class="nav-text">7. 用awk生成以下结构文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-awk用print打印单引号"><span class="nav-number">8.</span> <span class="nav-text">8. awk用print打印单引号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-合并两个文件"><span class="nav-number">9.</span> <span class="nav-text">9. 合并两个文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-awk的参考教程"><span class="nav-number">10.</span> <span class="nav-text">10. awk的参考教程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

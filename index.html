@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/5.5 - 5.7 Vim入门02/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/20.16-20.18 shell中的函数、数组/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -306,7 +306,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/5.5 - 5.7 Vim入门02/" itemprop="url">5.5 - 5.7 Vim入门02</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/20.16-20.18 shell中的函数、数组/" itemprop="url">20.16-20.17 shell中的函数、数组</a></h1>
         
 
         <div class="post-meta">
@@ -380,87 +380,37 @@
       
         
           
-            <h1 id="5-5-进入编辑模式"><a href="#5-5-进入编辑模式" class="headerlink" title="5.5 进入编辑模式"></a>5.5 进入编辑模式</h1><h2 id="1-进入vim编辑模式"><a href="#1-进入vim编辑模式" class="headerlink" title="1. 进入vim编辑模式"></a>1. 进入vim编辑模式</h2><p>vim命令后，输入 i 键，进入编辑模式（i, I, a, A, o,O,r,R都可以），按 Esc 键退出。</p>
-<h2 id="2-输入不同字母，进入编辑模式后的情况不同"><a href="#2-输入不同字母，进入编辑模式后的情况不同" class="headerlink" title="2. 输入不同字母，进入编辑模式后的情况不同"></a>2. 输入不同字母，进入编辑模式后的情况不同</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">（1）按 i 键，此时光标在当前位置，并进入编辑模式</span><br><span class="line">（2）按 I 键，此时光标移动到当前行的行首，并进入编辑模式</span><br><span class="line">（3）按 a 键，此时光标向后移动一个位置，并进入编辑模式</span><br><span class="line">（4）按 A 键，此时光标移动到当前行的末尾一个位置，并进入编辑模式</span><br><span class="line">（5）按 o 键，此时光标移动到当前行的下一新插的行的行首，并进入编辑模式</span><br><span class="line">（6）按 O 键，此时光标移动到当前行的上一新插的行的行首，并进入编辑模式</span><br></pre></td></tr></table></figure>
+            <p>##20.16/20.17 shell中的函数、数组</p>
+<p>函数就是把一段代码整理到了一个小单元中，并给这个小单元起一个名字，当用到这段代码时直接调用这个小单元的名字即可。</p>
+<p>###格式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function f_name() &#123;                      </span><br><span class="line">                 command            </span><br><span class="line"> &#125;</span><br><span class="line">#单词“function”可以省略，直接写函数的名字；函数必须放在脚本的最前面；调用函数的方法，是直接写函数名。</span><br></pre></td></tr></table></figure>
 
-<h1 id="5-6-vim命令模式"><a href="#5-6-vim命令模式" class="headerlink" title="5.6 vim命令模式"></a>5.6 vim命令模式</h1><h2 id="1-如何进图vim命令行模式"><a href="#1-如何进图vim命令行模式" class="headerlink" title="1. 如何进图vim命令行模式"></a>1. 如何进图vim命令行模式</h2><p>在一般模式，输入 : 或者 / 就可以进入命令模式，在改模式下，可以搜索，保存，替换，退出，显示行号等等操作。</p>
-<h2 id="2-命令"><a href="#2-命令" class="headerlink" title="2. 命令"></a>2. 命令</h2><ul>
-<li>命令模式下查找和替换</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>/word</td>
-<td>向光标之后寻找一个字符串位word，按n向后继续</td>
-</tr>
-<tr>
-<td>?word</td>
-<td>向光标之前寻找一个字符串位word，按n向后继续</td>
-</tr>
-<tr>
-<td>:n1,n2s/word1/word2/g</td>
-<td>在n1,n2行之间查找word1并替换位word2，不加g则只替换每行的第一个word1</td>
-</tr>
-<tr>
-<td>:1,$s/word1/word2/g</td>
-<td>替换文档中所有的word1位word2，不加g只替换每行的第一个</td>
-</tr>
-</tbody></table>
-<ul>
-<li>命令模式其他功能</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>:w</td>
-<td>保存文本</td>
-</tr>
-<tr>
-<td>:q</td>
-<td>退出vim</td>
-</tr>
-<tr>
-<td>:w!</td>
-<td>强制保存，root用户下即使文本只读也可以完成保存</td>
-</tr>
-<tr>
-<td>:q！</td>
-<td>强制退出，所有改动不生效</td>
-</tr>
-<tr>
-<td>:wq</td>
-<td>保存并退出</td>
-</tr>
-<tr>
-<td>: set nu</td>
-<td>显示行号</td>
-</tr>
-<tr>
-<td>: set nonu</td>
-<td>不显示行号</td>
-</tr>
-<tr>
-<td>:nohl</td>
-<td>取消文档中的高亮</td>
-</tr>
-</tbody></table>
-<h2 id="3-示例"><a href="#3-示例" class="headerlink" title="3. 示例"></a>3. 示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1,100s/iptables/seLinux</span><br><span class="line">**把1到100行之间的iptables替换位seLinux，只替换每行的第一个iptables**</span><br><span class="line"></span><br><span class="line">1,$s/iptables/seLinux/g      **把文件中所有的iptables替换位seLinux**</span><br><span class="line"></span><br><span class="line">%s/iptables/seLinux/g      **把文件中所有的iptables替换位seLinux**</span><br><span class="line"></span><br><span class="line">解释： %=1,s</span><br><span class="line">%s/ \ /etc \ /init.d/ \ /bin/ \ ls    **把文件中，所有的 /etc/init.d</span><br><span class="line">替换为 /bin/ls， 其中 \ 为退意符号，因为目录用的/和命令中的/有意义冲突，</span><br><span class="line">那么在目录中的/前面使用\符号，可以使冲突的意义去掉，只保留原来的意义。</span><br></pre></td></tr></table></figure>
+<p>###示例1 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# cd /shell/</span><br><span class="line">#!/bin/bash</span><br><span class="line">input() &#123;</span><br><span class="line">    echo &quot;The first parameter is $1&quot;</span><br><span class="line">    echo &quot;The second parameter is $2&quot;</span><br><span class="line">    echo &quot;The third parameter is  $3&quot;</span><br><span class="line">    echo &quot;The number of parameter is $#&quot;</span><br><span class="line">    echo &quot;The script&apos;s name is $0&quot;</span><br><span class="line">#定义函数</span><br><span class="line">&#125;</span><br><span class="line">input    a b c asd  sdg</span><br><span class="line">#引用函数</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh func.sh</span><br><span class="line">The first parameter is a</span><br><span class="line">The second parameter is b</span><br><span class="line">The third parameter is  c</span><br><span class="line">The number of parameter is 5</span><br><span class="line">The script&apos;s name is func.sh</span><br></pre></td></tr></table></figure>
 
-<h1 id="5-7-vim实践"><a href="#5-7-vim实践" class="headerlink" title="5.7 vim实践"></a>5.7 vim实践</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/dnsmasq.conf  /tmp/1.txt</span><br><span class="line"></span><br><span class="line">(1) 分别向下、向右、向左、向上移动6个字符（6j 6l 6h 6k）。</span><br><span class="line">(2) 分别向下、向上翻两页（分别按两次ctrl+f和ctrl+b）。</span><br><span class="line">(3) 把光标移动到第49行（49G）。</span><br><span class="line">(4) 把光标移动到行尾，再移动到行首（Shift+4, Shift+6）。</span><br><span class="line">(5) 移动到1.txt文件的最后一行（G）。</span><br><span class="line">(6) 移动到文件的首行（gg）。</span><br><span class="line">(7) 搜索文件中出现的“dnsmasq”，并数一下该字符串出现的次数（/dnsmsq 然后按n）。</span><br><span class="line">(8) 把从第1行到第10行出现的dnsmasq替换成dns（:1,10s/dnsmasq/dns/g）。</span><br><span class="line">(9) 还原上一步操作（u）。</span><br><span class="line">(10) 把整个文件中所有的etc替换成cte（:1,$s/etc/cte/g）。</span><br><span class="line">(11) 把光标移动到第25行，删除字符串 “ly”（25G 然后按j向右移动光标找到&quot;ly&quot;，按v选中，然后按x）。</span><br><span class="line">(12) 还原上一步操作（u）。</span><br><span class="line">(13) 删除第50行（50G dd）。</span><br><span class="line">(14) 还原上一步操作（u）。</span><br><span class="line">(15) 删除第37-42行的所有内容（37G 6dd）。</span><br><span class="line">(16) 还原上一步操作（u）。</span><br><span class="line">(17) 复制第48行的内容并粘贴到第52行下面（48G yy 52G p）。</span><br><span class="line">(18) 还原上一步操作（u）。</span><br><span class="line">(19) 复制第37-42行的内容并粘贴到第44行上面（37G 6yy 44G P）。</span><br><span class="line">(20) 还原上一步操作（按u）。</span><br><span class="line">(21) 把第37-42行的内容移动到第19行下面（37G 6dd 19G p）。</span><br><span class="line">(22) 还原上一步操作（按u）。</span><br><span class="line">(23) 把光标移动到首行，把第1行内容改为“#!/bin/bash”</span><br><span class="line">（先按gg，把光标定位到第1行，然后按字母A，进入编辑模式，</span><br><span class="line">同时&gt;光标到行末尾，进行修改操作，完成后按ESC）。</span><br><span class="line">(24) 在第1行下面插入新的一行，并输入“# Hello!”</span><br><span class="line">（按o进入编辑模式，同时光标向下另起一行，输入“# Hello!”）。</span><br><span class="line">(25) 保存文档并退出（按Esc键，输入“:wq”）。</span><br></pre></td></tr></table></figure>
+<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">sum() &#123;</span><br><span class="line">    s=$[$1+$2]</span><br><span class="line">    echo $s</span><br><span class="line">&#125;</span><br><span class="line">sum 1 2</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh func2.sh</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
 
-<h1 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">（1）vim下:/keyword,可以查找全文的关键字。假设我只想在1-50行之间查找这个关键字，要怎么写？ （感觉应该是没有这种写法的吧）</span><br><span class="line"></span><br><span class="line">aming</span><br><span class="line">没有。</span><br><span class="line"></span><br><span class="line">870566512</span><br><span class="line">**可以通过替换的方式实现**</span><br><span class="line">:1,10s/111/111/g</span><br><span class="line"></span><br><span class="line">（2）用什么方法可以在vim里面搜索关键词？  错误答案 AB</span><br><span class="line">A 一般模式下，直接输入/word</span><br><span class="line">B 一般模式下，直接输入?word</span><br><span class="line">C 一般模式下，直接输入:word</span><br><span class="line">D 一般模式下，直接输入:/word</span><br><span class="line">正确答案: A,B,D</span><br></pre></td></tr></table></figure>
+<h3 id="示例3"><a href="#示例3" class="headerlink" title="示例3"></a>示例3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">ip() &#123;</span><br><span class="line">    ifconfig|grep -A1 &quot;$e: &quot;|tail -1|awk &apos;&#123;print $2&#125;&apos;</span><br><span class="line">&#125;</span><br><span class="line">read -p &quot;Please input the eth name: &quot; e</span><br><span class="line">myip=`ip $e`</span><br><span class="line">echo &quot;$e address is $myip&quot;</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh func3.sh </span><br><span class="line">Please input the eth name: eth0</span><br><span class="line">eth0 address is 172.18.192.237</span><br><span class="line"></span><br><span class="line">#知识点</span><br><span class="line">#grep -A1 keyword filename  找出filename中带有keyword的行，输出中除显示该行外，还显示之后的一行(After 1)</span><br><span class="line">#grep -B1 keyword filename  找出filename中带有keyword的行，输出中除显示该行外，还显示之前的一行(Before 1)</span><br><span class="line">#grep -1 keyword filename     找出filename中带有keyword的行，输出中除显示该行外，还显示之前的一行(After 1)和显示之后的一行(After 1）</span><br><span class="line">#awk &apos;&#123;pattern + action&#125;&apos; &#123;filenames&#125;</span><br><span class="line">#awk [-F  field-separator]  &apos;commands&apos;  input-file(s)</span><br><span class="line">#cat /etc/passwd |awk  -F &apos;:&apos;  &apos;&#123;print $1&quot;\t&quot;$7&#125;&apos;  </span><br><span class="line">#加-F &apos;.&apos; 是以.为分隔符，不加默认以空格或者tab为分隔符，$1为被分割的第一个域，$0为全部域，\t是tab键</span><br><span class="line">root    /bin/bash</span><br><span class="line">daemon  /bin/sh</span><br><span class="line">bin    /bin/sh</span><br><span class="line">sys    /bin/sh</span><br><span class="line">#cat /etc/passwd |awk  -F &apos;:&apos;  &apos;BEGIN &#123;print &quot;name,shell&quot;&#125;  &#123;print $1&quot;,&quot;$7&#125; END &#123;print &quot;blue,/bin/nosh&quot;&#125;&apos;</span><br><span class="line">name,shell</span><br><span class="line">root,/bin/bash</span><br><span class="line">daemon,/bin/sh</span><br><span class="line">bin,/bin/sh</span><br><span class="line">sys,/bin/sh</span><br><span class="line">....</span><br><span class="line">blue,/bin/nosh</span><br></pre></td></tr></table></figure>
 
-<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vim的特殊用法 </span><br><span class="line">http://www.apelearn.com/bbs/thread-9334-1-1.html</span><br><span class="line"></span><br><span class="line">vim常用快捷键总结</span><br><span class="line">http://www.apelearn.com/bbs/thread-407-1-1.html</span><br><span class="line"></span><br><span class="line">vim快速删除一段字符</span><br><span class="line">http://www.apelearn.com/bbs/thread-842-1-1.html</span><br><span class="line"></span><br><span class="line">vim乱码 </span><br><span class="line">http://www.apelearn.com/bbs/thread-6753-1-1.html</span><br><span class="line"></span><br><span class="line">小键盘问题 </span><br><span class="line">http://www.apelearn.com/bbs/thread-7215-1-1.html</span><br><span class="line"></span><br><span class="line">vim加密 </span><br><span class="line">http://www.apelearn.com/bbs/thread-7750-1-1.html</span><br></pre></td></tr></table></figure>
+<p>###改进例子3<br>加上2个判断，判定输入的是不是系统里面的网卡；判定如果输入的是系统里的网卡，那么到底有没有ip？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">这个细节错了，需要重新改进</span><br><span class="line">#!/bin/bash</span><br><span class="line">while</span><br><span class="line">    read -p &quot;Please input the eth name: &quot; e</span><br><span class="line">    if  [ -z  ifconfig|grep -w &quot;$e&quot; ]</span><br><span class="line">    then</span><br><span class="line">         echo &quot;The eth you typed is none, please type a right one&quot;</span><br><span class="line">         continue</span><br><span class="line">             if  [ -z ifconfig|grep -A1 &quot;$e: &quot;|tail -1|awk &apos;&#123;print $2&#125;&apos; ]</span><br><span class="line">             then </span><br><span class="line">                     echo &quot;The eth has no ip&quot; </span><br><span class="line">             fi</span><br><span class="line">    else</span><br><span class="line">           break           </span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line">ip() &#123;</span><br><span class="line">    ifconfig|grep -A1 &quot;$e: &quot;|tail -1|awk &apos;&#123;print $2&#125;&apos;</span><br><span class="line">&#125;</span><br><span class="line">myip=`ip $e`</span><br><span class="line">echo &quot;$e address is $myip&quot;</span><br></pre></td></tr></table></figure>
+
+<p>##20.18 shell中的数组</p>
+<p>平时工作中，很少用到过数组，到那时这个概念还是要弄明白。</p>
+<p>###定义数组 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host shell]# vim shuzu.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">a=(1 2 3 4 5)</span><br><span class="line">echo $a</span><br><span class="line">echo $&#123;#a[@]&#125; </span><br><span class="line">#获取数组的元素个数 </span><br><span class="line">echo $&#123;a[2]&#125; </span><br><span class="line">#读取第三个元素，数组从0开始，a[0]是第一个元素</span><br><span class="line">echo $&#123;a[*]&#125; </span><br><span class="line">#等同于 $&#123;a[@]&#125;  显示整个数组的元素</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh shuzu.sh </span><br><span class="line">1</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">1 2 3 4 5</span><br></pre></td></tr></table></figure>
+
+<p>###数组赋值<br>直接通过  <code>数组名[下标]</code> 就可以对其进行引用赋值，如果下标不存在，那么自动添加新一个数组元素进去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@host shell]# vim shuzu.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">a=(1 2 3 4 5)</span><br><span class="line">echo $a</span><br><span class="line">echo $&#123;#a[@]&#125;</span><br><span class="line">echo $&#123;a[2]&#125;</span><br><span class="line">echo $&#123;a[*]&#125;</span><br><span class="line"></span><br><span class="line">a[1]=100</span><br><span class="line">echo $&#123;a[@]&#125;</span><br><span class="line"></span><br><span class="line">a[5]=100</span><br><span class="line">echo $&#123;a[@]&#125; </span><br><span class="line"></span><br><span class="line">[root@host shell]# sh shuzu.sh </span><br><span class="line">1</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">1 2 3 4 5</span><br><span class="line">1 100 3 4 5</span><br><span class="line">1 100 3 4 5 100</span><br></pre></td></tr></table></figure>
+
+<p>###数组的删除<br>uset a; unset a[1]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@host shell]# vim shuzudelete.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">a=(1 2 3 4 5)</span><br><span class="line">unset a</span><br><span class="line">echo $&#123;a[*]&#125; </span><br><span class="line">a=(1 2 3 4 5)</span><br><span class="line">unset a[1]</span><br><span class="line">echo $&#123;a[*]&#125; </span><br><span class="line">echo $&#123;#a[*]&#125;  </span><br><span class="line"></span><br><span class="line">[root@host shell]# sh shuzudelete.sh </span><br><span class="line"></span><br><span class="line">1 3 4 5</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<p>###数组的分片.<br>在某些特殊的复杂的情况下，会运用到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># a=(`seq 1 5`)</span><br><span class="line"># echo $&#123;a[@]:0:3&#125;</span><br><span class="line">1 2 3</span><br><span class="line"></span><br><span class="line"># echo $&#123;a[@]:1:4&#125;</span><br><span class="line">2 3 4 5</span><br></pre></td></tr></table></figure>
+
+<p>###数组替换，可以echo替换，也可以直接赋值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># a=(1 2 3 4 5)</span><br><span class="line">#echo $&#123;a[@/3/100]&#125;</span><br><span class="line">1 2 100 4 5</span><br><span class="line"></span><br><span class="line">#echo $&#123;a[@]&#125;</span><br><span class="line">1 2 3 4 5</span><br><span class="line"></span><br><span class="line">#a=($&#123;a[@]/3/100&#125;)</span><br><span class="line">#echo $&#123;a[@]&#125;</span><br><span class="line">1 2 100 4 5</span><br></pre></td></tr></table></figure>
           
         
       
@@ -693,7 +643,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/new post/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/3.1 - 3.3 用户文件及管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -712,7 +662,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/new post/" itemprop="url">2.1-2.2 系统目录结构</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/3.1 - 3.3 用户文件及管理/" itemprop="url">2.1-2.2 系统目录结构</a></h1>
         
 
         <div class="post-meta">
@@ -786,7 +736,26 @@
       
         
           
-            
+            <h1 id="1-根"><a href="#1-根" class="headerlink" title="1. / - 根"></a>1. / - 根</h1><p>每一个文件和目录从根目录开始。<br>只有root用户具有该目录下的写权限。请注意，/root是root用户的主目录，这与/.不一样</p>
+<h1 id="2-bin-用户二进制文件"><a href="#2-bin-用户二进制文件" class="headerlink" title="2. /bin - 用户二进制文件"></a>2. /bin - 用户二进制文件</h1><p>包含二进制可执行文件。<br>在单用户模式下，你需要使用的常见Linux命令都位于此目录下。系统的所有用户使用的命令都设在这里。<br>例如：ps、ls、ping、grep、cp</p>
+<h1 id="3-boot-引导加载程序文件"><a href="#3-boot-引导加载程序文件" class="headerlink" title="3. /boot - 引导加载程序文件"></a>3. /boot - 引导加载程序文件</h1><p>包含引导加载程序相关的文件。<br>内核的initrd、vmlinux、grub文件位于/boot下。<br>例如：initrd.img-2.6.32-24-generic、vmlinuz-2.6.32-24-generic</p>
+<h1 id="4-dev-设备文件"><a href="#4-dev-设备文件" class="headerlink" title="4. /dev - 设备文件"></a>4. /dev - 设备文件</h1><p>包含设备文件。<br>这些包括终端设备、USB或连接到系统的任何设备。例如：/dev/tty1、/dev/usbmon0</p>
+<h1 id="5-etc-配置文件"><a href="#5-etc-配置文件" class="headerlink" title="5. /etc - 配置文件"></a>5. /etc - 配置文件</h1><p>包含所有程序所需的配置文件。<br>也包含了用于启动/停止单个程序的启动和关闭shell脚本。例如：/etc/resolv.conf、/etc/logrotate.conf</p>
+<h1 id="6-home-HOME目录"><a href="#6-home-HOME目录" class="headerlink" title="6. /home - HOME目录"></a>6. /home - HOME目录</h1><p>所有用户用home目录来存储他们的个人档案。<br>例如：/home/john、/home/nikita</p>
+<h1 id="7-lib-和-lib64-系统库"><a href="#7-lib-和-lib64-系统库" class="headerlink" title="7./lib 和 /lib64 - 系统库"></a>7./lib 和 /lib64 - 系统库</h1><p>包含支持位于/bin和/sbin下的二进制文件的库文件.<br>库文件名为 ld<em>或lib</em>.so.*<br>例如：ld-2.11.1.so，libncurses.so.5.7</p>
+<h1 id="8-media-可移动媒体设备"><a href="#8-media-可移动媒体设备" class="headerlink" title="8. /media - 可移动媒体设备"></a>8. /media - 可移动媒体设备</h1><p>用于挂载可移动设备的临时目录。<br>举例来说，挂载CD-ROM的/media/cdrom，挂载软盘驱动器的/media/floppy</p>
+<h1 id="9-mnt-挂载目录"><a href="#9-mnt-挂载目录" class="headerlink" title="9. /mnt - 挂载目录"></a>9. /mnt - 挂载目录</h1><p>临时安装目录，系统管理员可以挂载文件系统</p>
+<h1 id="10-opt-可选的附加应用程序"><a href="#10-opt-可选的附加应用程序" class="headerlink" title="10. /opt - 可选的附加应用程序"></a>10. /opt - 可选的附加应用程序</h1><p>opt代表可选的。<br>包含从个别厂商的附加应用程序。<br>附加应用程序应该安装在/opt/或者/opt/的子目录下</p>
+<h1 id="11-proc-进程信息"><a href="#11-proc-进程信息" class="headerlink" title="11. /proc - 进程信息"></a>11. /proc - 进程信息</h1><p>包含系统进程的相关信息。<br>这是一个虚拟的文件系统，包含有关正在运行的进程的信息。例如：/proc/{pid}目录中包含的与特定pid相关的信息。<br>这是一个虚拟的文件系统，系统资源以文本信息形式存在。例如：/proc/uptime</p>
+<h1 id="12-root-系统数据"><a href="#12-root-系统数据" class="headerlink" title="12. /root - 系统数据"></a>12. /root - 系统数据</h1><p>root根用户目录。<br>包含root配置文件。</p>
+<h1 id="13-run-运行数据"><a href="#13-run-运行数据" class="headerlink" title="13. /run  运行数据"></a>13. /run  运行数据</h1><p>run代表运行。<br>包含运行时相关的数据。<br>例如，ssid.pid、syslogs.pid等相关数据</p>
+<h1 id="14-sbin-系统二进制文件"><a href="#14-sbin-系统二进制文件" class="headerlink" title="14. /sbin   系统二进制文件"></a>14. /sbin   系统二进制文件</h1><p>二进制文件 = 可执行文件。<br>在这个目录下的linux命令通常由系统管理员使用，对系统进行维护。<br>例如：iptables、reboot、fdisk、ifconfig、swapon命令</p>
+<h1 id="15-srv-服务数据"><a href="#15-srv-服务数据" class="headerlink" title="15. /srv   服务数据"></a>15. /srv   服务数据</h1><p>srv代表服务。<br>包含服务器特定服务相关的数据。<br>例如，/srv/cvs/包含cvs相关的数据。</p>
+<h1 id="16-sys-系统数据"><a href="#16-sys-系统数据" class="headerlink" title="16. /sys   系统数据"></a>16. /sys   系统数据</h1><p>sys代表系统。<br>包含系统进程数据文件。<br>例如，/sys/fs/包含文件、/sys/bus/包含总线等相关数据</p>
+<h1 id="17-tmp-临时文件"><a href="#17-tmp-临时文件" class="headerlink" title="17. /tmp   临时文件"></a>17. /tmp   临时文件</h1><p>包含系统和用户创建的临时文件。<br>      当系统重新启动时，这个目录下的文件都将被删除。</p>
+<h1 id="18-usr-用户程序"><a href="#18-usr-用户程序" class="headerlink" title="18. /usr   用户程序"></a>18. /usr   用户程序</h1><p>包含二进制文件、库文件、文档和二级程序的源代码。<br>/usr/bin中包含用户程序的二进制文件。如果你在/bin中找不到用户二进制文件，到/usr/bin目录看看。<br>例如：at、awk、cd、less、scp。<br>/usr/sbin中包含系统管理员的二进制文件。如果在/sbin/中找不到系统二进制文件，到/usr/sbin目录看看。<br>例如：atd、cron、sshd、useradd、userdel。<br>/usr/lib中包含了/usr/bin和/usr/sbin用到的库。<br>/usr/local中包含了从源安装的用户程序。</p>
+<h1 id="19-var-变量文件"><a href="#19-var-变量文件" class="headerlink" title="19. /var   变量文件"></a>19. /var   变量文件</h1><p>包含变量文件<br>这个目录下可以找到内容可能增长的文件。<br>例如：系统日志文件（/var/log）;包和数据库文件（/var/lib）；电子邮件（/var/mail）；打印队列（/var/spool）；锁文件（var/lock）；多次重新启动需要的临时文件（/var/tmp）</p>
+
           
         
       
@@ -834,7 +803,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/new post - 副本/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/18.1-18.5 集群介绍、keepalived介绍和配置高可用集群/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -853,7 +822,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/new post - 副本/" itemprop="url">2.1-2.2 系统目录结构</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/18.1-18.5 集群介绍、keepalived介绍和配置高可用集群/" itemprop="url">18.1-18.5 集群介绍、keepalived介绍和配置高可用集群</a></h1>
         
 
         <div class="post-meta">
@@ -927,742 +896,97 @@
       
         
           
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/4.1-4.4 磁盘管理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhouqun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joking的Linux世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux入门笔记/4.1-4.4 磁盘管理/" itemprop="url">4.1-4.4 磁盘管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">linux入门笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="4-1-df命令"><a href="#4-1-df命令" class="headerlink" title="4.1 df命令"></a>4.1 df命令</h1><h2 id="1-df命令"><a href="#1-df命令" class="headerlink" title="1. df命令"></a>1. df命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">df    \\可以查看到系统一共有几个分区，但swap（虚拟交换分区，内存）不会显示在此。</span><br><span class="line">df -h  \\自动变换单位*</span><br><span class="line">文件系统            容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/mapper/cl-root  17G  4.5G  13G  27% /</span><br><span class="line">devtmpfs            906M    0  906M    0% /dev</span><br><span class="line">tmpfs                916M  100K  916M    1% /dev/shm</span><br><span class="line">tmpfs                916M  9.0M  907M    1% /run</span><br><span class="line">tmpfs                916M    0  916M    0% /sys/fs/cgroup</span><br><span class="line">/dev/sda1          1014M  139M  876M  14% /boot</span><br><span class="line">tmpfs                184M  52K  184M    1% /run/user/0</span><br><span class="line"></span><br><span class="line">df -k  \\以K为单位</span><br><span class="line">df -m  \\以M为单位</span><br><span class="line">df -i  \\查看到系统分区下的inode情况</span><br><span class="line">df -T  \\会看到分区文件系统类型</span><br><span class="line"></span><br><span class="line">free  \\可以查看到swap状态*</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-重点-每次登录服务器，第一件事"><a href="#2-重点-每次登录服务器，第一件事" class="headerlink" title="2. @重点 每次登录服务器，第一件事"></a>2. @重点 每次登录服务器，第一件事</h2><ul>
-<li>用df -h  看磁盘空间满了没</li>
-<li>用df -i  看磁盘inode空间占满没有<br>最好，用shell监控起来。</li>
+            <h2 id="18-1-集群介绍"><a href="#18-1-集群介绍" class="headerlink" title="18.1 集群介绍"></a>18.1 集群介绍</h2><h3 id="Linux集群概述"><a href="#Linux集群概述" class="headerlink" title="Linux集群概述"></a>Linux集群概述</h3><ul>
+<li>根据功能划分为两大类：高可用和负载均衡  </li>
+<li>高可用集群通常为两台服务器，一台工作，另外一台作为冗余，当提供服务的机器宕机，冗余将接替继续提供服务  </li>
+<li>实现高可用的开源软件有：heartbeat(由于版本不再更新，在CentOS 6上面Bug比较多，不推荐使用了)、keepalived （既可以实现高可用，又可以实现负载均衡） </li>
+<li>负载均衡集群，需要有一台服务器作为分发器，它负责把用户的请求分发给后端的服务器处理，在这个集群里，除了分发器外，就是给用户提供服务的服务器了，这些服务器数量至少为2  </li>
+<li>实现负载均衡的开源软件有LVS、keepalived、haproxy、nginx，商业的有F5、Netscaler 专用商业服务器，价格很高，从几万到几十万都有</li>
 </ul>
-<h1 id="4-2-du命令"><a href="#4-2-du命令" class="headerlink" title="4.2 du命令"></a>4.2 du命令</h1><h2 id="1-du命令"><a href="#1-du命令" class="headerlink" title="1. du命令"></a>1. du命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">du      \\查看目录或者文件的占用磁盘空间大小，默认以K为单位</span><br><span class="line">du -a    \\显示所有下面的文件和目录，不加的话，不会显示下面目录内的文件</span><br><span class="line">du -b    \\以b为单位</span><br><span class="line">du -m    \\以M为单位</span><br><span class="line">du -h    \\自动匹配合适的单位</span><br><span class="line">du -s    \\只显示总和</span><br></pre></td></tr></table></figure>
+<h2 id="18-2-keepalived介绍"><a href="#18-2-keepalived介绍" class="headerlink" title="18.2 keepalived介绍"></a>18.2 keepalived介绍</h2><ul>
+<li>在这里我们使用keepalived来实现高可用集群，因为heartbeat在centos6上有一些问题，影响实验效果（比如，切换不及时）</li>
+<li>keepalived通过 VRRP（Virtual Router Redundancy Protocl）虚拟路由冗余协议 来实现高可用。</li>
+<li>在这个协议里会将多台功能相同的路由器组成一个小组，这个小组里会有1个master角色和N（N&gt;=1）个backup角色。</li>
+<li>master会通过组播的形式向各个backup发送VRRP协议的数据包，当backup收不到master发来的VRRP数据包时，就会认为master宕机了。此时就需要根据各个backup的优先级来决定谁成为新的mater。</li>
+<li>Keepalived要有三个模块，分别是core、check和vrrp。其中core模块为keepalived的核心，负责主进程的启动、维护以及全局配置文件的加载和解析，check模块负责健康检查，vrrp模块是来实现VRRP协议的。</li>
+</ul>
+<h2 id="18-3-18-4-18-5-用keepalived配置高可用集群"><a href="#18-3-18-4-18-5-用keepalived配置高可用集群" class="headerlink" title="18.3/18.4/18.5 用keepalived配置高可用集群"></a>18.3/18.4/18.5 用keepalived配置高可用集群</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li><p>两台机器 192.168.2.180（Master/yt-01）、192..168.2.183（backupyt-02）</p>
+</li>
+<li><p>keepalived的VIP设为192.168.2.100（在keepalived配置里面设置）。关于VIP，即Vitrual IP。当我们有主从两台机器，我们需要绑定域名到指定的IP，如果绑定在主上面。如果主宕机，我们就无法提供服务，所以Vitrual IP就起到了关键性作用。默认配置在主服务器上面，但是一旦宕机，从服务器就会立即启动，并且把这个IP绑定在从上面从而不会影响业务的状态！</p>
+</li>
+<li><p>机器都要联网</p>
+</li>
+<li><p>两台机器都要安装keepalived</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum install -y keepalived</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>两台机器都安装nginx<br>安装nginx作为实验对象，其中因为180上之前已经源码包安装过nginx，所以只需要181上安装就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum install -y nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>两台机器都要关闭防火墙</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># iptables -nvL</span><br><span class="line"># systemctl stop firewalld</span><br><span class="line"># getenforce</span><br><span class="line"># setenforce 0</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-常用的-du-sh"><a href="#2-常用的-du-sh" class="headerlink" title="2. 常用的 du -sh"></a>2. 常用的 du -sh</h2><p>du -sh 和 ls -sh 的区别 (涉及 块block 的概念)</p>
+</li>
+</ul>
+<h3 id="配置主keepalived服务器"><a href="#配置主keepalived服务器" class="headerlink" title="配置主keepalived服务器"></a>配置主keepalived服务器</h3><h4 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h4><ul>
+<li>编辑180上keepalived配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># &gt; /etc/keepalived/keepalived.conf              #清空原始配置文件</span><br><span class="line"># vim /etc/keepalived/keepalived.conf          #复制下面代码，代替原配置文件</span><br><span class="line"></span><br><span class="line"># 全局定义参数</span><br><span class="line">global_defs &#123;         </span><br><span class="line">  notification_email &#123;                                      #出现问题后接收提示的邮箱</span><br><span class="line">    test@test.com</span><br><span class="line">  &#125;</span><br><span class="line">  notification_email_from test@test.com       #发件人邮箱</span><br><span class="line">  smtp_server 127.0.0.1                                #邮件服务器</span><br><span class="line">  smtp_connect_timeout 30                          #延时</span><br><span class="line">  router_id LVS_DEVEL                                #运行keepalived机器的一个标识</span><br><span class="line">&#125;</span><br><span class="line">vrrp_script chk_nginx &#123;                                 #检测vrrp服务是否正常</span><br><span class="line">    script &quot;/usr/local/sbin/check_ng.sh&quot;          #检测脚本的路径</span><br><span class="line">    interval 3                                                   #检测间断是3s</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;                                     #定义相关Master的东西</span><br><span class="line">    state MASTER                                         #设定角色</span><br><span class="line">    interface ens33                                        #指定ens33这块网卡，通过vrrp协议去发广播</span><br><span class="line">    virtual_router_id 51                                  #指定虚拟路由器的ID，一定要和从上的保持一致</span><br><span class="line">    priority 100                                               #指定权重，数字越大优先级越高</span><br><span class="line">    advert_int 1                    </span><br><span class="line">    authentication &#123;                                       #认证的相关信息</span><br><span class="line">        auth_type PASS                                 #定义认证数据类型为密码</span><br><span class="line">        auth_pass 123456                              #密码暂定123456</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;                                  #定义VIP，VIP指的是高可用指定的固定IP地址，不论主从切换后IP都是这个</span><br><span class="line">        192.168.2.100</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_nginx                                           #加载定义的chk_nginx脚本</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="写监控脚本"><a href="#写监控脚本" class="headerlink" title="写监控脚本"></a>写监控脚本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# vim /usr/local/sbin/check_ng.sh     #keepalived的监控脚本，把下面代码粘贴进去</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line">#时间变量，用于记录日志</span><br><span class="line">d=`date --date today +%Y%m%d_%H:%M:%S`</span><br><span class="line">#计算nginx进程数量</span><br><span class="line">n=`ps -C nginx --no-heading|wc -l`</span><br><span class="line">#如果进程为0，则启动nginx，并且再次检测nginx进程数量，</span><br><span class="line">#如果还为0，说明nginx无法启动，此时需要关闭keepalived</span><br><span class="line">if [ $n -eq &quot;0&quot; ]; then</span><br><span class="line">        /etc/init.d/nginx start</span><br><span class="line">        n2=`ps -C nginx --no-heading|wc -l`</span><br><span class="line">        if [ $n2 -eq &quot;0&quot;  ]; then</span><br><span class="line">                echo &quot;$d nginx down,keepalived will stop&quot; &gt;&gt; /var/log/check_ng.log</span><br><span class="line">#杀掉keepalived，是为了防止脑裂。脑裂指的是高可用集群中，当主从切换时，主上的keepalived还在启动，会和从争抢VIP，导致后台链接服务器时，不知道连接哪台服务器好，导致出错。</span><br><span class="line">                systemctl stop keepalived</span><br><span class="line">        fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# chmod 755  /usr/local/sbin/check_ng.sh      ##给脚本755权限</span><br></pre></td></tr></table></figure>
+
+<p>脚本解读：<br>如果进程里面没发现nginx那就代表着服务宕机了，然后脚本自动的再次启动nginx服务。 如果服务还是不可以启动，就把启动报错日志输入到指定的位置，然后把keepalived也关闭。</p>
+<p>为什么需要关闭keepalived呢？ 行业里面有个名词叫做“脑裂”，如果主服务宕机，从服务势必会马上启动顶替主服务再次服务，如果主服务的keepalived没有关闭，一定会造成混乱，两台机器都争抢服务。</p>
+<p>在高可用（HA）系统中，当联系2个节点的“心跳线”断开时，本来为一整体、动作协调的HA系统，就分裂成为2个独立的个体。由于相互失去了联系，都以为是对方出了故障。两个节点上的HA软件像“裂脑人”一样，争抢“共享资源”、争起“应用服务”，就会发生严重后果——或者共享资源被瓜分、2边服务都起不来了；或者2边服务都起来了，但同时读写“共享存储”，导致数据损坏。</p>
+<p>高可用中，绝对不可以发生的脑裂问题！</p>
+<h4 id="启动keepalived服务"><a href="#启动keepalived服务" class="headerlink" title="启动keepalived服务"></a>启动keepalived服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# systemctl start  keepalived</span><br><span class="line">[root@yt-01 ~]# ps aux |grep keep</span><br><span class="line">root      3887  0.0  0.1 120724  1400 ?        Ss  15:57  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      3888  0.0  0.2 120724  2748 ?        S    15:57  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      3889  0.0  0.2 124980  2744 ?        S    15:57  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      3914  0.0  0.0 112680  972 pts/1    R+  15:57  0:00 grep --color=auto keep</span><br><span class="line">[root@yt-01 ~]# ps aux |grep nginx</span><br><span class="line">root      3866  0.0  0.0  20500  628 ?        Ss  15:54  0:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">nobody    3867  0.0  0.3  22944  3216 ?        S    15:54  0:00 nginx: worker process</span><br><span class="line">nobody    3868  0.0  0.3  22944  3216 ?        S    15:54  0:00 nginx: worker process</span><br><span class="line">root      3946  0.0  0.0 112680  972 pts/1    R+  15:57  0:00 grep --color=auto nginx</span><br></pre></td></tr></table></figure>
+
+<h4 id="停掉keepalived，测试是否会重新加载"><a href="#停掉keepalived，测试是否会重新加载" class="headerlink" title="停掉keepalived，测试是否会重新加载"></a>停掉keepalived，测试是否会重新加载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# /etc/init.d/nginx stop</span><br><span class="line">[root@yt-01 ~]# ps aux |grep nginx</span><br><span class="line">root      4093  0.0  0.0  20500  628 ?        Ss  15:58  0:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">nobody    4097  0.0  0.3  22944  3216 ?        S    15:58  0:00 nginx: worker process</span><br><span class="line">nobody    4098  0.0  0.3  22944  3216 ?        S    15:58  0:00 nginx: worker process</span><br><span class="line">root      4106  0.0  0.0 112680  968 pts/1    R+  15:58  0:00 grep --color=auto nginx</span><br><span class="line">还是会再加载</span><br><span class="line"></span><br><span class="line">#查看日志#</span><br><span class="line">[root@yt-01 ~]# tail /var/log/messages</span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# ifconfig -a  ##这个命令查看不到VIP</span><br><span class="line">ens33: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 192.168.2.180  netmask 255.255.255.0  broadcast 192.168.2.255</span><br><span class="line">        inet6 fe80::6b0e:c2eb:de7a:3662  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:0c:29:14:f6:1b  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 16608  bytes 11284525 (10.7 MiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 10439  bytes 3068832 (2.9 MiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</span><br><span class="line">        loop  txqueuelen 1  (Local Loopback)</span><br><span class="line">        RX packets 617885  bytes 308269731 (293.9 MiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 617885  bytes 308269731 (293.9 MiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# ip add         ##查看到的到VIP  xxx/32</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN qlen 1</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000</span><br><span class="line">    link/ether 00:0c:29:14:f6:1b brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.2.180/24 brd 192.168.2.255 scope global ens33</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet 192.168.2.100/32 scope global ens33             ##VIP为192.168.2.100/32##</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::6b0e:c2eb:de7a:3662/64 scope link </span><br><span class="line">      valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置keepalived从"><a href="#配置keepalived从" class="headerlink" title="配置keepalived从"></a>配置keepalived从</h3><h4 id="更改配置文件-1"><a href="#更改配置文件-1" class="headerlink" title="更改配置文件"></a>更改配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-02 ~]# &gt; /etc/keepalived/keepalived.conf    ##清空原始配置文件</span><br><span class="line">[root@yt-02 ~]# vim /etc/keepalived/keepalived.conf  ##复制下面代码，代替原配置文件</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">  notification_email &#123;</span><br><span class="line">    test@test.com</span><br><span class="line">  &#125;</span><br><span class="line">  notification_email_from test@test.com</span><br><span class="line">  smtp_server 127.0.0.1</span><br><span class="line">  smtp_connect_timeout 30</span><br><span class="line">  router_id LVS_DEVEL</span><br><span class="line">&#125;</span><br><span class="line">vrrp_script chk_nginx &#123;</span><br><span class="line">    script &quot;/usr/local/sbin/check_ng.sh&quot;</span><br><span class="line">    interval 3</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP               #指定角色为从</span><br><span class="line">    interface ens33              </span><br><span class="line">    virtual_router_id 51        </span><br><span class="line">    priority 90                       #指定权重为90，低于主</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 123456</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.2.100</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_nginx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="编辑监控脚本"><a href="#编辑监控脚本" class="headerlink" title="编辑监控脚本"></a>编辑监控脚本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-02 ~]# vim /usr/local/sbin/check_ng.sh     ##keepalived监控脚本路径是在keepalived配置文件中指定的，把下面代码粘贴进去</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line">#时间变量，用于记录日志</span><br><span class="line">d=`date --date today +%Y%m%d_%H:%M:%S`</span><br><span class="line">#计算nginx进程数量</span><br><span class="line">n=`ps -C nginx --no-heading|wc -l`</span><br><span class="line">#如果进程为0，则启动nginx，并且再次检测nginx进程数量，</span><br><span class="line">#如果还为0，说明nginx无法启动，此时需要关闭keepalived</span><br><span class="line">if [ $n -eq &quot;0&quot; ]; then</span><br><span class="line">        systemctl start nginx    ##因为是yum安装，启动有点不一样</span><br><span class="line">        n2=`ps -C nginx --no-heading|wc -l`</span><br><span class="line">        if [ $n2 -eq &quot;0&quot;  ]; then</span><br><span class="line">                echo &quot;$d nginx down,keepalived will stop&quot; &gt;&gt; /var/log/check_ng.log</span><br><span class="line">                systemctl stop keepalived</span><br><span class="line">        fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">[root@yt-02 ~]# chmod 755  /usr/local/sbin/check_ng.sh      ##给脚本755权限</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动keepalived"><a href="#启动keepalived" class="headerlink" title="启动keepalived"></a>启动keepalived</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-02 ~]# systemctl start  keepalived</span><br><span class="line">[root@yt-02 ~]# ps aux |grep keep</span><br><span class="line">root      7174  0.0  0.1 120720  1404 ?        Ss  20:46  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      7175  0.0  0.2 120720  2752 ?        S    20:46  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      7176  0.0  0.2 124976  2740 ?        S    20:46  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      7218  0.0  0.0 112632  660 pts/0    D+  20:46  0:00 grep --color=auto keep</span><br><span class="line">[root@yt-02 ~]# ps aux |grep nginx</span><br><span class="line">root      7199  0.0  0.2 122904  2108 ?        Ss  20:46  0:00 nginx: master process /usr/sbin/nginx</span><br><span class="line">nginx    7200  0.0  0.3 123368  3152 ?        S    20:46  0:00 nginx: worker process</span><br><span class="line">root      7232  0.0  0.0 112676  976 pts/0    S+  20:47  0:00 grep --color=auto nginx</span><br></pre></td></tr></table></figure>
+
+<h4 id="停掉keepalived，测试是否会重新加载-1"><a href="#停掉keepalived，测试是否会重新加载-1" class="headerlink" title="停掉keepalived，测试是否会重新加载"></a>停掉keepalived，测试是否会重新加载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-02 ~]# systemctl stop nginx</span><br><span class="line">[root@yt-02 ~]# ps aux |grep nginx</span><br><span class="line">root      7413  0.0  0.2 122904  2108 ?        Ss  20:48  0:00 nginx: master process /usr/sbin/nginx</span><br><span class="line">nginx    7414  0.0  0.3 123368  3152 ?        S    20:48  0:00 nginx: worker process</span><br><span class="line">root      7485  0.0  0.0 112676  972 pts/0    S+  20:48  0:00 grep --color=auto nginx</span><br><span class="line">还是会再加载</span><br><span class="line"></span><br><span class="line">[root@yt-02 ~]# ifconfig -a  ##查看不到VIP</span><br><span class="line">ens33: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 192.168.2.183  netmask 255.255.255.0  broadcast 192.168.2.255</span><br><span class="line">        inet6 fe80::62d6:aa12:bb83:d01a  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:0c:29:0d:54:47  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 16098  bytes 18728112 (17.8 MiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 4869  bytes 499007 (487.3 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</span><br><span class="line">        loop  txqueuelen 1  (Local Loopback)</span><br><span class="line">        RX packets 16  bytes 1360 (1.3 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 16  bytes 1360 (1.3 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">[root@yt-02 ~]# ip add        ##查看到的到VIP  xxx/32</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN qlen 1</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000</span><br><span class="line">    link/ether 00:0c:29:0d:54:47 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.2.183/24 brd 192.168.2.255 scope global ens33</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet 192.168.2.100/32 scope global ens33</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::62d6:aa12:bb83:d01a/64 scope link </span><br><span class="line">      valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
+
+<h3 id="怎么区分主从上的nginx"><a href="#怎么区分主从上的nginx" class="headerlink" title="怎么区分主从上的nginx"></a>怎么区分主从上的nginx</h3><p>更改nginx默认主页的文件内容，比如：主上改成This is Master，从上改成This is backup。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nginx默认主页的文件地址</span><br><span class="line">主上：更改 /data/wwwroot/default/index.html 文件  （编译安装）</span><br><span class="line">                  如果找不到，就去/usr/local/nginx/html/index.html</span><br><span class="line">从上：/usr/share/nginx/html/index.html 文件            （yum安装）</span><br></pre></td></tr></table></figure>
+
+<p>主：</p>
+<p>从：</p>
+<p>VIP：</p>
+<h3 id="测试高可用"><a href="#测试高可用" class="headerlink" title="测试高可用"></a>测试高可用</h3><p>先确定好两台机器上nginx差异，比如可以通过curl -I 来查看nginx版本，通过浏览器访问各个IP测试。</p>
 <ul>
-<li>du -sh是查询文件占用磁盘空间的大小</li>
-<li>ls -sh 是文件实际的大小</li>
-</ul>
-<h1 id="4-3-4-4-磁盘分区"><a href="#4-3-4-4-磁盘分区" class="headerlink" title="4.3/4.4 磁盘分区"></a>4.3/4.4 磁盘分区</h1><h2 id="1-fdisk命令"><a href="#1-fdisk命令" class="headerlink" title="1. fdisk命令"></a>1. fdisk命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line">查看所有磁盘的分区状况</span><br><span class="line"></span><br><span class="line">fdisk /dev/sdb    \\给小于2T的硬盘分区</span><br><span class="line">p 打印分区表</span><br><span class="line">n 新增一个分区</span><br><span class="line">w 保存</span><br><span class="line">q 退出</span><br><span class="line">d 删除分区</span><br><span class="line"></span><br><span class="line">关于分区</span><br><span class="line">- 主分区：一块物理硬盘上可以被独立使用的一部分，一个硬盘最多可以有4个主分区。</span><br><span class="line">- 扩展分区：为了突破一个物理硬盘只能有4个分区的限制，引入了扩展分区。扩展分区和主分区的地位相当，但是扩展分区本身不能被直接使用，然而可以被继续划分成多个逻辑分区。</span><br><span class="line">- 逻辑分区：逻辑分区可以有任意多个，但是不能独立存在，多个连续的逻辑分区可做为一个扩展分区。一个硬盘只能有一个扩展分区。</span><br><span class="line"></span><br><span class="line">  e扩展分区  逻辑分区是从扩展分区分出来的</span><br><span class="line">  p主分区    p+e不大于4</span><br><span class="line"></span><br><span class="line">- 关于分区号</span><br><span class="line">1-4是主分区和扩展分区，5和以后是逻辑分区</span><br><span class="line"></span><br><span class="line">- 主分区可以分零个</span><br><span class="line">- 扩展分区只能分一个</span><br><span class="line">- 逻辑分区的序列号一定从5开始，而主分区和扩展分区随意1-4</span><br><span class="line"></span><br><span class="line">**parted命令 是专门给大于2T的硬盘分区的**</span><br></pre></td></tr></table></figure>
-
-<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><h2 id="parted分区GPT"><a href="#parted分区GPT" class="headerlink" title="parted分区GPT"></a>parted分区GPT</h2><p>[<a href="http://ask.apelearn.com/question/7243]" target="_blank" rel="noopener">http://ask.apelearn.com/question/7243]</a><br>fdisk分区工具，它的分区格式为MBR，特点是，最多分4个主分区，磁盘大小不能超过2T。而GPT分区格式，突破了这些限制，它没有主分区、扩展分区、逻辑分区之分，在一块磁盘上最多可以分128个分区出来，支持大于2T的分区，最大卷可达18EB。 相信，随着存储级别的升级，将来的分区格式逐渐会淘汰MBR，而GPT成为主流。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/5.1 - 5.4 Vim命令入门01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhouqun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joking的Linux世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux入门笔记/5.1 - 5.4 Vim命令入门01/" itemprop="url">5.1 - 5.4 Vim命令入门01</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">linux入门笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="5-1-vim介绍"><a href="#5-1-vim介绍" class="headerlink" title="5.1 vim介绍"></a>5.1 vim介绍</h1><h2 id="vi-和-vim-的区别"><a href="#vi-和-vim-的区别" class="headerlink" title="vi 和 vim 的区别"></a>vi 和 vim 的区别</h2><p>vi 是早期版本，vim是后来改进版本。直观的是，vim编辑文件可以显示不同颜色，一般电脑都有vi，而vim有的没有，需要安装。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install vim-enhanced</span><br><span class="line">安装vim包的命令</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-vim和vi的一些用法"><a href="#2-vim和vi的一些用法" class="headerlink" title="2. vim和vi的一些用法"></a>2. vim和vi的一些用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim 1.txt</span><br><span class="line">vim /etc/init.d/iptables</span><br><span class="line">vi !$      \\在这里，!$=/etc/init.d/iptables.表示上一条命令中，</span><br><span class="line">如果有空格隔开的命令，那么!$可以代指它。</span><br><span class="line">vim +10 !$ \\打开/etc/init.d/iptables文件的第十行。</span><br></pre></td></tr></table></figure>
-
-<h1 id="5-2-vim颜色显示和移动光标"><a href="#5-2-vim颜色显示和移动光标" class="headerlink" title="5.2 vim颜色显示和移动光标"></a>5.2 vim颜色显示和移动光标</h1><h2 id="1-vim颜色显示配置文件"><a href="#1-vim颜色显示配置文件" class="headerlink" title="1. vim颜色显示配置文件"></a>1. vim颜色显示配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vimrc 的存放位置： </span><br><span class="line">系统 vimrc 文件: &quot;$VIM/vimrc&quot; </span><br><span class="line">用户 vimrc 文件: &quot;$HOME/.vimrc&quot; </span><br><span class="line">用户 exrc 文件: &quot;$HOME/.exrc&quot; </span><br><span class="line">系统 gvimrc 文件: &quot;$VIM/gvimrc&quot; </span><br><span class="line">用户 gvimrc 文件: &quot;$HOME/.gvimrc&quot; </span><br><span class="line">系统菜单文件: &quot;$VIMRUNTIME/menu.vim&quot; </span><br><span class="line">$VIM 预设值: &quot;/usr/share/vim&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-vim的3种模式"><a href="#2-vim的3种模式" class="headerlink" title="2. vim的3种模式"></a>2. vim的3种模式</h2><ul>
-<li>一般模式  <strong>光标移动  复制  粘贴  剪切</strong></li>
-<li>编辑模式  <strong>输入字母</strong></li>
-<li>命令模式  <strong>使用命令</strong></li>
-</ul>
-<h1 id="5-3-vim一般模式下移动光标"><a href="#5-3-vim一般模式下移动光标" class="headerlink" title="5.3 vim一般模式下移动光标"></a>5.3 vim一般模式下移动光标</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">j  光标向下</span><br><span class="line">k 光标向上</span><br><span class="line">h 光标左移</span><br><span class="line">l  光标右移</span><br><span class="line">Ctrl+b 或者 Pageup      页面内容上翻一页</span><br><span class="line">Ctrl+f 或者 Pagedown 页面内容下翻一页</span><br><span class="line">gg 光标移到首行</span><br><span class="line">G  光标移到尾行</span><br><span class="line">0或者shift+6  光标移动到本行行首</span><br><span class="line">shift+4          光标移动到本行行尾</span><br><span class="line">nG（n是任意一个数字）  光标移动到第n行</span><br></pre></td></tr></table></figure>
-
-<h1 id="5-4-vim一般模式下复制、剪切和粘贴"><a href="#5-4-vim一般模式下复制、剪切和粘贴" class="headerlink" title="5.4 vim一般模式下复制、剪切和粘贴"></a>5.4 vim一般模式下复制、剪切和粘贴</h1><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>x</td>
-<td>向后删除一个字符</td>
-</tr>
-<tr>
-<td>X</td>
-<td>向前删除一个字符</td>
-</tr>
-<tr>
-<td>dd</td>
-<td>剪切光标所在的那一行</td>
-</tr>
-<tr>
-<td>ndd</td>
-<td>剪切光标所在的那一行以及向下行一起的n行</td>
-</tr>
-<tr>
-<td>p</td>
-<td>粘贴到光标所在行的下一行</td>
-</tr>
-<tr>
-<td>P</td>
-<td>粘贴到光标所在行的上一行</td>
-</tr>
-<tr>
-<td>u</td>
-<td>还原上一步操作（最多50步）</td>
-</tr>
-<tr>
-<td>Ctrl+r</td>
-<td>反撤销</td>
-</tr>
-<tr>
-<td>yy</td>
-<td>复制光标所在行</td>
-</tr>
-<tr>
-<td>nyy</td>
-<td>复制光标所在的那一行以及向下行一起的n行</td>
-</tr>
-<tr>
-<td>v</td>
-<td>按v后移动光标会选中指定字符，然后可以复制、粘贴等</td>
-</tr>
-</tbody></table>
-<h1 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h1><h2 id="1-出错题目"><a href="#1-出错题目" class="headerlink" title="1. 出错题目"></a>1. 出错题目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. vim一般模式下，如何快速删除某些字符串（这些字符串并非为一整行）？ (错误答案 B)</span><br><span class="line">A 先按v（小写）进入可选模式，然后移动光标选择要删除的字符串，选好后按x</span><br><span class="line">B 先按v进入可选模式，然后移动光标选择要删除的字符串，选好后按dd</span><br><span class="line">C 先按V（大写）进入可选模式，然后移动光标选择要删除的字符串，选好后按x</span><br><span class="line">D 先按V进入可选模式，然后移动光标选择要删除的字符串，选好后按dd</span><br><span class="line">正确答案: A</span><br><span class="line"></span><br><span class="line">因为dd是指删除/剪切一整行，而选中的字符删除需要用x/X。</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-实操练习题"><a href="#2-实操练习题" class="headerlink" title="2. 实操练习题"></a>2. 实操练习题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/dnsmasq.conf  /tmp/1.txt</span><br><span class="line"></span><br><span class="line">(1) 分别向下、向右、向左、向上移动6个字符（6j 6l 6h 6k）。</span><br><span class="line">(2) 分别向下、向上翻两页（分别按两次ctrl+f和ctrl+b）。</span><br><span class="line">(3) 把光标移动到第49行（49G）。</span><br><span class="line">(4) 把光标移动到行尾，再移动到行首（Shift+4, Shift+6）。</span><br><span class="line">(5) 移动到1.txt文件的最后一行（G）。</span><br><span class="line">(6) 移动到文件的首行（gg）。</span><br><span class="line">(7) 搜索文件中出现的“dnsmasq”，并数一下该字符串出现的次数（/dnsmsq 然后按n）。</span><br><span class="line">(8) 把从第1行到第10行出现的dnsmasq替换成dns（:1,10s/dnsmasq/dns/g）。</span><br><span class="line">(9) 还原上一步操作（u）。</span><br><span class="line">(10) 把整个文件中所有的etc替换成cte（:1,$s/etc/cte/g）。</span><br><span class="line">(11) 把光标移动到第25行，删除字符串 “ly”（25G 然后按j向右移动光标找到&quot;ly&quot;，按v选中，然后按x）。</span><br><span class="line">(12) 还原上一步操作（u）。</span><br><span class="line">(13) 删除第50行（50G dd）。</span><br><span class="line">(14) 还原上一步操作（u）。</span><br><span class="line">(15) 删除第37-42行的所有内容（37G 6dd）。</span><br><span class="line">(16) 还原上一步操作（u）。</span><br><span class="line">(17) 复制第48行的内容并粘贴到第52行下面（48G yy 52G p）。</span><br><span class="line">(18) 还原上一步操作（u）。</span><br><span class="line">(19) 复制第37-42行的内容并粘贴到第44行上面（37G 6yy 44G P）。</span><br><span class="line">(20) 还原上一步操作（按u）。</span><br><span class="line">(21) 把第37-42行的内容移动到第19行下面（37G 6dd 19G p）。</span><br><span class="line">(22) 还原上一步操作（按u）。</span><br><span class="line">(23) 把光标移动到首行，把第1行内容改为“#!/bin/bash”</span><br><span class="line">（先按gg，把光标定位到第1行，然后按字母A，进入编辑模式，</span><br><span class="line">同时&gt;光标到行末尾，进行修改操作，完成后按ESC）。</span><br><span class="line">(24) 在第1行下面插入新的一行，并输入“# Hello!”</span><br><span class="line">（按o进入编辑模式，同时光标向下另起一行，输入“# Hello!”）。</span><br><span class="line">(25) 保存文档并退出（按Esc键，输入“:wq”）。</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/3.7 -3.9 su和sudo用户切换/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhouqun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joking的Linux世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux入门笔记/3.7 -3.9 su和sudo用户切换/" itemprop="url">3.7 -3.9 su和sudo用户切换</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">linux入门笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="3-7-su命令"><a href="#3-7-su命令" class="headerlink" title="3.7 su命令"></a>3.7 su命令</h1><p>su 命令就是切换用户的工具</p>
-<h2 id="1-su-命令的用法"><a href="#1-su-命令的用法" class="headerlink" title="1. su 命令的用法"></a>1. su 命令的用法</h2><p><code>su</code>+ [参数]  [用户名]</p>
-<p><code>-；-l</code> 登录并改变到所切换的用户环境</p>
-<p><code>-c</code>  执行一个命令，然后退出所切换到的用户环境</p>
-<h2 id="2-su-命令的范例"><a href="#2-su-命令的范例" class="headerlink" title="2. su 命令的范例"></a>2. su 命令的范例</h2><p>su 在不加任何参数，默认为切换到root用户，但没有转到root用户家目录下，也就是说这时虽然是切换为root用户了，但并没有改变root登录环境；用户默认的登录环境，可以在/etc/passwd 中查得到，包括家目录，SHELL定义等</p>
-<h1 id="3-8-sudo命令"><a href="#3-8-sudo命令" class="headerlink" title="3.8 sudo命令"></a>3.8 sudo命令</h1><h2 id="1-sudo的使用范围"><a href="#1-sudo的使用范围" class="headerlink" title="1. sudo的使用范围"></a>1. sudo的使用范围</h2><p>sudo 执行命令的流程是当前用户切换到root（或其它指定切换到的用户），然后以root（或其它指定的切换到的用户）身份执行命令，执行完成后，直接退回到当前用户；而这些的前提是要通过sudo的配置文件/etc/sudoers来进行授权；<strong>但是不直接vi编辑，因为系统不能识别语法错误，所以我们使用visudo命令。</strong>为了更好的审计各个用户。</p>
-<h2 id="2-sudo的配置文件"><a href="#2-sudo的配置文件" class="headerlink" title="2. sudo的配置文件"></a>2. sudo的配置文件</h2><p>sudo的配置文件/etc/sudoers，但是不直接vi编辑，我们使用使用visudo命令（需要root权限才能使用），因为系统可以通过visudo命令来识别修改后配置文件的语法错误。</p>
-<p><strong>为什么需要使用sodo而不直接使用root直接登录了？</strong><br>是为了更好的审计各个用户的使用历史，最大限度的规范行为和杜绝二次发生。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# visudo</span><br><span class="line">## Sudoers allows particular users to run various commands as  </span><br><span class="line">## the root user, without needing the root password.  </span><br><span class="line">## 该文件允许特定用户像root用户一样使用各种各样的命令，而不需要root用户的密码  </span><br><span class="line">##  </span><br><span class="line">## Examples are provided at the bottom of the file for collections  </span><br><span class="line">## of related commands, which can then be delegated out to particular  </span><br><span class="line">## users or groups.  </span><br><span class="line">## 在文件的底部提供了很多相关命令的示例以供选择，这些示例都可以被特定用户或  </span><br><span class="line">## 用户组所使用  </span><br><span class="line">##  </span><br><span class="line">## This file must be edited with the &apos;visudo&apos; command.  </span><br><span class="line">## 该文件必须使用&quot;visudo&quot;命令编辑  </span><br><span class="line">  </span><br><span class="line">## Host Aliases  </span><br><span class="line">## Groups of machines. You may prefer to use hostnames (perhaps using  </span><br><span class="line">## wildcards for entire domains) or IP addresses instead.  </span><br><span class="line">## 对于一组服务器，你可能会更喜欢使用主机名（可能是全域名的通配符）、或IP地址，这时可以配置主机别名  </span><br><span class="line"># Host_Alias    FILESERVERS = fs1, fs2  </span><br><span class="line"># Host_Alias    MAILSERVERS = smtp, smtp2  </span><br><span class="line">  </span><br><span class="line">## User Aliases  </span><br><span class="line">## These aren&apos;t often necessary, as you can use regular groups  </span><br><span class="line">## (ie, from files, LDAP, NIS, etc) in this file - just use %groupname  </span><br><span class="line">## rather than USERALIAS  </span><br><span class="line">## 这并不很常用，因为你可以通过使用组来代替一组用户的别名  </span><br><span class="line"># User_Alias ADMINS = jsmith, mikem  </span><br><span class="line">  </span><br><span class="line">## Command Aliases  </span><br><span class="line">## These are groups of related commands...  </span><br><span class="line">## 指定一系列相互关联的命令（当然可以是一个）的别名，通过赋予该别名sudo权限，  </span><br><span class="line">## 可以通过sudo调用所有别名包含的命令，下面是一些示例  </span><br><span class="line">  </span><br><span class="line">## Networking 网络操作相关命令别名  </span><br><span class="line"># Cmnd_Alias NETWORKING = /sbin/route, /sbin/ifconfig, /bin/ping, /sbin/dhclient  </span><br><span class="line">, /usr/bin/net, /sbin/iptables, /usr/bin/rfcomm, /usr/bin/wvdial, /sbin/iwconfig  </span><br><span class="line">, /sbin/mii-tool  </span><br><span class="line">  </span><br><span class="line">## Installation and management of software 软件安装管理相关命令别名  </span><br><span class="line"># Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum  </span><br><span class="line">  </span><br><span class="line">## Services 服务相关命令别名  </span><br><span class="line"># Cmnd_Alias SERVICES = /sbin/service, /sbin/chkconfig  </span><br><span class="line">  </span><br><span class="line">## Updating the locate database 本地数据库升级命令别名  </span><br><span class="line"># Cmnd_Alias LOCATE = /usr/bin/updatedb  </span><br><span class="line">  </span><br><span class="line">## Storage 磁盘操作相关命令别名  </span><br><span class="line"># Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe  </span><br><span class="line">, /bin/mount, /bin/umount  </span><br><span class="line">  </span><br><span class="line">## Delegating permissions 代理权限相关命令别名  </span><br><span class="line"># Cmnd_Alias DELEGATING = /usr/sbin/visudo, /bin/chown, /bin/chmod, /bin/chgrp  </span><br><span class="line">  </span><br><span class="line">## Processes 进程相关命令别名  </span><br><span class="line"># Cmnd_Alias PROCESSES = /bin/nice, /bin/kill, /usr/bin/kill, /usr/bin/killall  </span><br><span class="line">  </span><br><span class="line">## Drivers 驱动命令别名  </span><br><span class="line"># Cmnd_Alias DRIVERS = /sbin/modprobe  </span><br><span class="line">  </span><br><span class="line"># Defaults specification  </span><br><span class="line">  </span><br><span class="line">#  </span><br><span class="line"># Disable &quot;ssh hostname sudo &lt;cmd&gt;&quot;, because it will show the password in clear.  </span><br><span class="line">#        You have to run &quot;ssh -t hostname sudo &lt;cmd&gt;&quot;.  </span><br><span class="line"># 一些环境变量的相关配置，具体情况可见man soduers  </span><br><span class="line">Defaults    requiretty  </span><br><span class="line">  </span><br><span class="line">Defaults    env_reset  </span><br><span class="line">Defaults    env_keep =  &quot;COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS&quot;  </span><br><span class="line">Defaults    env_keep += &quot;MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE&quot;  </span><br><span class="line">Defaults    env_keep += &quot;LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES&quot;  </span><br><span class="line">Defaults    env_keep += &quot;LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE&quot;  </span><br><span class="line">Defaults    env_keep += &quot;LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY&quot;  </span><br><span class="line">  </span><br><span class="line">Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin  </span><br><span class="line">  </span><br><span class="line">## Next comes the main part: which users can run what software on  </span><br><span class="line">## which machines (the sudoers file can be shared between multiple  </span><br><span class="line">## systems).  </span><br><span class="line">## 下面是规则配置：什么用户在哪台服务器上可以执行哪些命令（sudoers文件可以在多个系统上共享）  </span><br><span class="line">## Syntax(语法):  </span><br><span class="line">##  </span><br><span class="line">##  user    MACHINE=COMMANDS 用户 登录的主机=（可以变换的身份） 可以执行的命令  </span><br><span class="line">##  </span><br><span class="line">## The COMMANDS section may have other options added to it.  </span><br><span class="line">## 命令部分可以附带一些其它的选项  </span><br><span class="line">##  </span><br><span class="line">## Allow root to run any commands anywhere  </span><br><span class="line">## 允许root用户执行任意路径下的任意命令  </span><br><span class="line">root    ALL=(ALL)  ALL  </span><br><span class="line">  </span><br><span class="line">## Allows members of the &apos;sys&apos; group to run networking, software,  </span><br><span class="line">## service management apps and more.  </span><br><span class="line">## 允许sys中户组中的用户使用NETWORKING等所有别名中配置的命令  </span><br><span class="line"># %sys ALL = NETWORKING, SOFTWARE, SERVICES, STORAGE, DELEGATING, PROCESSES, LOCATE  </span><br><span class="line">, DRIVERS  </span><br><span class="line">  </span><br><span class="line">## Allows people in group wheel to run all commands  </span><br><span class="line">## 允许wheel用户组中的用户执行所有命令  </span><br><span class="line">%wheel  ALL=(ALL)  ALL  </span><br><span class="line">  </span><br><span class="line">## Same thing without a password  </span><br><span class="line">## 允许wheel用户组中的用户在不输入该用户的密码的情况下使用所有命令  </span><br><span class="line"># %wheel    ALL=(ALL)  NOPASSWD: ALL  </span><br><span class="line">  </span><br><span class="line">## Allows members of the users group to mount and unmount the  </span><br><span class="line">## cdrom as root  </span><br><span class="line">## 允许users用户组中的用户像root用户一样使用mount、unmount、chrom命令  </span><br><span class="line"># %users  ALL=/sbin/mount /mnt/cdrom, /sbin/umount /mnt/cdrom  </span><br><span class="line">  </span><br><span class="line">## Allows members of the users group to shutdown this system  </span><br><span class="line">## 允许users用户组中的用户关闭localhost这台服务器  </span><br><span class="line"># %users  localhost=/sbin/shutdown -h now  </span><br><span class="line">  </span><br><span class="line">## Read drop-in files from /etc/sudoers.d (the # here does not mean a comment)  </span><br><span class="line">## 读取放置在/etc/sudoers.d/文件夹中的文件（此处的#不意味着这是一个声明）  </span><br><span class="line">#includedir /etc/sudoers.d</span><br></pre></td></tr></table></figure>
-
-<p>特别要注意的是==别名==一定要==使用大写==</p>
-<h1 id="3-9-限制root远程登录"><a href="#3-9-限制root远程登录" class="headerlink" title="3.9 限制root远程登录"></a>3.9 限制root远程登录</h1><h2 id="1-思路"><a href="#1-思路" class="headerlink" title="1. 思路"></a>1. 思路</h2><ul>
-<li>禁止root用户登录</li>
-<li>允许用户 aming user5 user6  使用 su - root</li>
-<li>root‘s passwd  xxxx 禁止登录</li>
-<li>普通用户使用 sudo su - root</li>
-</ul>
-<h2 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h2><ul>
-<li><p>配置/etc/ssh/sshd_config，使系统禁止root用户登录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br><span class="line">/Root  搜索Root</span><br><span class="line">#PermitRootLogin yes  允许Root远程登录，将此选项改为 no &gt;&gt;</span><br><span class="line">PermitRootLogin no  &gt;&gt;  ：wq</span><br><span class="line">systemctl restart sshd.service  重启服务</span><br></pre></td></tr></table></figure>
+<li><p>测试1：关闭master上的nginx服务<br>chkng脚本可以再次启动nginx的，我们上面测试过，无法关闭的</p>
 </li>
-<li><p>配置visudo，使普通用户可以临时用root权限使用sudo命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">visudo</span><br><span class="line">User_Alias AMINGS = aming, user5, user6</span><br><span class="line">AMINGS  ALL=(ALL)  NOPASSWD: /usr/bin/su</span><br><span class="line">:wq</span><br><span class="line">sudo su -</span><br><span class="line">whoami</span><br><span class="line">root</span><br></pre></td></tr></table></figure>
+<li><p>测试2：在master上增加iptabls规则 iptables -I OUTPUT -p vrrp -j DROP<br>用防火墙关闭vrrp协议，也不能让keepalived的主达到切换到从的目的。<br>我们还是恢复过来，iptables -F</p>
+</li>
+<li><p>测试3：关闭master上的keepalived服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# systemctl stop keepalived</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo su -  约等于  sudo -i </span><br><span class="line">sudo -s    完全等于  sudo  /bin/bash  约等于 sudo su </span><br><span class="line">sudo      终究被一个&quot;临时权限的帽子&quot;扣住，不能等价于纯粹的登录到系统里。</span><br></pre></td></tr></table></figure>
-
-<p><a href="www.opensource.apple.com/source/sudo/sudo-16/sudo/sample.sudoers">sudo配置文件样例</a>[<a href="http://www.opensource.apple.com/source/sudo/sudo-16/sudo/sample.sudoers]" target="_blank" rel="noopener">www.opensource.apple.com/source/sudo/sudo-16/sudo/sample.sudoers]</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/4.5 - 4.9 磁盘格式化与挂载/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhouqun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joking的Linux世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux入门笔记/4.5 - 4.9 磁盘格式化与挂载/" itemprop="url">4.5 - 4.9 磁盘格式化与挂载</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">linux入门笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="4-5-4-6-磁盘格式化"><a href="#4-5-4-6-磁盘格式化" class="headerlink" title="4.5/4.6 磁盘格式化"></a>4.5/4.6 磁盘格式化</h1><h2 id="1-mke2fs命令"><a href="#1-mke2fs命令" class="headerlink" title="1. mke2fs命令"></a>1. mke2fs命令</h2><p>被用于创建磁盘分区上文件系统（格式化）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mke2fs -t ext4 -b 2048 -m 1 -L yule /dev/sdb1</span><br><span class="line">-t 指定磁盘格式  mke2fs目前不支持xfs格式</span><br><span class="line">-b 指定块block大小，默认值是4K</span><br><span class="line">-m 指定给root保留区块的比例，默认值是5%</span><br><span class="line">-L 设定磁盘分区的卷标</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mke2fs -i 8192 -t ext4 /dev/sdb1</span><br><span class="line">-i 指定&quot;字节/inode&quot;的比例，最低至少一个块对应一个inode。</span><br><span class="line">默认大概是4个块对应一个inode，4个块=16K=16,384b；</span><br><span class="line">那么默认的&quot;字节/inode&quot;的比例是16384；</span><br><span class="line">将数字改小的话，inode数量就会变多，相反，改大的话，inode数量就会变少，最小值为4096。</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-格式化分区的一些注意事项"><a href="#2-格式化分区的一些注意事项" class="headerlink" title="2. 格式化分区的一些注意事项"></a>2. 格式化分区的一些注意事项</h2><ul>
-<li>新添加的磁盘分好区以后，不能直接使用，得先格式化  </li>
-<li>主分区和逻辑分区可以被格式化，扩展分区不能格式化。只能格式化扩展下面的逻辑分区。</li>
-<li>查看Linux系统支持的磁盘文件系统格式的配置文件<br><code>cat /etc/filesystems</code></li>
-<li>查看一个分区的文件系统是什么<br><code>mount</code>后，查看<code>dev/</code>开头的文件全名就可以知道了，如 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/mapper/cl-root on / type xfs (rw,relatime,attr2,inode64,noquota)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="3-如何格式化新的磁盘分区"><a href="#3-如何格式化新的磁盘分区" class="headerlink" title="3. 如何格式化新的磁盘分区"></a>3. 如何格式化新的磁盘分区</h2><h3 id="3-1-创建新的分区"><a href="#3-1-创建新的分区" class="headerlink" title="3.1. 创建新的分区"></a>3.1. 创建新的分区</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sdb</span><br><span class="line">n</span><br><span class="line">p</span><br><span class="line">+3G</span><br><span class="line">w</span><br><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-格式化分区（2种方法）"><a href="#3-2-格式化分区（2种方法）" class="headerlink" title="3.2. 格式化分区（2种方法）"></a>3.2. 格式化分区（2种方法）</h3><ul>
-<li><p>用mkfs命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkfs -t ext4 /dev/sdb5</span><br><span class="line">将磁盘分区sdb5格式化为ext4格式分区，默认会给root用户预留原有的2%的空间</span><br><span class="line">在centos7中，如果想把分区格式化位xfs格式，只有使用mkfs.xfs或mkfs -t /dev/sdb5</span><br><span class="line">mke2fs默认不支持格式化为xfs格式</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>用mke2fs命令 (mke2fs是mkfs命令的进化版本，功能更加丰富)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mke2fs -t ext4 -b 2048 -m 1 -L game /dev/sdb1</span><br><span class="line">将分区sdb1格式化为ext4文件系统，块大小设为2048b，预留1%空间其中给root用户，并将磁盘命名位 game</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="3-3-mkfs补充"><a href="#3-3-mkfs补充" class="headerlink" title="3.3 mkfs补充"></a>3.3 mkfs补充</h3><blockquote>
-<p>mkfs  mkfs.cramfs  mkfs.ext2  mkfs.ext3  mkfs.ext4  mkfs.ext4dev  mkfs.msdos  mkfs.vfat mkfs.xfs</p>
-</blockquote>
-<p>这里面<br>mkfs -t ext4 == mkfs.ext4<br>mkfs -t ext3 == mkfs.ext3<br>所以，直接可以用 mkfs.ext4命令 来代替 mkfs -t ext4</p>
-<h2 id="4-blkid命令"><a href="#4-blkid命令" class="headerlink" title="4. blkid命令"></a>4. blkid命令</h2><p>主要用来对系统的块设备（包括交换分区）所使用的文件系统类型、LABEL、UUID等信息进行查询。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# blkid /dev/sdb1</span><br><span class="line">/dev/sdb1: UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot; TYPE=&quot;xfs&quot;</span><br><span class="line">可以用来查看为挂载分区的文件类型</span><br><span class="line"></span><br><span class="line">[root@zhouqunic-01 ~]# blkid</span><br><span class="line">/dev/sdb1: UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot; TYPE=&quot;xfs&quot; </span><br><span class="line">/dev/sdb3: UUID=&quot;a17dcca1-6da1-42f1-b955-caacc22bb1fc&quot; TYPE=&quot;ext4&quot; </span><br><span class="line">/dev/sda1: UUID=&quot;0ae79bcd-e732-46fc-9213-6118c491a714&quot; TYPE=&quot;xfs&quot; </span><br><span class="line">/dev/sda2: UUID=&quot;AwDLCG-5vsY-OMmL-XeKE-RNEr-y12K-styMJV&quot; TYPE=&quot;LVM2_member&quot; </span><br><span class="line">/dev/sr0: UUID=&quot;2016-12-05-13-55-45-00&quot; LABEL=&quot;CentOS 7 x86_64&quot; TYPE=&quot;iso9660&quot; PTTYPE=&quot;dos&quot; </span><br><span class="line">/dev/mapper/cl-root: UUID=&quot;120c5b93-2bee-4af8-9868-140e9de6f281&quot; TYPE=&quot;xfs&quot; </span><br><span class="line">/dev/mapper/cl-swap: UUID=&quot;49d49d46-b6c2-4a1c-925a-a8e68bdc79b2&quot; TYPE=&quot;swap&quot; </span><br><span class="line">列出当前系统中所有文件系统的类型</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-7-4-8-磁盘挂载"><a href="#4-7-4-8-磁盘挂载" class="headerlink" title="4.7/4.8 磁盘挂载"></a>4.7/4.8 磁盘挂载</h1><h2 id="1-挂载"><a href="#1-挂载" class="headerlink" title="1. 挂载"></a>1. 挂载</h2><h3 id="1-1-路径-挂载"><a href="#1-1-路径-挂载" class="headerlink" title="1.1 路径 挂载"></a>1.1 路径 挂载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sdb5 /mnt/  /mnt/挂载点 </span><br><span class="line">df -T 查看磁盘类型</span><br><span class="line">df -h 查看磁盘信息</span><br></pre></td></tr></table></figure>
-
+<p>访问VIP成功切换到从上。</p>
 <ul>
-<li>不管有没有分区，都可以格式化，磁盘分完区以后，需要挂载 才能写文件进去</li>
-<li>一个挂载点只能给一个分区进行服务，</li>
-<li>假设有两个分区放在一个挂载点下，只能服务第二个分区,第二个会遮盖第一个，但是卸载掉第二个，第一个分区的数据就会出现</li>
-</ul>
-<h3 id="1-2-label卷标-UUID-挂载"><a href="#1-2-label卷标-UUID-挂载" class="headerlink" title="1.2 label卷标/UUID 挂载"></a>1.2 label卷标/UUID 挂载</h3><ul>
-<li>通过blkid来获得要挂载分区的UUID<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mount LABEL=aming /home/aming/123/</span><br><span class="line">mount UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot;  /mnt/</span><br><span class="line">umount /mnt/ 卸载  或者 umount /dev/dev1/</span><br><span class="line">umount -l  直接卸载(无需退出挂载点)</span><br></pre></td></tr></table></figure>
+<li>测试4：启动master上的keepalived服务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# systemctl start keepalived</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h2 id="2-mount命令"><a href="#2-mount命令" class="headerlink" title="2. mount命令"></a>2. mount命令</h2><p>用于加载文件系统到指定的加载点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mount [-t vfstype(ext4,ntfs...)] [-o options(rw,ro...)] device dir</span><br><span class="line">-l 无需退出卸出挂载  </span><br><span class="line">  remount 重新挂载</span><br><span class="line"></span><br><span class="line">mount -o remount,rw /dev/foo /dir 重新挂载      </span><br><span class="line"></span><br><span class="line">umount（卸载）磁盘分区</span><br></pre></td></tr></table></figure>
+<p>VIP马上有调到了主上面，这些过程，都可以在/var/log/messages日志里面看到。</p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="高可用开源方案-Keepalived-VS-Heartbeat对比"><a href="#高可用开源方案-Keepalived-VS-Heartbeat对比" class="headerlink" title="高可用开源方案 Keepalived VS Heartbeat对比"></a>高可用开源方案 Keepalived VS Heartbeat对比</h3><p>出处：<a href="http://blog.csdn.net/yunhua_lee/article/details/9788433" target="_blank" rel="noopener">http://blog.csdn.net/yunhua_lee/article/details/9788433</a></p>
+<h3 id="DRBD工作原理和配置"><a href="#DRBD工作原理和配置" class="headerlink" title="DRBD工作原理和配置"></a>DRBD工作原理和配置</h3><p>出处：<a href="http://502245466.blog.51cto.com/7559397/1298945" target="_blank" rel="noopener">http://502245466.blog.51cto.com/7559397/1298945</a></p>
+<h3 id="mysql-keepalived"><a href="#mysql-keepalived" class="headerlink" title="mysql+keepalived"></a>mysql+keepalived</h3><p>出处：<a href="http://lizhenliang.blog.51cto.com/7876557/1362313" target="_blank" rel="noopener">http://lizhenliang.blog.51cto.com/7876557/1362313</a><br>环境描述：<br>OS：CentOS6.5_X64<br>MASTER：192.168.0.202<br>BACKUP：192.168.0.203<br>VIP：192.168.0.204<br>1、配置两台Mysql主主同步<br>[root@master ~]# yum install mysql-server mysql -y<br>[root@master ~]# service mysqld start<br>[root@master ~]# mysqladmin -u root password 123.com<br>[root@master ~]# vi /etc/my.cnf  #开启二进制日志，设置id<br>[mysqld]<br>server-id = 1                    #backup这台设置2<br>log-bin = mysql-bin<br>binlog-ignore-db = mysql,information_schema       #忽略写入binlog日志的库<br>auto-increment-increment = 2             #字段变化增量值<br>auto-increment-offset = 1              #初始字段ID为1<br>slave-skip-errors = all                       #忽略所有复制产生的错误<br>[root@master ~]# service mysqld restart</p>
+<p>#先查看下log bin日志和pos值位置<br>wKiom1MJYSngwysqAADkFn9zcK8686.jpg<br>master配置如下：<br>[root@ master ~]# mysql -u root -p123.com<br>mysql&gt; GRANT  REPLICATION SLAVE ON <em>.</em> TO ‘replication’@’192.168.0.%’ IDENTIFIED  BY ‘replication’;<br>mysql&gt; flush  privileges;<br>mysql&gt; change  master to<br>    -&gt;  master_host=’192.168.0.203’,<br>    -&gt;  master_user=’replication’,<br>    -&gt;  master_password=’replication’,<br>    -&gt;  master_log_file=’mysql-bin.000002’,<br>    -&gt;  master_log_pos=106;  #对端状态显示的值<br>mysql&gt; start  slave;         #启动同步<br>backup配置如下：<br>[root@backup ~]#  mysql -u root -p123.com<br>mysql&gt; GRANT  REPLICATION SLAVE ON <em>.</em> TO ‘replication’@’192.168.0.%’ IDENTIFIED  BY ‘replication’;<br>mysql&gt; flush  privileges;<br>mysql&gt; change  master to<br>    -&gt;  master_host=’192.168.0.202’,<br>    -&gt;  master_user=’replication’,<br>    -&gt;  master_password=’replication’,<br>    -&gt;  master_log_file=’mysql-bin.000002’,<br>    -&gt;  master_log_pos=106;<br>mysql&gt; start  slave;</p>
+<p>#主主同步配置完毕，查看同步状态Slave_IO和Slave_SQL是YES说明主主同步成功。<br>wKioL1MJYQ7QfZfXAAGQt0H1o1c742.jpg<br>在master插入数据测试下：<br>wKiom1MJYUCC0nlQAAEk4ruZ3ys652.jpg<br>在backup查看是否同步成功：<br>wKioL1MJYXyyChXUAADPZraUk3Y684.jpg<br>可以看到已经成功同步过去，同样在backup插入到user表数据，一样同步过去，双主就做成功了。<br>2、配置keepalived实现热备<br>[root@backup ~]# yum install -y pcre-devel openssl-devel popt-devel #安装依赖包<br>[root@master ~]# wget <a href="http://www.keepalived.org/software/keepalived-1.2.7.tar.gz" target="_blank" rel="noopener">http://www.keepalived.org/software/keepalived-1.2.7.tar.gz</a><br>[root@master ~]# tar zxvf keepalived-1.2.7.tar.gz<br>[root@master ~]# cd keepalived-1.2.7<br>[root@master ~]#./configure –prefix=/usr/local/keepalived<br>make &amp;&amp; make install</p>
+<p>#将keepalived配置成系统服务<br>[root@master ~]# cp /usr/local/keepalived/etc/rc.d/init.d/keepalived /etc/init.d/<br>[root@master ~]# cp /usr/local/keepalived/etc/sysconfig/keepalived /etc/sysconfig/<br>[root@master ~]# mkdir /etc/keepalived/<br>[root@master ~]# cp /usr/local/keepalived/etc/keepalived/keepalived.conf /etc/keepalived/<br>[root@master ~]# cp /usr/local/keepalived/sbin/keepalived /usr/sbin/<br>[root@master ~]# vi /etc/keepalived/keepalived.conf<br>! Configuration File forkeepalived<br>global_defs {<br>notification_email {<br><a href="mailto:test@sina.com" target="_blank" rel="noopener">test@sina.com</a><br> }<br>notification_email_from  <a href="mailto:admin@test.com" target="_blank" rel="noopener">admin@test.com</a><br>smtp_server 127.0.0.1<br>smtp_connect_timeout 30<br>router_id MYSQL_HA      #标识，双主相同<br> }<br>vrrp_instance VI_1 {<br> state BACKUP           #两台都设置BACKUP<br> interface eth0<br> virtual_router_id 51       #主备相同<br> priority 100           #优先级，backup设置90<br> advert_int 1<br> nopreempt             #不主动抢占资源，只在master这台优先级高的设置，backup不设置<br> authentication {<br> auth_type PASS<br> auth_pass 1111<br> }<br> virtual_ipaddress {<br> 192.168.0.204<br> }<br>}<br>virtual_server 192.168.0.204 3306 {<br> delay_loop 2</p>
+<p> #lb_algo rr              #LVS算法，用不到，我们就关闭了</p>
+<p> #lb_kind DR              #LVS模式，如果不关闭，备用服务器不能通过VIP连接主MySQL<br> persistence_timeout 50  #同一IP的连接60秒内被分配到同一台真实服务器<br> protocol TCP<br> real_server 192.168.0.202 3306 {   #检测本地mysql，backup也要写检测本地mysql<br> weight 3<br> notify_down /usr/local/keepalived/mysql.sh    #当mysq服down时，执行此脚本，杀死keepalived实现切换<br> TCP_CHECK {<br> connect_timeout 3    #连接超时<br> nb_get_retry 3       #重试次数<br> delay_before_retry 3 #重试间隔时间<br>  }<br>}<br>[root@master ~]# vi /usr/local/keepalived/mysql.sh</p>
+<p>#!/bin/bash<br>pkill keepalived<br>[root@master ~]# chmod +x /usr/local/keepalived/mysql.sh<br>[root@master ~]# /etc/init.d/keepalived start</p>
+<p>#backup服务器只修改priority为90、nopreempt不设置、real_server设置本地IP。</p>
+<p>#授权两台Mysql服务器允许root远程登录，用于在其他服务器登陆测试！<br>mysql&gt; grant all on <em>.</em> to’root’@’192.168.0.%’ identified by ‘123.com’;<br>mysql&gt; flush privileges;<br>3、测试高可用性<br>1、通过Mysql客户端通过VIP连接，看是否连接成功。<br>2、停止master这台mysql服务，是否能正常切换过去，可通过ip addr命令来查看VIP在哪台服务器上。<br>wKiom1MJYbCBORSGAAHChWpI93k009.jpg<br>3、可通过查看/var/log/messges日志，看出主备切换过程<br>4、master服务器故障恢复后，是否主动抢占资源，成为活动服务器。</p>
 
-<h2 id="3-etc-fstab配置文件"><a href="#3-etc-fstab配置文件" class="headerlink" title="3. /etc/fstab配置文件"></a>3. /etc/fstab配置文件</h2><p>fstab包含了开机需要挂载的设备，相应的挂载点，以及属性等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# cat /etc/fstab</span><br><span class="line">**6列分别表示：设备号，挂载点，分区格式，挂载选项，是否备份，设置优先级，</span><br><span class="line">（1，2要检测，1级别更高，0 不检测）**</span><br><span class="line">#</span><br><span class="line"># /etc/fstab</span><br><span class="line"># Created by anaconda on Fri May 26 06:46:23 2017</span><br><span class="line">#</span><br><span class="line"># Accessible filesystems, by reference, are maintained under &apos;/dev/disk&apos;</span><br><span class="line"># See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info</span><br><span class="line">#</span><br><span class="line">/dev/mapper/cl-root    /                      xfs    defaults        0 0</span><br><span class="line">UUID=0ae79bcd-e732-46fc-9213-6118c491a714 /boot                  xfs    defaults        0 0</span><br><span class="line">/dev/mapper/cl-swap    swap                    swap    defaults        0 0</span><br><span class="line">把分区挂载到挂载点 添加进去</span><br><span class="line">mount UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot;  /mnt/  xfs defaults  0 0</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-9-手动增加swap空间"><a href="#4-9-手动增加swap空间" class="headerlink" title="4.9 手动增加swap空间"></a>4.9 手动增加swap空间</h1><p>当某一个服务就是需要比较大的swap空间的时候，我们可以手动增加swap空间</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">首先弄一个模拟磁盘，在服务器的文件系统里模拟一个100M 的磁盘</span><br><span class="line">dd if=/dev/zero of=/tmp/newdisk bs=1M count=100</span><br><span class="line">&gt; dd 用于操作磁盘，可以写可以读  </span><br><span class="line">&gt; if 指定从哪里去读  </span><br><span class="line">&gt; /dev/zero 是Linux系统里面的一个造零器，可以产生无数的&quot;0&quot;  </span><br><span class="line">&gt; of 将/dev/zero 造出来的&quot;0&quot;，写到哪里去  </span><br><span class="line">&gt; bs 指定块的大小  </span><br><span class="line">&gt; count 计数，总共多少个块  </span><br><span class="line"></span><br><span class="line">创建虚拟磁盘以后，需要进行格式化  </span><br><span class="line">mkswap -f /tmp/newdisk</span><br><span class="line"></span><br><span class="line">格式化以后进行挂载</span><br><span class="line">swapon /tmp/newdisk</span><br><span class="line"></span><br><span class="line">执行命令之后会提示“权限不安全”。为了安全起见，建议使用0600的权限</span><br><span class="line">chmod 0600 /tmp/newdisk</span><br><span class="line"></span><br><span class="line">当使用完毕以后，卸载swap挂载</span><br><span class="line">swapoff /tmp/newdisk</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>free -m 可以查看 swap 的使用情况</li>
-</ul>
-<h1 id="拓展：LVM-学习"><a href="#拓展：LVM-学习" class="headerlink" title="拓展：LVM 学习"></a>拓展：LVM 学习</h1><blockquote>
-<p>LVM(Logical Volume Manager)逻辑卷管理，是一种将一个或多个硬盘的分区在逻辑上集合，<br>相当于一个大硬盘来使用，当硬盘的空间不够使用的时候，可以继续将其它的硬盘的<br>分区加入其中，这样可以事项一种磁盘空间的动态管理，相对于普通的磁盘分区有很<br>大的灵活性，使用普通的磁盘分区，当一个磁盘的分区空间不够使用的时候，可能就<br>会带来很大的麻烦。使用LVM在一定程度上就可以解决普通磁盘分区带来的问题。 </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">创建分区--更改类型t(8e)---创建物理卷--创建卷组</span><br><span class="line">  pvcreate /dev/sdb1 以此类推创建见三个物理卷</span><br><span class="line">  pvdisplay 查看LVM物理卷=pvs</span><br><span class="line">  vgcreate vg1 /dev/sdb(物理卷</span><br><span class="line">  vgcdisplay查看VM物理卷组=vgs</span><br><span class="line">  lvcreate -L 100M(指定大小） -n lv1(lvm）vg1(卷组） ##以此类推做LV2.LV3</span><br><span class="line">  mkfs.ext4 /dev/vh1/lv1 格式化lv1</span><br><span class="line">  mount /dev/vg1/lv1 /mnt  挂载到/mnt</span><br><span class="line"></span><br><span class="line">扩容逻辑卷</span><br><span class="line">  lvresize -L 300M /dev/vg1/lv1 重新设置卷大小</span><br><span class="line">  e2fsck -f /dev/vg1/lv1 检查磁盘错误(ext4执行）</span><br><span class="line">  resize2fs /dev/vg1/lv1 更新逻辑卷信息（ext4执行）</span><br><span class="line">  xfs_growfs /dev/vg1/lv1 xfs文件系统需要执行</span><br><span class="line"></span><br><span class="line">缩减逻辑卷（xfs不支持）</span><br><span class="line">  先卸载umount</span><br><span class="line">  e2fsck -f /dev/vg1/lv1 检查磁盘错误(ext)</span><br><span class="line">  resize2fs /dev/vg1/lv1 100M 更新逻辑卷信息（ext)</span><br><span class="line">  lvresize -L 100M /dev/vg1/lv1 更新设置卷大小 </span><br><span class="line">  </span><br><span class="line">扩展卷组</span><br><span class="line">  fdisk /dev/sdb 新增/dev/sdb5(辑分区8e) 2G</span><br><span class="line">  pvcreate /dev/sdb5</span><br><span class="line">  vgextend vg1 /dev/sdb5 创建物理卷</span><br><span class="line">  lvresize -L 100M /dev/vg1/lv1 重新设置卷大小</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1918,7 +1242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/3.1 - 3.3 用户文件及管理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/3.7 -3.9 su和sudo用户切换/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1937,7 +1261,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/3.1 - 3.3 用户文件及管理/" itemprop="url">2.1-2.2 系统目录结构</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/3.7 -3.9 su和sudo用户切换/" itemprop="url">3.7 -3.9 su和sudo用户切换</a></h1>
         
 
         <div class="post-meta">
@@ -2011,26 +1335,798 @@
       
         
           
-            <h1 id="1-根"><a href="#1-根" class="headerlink" title="1. / - 根"></a>1. / - 根</h1><p>每一个文件和目录从根目录开始。<br>只有root用户具有该目录下的写权限。请注意，/root是root用户的主目录，这与/.不一样</p>
-<h1 id="2-bin-用户二进制文件"><a href="#2-bin-用户二进制文件" class="headerlink" title="2. /bin - 用户二进制文件"></a>2. /bin - 用户二进制文件</h1><p>包含二进制可执行文件。<br>在单用户模式下，你需要使用的常见Linux命令都位于此目录下。系统的所有用户使用的命令都设在这里。<br>例如：ps、ls、ping、grep、cp</p>
-<h1 id="3-boot-引导加载程序文件"><a href="#3-boot-引导加载程序文件" class="headerlink" title="3. /boot - 引导加载程序文件"></a>3. /boot - 引导加载程序文件</h1><p>包含引导加载程序相关的文件。<br>内核的initrd、vmlinux、grub文件位于/boot下。<br>例如：initrd.img-2.6.32-24-generic、vmlinuz-2.6.32-24-generic</p>
-<h1 id="4-dev-设备文件"><a href="#4-dev-设备文件" class="headerlink" title="4. /dev - 设备文件"></a>4. /dev - 设备文件</h1><p>包含设备文件。<br>这些包括终端设备、USB或连接到系统的任何设备。例如：/dev/tty1、/dev/usbmon0</p>
-<h1 id="5-etc-配置文件"><a href="#5-etc-配置文件" class="headerlink" title="5. /etc - 配置文件"></a>5. /etc - 配置文件</h1><p>包含所有程序所需的配置文件。<br>也包含了用于启动/停止单个程序的启动和关闭shell脚本。例如：/etc/resolv.conf、/etc/logrotate.conf</p>
-<h1 id="6-home-HOME目录"><a href="#6-home-HOME目录" class="headerlink" title="6. /home - HOME目录"></a>6. /home - HOME目录</h1><p>所有用户用home目录来存储他们的个人档案。<br>例如：/home/john、/home/nikita</p>
-<h1 id="7-lib-和-lib64-系统库"><a href="#7-lib-和-lib64-系统库" class="headerlink" title="7./lib 和 /lib64 - 系统库"></a>7./lib 和 /lib64 - 系统库</h1><p>包含支持位于/bin和/sbin下的二进制文件的库文件.<br>库文件名为 ld<em>或lib</em>.so.*<br>例如：ld-2.11.1.so，libncurses.so.5.7</p>
-<h1 id="8-media-可移动媒体设备"><a href="#8-media-可移动媒体设备" class="headerlink" title="8. /media - 可移动媒体设备"></a>8. /media - 可移动媒体设备</h1><p>用于挂载可移动设备的临时目录。<br>举例来说，挂载CD-ROM的/media/cdrom，挂载软盘驱动器的/media/floppy</p>
-<h1 id="9-mnt-挂载目录"><a href="#9-mnt-挂载目录" class="headerlink" title="9. /mnt - 挂载目录"></a>9. /mnt - 挂载目录</h1><p>临时安装目录，系统管理员可以挂载文件系统</p>
-<h1 id="10-opt-可选的附加应用程序"><a href="#10-opt-可选的附加应用程序" class="headerlink" title="10. /opt - 可选的附加应用程序"></a>10. /opt - 可选的附加应用程序</h1><p>opt代表可选的。<br>包含从个别厂商的附加应用程序。<br>附加应用程序应该安装在/opt/或者/opt/的子目录下</p>
-<h1 id="11-proc-进程信息"><a href="#11-proc-进程信息" class="headerlink" title="11. /proc - 进程信息"></a>11. /proc - 进程信息</h1><p>包含系统进程的相关信息。<br>这是一个虚拟的文件系统，包含有关正在运行的进程的信息。例如：/proc/{pid}目录中包含的与特定pid相关的信息。<br>这是一个虚拟的文件系统，系统资源以文本信息形式存在。例如：/proc/uptime</p>
-<h1 id="12-root-系统数据"><a href="#12-root-系统数据" class="headerlink" title="12. /root - 系统数据"></a>12. /root - 系统数据</h1><p>root根用户目录。<br>包含root配置文件。</p>
-<h1 id="13-run-运行数据"><a href="#13-run-运行数据" class="headerlink" title="13. /run  运行数据"></a>13. /run  运行数据</h1><p>run代表运行。<br>包含运行时相关的数据。<br>例如，ssid.pid、syslogs.pid等相关数据</p>
-<h1 id="14-sbin-系统二进制文件"><a href="#14-sbin-系统二进制文件" class="headerlink" title="14. /sbin   系统二进制文件"></a>14. /sbin   系统二进制文件</h1><p>二进制文件 = 可执行文件。<br>在这个目录下的linux命令通常由系统管理员使用，对系统进行维护。<br>例如：iptables、reboot、fdisk、ifconfig、swapon命令</p>
-<h1 id="15-srv-服务数据"><a href="#15-srv-服务数据" class="headerlink" title="15. /srv   服务数据"></a>15. /srv   服务数据</h1><p>srv代表服务。<br>包含服务器特定服务相关的数据。<br>例如，/srv/cvs/包含cvs相关的数据。</p>
-<h1 id="16-sys-系统数据"><a href="#16-sys-系统数据" class="headerlink" title="16. /sys   系统数据"></a>16. /sys   系统数据</h1><p>sys代表系统。<br>包含系统进程数据文件。<br>例如，/sys/fs/包含文件、/sys/bus/包含总线等相关数据</p>
-<h1 id="17-tmp-临时文件"><a href="#17-tmp-临时文件" class="headerlink" title="17. /tmp   临时文件"></a>17. /tmp   临时文件</h1><p>包含系统和用户创建的临时文件。<br>      当系统重新启动时，这个目录下的文件都将被删除。</p>
-<h1 id="18-usr-用户程序"><a href="#18-usr-用户程序" class="headerlink" title="18. /usr   用户程序"></a>18. /usr   用户程序</h1><p>包含二进制文件、库文件、文档和二级程序的源代码。<br>/usr/bin中包含用户程序的二进制文件。如果你在/bin中找不到用户二进制文件，到/usr/bin目录看看。<br>例如：at、awk、cd、less、scp。<br>/usr/sbin中包含系统管理员的二进制文件。如果在/sbin/中找不到系统二进制文件，到/usr/sbin目录看看。<br>例如：atd、cron、sshd、useradd、userdel。<br>/usr/lib中包含了/usr/bin和/usr/sbin用到的库。<br>/usr/local中包含了从源安装的用户程序。</p>
-<h1 id="19-var-变量文件"><a href="#19-var-变量文件" class="headerlink" title="19. /var   变量文件"></a>19. /var   变量文件</h1><p>包含变量文件<br>这个目录下可以找到内容可能增长的文件。<br>例如：系统日志文件（/var/log）;包和数据库文件（/var/lib）；电子邮件（/var/mail）；打印队列（/var/spool）；锁文件（var/lock）；多次重新启动需要的临时文件（/var/tmp）</p>
+            <h1 id="3-7-su命令"><a href="#3-7-su命令" class="headerlink" title="3.7 su命令"></a>3.7 su命令</h1><p>su 命令就是切换用户的工具</p>
+<h2 id="1-su-命令的用法"><a href="#1-su-命令的用法" class="headerlink" title="1. su 命令的用法"></a>1. su 命令的用法</h2><p><code>su</code>+ [参数]  [用户名]</p>
+<p><code>-；-l</code> 登录并改变到所切换的用户环境</p>
+<p><code>-c</code>  执行一个命令，然后退出所切换到的用户环境</p>
+<h2 id="2-su-命令的范例"><a href="#2-su-命令的范例" class="headerlink" title="2. su 命令的范例"></a>2. su 命令的范例</h2><p>su 在不加任何参数，默认为切换到root用户，但没有转到root用户家目录下，也就是说这时虽然是切换为root用户了，但并没有改变root登录环境；用户默认的登录环境，可以在/etc/passwd 中查得到，包括家目录，SHELL定义等</p>
+<h1 id="3-8-sudo命令"><a href="#3-8-sudo命令" class="headerlink" title="3.8 sudo命令"></a>3.8 sudo命令</h1><h2 id="1-sudo的使用范围"><a href="#1-sudo的使用范围" class="headerlink" title="1. sudo的使用范围"></a>1. sudo的使用范围</h2><p>sudo 执行命令的流程是当前用户切换到root（或其它指定切换到的用户），然后以root（或其它指定的切换到的用户）身份执行命令，执行完成后，直接退回到当前用户；而这些的前提是要通过sudo的配置文件/etc/sudoers来进行授权；<strong>但是不直接vi编辑，因为系统不能识别语法错误，所以我们使用visudo命令。</strong>为了更好的审计各个用户。</p>
+<h2 id="2-sudo的配置文件"><a href="#2-sudo的配置文件" class="headerlink" title="2. sudo的配置文件"></a>2. sudo的配置文件</h2><p>sudo的配置文件/etc/sudoers，但是不直接vi编辑，我们使用使用visudo命令（需要root权限才能使用），因为系统可以通过visudo命令来识别修改后配置文件的语法错误。</p>
+<p><strong>为什么需要使用sodo而不直接使用root直接登录了？</strong><br>是为了更好的审计各个用户的使用历史，最大限度的规范行为和杜绝二次发生。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# visudo</span><br><span class="line">## Sudoers allows particular users to run various commands as  </span><br><span class="line">## the root user, without needing the root password.  </span><br><span class="line">## 该文件允许特定用户像root用户一样使用各种各样的命令，而不需要root用户的密码  </span><br><span class="line">##  </span><br><span class="line">## Examples are provided at the bottom of the file for collections  </span><br><span class="line">## of related commands, which can then be delegated out to particular  </span><br><span class="line">## users or groups.  </span><br><span class="line">## 在文件的底部提供了很多相关命令的示例以供选择，这些示例都可以被特定用户或  </span><br><span class="line">## 用户组所使用  </span><br><span class="line">##  </span><br><span class="line">## This file must be edited with the &apos;visudo&apos; command.  </span><br><span class="line">## 该文件必须使用&quot;visudo&quot;命令编辑  </span><br><span class="line">  </span><br><span class="line">## Host Aliases  </span><br><span class="line">## Groups of machines. You may prefer to use hostnames (perhaps using  </span><br><span class="line">## wildcards for entire domains) or IP addresses instead.  </span><br><span class="line">## 对于一组服务器，你可能会更喜欢使用主机名（可能是全域名的通配符）、或IP地址，这时可以配置主机别名  </span><br><span class="line"># Host_Alias    FILESERVERS = fs1, fs2  </span><br><span class="line"># Host_Alias    MAILSERVERS = smtp, smtp2  </span><br><span class="line">  </span><br><span class="line">## User Aliases  </span><br><span class="line">## These aren&apos;t often necessary, as you can use regular groups  </span><br><span class="line">## (ie, from files, LDAP, NIS, etc) in this file - just use %groupname  </span><br><span class="line">## rather than USERALIAS  </span><br><span class="line">## 这并不很常用，因为你可以通过使用组来代替一组用户的别名  </span><br><span class="line"># User_Alias ADMINS = jsmith, mikem  </span><br><span class="line">  </span><br><span class="line">## Command Aliases  </span><br><span class="line">## These are groups of related commands...  </span><br><span class="line">## 指定一系列相互关联的命令（当然可以是一个）的别名，通过赋予该别名sudo权限，  </span><br><span class="line">## 可以通过sudo调用所有别名包含的命令，下面是一些示例  </span><br><span class="line">  </span><br><span class="line">## Networking 网络操作相关命令别名  </span><br><span class="line"># Cmnd_Alias NETWORKING = /sbin/route, /sbin/ifconfig, /bin/ping, /sbin/dhclient  </span><br><span class="line">, /usr/bin/net, /sbin/iptables, /usr/bin/rfcomm, /usr/bin/wvdial, /sbin/iwconfig  </span><br><span class="line">, /sbin/mii-tool  </span><br><span class="line">  </span><br><span class="line">## Installation and management of software 软件安装管理相关命令别名  </span><br><span class="line"># Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum  </span><br><span class="line">  </span><br><span class="line">## Services 服务相关命令别名  </span><br><span class="line"># Cmnd_Alias SERVICES = /sbin/service, /sbin/chkconfig  </span><br><span class="line">  </span><br><span class="line">## Updating the locate database 本地数据库升级命令别名  </span><br><span class="line"># Cmnd_Alias LOCATE = /usr/bin/updatedb  </span><br><span class="line">  </span><br><span class="line">## Storage 磁盘操作相关命令别名  </span><br><span class="line"># Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe  </span><br><span class="line">, /bin/mount, /bin/umount  </span><br><span class="line">  </span><br><span class="line">## Delegating permissions 代理权限相关命令别名  </span><br><span class="line"># Cmnd_Alias DELEGATING = /usr/sbin/visudo, /bin/chown, /bin/chmod, /bin/chgrp  </span><br><span class="line">  </span><br><span class="line">## Processes 进程相关命令别名  </span><br><span class="line"># Cmnd_Alias PROCESSES = /bin/nice, /bin/kill, /usr/bin/kill, /usr/bin/killall  </span><br><span class="line">  </span><br><span class="line">## Drivers 驱动命令别名  </span><br><span class="line"># Cmnd_Alias DRIVERS = /sbin/modprobe  </span><br><span class="line">  </span><br><span class="line"># Defaults specification  </span><br><span class="line">  </span><br><span class="line">#  </span><br><span class="line"># Disable &quot;ssh hostname sudo &lt;cmd&gt;&quot;, because it will show the password in clear.  </span><br><span class="line">#        You have to run &quot;ssh -t hostname sudo &lt;cmd&gt;&quot;.  </span><br><span class="line"># 一些环境变量的相关配置，具体情况可见man soduers  </span><br><span class="line">Defaults    requiretty  </span><br><span class="line">  </span><br><span class="line">Defaults    env_reset  </span><br><span class="line">Defaults    env_keep =  &quot;COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS&quot;  </span><br><span class="line">Defaults    env_keep += &quot;MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE&quot;  </span><br><span class="line">Defaults    env_keep += &quot;LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES&quot;  </span><br><span class="line">Defaults    env_keep += &quot;LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE&quot;  </span><br><span class="line">Defaults    env_keep += &quot;LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY&quot;  </span><br><span class="line">  </span><br><span class="line">Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin  </span><br><span class="line">  </span><br><span class="line">## Next comes the main part: which users can run what software on  </span><br><span class="line">## which machines (the sudoers file can be shared between multiple  </span><br><span class="line">## systems).  </span><br><span class="line">## 下面是规则配置：什么用户在哪台服务器上可以执行哪些命令（sudoers文件可以在多个系统上共享）  </span><br><span class="line">## Syntax(语法):  </span><br><span class="line">##  </span><br><span class="line">##  user    MACHINE=COMMANDS 用户 登录的主机=（可以变换的身份） 可以执行的命令  </span><br><span class="line">##  </span><br><span class="line">## The COMMANDS section may have other options added to it.  </span><br><span class="line">## 命令部分可以附带一些其它的选项  </span><br><span class="line">##  </span><br><span class="line">## Allow root to run any commands anywhere  </span><br><span class="line">## 允许root用户执行任意路径下的任意命令  </span><br><span class="line">root    ALL=(ALL)  ALL  </span><br><span class="line">  </span><br><span class="line">## Allows members of the &apos;sys&apos; group to run networking, software,  </span><br><span class="line">## service management apps and more.  </span><br><span class="line">## 允许sys中户组中的用户使用NETWORKING等所有别名中配置的命令  </span><br><span class="line"># %sys ALL = NETWORKING, SOFTWARE, SERVICES, STORAGE, DELEGATING, PROCESSES, LOCATE  </span><br><span class="line">, DRIVERS  </span><br><span class="line">  </span><br><span class="line">## Allows people in group wheel to run all commands  </span><br><span class="line">## 允许wheel用户组中的用户执行所有命令  </span><br><span class="line">%wheel  ALL=(ALL)  ALL  </span><br><span class="line">  </span><br><span class="line">## Same thing without a password  </span><br><span class="line">## 允许wheel用户组中的用户在不输入该用户的密码的情况下使用所有命令  </span><br><span class="line"># %wheel    ALL=(ALL)  NOPASSWD: ALL  </span><br><span class="line">  </span><br><span class="line">## Allows members of the users group to mount and unmount the  </span><br><span class="line">## cdrom as root  </span><br><span class="line">## 允许users用户组中的用户像root用户一样使用mount、unmount、chrom命令  </span><br><span class="line"># %users  ALL=/sbin/mount /mnt/cdrom, /sbin/umount /mnt/cdrom  </span><br><span class="line">  </span><br><span class="line">## Allows members of the users group to shutdown this system  </span><br><span class="line">## 允许users用户组中的用户关闭localhost这台服务器  </span><br><span class="line"># %users  localhost=/sbin/shutdown -h now  </span><br><span class="line">  </span><br><span class="line">## Read drop-in files from /etc/sudoers.d (the # here does not mean a comment)  </span><br><span class="line">## 读取放置在/etc/sudoers.d/文件夹中的文件（此处的#不意味着这是一个声明）  </span><br><span class="line">#includedir /etc/sudoers.d</span><br></pre></td></tr></table></figure>
 
+<p>特别要注意的是==别名==一定要==使用大写==</p>
+<h1 id="3-9-限制root远程登录"><a href="#3-9-限制root远程登录" class="headerlink" title="3.9 限制root远程登录"></a>3.9 限制root远程登录</h1><h2 id="1-思路"><a href="#1-思路" class="headerlink" title="1. 思路"></a>1. 思路</h2><ul>
+<li>禁止root用户登录</li>
+<li>允许用户 aming user5 user6  使用 su - root</li>
+<li>root‘s passwd  xxxx 禁止登录</li>
+<li>普通用户使用 sudo su - root</li>
+</ul>
+<h2 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h2><ul>
+<li><p>配置/etc/ssh/sshd_config，使系统禁止root用户登录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br><span class="line">/Root  搜索Root</span><br><span class="line">#PermitRootLogin yes  允许Root远程登录，将此选项改为 no &gt;&gt;</span><br><span class="line">PermitRootLogin no  &gt;&gt;  ：wq</span><br><span class="line">systemctl restart sshd.service  重启服务</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置visudo，使普通用户可以临时用root权限使用sudo命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">visudo</span><br><span class="line">User_Alias AMINGS = aming, user5, user6</span><br><span class="line">AMINGS  ALL=(ALL)  NOPASSWD: /usr/bin/su</span><br><span class="line">:wq</span><br><span class="line">sudo su -</span><br><span class="line">whoami</span><br><span class="line">root</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo su -  约等于  sudo -i </span><br><span class="line">sudo -s    完全等于  sudo  /bin/bash  约等于 sudo su </span><br><span class="line">sudo      终究被一个&quot;临时权限的帽子&quot;扣住，不能等价于纯粹的登录到系统里。</span><br></pre></td></tr></table></figure>
+
+<p><a href="www.opensource.apple.com/source/sudo/sudo-16/sudo/sample.sudoers">sudo配置文件样例</a>[<a href="http://www.opensource.apple.com/source/sudo/sudo-16/sudo/sample.sudoers]" target="_blank" rel="noopener">www.opensource.apple.com/source/sudo/sudo-16/sudo/sample.sudoers]</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/4.1-4.4 磁盘管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux入门笔记/4.1-4.4 磁盘管理/" itemprop="url">4.1-4.4 磁盘管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="4-1-df命令"><a href="#4-1-df命令" class="headerlink" title="4.1 df命令"></a>4.1 df命令</h1><h2 id="1-df命令"><a href="#1-df命令" class="headerlink" title="1. df命令"></a>1. df命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">df    \\可以查看到系统一共有几个分区，但swap（虚拟交换分区，内存）不会显示在此。</span><br><span class="line">df -h  \\自动变换单位*</span><br><span class="line">文件系统            容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/mapper/cl-root  17G  4.5G  13G  27% /</span><br><span class="line">devtmpfs            906M    0  906M    0% /dev</span><br><span class="line">tmpfs                916M  100K  916M    1% /dev/shm</span><br><span class="line">tmpfs                916M  9.0M  907M    1% /run</span><br><span class="line">tmpfs                916M    0  916M    0% /sys/fs/cgroup</span><br><span class="line">/dev/sda1          1014M  139M  876M  14% /boot</span><br><span class="line">tmpfs                184M  52K  184M    1% /run/user/0</span><br><span class="line"></span><br><span class="line">df -k  \\以K为单位</span><br><span class="line">df -m  \\以M为单位</span><br><span class="line">df -i  \\查看到系统分区下的inode情况</span><br><span class="line">df -T  \\会看到分区文件系统类型</span><br><span class="line"></span><br><span class="line">free  \\可以查看到swap状态*</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-重点-每次登录服务器，第一件事"><a href="#2-重点-每次登录服务器，第一件事" class="headerlink" title="2. @重点 每次登录服务器，第一件事"></a>2. @重点 每次登录服务器，第一件事</h2><ul>
+<li>用df -h  看磁盘空间满了没</li>
+<li>用df -i  看磁盘inode空间占满没有<br>最好，用shell监控起来。</li>
+</ul>
+<h1 id="4-2-du命令"><a href="#4-2-du命令" class="headerlink" title="4.2 du命令"></a>4.2 du命令</h1><h2 id="1-du命令"><a href="#1-du命令" class="headerlink" title="1. du命令"></a>1. du命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">du      \\查看目录或者文件的占用磁盘空间大小，默认以K为单位</span><br><span class="line">du -a    \\显示所有下面的文件和目录，不加的话，不会显示下面目录内的文件</span><br><span class="line">du -b    \\以b为单位</span><br><span class="line">du -m    \\以M为单位</span><br><span class="line">du -h    \\自动匹配合适的单位</span><br><span class="line">du -s    \\只显示总和</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-常用的-du-sh"><a href="#2-常用的-du-sh" class="headerlink" title="2. 常用的 du -sh"></a>2. 常用的 du -sh</h2><p>du -sh 和 ls -sh 的区别 (涉及 块block 的概念)</p>
+<ul>
+<li>du -sh是查询文件占用磁盘空间的大小</li>
+<li>ls -sh 是文件实际的大小</li>
+</ul>
+<h1 id="4-3-4-4-磁盘分区"><a href="#4-3-4-4-磁盘分区" class="headerlink" title="4.3/4.4 磁盘分区"></a>4.3/4.4 磁盘分区</h1><h2 id="1-fdisk命令"><a href="#1-fdisk命令" class="headerlink" title="1. fdisk命令"></a>1. fdisk命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line">查看所有磁盘的分区状况</span><br><span class="line"></span><br><span class="line">fdisk /dev/sdb    \\给小于2T的硬盘分区</span><br><span class="line">p 打印分区表</span><br><span class="line">n 新增一个分区</span><br><span class="line">w 保存</span><br><span class="line">q 退出</span><br><span class="line">d 删除分区</span><br><span class="line"></span><br><span class="line">关于分区</span><br><span class="line">- 主分区：一块物理硬盘上可以被独立使用的一部分，一个硬盘最多可以有4个主分区。</span><br><span class="line">- 扩展分区：为了突破一个物理硬盘只能有4个分区的限制，引入了扩展分区。扩展分区和主分区的地位相当，但是扩展分区本身不能被直接使用，然而可以被继续划分成多个逻辑分区。</span><br><span class="line">- 逻辑分区：逻辑分区可以有任意多个，但是不能独立存在，多个连续的逻辑分区可做为一个扩展分区。一个硬盘只能有一个扩展分区。</span><br><span class="line"></span><br><span class="line">  e扩展分区  逻辑分区是从扩展分区分出来的</span><br><span class="line">  p主分区    p+e不大于4</span><br><span class="line"></span><br><span class="line">- 关于分区号</span><br><span class="line">1-4是主分区和扩展分区，5和以后是逻辑分区</span><br><span class="line"></span><br><span class="line">- 主分区可以分零个</span><br><span class="line">- 扩展分区只能分一个</span><br><span class="line">- 逻辑分区的序列号一定从5开始，而主分区和扩展分区随意1-4</span><br><span class="line"></span><br><span class="line">**parted命令 是专门给大于2T的硬盘分区的**</span><br></pre></td></tr></table></figure>
+
+<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><h2 id="parted分区GPT"><a href="#parted分区GPT" class="headerlink" title="parted分区GPT"></a>parted分区GPT</h2><p>[<a href="http://ask.apelearn.com/question/7243]" target="_blank" rel="noopener">http://ask.apelearn.com/question/7243]</a><br>fdisk分区工具，它的分区格式为MBR，特点是，最多分4个主分区，磁盘大小不能超过2T。而GPT分区格式，突破了这些限制，它没有主分区、扩展分区、逻辑分区之分，在一块磁盘上最多可以分128个分区出来，支持大于2T的分区，最大卷可达18EB。 相信，随着存储级别的升级，将来的分区格式逐渐会淘汰MBR，而GPT成为主流。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/5.5 - 5.7 Vim入门02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux入门笔记/5.5 - 5.7 Vim入门02/" itemprop="url">5.5 - 5.7 Vim入门02</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="5-5-进入编辑模式"><a href="#5-5-进入编辑模式" class="headerlink" title="5.5 进入编辑模式"></a>5.5 进入编辑模式</h1><h2 id="1-进入vim编辑模式"><a href="#1-进入vim编辑模式" class="headerlink" title="1. 进入vim编辑模式"></a>1. 进入vim编辑模式</h2><p>vim命令后，输入 i 键，进入编辑模式（i, I, a, A, o,O,r,R都可以），按 Esc 键退出。</p>
+<h2 id="2-输入不同字母，进入编辑模式后的情况不同"><a href="#2-输入不同字母，进入编辑模式后的情况不同" class="headerlink" title="2. 输入不同字母，进入编辑模式后的情况不同"></a>2. 输入不同字母，进入编辑模式后的情况不同</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">（1）按 i 键，此时光标在当前位置，并进入编辑模式</span><br><span class="line">（2）按 I 键，此时光标移动到当前行的行首，并进入编辑模式</span><br><span class="line">（3）按 a 键，此时光标向后移动一个位置，并进入编辑模式</span><br><span class="line">（4）按 A 键，此时光标移动到当前行的末尾一个位置，并进入编辑模式</span><br><span class="line">（5）按 o 键，此时光标移动到当前行的下一新插的行的行首，并进入编辑模式</span><br><span class="line">（6）按 O 键，此时光标移动到当前行的上一新插的行的行首，并进入编辑模式</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-6-vim命令模式"><a href="#5-6-vim命令模式" class="headerlink" title="5.6 vim命令模式"></a>5.6 vim命令模式</h1><h2 id="1-如何进图vim命令行模式"><a href="#1-如何进图vim命令行模式" class="headerlink" title="1. 如何进图vim命令行模式"></a>1. 如何进图vim命令行模式</h2><p>在一般模式，输入 : 或者 / 就可以进入命令模式，在改模式下，可以搜索，保存，替换，退出，显示行号等等操作。</p>
+<h2 id="2-命令"><a href="#2-命令" class="headerlink" title="2. 命令"></a>2. 命令</h2><ul>
+<li>命令模式下查找和替换</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/word</td>
+<td>向光标之后寻找一个字符串位word，按n向后继续</td>
+</tr>
+<tr>
+<td>?word</td>
+<td>向光标之前寻找一个字符串位word，按n向后继续</td>
+</tr>
+<tr>
+<td>:n1,n2s/word1/word2/g</td>
+<td>在n1,n2行之间查找word1并替换位word2，不加g则只替换每行的第一个word1</td>
+</tr>
+<tr>
+<td>:1,$s/word1/word2/g</td>
+<td>替换文档中所有的word1位word2，不加g只替换每行的第一个</td>
+</tr>
+</tbody></table>
+<ul>
+<li>命令模式其他功能</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:w</td>
+<td>保存文本</td>
+</tr>
+<tr>
+<td>:q</td>
+<td>退出vim</td>
+</tr>
+<tr>
+<td>:w!</td>
+<td>强制保存，root用户下即使文本只读也可以完成保存</td>
+</tr>
+<tr>
+<td>:q！</td>
+<td>强制退出，所有改动不生效</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td>: set nu</td>
+<td>显示行号</td>
+</tr>
+<tr>
+<td>: set nonu</td>
+<td>不显示行号</td>
+</tr>
+<tr>
+<td>:nohl</td>
+<td>取消文档中的高亮</td>
+</tr>
+</tbody></table>
+<h2 id="3-示例"><a href="#3-示例" class="headerlink" title="3. 示例"></a>3. 示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1,100s/iptables/seLinux</span><br><span class="line">**把1到100行之间的iptables替换位seLinux，只替换每行的第一个iptables**</span><br><span class="line"></span><br><span class="line">1,$s/iptables/seLinux/g      **把文件中所有的iptables替换位seLinux**</span><br><span class="line"></span><br><span class="line">%s/iptables/seLinux/g      **把文件中所有的iptables替换位seLinux**</span><br><span class="line"></span><br><span class="line">解释： %=1,s</span><br><span class="line">%s/ \ /etc \ /init.d/ \ /bin/ \ ls    **把文件中，所有的 /etc/init.d</span><br><span class="line">替换为 /bin/ls， 其中 \ 为退意符号，因为目录用的/和命令中的/有意义冲突，</span><br><span class="line">那么在目录中的/前面使用\符号，可以使冲突的意义去掉，只保留原来的意义。</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-7-vim实践"><a href="#5-7-vim实践" class="headerlink" title="5.7 vim实践"></a>5.7 vim实践</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/dnsmasq.conf  /tmp/1.txt</span><br><span class="line"></span><br><span class="line">(1) 分别向下、向右、向左、向上移动6个字符（6j 6l 6h 6k）。</span><br><span class="line">(2) 分别向下、向上翻两页（分别按两次ctrl+f和ctrl+b）。</span><br><span class="line">(3) 把光标移动到第49行（49G）。</span><br><span class="line">(4) 把光标移动到行尾，再移动到行首（Shift+4, Shift+6）。</span><br><span class="line">(5) 移动到1.txt文件的最后一行（G）。</span><br><span class="line">(6) 移动到文件的首行（gg）。</span><br><span class="line">(7) 搜索文件中出现的“dnsmasq”，并数一下该字符串出现的次数（/dnsmsq 然后按n）。</span><br><span class="line">(8) 把从第1行到第10行出现的dnsmasq替换成dns（:1,10s/dnsmasq/dns/g）。</span><br><span class="line">(9) 还原上一步操作（u）。</span><br><span class="line">(10) 把整个文件中所有的etc替换成cte（:1,$s/etc/cte/g）。</span><br><span class="line">(11) 把光标移动到第25行，删除字符串 “ly”（25G 然后按j向右移动光标找到&quot;ly&quot;，按v选中，然后按x）。</span><br><span class="line">(12) 还原上一步操作（u）。</span><br><span class="line">(13) 删除第50行（50G dd）。</span><br><span class="line">(14) 还原上一步操作（u）。</span><br><span class="line">(15) 删除第37-42行的所有内容（37G 6dd）。</span><br><span class="line">(16) 还原上一步操作（u）。</span><br><span class="line">(17) 复制第48行的内容并粘贴到第52行下面（48G yy 52G p）。</span><br><span class="line">(18) 还原上一步操作（u）。</span><br><span class="line">(19) 复制第37-42行的内容并粘贴到第44行上面（37G 6yy 44G P）。</span><br><span class="line">(20) 还原上一步操作（按u）。</span><br><span class="line">(21) 把第37-42行的内容移动到第19行下面（37G 6dd 19G p）。</span><br><span class="line">(22) 还原上一步操作（按u）。</span><br><span class="line">(23) 把光标移动到首行，把第1行内容改为“#!/bin/bash”</span><br><span class="line">（先按gg，把光标定位到第1行，然后按字母A，进入编辑模式，</span><br><span class="line">同时&gt;光标到行末尾，进行修改操作，完成后按ESC）。</span><br><span class="line">(24) 在第1行下面插入新的一行，并输入“# Hello!”</span><br><span class="line">（按o进入编辑模式，同时光标向下另起一行，输入“# Hello!”）。</span><br><span class="line">(25) 保存文档并退出（按Esc键，输入“:wq”）。</span><br></pre></td></tr></table></figure>
+
+<h1 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">（1）vim下:/keyword,可以查找全文的关键字。假设我只想在1-50行之间查找这个关键字，要怎么写？ （感觉应该是没有这种写法的吧）</span><br><span class="line"></span><br><span class="line">aming</span><br><span class="line">没有。</span><br><span class="line"></span><br><span class="line">870566512</span><br><span class="line">**可以通过替换的方式实现**</span><br><span class="line">:1,10s/111/111/g</span><br><span class="line"></span><br><span class="line">（2）用什么方法可以在vim里面搜索关键词？  错误答案 AB</span><br><span class="line">A 一般模式下，直接输入/word</span><br><span class="line">B 一般模式下，直接输入?word</span><br><span class="line">C 一般模式下，直接输入:word</span><br><span class="line">D 一般模式下，直接输入:/word</span><br><span class="line">正确答案: A,B,D</span><br></pre></td></tr></table></figure>
+
+<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vim的特殊用法 </span><br><span class="line">http://www.apelearn.com/bbs/thread-9334-1-1.html</span><br><span class="line"></span><br><span class="line">vim常用快捷键总结</span><br><span class="line">http://www.apelearn.com/bbs/thread-407-1-1.html</span><br><span class="line"></span><br><span class="line">vim快速删除一段字符</span><br><span class="line">http://www.apelearn.com/bbs/thread-842-1-1.html</span><br><span class="line"></span><br><span class="line">vim乱码 </span><br><span class="line">http://www.apelearn.com/bbs/thread-6753-1-1.html</span><br><span class="line"></span><br><span class="line">小键盘问题 </span><br><span class="line">http://www.apelearn.com/bbs/thread-7215-1-1.html</span><br><span class="line"></span><br><span class="line">vim加密 </span><br><span class="line">http://www.apelearn.com/bbs/thread-7750-1-1.html</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/6.1 - 6.4 linux下压缩打包工具01-bzip2、xz、gzip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux入门笔记/6.1 - 6.4 linux下压缩打包工具01-bzip2、xz、gzip/" itemprop="url">6.1 - 6.4 linux下压缩打包工具01-bzip2、xz、gzip</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="6-1-压缩打包介绍"><a href="#6-1-压缩打包介绍" class="headerlink" title="6.1 压缩打包介绍"></a>6.1 压缩打包介绍</h1><h2 id="1-windows压缩工具"><a href="#1-windows压缩工具" class="headerlink" title="1. windows压缩工具"></a>1. windows压缩工具</h2><p>.rar .zip .7z</p>
+<h2 id="2-linux压缩工具"><a href="#2-linux压缩工具" class="headerlink" title="2. linux压缩工具"></a>2. linux压缩工具</h2><p>.zip, .gz, .bz2, .xz,<br>.tar.gz,tar.bz2,.tar.xz</p>
+<h1 id="6-2-gzip压缩工具"><a href="#6-2-gzip压缩工具" class="headerlink" title="6.2 gzip压缩工具"></a>6.2 gzip压缩工具</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gzip [-d#] filename 其中#为1-9的数字</span><br><span class="line">gzip压缩有10个级别，默认是gzip -6 级别的，1是压缩最少，速度最快，10是压缩最大，速度最慢</span><br><span class="line">压缩的文件后缀位.gz</span><br><span class="line">解压缩位gzip -d</span><br><span class="line">gzip不支持压缩目录</span><br><span class="line">zcat 直接查看.gz压缩包的内容</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-将etc目录中含有conf文件名的文件列并追加都1-txt"><a href="#1-将etc目录中含有conf文件名的文件列并追加都1-txt" class="headerlink" title="1. 将etc目录中含有conf文件名的文件列并追加都1.txt"></a>1. 将etc目录中含有conf文件名的文件列并追加都1.txt</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# find /etc/ -type f -name &quot;*conf&quot; -exec cat &#123;&#125; &gt;&gt;1.txt \</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-压缩文件"><a href="#2-压缩文件" class="headerlink" title="2. 压缩文件"></a>2. 压缩文件</h2><blockquote>
+<p>文件压缩之后再解压，就会将原文件中虚的空间挤掉。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip 1.txt</span><br><span class="line">[root@localhost]# ls</span><br><span class="line">1.txt.gz</span><br><span class="line">[root@localhost]# du -sh 1.txt.gz</span><br><span class="line">596K    1.txt.gz</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-解压文件："><a href="#3-解压文件：" class="headerlink" title="3. 解压文件："></a>3. 解压文件：</h2><blockquote>
+<p>1.txt压缩前是4M，压缩再解压变成了2.3M，文件内容的行数是不变的。 压缩等级1~9，默认是6级，1级别压缩后，压缩文件稍大，9级压缩文件文件最小。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip -d 1.txt.gz</span><br><span class="line">[root@localhost]# du -sh 1.txt</span><br><span class="line">2.3M    1.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h2><ul>
+<li><p>使用1级别压缩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip -1 1.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他压缩方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gunzip 1.txt.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压并查看内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# zcat 1.txt.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>压缩文件到指定目录并且原文件不消失</p>
+<blockquote>
+<p>gzip不能压缩目录</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip -c 1.txt &gt; /tmp/1.txt.gz</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-3-bzip2压缩工具"><a href="#6-3-bzip2压缩工具" class="headerlink" title="6.3 bzip2压缩工具"></a>6.3 bzip2压缩工具</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bzip2 [-d]  [-d] filename</span><br><span class="line">不支持压缩目录</span><br><span class="line">压缩级别10 默认压缩级别是9</span><br><span class="line">-d 解压缩</span><br><span class="line"></span><br><span class="line">bzcat 可以直接查看.bz2压缩包的内容</span><br><span class="line">[root@localhost]# bzcat 1.txt.bz2</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-压缩文件"><a href="#1-压缩文件" class="headerlink" title="1. 压缩文件"></a>1. 压缩文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost tmp]# bzip2 1.txt</span><br><span class="line"></span><br><span class="line">压缩到指定目录下：</span><br><span class="line">[root@localhost]# bzip2 -c 1.txt &gt; /tmp/1.txt.bz2</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-解压"><a href="#2-解压" class="headerlink" title="2. 解压"></a>2. 解压</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# bzip2 -d 1.txt.bz2</span><br><span class="line">或者</span><br><span class="line">[root@localhost]# bunzip2 1.txt.bz2</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-4-xz压缩工具"><a href="#6-4-xz压缩工具" class="headerlink" title="6.4 xz压缩工具"></a>6.4 xz压缩工具</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）xz压缩工具与gzip,bzip2的压缩方式类似，只是压缩算法不一样，喜欢用哪个，就用哪个</span><br><span class="line">（2）xz压缩文件时，源文件会消失</span><br><span class="line">（3）通过xzcat可以看xz文件</span><br><span class="line">（4）xz也是与bzip2一样有压缩级别的</span><br><span class="line">（5）如果想解压到指定目录可以用-c选项</span><br><span class="line">（6）xz不能压缩目录</span><br><span class="line">(7) 默认压缩级别为9, 压缩最狠的是xz，其次是bzip2，最不狠的是gzip</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-压缩文件-1"><a href="#1-压缩文件-1" class="headerlink" title="1. 压缩文件"></a>1. 压缩文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# xz 2.txt</span><br><span class="line"></span><br><span class="line">压缩文件到指定目录</span><br><span class="line">[root@localhost]# xz -c 2.txt &gt;</span><br><span class="line">/tmp/d6z/2.txt.xz</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-解压-1"><a href="#2-解压-1" class="headerlink" title="2. 解压"></a>2. 解压</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# xz -d 2.txt.xz</span><br><span class="line">或者</span><br><span class="line">[root@localhost]# unxz 2.txt.xz</span><br><span class="line"></span><br><span class="line">解压文件并指定目录：</span><br><span class="line"></span><br><span class="line">[root@localhost]# xz -d -c /tmp/d6z/2.txt.xz &gt; ./4.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-查看压缩文件内容"><a href="#3-查看压缩文件内容" class="headerlink" title="3. 查看压缩文件内容"></a>3. 查看压缩文件内容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# xzcat /tmp/2.txt.xz</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/4.5 - 4.9 磁盘格式化与挂载/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux入门笔记/4.5 - 4.9 磁盘格式化与挂载/" itemprop="url">4.5 - 4.9 磁盘格式化与挂载</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="4-5-4-6-磁盘格式化"><a href="#4-5-4-6-磁盘格式化" class="headerlink" title="4.5/4.6 磁盘格式化"></a>4.5/4.6 磁盘格式化</h1><h2 id="1-mke2fs命令"><a href="#1-mke2fs命令" class="headerlink" title="1. mke2fs命令"></a>1. mke2fs命令</h2><p>被用于创建磁盘分区上文件系统（格式化）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mke2fs -t ext4 -b 2048 -m 1 -L yule /dev/sdb1</span><br><span class="line">-t 指定磁盘格式  mke2fs目前不支持xfs格式</span><br><span class="line">-b 指定块block大小，默认值是4K</span><br><span class="line">-m 指定给root保留区块的比例，默认值是5%</span><br><span class="line">-L 设定磁盘分区的卷标</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mke2fs -i 8192 -t ext4 /dev/sdb1</span><br><span class="line">-i 指定&quot;字节/inode&quot;的比例，最低至少一个块对应一个inode。</span><br><span class="line">默认大概是4个块对应一个inode，4个块=16K=16,384b；</span><br><span class="line">那么默认的&quot;字节/inode&quot;的比例是16384；</span><br><span class="line">将数字改小的话，inode数量就会变多，相反，改大的话，inode数量就会变少，最小值为4096。</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-格式化分区的一些注意事项"><a href="#2-格式化分区的一些注意事项" class="headerlink" title="2. 格式化分区的一些注意事项"></a>2. 格式化分区的一些注意事项</h2><ul>
+<li>新添加的磁盘分好区以后，不能直接使用，得先格式化  </li>
+<li>主分区和逻辑分区可以被格式化，扩展分区不能格式化。只能格式化扩展下面的逻辑分区。</li>
+<li>查看Linux系统支持的磁盘文件系统格式的配置文件<br><code>cat /etc/filesystems</code></li>
+<li>查看一个分区的文件系统是什么<br><code>mount</code>后，查看<code>dev/</code>开头的文件全名就可以知道了，如 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/mapper/cl-root on / type xfs (rw,relatime,attr2,inode64,noquota)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="3-如何格式化新的磁盘分区"><a href="#3-如何格式化新的磁盘分区" class="headerlink" title="3. 如何格式化新的磁盘分区"></a>3. 如何格式化新的磁盘分区</h2><h3 id="3-1-创建新的分区"><a href="#3-1-创建新的分区" class="headerlink" title="3.1. 创建新的分区"></a>3.1. 创建新的分区</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sdb</span><br><span class="line">n</span><br><span class="line">p</span><br><span class="line">+3G</span><br><span class="line">w</span><br><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-格式化分区（2种方法）"><a href="#3-2-格式化分区（2种方法）" class="headerlink" title="3.2. 格式化分区（2种方法）"></a>3.2. 格式化分区（2种方法）</h3><ul>
+<li><p>用mkfs命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkfs -t ext4 /dev/sdb5</span><br><span class="line">将磁盘分区sdb5格式化为ext4格式分区，默认会给root用户预留原有的2%的空间</span><br><span class="line">在centos7中，如果想把分区格式化位xfs格式，只有使用mkfs.xfs或mkfs -t /dev/sdb5</span><br><span class="line">mke2fs默认不支持格式化为xfs格式</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用mke2fs命令 (mke2fs是mkfs命令的进化版本，功能更加丰富)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mke2fs -t ext4 -b 2048 -m 1 -L game /dev/sdb1</span><br><span class="line">将分区sdb1格式化为ext4文件系统，块大小设为2048b，预留1%空间其中给root用户，并将磁盘命名位 game</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="3-3-mkfs补充"><a href="#3-3-mkfs补充" class="headerlink" title="3.3 mkfs补充"></a>3.3 mkfs补充</h3><blockquote>
+<p>mkfs  mkfs.cramfs  mkfs.ext2  mkfs.ext3  mkfs.ext4  mkfs.ext4dev  mkfs.msdos  mkfs.vfat mkfs.xfs</p>
+</blockquote>
+<p>这里面<br>mkfs -t ext4 == mkfs.ext4<br>mkfs -t ext3 == mkfs.ext3<br>所以，直接可以用 mkfs.ext4命令 来代替 mkfs -t ext4</p>
+<h2 id="4-blkid命令"><a href="#4-blkid命令" class="headerlink" title="4. blkid命令"></a>4. blkid命令</h2><p>主要用来对系统的块设备（包括交换分区）所使用的文件系统类型、LABEL、UUID等信息进行查询。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# blkid /dev/sdb1</span><br><span class="line">/dev/sdb1: UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot; TYPE=&quot;xfs&quot;</span><br><span class="line">可以用来查看为挂载分区的文件类型</span><br><span class="line"></span><br><span class="line">[root@zhouqunic-01 ~]# blkid</span><br><span class="line">/dev/sdb1: UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot; TYPE=&quot;xfs&quot; </span><br><span class="line">/dev/sdb3: UUID=&quot;a17dcca1-6da1-42f1-b955-caacc22bb1fc&quot; TYPE=&quot;ext4&quot; </span><br><span class="line">/dev/sda1: UUID=&quot;0ae79bcd-e732-46fc-9213-6118c491a714&quot; TYPE=&quot;xfs&quot; </span><br><span class="line">/dev/sda2: UUID=&quot;AwDLCG-5vsY-OMmL-XeKE-RNEr-y12K-styMJV&quot; TYPE=&quot;LVM2_member&quot; </span><br><span class="line">/dev/sr0: UUID=&quot;2016-12-05-13-55-45-00&quot; LABEL=&quot;CentOS 7 x86_64&quot; TYPE=&quot;iso9660&quot; PTTYPE=&quot;dos&quot; </span><br><span class="line">/dev/mapper/cl-root: UUID=&quot;120c5b93-2bee-4af8-9868-140e9de6f281&quot; TYPE=&quot;xfs&quot; </span><br><span class="line">/dev/mapper/cl-swap: UUID=&quot;49d49d46-b6c2-4a1c-925a-a8e68bdc79b2&quot; TYPE=&quot;swap&quot; </span><br><span class="line">列出当前系统中所有文件系统的类型</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-7-4-8-磁盘挂载"><a href="#4-7-4-8-磁盘挂载" class="headerlink" title="4.7/4.8 磁盘挂载"></a>4.7/4.8 磁盘挂载</h1><h2 id="1-挂载"><a href="#1-挂载" class="headerlink" title="1. 挂载"></a>1. 挂载</h2><h3 id="1-1-路径-挂载"><a href="#1-1-路径-挂载" class="headerlink" title="1.1 路径 挂载"></a>1.1 路径 挂载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sdb5 /mnt/  /mnt/挂载点 </span><br><span class="line">df -T 查看磁盘类型</span><br><span class="line">df -h 查看磁盘信息</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不管有没有分区，都可以格式化，磁盘分完区以后，需要挂载 才能写文件进去</li>
+<li>一个挂载点只能给一个分区进行服务，</li>
+<li>假设有两个分区放在一个挂载点下，只能服务第二个分区,第二个会遮盖第一个，但是卸载掉第二个，第一个分区的数据就会出现</li>
+</ul>
+<h3 id="1-2-label卷标-UUID-挂载"><a href="#1-2-label卷标-UUID-挂载" class="headerlink" title="1.2 label卷标/UUID 挂载"></a>1.2 label卷标/UUID 挂载</h3><ul>
+<li>通过blkid来获得要挂载分区的UUID<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mount LABEL=aming /home/aming/123/</span><br><span class="line">mount UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot;  /mnt/</span><br><span class="line">umount /mnt/ 卸载  或者 umount /dev/dev1/</span><br><span class="line">umount -l  直接卸载(无需退出挂载点)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="2-mount命令"><a href="#2-mount命令" class="headerlink" title="2. mount命令"></a>2. mount命令</h2><p>用于加载文件系统到指定的加载点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mount [-t vfstype(ext4,ntfs...)] [-o options(rw,ro...)] device dir</span><br><span class="line">-l 无需退出卸出挂载  </span><br><span class="line">  remount 重新挂载</span><br><span class="line"></span><br><span class="line">mount -o remount,rw /dev/foo /dir 重新挂载      </span><br><span class="line"></span><br><span class="line">umount（卸载）磁盘分区</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-etc-fstab配置文件"><a href="#3-etc-fstab配置文件" class="headerlink" title="3. /etc/fstab配置文件"></a>3. /etc/fstab配置文件</h2><p>fstab包含了开机需要挂载的设备，相应的挂载点，以及属性等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# cat /etc/fstab</span><br><span class="line">**6列分别表示：设备号，挂载点，分区格式，挂载选项，是否备份，设置优先级，</span><br><span class="line">（1，2要检测，1级别更高，0 不检测）**</span><br><span class="line">#</span><br><span class="line"># /etc/fstab</span><br><span class="line"># Created by anaconda on Fri May 26 06:46:23 2017</span><br><span class="line">#</span><br><span class="line"># Accessible filesystems, by reference, are maintained under &apos;/dev/disk&apos;</span><br><span class="line"># See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info</span><br><span class="line">#</span><br><span class="line">/dev/mapper/cl-root    /                      xfs    defaults        0 0</span><br><span class="line">UUID=0ae79bcd-e732-46fc-9213-6118c491a714 /boot                  xfs    defaults        0 0</span><br><span class="line">/dev/mapper/cl-swap    swap                    swap    defaults        0 0</span><br><span class="line">把分区挂载到挂载点 添加进去</span><br><span class="line">mount UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot;  /mnt/  xfs defaults  0 0</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-9-手动增加swap空间"><a href="#4-9-手动增加swap空间" class="headerlink" title="4.9 手动增加swap空间"></a>4.9 手动增加swap空间</h1><p>当某一个服务就是需要比较大的swap空间的时候，我们可以手动增加swap空间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">首先弄一个模拟磁盘，在服务器的文件系统里模拟一个100M 的磁盘</span><br><span class="line">dd if=/dev/zero of=/tmp/newdisk bs=1M count=100</span><br><span class="line">&gt; dd 用于操作磁盘，可以写可以读  </span><br><span class="line">&gt; if 指定从哪里去读  </span><br><span class="line">&gt; /dev/zero 是Linux系统里面的一个造零器，可以产生无数的&quot;0&quot;  </span><br><span class="line">&gt; of 将/dev/zero 造出来的&quot;0&quot;，写到哪里去  </span><br><span class="line">&gt; bs 指定块的大小  </span><br><span class="line">&gt; count 计数，总共多少个块  </span><br><span class="line"></span><br><span class="line">创建虚拟磁盘以后，需要进行格式化  </span><br><span class="line">mkswap -f /tmp/newdisk</span><br><span class="line"></span><br><span class="line">格式化以后进行挂载</span><br><span class="line">swapon /tmp/newdisk</span><br><span class="line"></span><br><span class="line">执行命令之后会提示“权限不安全”。为了安全起见，建议使用0600的权限</span><br><span class="line">chmod 0600 /tmp/newdisk</span><br><span class="line"></span><br><span class="line">当使用完毕以后，卸载swap挂载</span><br><span class="line">swapoff /tmp/newdisk</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>free -m 可以查看 swap 的使用情况</li>
+</ul>
+<h1 id="拓展：LVM-学习"><a href="#拓展：LVM-学习" class="headerlink" title="拓展：LVM 学习"></a>拓展：LVM 学习</h1><blockquote>
+<p>LVM(Logical Volume Manager)逻辑卷管理，是一种将一个或多个硬盘的分区在逻辑上集合，<br>相当于一个大硬盘来使用，当硬盘的空间不够使用的时候，可以继续将其它的硬盘的<br>分区加入其中，这样可以事项一种磁盘空间的动态管理，相对于普通的磁盘分区有很<br>大的灵活性，使用普通的磁盘分区，当一个磁盘的分区空间不够使用的时候，可能就<br>会带来很大的麻烦。使用LVM在一定程度上就可以解决普通磁盘分区带来的问题。 </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">创建分区--更改类型t(8e)---创建物理卷--创建卷组</span><br><span class="line">  pvcreate /dev/sdb1 以此类推创建见三个物理卷</span><br><span class="line">  pvdisplay 查看LVM物理卷=pvs</span><br><span class="line">  vgcreate vg1 /dev/sdb(物理卷</span><br><span class="line">  vgcdisplay查看VM物理卷组=vgs</span><br><span class="line">  lvcreate -L 100M(指定大小） -n lv1(lvm）vg1(卷组） ##以此类推做LV2.LV3</span><br><span class="line">  mkfs.ext4 /dev/vh1/lv1 格式化lv1</span><br><span class="line">  mount /dev/vg1/lv1 /mnt  挂载到/mnt</span><br><span class="line"></span><br><span class="line">扩容逻辑卷</span><br><span class="line">  lvresize -L 300M /dev/vg1/lv1 重新设置卷大小</span><br><span class="line">  e2fsck -f /dev/vg1/lv1 检查磁盘错误(ext4执行）</span><br><span class="line">  resize2fs /dev/vg1/lv1 更新逻辑卷信息（ext4执行）</span><br><span class="line">  xfs_growfs /dev/vg1/lv1 xfs文件系统需要执行</span><br><span class="line"></span><br><span class="line">缩减逻辑卷（xfs不支持）</span><br><span class="line">  先卸载umount</span><br><span class="line">  e2fsck -f /dev/vg1/lv1 检查磁盘错误(ext)</span><br><span class="line">  resize2fs /dev/vg1/lv1 100M 更新逻辑卷信息（ext)</span><br><span class="line">  lvresize -L 100M /dev/vg1/lv1 更新设置卷大小 </span><br><span class="line">  </span><br><span class="line">扩展卷组</span><br><span class="line">  fdisk /dev/sdb 新增/dev/sdb5(辑分区8e) 2G</span><br><span class="line">  pvcreate /dev/sdb5</span><br><span class="line">  vgextend vg1 /dev/sdb5 创建物理卷</span><br><span class="line">  lvresize -L 100M /dev/vg1/lv1 重新设置卷大小</span><br></pre></td></tr></table></figure>
           
         
       
@@ -2069,7 +2165,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2115,7 +2211,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2137,7 +2233,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">109</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
