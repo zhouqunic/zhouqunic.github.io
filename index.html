@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/6.1 - 6.4 linux下压缩打包工具01-bzip2、xz、gzip/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/12.1 - 12.5 LNMP架构介绍、MySQL安装、PHP安装、Nginx介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -306,7 +306,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/6.1 - 6.4 linux下压缩打包工具01-bzip2、xz、gzip/" itemprop="url">6.1 - 6.4 linux下压缩打包工具01-bzip2、xz、gzip</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/12.1 - 12.5 LNMP架构介绍、MySQL安装、PHP安装、Nginx介绍/" itemprop="url">12.1 - 12.5 LNMP架构介绍、MySQL安装、PHP安装、Nginx介绍</a></h1>
         
 
         <div class="post-meta">
@@ -380,53 +380,306 @@
       
         
           
-            <h1 id="6-1-压缩打包介绍"><a href="#6-1-压缩打包介绍" class="headerlink" title="6.1 压缩打包介绍"></a>6.1 压缩打包介绍</h1><h2 id="1-windows压缩工具"><a href="#1-windows压缩工具" class="headerlink" title="1. windows压缩工具"></a>1. windows压缩工具</h2><p>.rar .zip .7z</p>
-<h2 id="2-linux压缩工具"><a href="#2-linux压缩工具" class="headerlink" title="2. linux压缩工具"></a>2. linux压缩工具</h2><p>.zip, .gz, .bz2, .xz,<br>.tar.gz,tar.bz2,.tar.xz</p>
-<h1 id="6-2-gzip压缩工具"><a href="#6-2-gzip压缩工具" class="headerlink" title="6.2 gzip压缩工具"></a>6.2 gzip压缩工具</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gzip [-d#] filename 其中#为1-9的数字</span><br><span class="line">gzip压缩有10个级别，默认是gzip -6 级别的，1是压缩最少，速度最快，10是压缩最大，速度最慢</span><br><span class="line">压缩的文件后缀位.gz</span><br><span class="line">解压缩位gzip -d</span><br><span class="line">gzip不支持压缩目录</span><br><span class="line">zcat 直接查看.gz压缩包的内容</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-将etc目录中含有conf文件名的文件列并追加都1-txt"><a href="#1-将etc目录中含有conf文件名的文件列并追加都1-txt" class="headerlink" title="1. 将etc目录中含有conf文件名的文件列并追加都1.txt"></a>1. 将etc目录中含有conf文件名的文件列并追加都1.txt</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# find /etc/ -type f -name &quot;*conf&quot; -exec cat &#123;&#125; &gt;&gt;1.txt \</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-压缩文件"><a href="#2-压缩文件" class="headerlink" title="2. 压缩文件"></a>2. 压缩文件</h2><blockquote>
-<p>文件压缩之后再解压，就会将原文件中虚的空间挤掉。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip 1.txt</span><br><span class="line">[root@localhost]# ls</span><br><span class="line">1.txt.gz</span><br><span class="line">[root@localhost]# du -sh 1.txt.gz</span><br><span class="line">596K    1.txt.gz</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-解压文件："><a href="#3-解压文件：" class="headerlink" title="3. 解压文件："></a>3. 解压文件：</h2><blockquote>
-<p>1.txt压缩前是4M，压缩再解压变成了2.3M，文件内容的行数是不变的。 压缩等级1~9，默认是6级，1级别压缩后，压缩文件稍大，9级压缩文件文件最小。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip -d 1.txt.gz</span><br><span class="line">[root@localhost]# du -sh 1.txt</span><br><span class="line">2.3M    1.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h2><ul>
-<li><p>使用1级别压缩</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip -1 1.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其他压缩方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gunzip 1.txt.gz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>解压并查看内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# zcat 1.txt.gz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>压缩文件到指定目录并且原文件不消失</p>
+            <p>#12.1 LNMP架构介绍</p>
 <blockquote>
-<p>gzip不能压缩目录</p>
+<p> LNMP代表的就是：Linux系统下Nginx+MySQL+PHP这种网站服务器架构。</p>
 </blockquote>
-</li>
+<ul>
+<li>和LAMP不同的是，提供web服务的是Nginx</li>
+<li>并且php是作为一个独立服务存在的，这个服务叫做php-fpm</li>
+<li>Nginx直接处理静态请求，动态请求会转发给php-fpm。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip -c 1.txt &gt; /tmp/1.txt.gz</span><br></pre></td></tr></table></figure>
+<p>#12.2 MySQL安装</p>
+<h2 id="卸载二进制包安装的MySQL"><a href="#卸载二进制包安装的MySQL" class="headerlink" title="卸载二进制包安装的MySQL"></a>卸载二进制包安装的MySQL</h2><p>确认MySQL服务运行状态，并停止</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# ps -ef | grep mysql</span><br><span class="line">[root@host ~]# /etc/init.d/mysql.server status</span><br><span class="line">[root@host ~]# /etc/init.d/mysql.server stop</span><br></pre></td></tr></table></figure>
 
-<h1 id="6-3-bzip2压缩工具"><a href="#6-3-bzip2压缩工具" class="headerlink" title="6.3 bzip2压缩工具"></a>6.3 bzip2压缩工具</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bzip2 [-d]  [-d] filename</span><br><span class="line">不支持压缩目录</span><br><span class="line">压缩级别10 默认压缩级别是9</span><br><span class="line">-d 解压缩</span><br><span class="line"></span><br><span class="line">bzcat 可以直接查看.bz2压缩包的内容</span><br><span class="line">[root@localhost]# bzcat 1.txt.bz2</span><br></pre></td></tr></table></figure>
+<p>删除MySQL安装时的相关文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# rm -rf /usr/local/mysql </span><br><span class="line">[root@host ~]# rm -rf /etc/init.d/mysqld </span><br><span class="line">[root@host ~]# rm -rf /data/mysql</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-压缩文件"><a href="#1-压缩文件" class="headerlink" title="1. 压缩文件"></a>1. 压缩文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost tmp]# bzip2 1.txt</span><br><span class="line"></span><br><span class="line">压缩到指定目录下：</span><br><span class="line">[root@localhost]# bzip2 -c 1.txt &gt; /tmp/1.txt.bz2</span><br></pre></td></tr></table></figure>
+<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><p>和之前LAMP环境安装MySQL的方法一样<br>11.1 LAMP架构介绍+11.2 MySQL_MariaDB介绍+11.3-11. 5MySQL安装.md</p>
+<p>#12.3/12.4 PHP安装<br>和LAMP安装PHP有区别，需要开启php-fpm服务。</p>
+<p>##准备PHP的包和用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# cd /usr/local/src/</span><br><span class="line">[root@host src]# wget http://cn2.php.net/distributions/php-5.6.30.tar.gz   //下载php二进制包</span><br><span class="line">[root@host src]# tar zxvf php-5.6.30.tar.gz   //解压缩</span><br><span class="line">[root@host  src]# useradd -s /sbin/nologin php-fpm   //创建专门账号用来运行php-fpm服务，因为在LNMP环境中，PHP是以一种服务的形式独立存在的</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-解压"><a href="#2-解压" class="headerlink" title="2. 解压"></a>2. 解压</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# bzip2 -d 1.txt.bz2</span><br><span class="line">或者</span><br><span class="line">[root@localhost]# bunzip2 1.txt.bz2</span><br></pre></td></tr></table></figure>
+<p>##卸载之前编译安装的PHP（如果之前有安装的话）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# cd /usr/local/src</span><br><span class="line">[root@host src]# ls</span><br><span class="line">[root@host src]# cd php-5.6.30</span><br><span class="line">[root@host php-5.6.30]# ls</span><br><span class="line">[root@host php-5.6.30]# make clean</span><br></pre></td></tr></table></figure>
 
-<h1 id="6-4-xz压缩工具"><a href="#6-4-xz压缩工具" class="headerlink" title="6.4 xz压缩工具"></a>6.4 xz压缩工具</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）xz压缩工具与gzip,bzip2的压缩方式类似，只是压缩算法不一样，喜欢用哪个，就用哪个</span><br><span class="line">（2）xz压缩文件时，源文件会消失</span><br><span class="line">（3）通过xzcat可以看xz文件</span><br><span class="line">（4）xz也是与bzip2一样有压缩级别的</span><br><span class="line">（5）如果想解压到指定目录可以用-c选项</span><br><span class="line">（6）xz不能压缩目录</span><br><span class="line">(7) 默认压缩级别为9, 压缩最狠的是xz，其次是bzip2，最不狠的是gzip</span><br></pre></td></tr></table></figure>
+<p>##安装PHP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">[root@host php-5.6.30]# cd php-5.6.30</span><br><span class="line">[root@host php-5.6.30]# ./configure --prefix=/usr/local/php-fpm --with-config-file-path=/usr/local/php-fpm/etc --enable-fpm --with-fpm-user=php-fpm --with-fpm-group=php-fpm --with-mysql=/usr/local/mysql --with-mysqli=/usr/local/mysql/bin/mysql_config --with-pdo-mysql=/usr/local/mysql --with-mysql-sock=/tmp/mysql.sock --with-libxml-dir --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --with-mcrypt --enable-soap --enable-gd-native-ttf --enable-ftp --enable-mbstring --enable-exif --with-pear --with-curl  --with-openssl   //初始化</span><br><span class="line"></span><br><span class="line">另外，附php7.1的./configure ，从lnmp.org的脚本copy来的。  </span><br><span class="line">[root@localhost php-7.1.6]#      </span><br><span class="line">./configure --prefix=/usr/local/php-fpm --with-config-file-path=/usr/local/php-fpm/etc --enable-fpm --with-fpm-user=php-fpm --with-fpm-group=php-fpm --enable-mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-mysql-sock=/tmp/mysql.sock --with-libxml-dir --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --with-mcrypt --enable-soap --enable-gd-native-ttf --enable-ftp --enable-mbstring --enable-exif --with-pear --with-curl --with-openssl</span><br><span class="line"></span><br><span class="line">附php7.2的./configure</span><br><span class="line">[root@localhost php-7.2.10]# ./configure \</span><br><span class="line">--prefix=/usr/local/php \</span><br><span class="line">--with-config-file-path=/usr/local/php/etc \</span><br><span class="line">--with-config-file-scan-dir=/usr/local/php/conf.d \</span><br><span class="line">--enable-fpm \</span><br><span class="line">--with-fpm-user=www \</span><br><span class="line">--with-fpm-group=www \</span><br><span class="line">--enable-mysqlnd \</span><br><span class="line">--with-mysqli=mysqlnd \</span><br><span class="line">--with-pdo-mysql=mysqlnd \</span><br><span class="line">--with-iconv-dir \</span><br><span class="line">--with-freetype-dir \</span><br><span class="line">--with-jpeg-dir \</span><br><span class="line">--with-png-dir \</span><br><span class="line">--with-zlib \</span><br><span class="line">--with-libxml-dir \</span><br><span class="line">--enable-xml \</span><br><span class="line">--disable-rpath \</span><br><span class="line">--enable-bcmath \</span><br><span class="line">--enable-shmop \</span><br><span class="line">--enable-sysvsem \</span><br><span class="line">--enable-inline-optimization \</span><br><span class="line">--with-curl \</span><br><span class="line">--enable-mbregex \</span><br><span class="line">--enable-mbstring \</span><br><span class="line">--enable-intl \</span><br><span class="line">--enable-pcntl \</span><br><span class="line">--enable-ftp \</span><br><span class="line">--with-gd \</span><br><span class="line">--with-openssl \</span><br><span class="line">--with-mhash \</span><br><span class="line">--enable-pcntl \</span><br><span class="line">--enable-sockets \</span><br><span class="line">--with-xmlrpc \</span><br><span class="line">--enable-zip \</span><br><span class="line">--enable-soap \</span><br><span class="line">--with-gettext \</span><br><span class="line">--disable-fileinfo \</span><br><span class="line">--enable-opcache \</span><br><span class="line">--with-xsl</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-压缩文件-1"><a href="#1-压缩文件-1" class="headerlink" title="1. 压缩文件"></a>1. 压缩文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# xz 2.txt</span><br><span class="line"></span><br><span class="line">压缩文件到指定目录</span><br><span class="line">[root@localhost]# xz -c 2.txt &gt;</span><br><span class="line">/tmp/d6z/2.txt.xz</span><br></pre></td></tr></table></figure>
+<p>##编译过程中的出错排查</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">汇总</span><br><span class="line">yum install -y  libxml2 libxml2-devel openssl openssl-devel libcurl libcurl-devel  libjpeg libjpeg-turbo-devel libpng libpng-devel freetype freetype-devel libmcrypt libmcrypt-devel php-mcrypt  libmcrypt  libmcrypt-devel</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-解压-1"><a href="#2-解压-1" class="headerlink" title="2. 解压"></a>2. 解压</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# xz -d 2.txt.xz</span><br><span class="line">或者</span><br><span class="line">[root@localhost]# unxz 2.txt.xz</span><br><span class="line"></span><br><span class="line">解压文件并指定目录：</span><br><span class="line"></span><br><span class="line">[root@localhost]# xz -d -c /tmp/d6z/2.txt.xz &gt; ./4.txt</span><br></pre></td></tr></table></figure>
+<p>错误1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onfigure: error: xml2-config not found. Please check your libxml2 installation.</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-查看压缩文件内容"><a href="#3-查看压缩文件内容" class="headerlink" title="3. 查看压缩文件内容"></a>3. 查看压缩文件内容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# xzcat /tmp/2.txt.xz</span><br></pre></td></tr></table></figure>
+<p>解决办法1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@host php-5.6.30]# yum list |grep libxml2</span><br><span class="line">libxml2.x86_64                          2.9.1-6.el7_2.3                @anaconda</span><br><span class="line">libxml2.i686                            2.9.1-6.el7_2.3                base    </span><br><span class="line">libxml2-devel.i686                      2.9.1-6.el7_2.3                base    </span><br><span class="line">libxml2-devel.x86_64                    2.9.1-6.el7_2.3                base    </span><br><span class="line">libxml2-python.x86_64                  2.9.1-6.el7_2.3                base    </span><br><span class="line">libxml2-static.i686                    2.9.1-6.el7_2.3                base    </span><br><span class="line">libxml2-static.x86_64                  2.9.1-6.el7_2.3                base    </span><br><span class="line"></span><br><span class="line">[root@host php-5.6.30]# yum install -y libxml2 libxml2-devel     //一般只需要安裝devel的庫文件就好了</span><br></pre></td></tr></table></figure>
+
+<p>错误2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure: error: Cannot find OpenSSL&apos;s &lt;evp.h&gt;</span><br></pre></td></tr></table></figure>
+
+<p>解决办法2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host php-5.6.30]# yum install -y openssl openssl-devel</span><br></pre></td></tr></table></figure>
+
+<p>错误3：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">configure: error: Please reinstall the libcurl distribution -</span><br><span class="line">    easy.h should be in &lt;curl-dir&gt;/include/curl/</span><br></pre></td></tr></table></figure>
+
+<p>解决办法3：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host php-5.6.30]# yum install -y libcurl libcurl-devel</span><br></pre></td></tr></table></figure>
+
+<p>错误4：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure: error: jpeglib.h not found.</span><br></pre></td></tr></table></figure>
+
+<p>解决办法4：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host php-5.6.30]# yum install -y libjpeg libjpeg-turbo-devel</span><br></pre></td></tr></table></figure>
+
+<p>错误5：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure: error: png.h not found.</span><br></pre></td></tr></table></figure>
+
+<p>解决办法5：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host php-5.6.30]# yum install -y libpng libpng-devel</span><br></pre></td></tr></table></figure>
+
+<p>错误6：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure: error: freetype-config not found.</span><br></pre></td></tr></table></figure>
+
+<p>解决办法6：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host php-5.6.30]# yum install -y freetype freetype-devel</span><br></pre></td></tr></table></figure>
+
+<p>错误7：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure: error: mcrypt.h not found. Please reinstall libmcrypt.</span><br></pre></td></tr></table></figure>
+
+<p>解决办法7：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host php-5.6.30]# yum install -y libmcrypt libmcrypt-devel</span><br></pre></td></tr></table></figure>
+
+<p>错误8：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">configure: error: mcrypt.h not found. Please reinstall libmcrypt.</span><br><span class="line">(centos源不能安装libmcrypt-devel，由于版权的原因没有自带mcrypt的包rpm -qa|grep limcrypt limcrypt-devel,此源为rethot社区版的源)</span><br></pre></td></tr></table></figure>
+
+<p>解决办法8：安装第三方yum源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.atomicorp.com/installers/atomic</span><br><span class="line">sh ./atomic</span><br><span class="line"></span><br><span class="line">yum  install  php-mcrypt  libmcrypt  libmcrypt-devel</span><br></pre></td></tr></table></figure>
+
+<p>检测、编译和安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@host php-5.6.30]# echo $?</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">[root@host php-5.6.30]# make </span><br><span class="line"></span><br><span class="line">[root@host php-5.6.30]# make install</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置PHP"><a href="#配置PHP" class="headerlink" title="配置PHP"></a>配置PHP</h2><p>添加配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host php-5.6.30]# cp php.ini-production /usr/local/php-fpm/etc/php.ini</span><br></pre></td></tr></table></figure>
+
+<p>配置文件编辑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@host php-5.6.30]# vi /usr/local/php-fpm/etc/php-fpm.conf   //写入如下内容</span><br><span class="line"></span><br><span class="line">[global]</span><br><span class="line">#定义全局参数</span><br><span class="line">pid = /usr/local/php-fpm/var/run/php-fpm.pid</span><br><span class="line">error_log = /usr/local/php-fpm/var/log/php-fpm.log</span><br><span class="line">[www]</span><br><span class="line">listen = /tmp/php-fcgi.sock</span><br><span class="line">#监听地址，也可以写：listen = 127.0.0.1：:9000，本地监听，也可以监听其他IP：port</span><br><span class="line">#此处格式会影响配置Nginx和PHP结合时Nginx寻址PHP的路径</span><br><span class="line">listen.mode = 666</span><br><span class="line">#当监听的为socket文件时该部分才生效，用于指定.sock文件的权限</span><br><span class="line">user = php-fpm</span><br><span class="line">group = php-fpm</span><br><span class="line">#定义php-fpm服务的用户</span><br><span class="line">pm = dynamic</span><br><span class="line">pm.max_children = 50</span><br><span class="line">pm.start_servers = 20</span><br><span class="line">pm.min_spare_servers = 5</span><br><span class="line">pm.max_spare_servers = 35</span><br><span class="line">pm.max_requests = 500</span><br><span class="line">rlimit_files = 1024</span><br><span class="line">#以上部分为进程相关信息</span><br></pre></td></tr></table></figure>
+
+<p>配置启动脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@host etc]# cd /usr/local/src/php-5.6.30  //进入源码目录下来</span><br><span class="line"></span><br><span class="line">[root@host php-5.6.30]#  cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm  //把启动脚本放到到系统配置</span><br><span class="line"></span><br><span class="line">[root@host php-5.6.30]# chmod 755 /etc/init.d/php-fpm  //修改权限</span><br><span class="line"></span><br><span class="line">[root@host php-5.6.30]# chkconfig --add php-fpm  //添加到开机启动项</span><br><span class="line"></span><br><span class="line">[root@host php-5.6.30]# chkconfig php-fpm on  //设置开机启动</span><br><span class="line"></span><br><span class="line">[root@host php-5.6.30]# service php-fpm start  //启动php-fpm服务</span><br><span class="line">Starting php-fpm  done</span><br><span class="line"></span><br><span class="line">[root@host php-5.6.30]# ps aux |grep php-fpm  //查看后台www的pool是否启动</span><br></pre></td></tr></table></figure>
+
+<p>#12.5 Nginx介绍</p>
+<blockquote>
+<p>Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。其特点是占有内存少，并发能力强，事实上nginx的并发能力确实在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。</p>
+</blockquote>
+<ul>
+<li>Nginx官网 nginx.org，最新版1.13，最新稳定版1.12 </li>
+<li>Nginx应用场景：web服务、反向代理、负载均衡</li>
+<li>Nginx著名分支，淘宝基于Nginx开发的Tengine，使用上和Nginx一致，服务名，配置文件名都一样，和Nginx的最大区别在于Tenging增加了一些定制化模块，在安全限速方面表现突出，另外它支持对js，css合并</li>
+<li>Nginx核心+lua相关的组件和模块组成了一个支持lua的高性能web容器openresty。</li>
+</ul>
+<blockquote>
+<p>1、Nginx优点<br>Nginx设计为一个主进程多个工作进程的工作模式，每个进程是单线程来处理多个连接，而且每个工作进程采用了非阻塞I/O来处理多个连接，从而减少了线程上下文切换，从而实现了公认的高性能、高并发；因此在生成环境中会通过把CPU绑定给Nginx工作进程从而提升其性能；另外因为单线程工作模式的特点，内存占用就非常少了。<br>Nginx更改配置重启速度非常快，可以毫秒级，而且支持不停止Nginx进行升级Nginx版本、动态重载Nginx配置。<br>Nginx模块也是非常多，功能也很强劲，不仅可以作为http负载均衡，Nginx发布1.9.0版本还支持TCP负载均衡，还可以很容易的实现内容缓存、web服务器、反向代理、访问控制等功能。</p>
+</blockquote>
+<blockquote>
+<p>2、Lua的优点<br>Lua是一种轻量级、可嵌入式的脚本语言，这样可以非常容易的嵌入到其他语言中使用。另外Lua提供了协程并发，即以同步调用的方式进行异步执行，从而实现并发，比起回调机制的并发来说代码更容易编写和理解，排查问题也会容易。Lua还提供了闭包机制，函数可以作为First Class Value 进行参数传递，另外其实现了标记清除垃圾收集。<br>因为Lua的小巧轻量级，可以在Nginx中嵌入Lua VM，请求的时候创建一个VM，请求结束的时候回收VM。</p>
+</blockquote>
+<blockquote>
+<p>3、什么是ngx_lua<br>ngx_lua是Nginx的一个模块，将Lua嵌入到Nginx中，从而可以使用Lua来编写脚本，这样就可以使用Lua编写应用脚本，部署到Nginx中运行，即Nginx变成了一个Web容器；这样开发人员就可以使用Lua语言开发高性能Web应用了。<br>ngx_lua提供了与Nginx交互的很多的API，对于开发人员来说只需要学习这些API就可以进行功能开发，而对于开发web应用来说，如果接触过Servlet的话，其开发和Servlet类似，无外乎就是知道接收请求、参数解析、功能处理、返回响应这几步的API是什么样子的。</p>
+</blockquote>
+<blockquote>
+<p>4、开发环境<br>我们可以使用OpenResty来搭建开发环境，OpenResty将Nginx核心、LuaJIT、许多有用的Lua库和Nginx第三方模块打包在一起；这样开发人员只需要安装OpenResty，不需要了解Nginx核心和写复杂的C/C++模块就可以，只需要使用Lua语言进行Web应用开发了。</p>
+</blockquote>
+<p>参考<a href="http://jinnianshilongnian.iteye.com/blog/2280928" target="_blank" rel="noopener">http://jinnianshilongnian.iteye.com/blog/2280928</a></p>
+<p>#扩展</p>
+<p>##Nginx为什么比Apache Httpd高效：原理篇<br><a href="http://www.toxingwang.com/linux-unix/linux-basic/1712.html" target="_blank" rel="noopener">http://www.toxingwang.com/linux-unix/linux-basic/1712.html</a></p>
+<p>##apache和nginx工作原理比较<br><a href="http://www.server110.com/nginx/201402/6543.html" target="_blank" rel="noopener">http://www.server110.com/nginx/201402/6543.html</a></p>
+<p>##mod_php 和 mod_fastcgi以及php-fpm的比较<br><a href="http://dwz.cn/1lwMSd" target="_blank" rel="noopener">http://dwz.cn/1lwMSd</a></p>
+<p>##概念了解：CGI，FastCGI，PHP-CGI与PHP-FPM<br><a href="http://www.nowamagic.net/librarys/veda/detail/1319/" target="_blank" rel="noopener">http://www.nowamagic.net/librarys/veda/detail/1319/</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/10.11 - 10.14 iptables学习01-linux网络相关和防火墙介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux入门笔记/10.11 - 10.14 iptables学习01-linux网络相关和防火墙介绍/" itemprop="url">10.11 - 10.14 iptables学习01-linux网络相关和防火墙介绍</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="10-11-Linux网络相关"><a href="#10-11-Linux网络相关" class="headerlink" title="10.11 Linux网络相关"></a>10.11 Linux网络相关</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">ifconfig查看网卡ip（需要安装包yum install net-tools）</span><br><span class="line">ifconfig -a 当网卡down掉也可以查看到</span><br><span class="line">ifdown ens33  关闭网卡ens33</span><br><span class="line">ifup ens33    开启网卡ens33</span><br><span class="line"></span><br><span class="line">如果在远程连接，想重启网卡，那么不能使用ifdown</span><br><span class="line">两种方法：</span><br><span class="line">1. ifdown ens33 &amp;&amp; ifup ens33</span><br><span class="line">2. 设定虚拟网卡ens331</span><br><span class="line">cd etcsysconfignetwork-scripts</span><br><span class="line">cp ifcfg-ens33 ifcfg-ens330      这里的脱义的</span><br><span class="line">vi !$  修改配置文件</span><br><span class="line">NAME=ens330</span><br><span class="line">IP=......</span><br><span class="line">ifdown ens33 &amp;&amp; ifup ens33</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查看网卡是否连接有网线</span><br><span class="line">mii-tool ens33 查看网卡是否连接有网线</span><br><span class="line">查看link detectedyes 这一行是否存在，有的话，表示有网线连接</span><br><span class="line">ethtool ens33 也可以查看网卡是否连接</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">更改主机名 </span><br><span class="line">hostnamectl set-hostname aminglinux  想要改过来，需要重新登录账户</span><br><span class="line">主机名配置文件 etchostname</span><br><span class="line">DNS配置文件    etcresolv.conf</span><br><span class="line">host配置文件  etchosts文件  只在本机生效</span><br><span class="line">格式：</span><br><span class="line">ip 域名（www.百度.com） 域名    支持1个IP配多个域名</span><br></pre></td></tr></table></figure>
+
+<h1 id="10-12-firewalld和netfilter"><a href="#10-12-firewalld和netfilter" class="headerlink" title="10.12 firewalld和netfilter"></a>10.12 firewalld和netfilter</h1><h2 id="1-seLinux"><a href="#1-seLinux" class="headerlink" title="1. seLinux"></a>1. seLinux</h2><ul>
+<li>selinux临时关闭 setenforce 0</li>
+<li>selinux永久关闭 vi etcselinuxconfig</li>
+<li>把SELINUX=enforcing  改为SELINUX=disabled</li>
+<li>selinux平时运维都是关闭的</li>
+</ul>
+<h2 id="2-firewalld和netfilter"><a href="#2-firewalld和netfilter" class="headerlink" title="2. firewalld和netfilter"></a>2. firewalld和netfilter</h2><ul>
+<li>centos7之前使用netfilter防火墙</li>
+<li>centos7开始使用firewalld防火墙</li>
+<li>firewalld和netfilter机制不太一样，但是都支持iptables 命令</li>
+<li>CentOS7默认是关闭netfilter开启firewalld的</li>
+</ul>
+<h2 id="3-怎么启用CentOS7的netfilter呢？"><a href="#3-怎么启用CentOS7的netfilter呢？" class="headerlink" title="3. 怎么启用CentOS7的netfilter呢？"></a>3. 怎么启用CentOS7的netfilter呢？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld  关闭firewalld  </span><br><span class="line"></span><br><span class="line">开启netfilter 之前需要安装iptables-service 包，就会产生iptables服务</span><br><span class="line">yum install -y iptables-services</span><br><span class="line">systemctl disable firewalled  开启netfilter</span><br><span class="line"></span><br><span class="line">开启iptables工具</span><br><span class="line">systemctl enable iptables</span><br><span class="line">systemctl start iptables</span><br></pre></td></tr></table></figure>
+
+<h1 id="10-13-netfilter5表5链介绍"><a href="#10-13-netfilter5表5链介绍" class="headerlink" title="10.13 netfilter5表5链介绍"></a>10.13 netfilter5表5链介绍</h1><p>netfilter的5个表</p>
+<ul>
+<li>filter表用于过滤包，最常用的表，有INPUT、FORWARD、OUTPUT三个链</li>
+<li>nat表用于网络地址转换，有PREROUTING、OUTPUT、POSTROUTING三个链，可以用于共享上网，和端口映射</li>
+<li>managle表用于给数据包做标记，几乎用不到</li>
+<li>raw表可以实现不追踪某些数据包，阿铭从来不用</li>
+<li>security表在centos6中并没有，用于强制访问控制（MAC）的网络规则，阿铭没用过<br>（CentOS6只有4个表，没有security）</li>
+</ul>
+<p>数据包流向与netfilter的5个链</p>
+<ul>
+<li>PREROUTING：数据包进入路由表之前</li>
+<li>INPUT：通过路由表后目的地为本机</li>
+<li>FORWARD：通过路由表后，目的地不为本机</li>
+<li>OUTPUT：由本机产生，向外发出</li>
+<li>POSTROUTING：发送到网卡接口之前</li>
+</ul>
+<h1 id="10-14-iptables语法"><a href="#10-14-iptables语法" class="headerlink" title="10.14 iptables语法"></a>10.14 iptables语法</h1><p> iptables命令是Linux上常用的防火墙软件，是netfilter项目的一部分。可以直接配置，也可以通过许多前端和图形界面配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">语法 iptables(选项)(参数)</span><br><span class="line">选项 </span><br><span class="line">-t表：指定要操纵的表；</span><br><span class="line">-A：向规则链中添加条目；</span><br><span class="line">-D：从规则链中删除条目；</span><br><span class="line">-i：向规则链中插入条目；</span><br><span class="line">-R：替换规则链中的条目；</span><br><span class="line">-L：显示规则链中已有的条目；</span><br><span class="line">-F：清楚规则链中已有的条目；</span><br><span class="line">-Z：清空规则链中的数据包计算器和字节计数器；</span><br><span class="line">-N：创建新的用户自定义规则链；</span><br><span class="line">-P：定义规则链中的默认目标；</span><br><span class="line">-h：显示帮助信息；</span><br><span class="line">-p：指定要匹配的数据包协议类型；</span><br><span class="line">-s：指定要匹配的数据包源ip地址；</span><br><span class="line">-j目标：指定要跳转的目标；</span><br><span class="line">-i网络接口：指定数据包进入本机的网络接口；</span><br><span class="line">-o网络接口：指定数据包要离开本机所使用的网络接口。</span><br><span class="line"></span><br><span class="line">使用：</span><br><span class="line">iptables -nvL  查看iptables规则</span><br><span class="line">规则保存在 catetcsysconfigiptables 文件</span><br><span class="line"></span><br><span class="line">iptables -F 清空规则</span><br><span class="line">清空规则之后，文件etcsysconfigiptables还是有的</span><br><span class="line"></span><br><span class="line">service iptables save 保存规则</span><br><span class="line">把当前的规则保存到文件里</span><br><span class="line">service iptables restart  重启服务把规则加载回来</span><br><span class="line"></span><br><span class="line">iptables -t filter    以上操作都是针对filter表，默认的表</span><br><span class="line"></span><br><span class="line">iptables -t nat    查看nat 规则， -t 指定表</span><br><span class="line"></span><br><span class="line">iptables -Z      可以把计数器清零</span><br><span class="line"></span><br><span class="line">iptables -A INPUT -s 192.168.188.1 -p tcp --sport 1234 -s 192.168.188.128 --dport 80 -j DROP    </span><br><span class="line">-A    增加一条规则</span><br><span class="line">INPUT  针对INPUT链</span><br><span class="line">-s      指定来源ip    s=source</span><br><span class="line">-p      指定协议</span><br><span class="line">-sport 1234  来源的端口1234</span><br><span class="line">-d      目标的ip</span><br><span class="line">-dport 80  目标的端口</span><br><span class="line">DROP    直接扔掉数据，不接受</span><br><span class="line">REJECT  拒绝数据，但是先查看一下</span><br><span class="line">扔掉和拒绝，是为了封掉数据包，相当于封掉ip</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iptables -I INPUT -s 1.1.1.1 -j DROP  插入优先规则，该IP输入的数据直接扔掉</span><br><span class="line">iptables -A INPUT -s 1.1.1.1 -j DROP    新增规则，该IP输入的数据直接扔掉</span><br><span class="line">iptables -D INPUT -s 1.1.1.1 -j DROP    删除规则：该IP输入的数据直接扔掉</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iptables -I INPUT -s 192.168.1.024 -i eth0 -j ACCEPT  插入优先规则，该IP出入数据从eth0网卡进入，将会接收</span><br><span class="line">iptables -nvL --line-numbers    打印iptables规则的序列号</span><br><span class="line">iptables -D INPUT 1    删除对应编号的规则</span><br><span class="line">iptables -P INPUT DROP  默认的规则，输入的数据都扔掉（输出的数据不能直接扔掉，不然会连不上机器）</span><br></pre></td></tr></table></figure>
+
+<p>平时一些iptables规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop log]# iptables -S</span><br><span class="line">-P INPUT DROP</span><br><span class="line">-P FORWARD ACCEPT</span><br><span class="line">-P OUTPUT DROP</span><br><span class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">-A INPUT -p icmp -j ACCEPT</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 111 -j ACCEPT</span><br><span class="line">-A INPUT -p udp -m state --state NEW -m udp --dport 111 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 892 -j ACCEPT</span><br><span class="line">-A INPUT -p udp -m state --state NEW -m udp --dport 892 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 2049 -j ACCEPT</span><br><span class="line">-A INPUT -p udp -m state --state NEW -m udp --dport 2049 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 32803 -j ACCEPT</span><br><span class="line">-A INPUT -j LOG --log-prefix hua-IN  --log-level 1</span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">-A OUTPUT -p icmp -j ACCEPT</span><br><span class="line">-A OUTPUT -o lo -j ACCEPT</span><br><span class="line">-A OUTPUT -p tcp -m state --state NEW -m tcp --dport 21 -j ACCEPT</span><br><span class="line">-A OUTPUT -p udp -m state --state NEW -m udp --dport 53 -j ACCEPT</span><br><span class="line">-A OUTPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT</span><br><span class="line">-A OUTPUT -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT</span><br><span class="line">-A OUTPUT -j LOG --log-prefix hua-OUT  --log-level 1</span><br></pre></td></tr></table></figure>
+
+<h1 id="扩展（selinux了解即可）"><a href="#扩展（selinux了解即可）" class="headerlink" title="扩展（selinux了解即可）"></a>扩展（selinux了解即可）</h1><h2 id="1-selinux教程"><a href="#1-selinux教程" class="headerlink" title="1. selinux教程"></a>1. selinux教程</h2><p>httpos.51cto.comart201209355490.htm</p>
+<h2 id="2-selinux-pdf电子书"><a href="#2-selinux-pdf电子书" class="headerlink" title="2.selinux pdf电子书"></a>2.selinux pdf电子书</h2><p>httppan.baidu.coms1jGGdExK</p>
+
           
         
       
@@ -599,177 +852,6 @@
 <li>sant,dnat,masquerade<br><a href="http://www.aminglinux.com/bbs/thread-7255-1-1.html" target="_blank" rel="noopener">http://www.aminglinux.com/bbs/thread-7255-1-1.html</a></li>
 <li>iptables限制syn速率<br><a href="http://www.aminglinux.com/bbs/thread-985-1-1.html" target="_blank" rel="noopener">http://www.aminglinux.com/bbs/thread-985-1-1.html</a></li>
 </ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/10.19 - 10.22 iptables学习03-firewalld的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhouqun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joking的Linux世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux入门笔记/10.19 - 10.22 iptables学习03-firewalld的使用/" itemprop="url">10.19 - 10.22 iptables学习03-firewalld的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">linux入门笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="10-19-iptables规则备份和恢复"><a href="#10-19-iptables规则备份和恢复" class="headerlink" title="10.19 iptables规则备份和恢复"></a>10.19 iptables规则备份和恢复</h1><ul>
-<li><p>保存和备份iptables规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables save  会把规则保存到/etc/sysconfig/iptables</span><br><span class="line">如果想要一开机就启动规则，最好把规则保存到配置文件中</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>有时候想把iptables规则备份其他文件中，比如到my.ipt文件中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables-save &gt; my.ipt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>清空iptables规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -F</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>恢复刚才备份的规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables-restore &lt; my.ipt</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="10-20-firewalld的9个zone"><a href="#10-20-firewalld的9个zone" class="headerlink" title="10.20 firewalld的9个zone"></a>10.20 firewalld的9个zone</h1><ul>
-<li><p>打开firewalld，禁掉iptables</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable iptables</span><br><span class="line">systemctl stop iptables</span><br><span class="line">systemctl enable firewalld</span><br><span class="line">systemctl start firewalld</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>firewalld自带规则，默认有9个zone</p>
-</li>
-<li><p>默认zone为public，每个zone好比一个规则集</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --get-zones          查看所有zone</span><br><span class="line">block dmz drop external home internal public trusted work</span><br><span class="line"></span><br><span class="line">block：拒绝所有外部连接，允许内部发起的连接</span><br><span class="line">dmz：和硬件防火墙一样，受限制的公共连接可以进入</span><br><span class="line">drop：丢弃接收到的所有网络数据包</span><br><span class="line">external：允许指定的外部连接</span><br><span class="line">home：用于家庭组网络，允许指定的外部连接</span><br><span class="line">internal：用于内部网络，允许指定的外部连接</span><br><span class="line">public：公共区域内使用，允许指定的外部连接</span><br><span class="line">trusted：信任所有网络连接</span><br><span class="line">work：用于工作区，允许指定的外部连接</span><br><span class="line"></span><br><span class="line">firewall-cmd --get-default-zone  查看默认zone</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="10-21-firewalld关于zone的操作"><a href="#10-21-firewalld关于zone的操作" class="headerlink" title="10.21 firewalld关于zone的操作"></a>10.21 firewalld关于zone的操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ls /usr/lib/firewalld/zones/                      查看zone的配置文件模板</span><br><span class="line">firewall-cmd --set-default-zone=work              设定默认zone</span><br><span class="line">firewall-cmd --get-zone-of-interface=ens33        查指定网卡</span><br><span class="line">firewall-cmd --zone=public --add-interface=lo    给指定网卡设置zone </span><br><span class="line">firewall-cmd --zone=dmz --change-interface=lo    针对网卡更改zone</span><br><span class="line">firewall-cmd --zone=dmz  --remove-interface=lo    针对网卡删除zone </span><br><span class="line">firewall-cmd --get-active-zones                  查看系统所有网卡所在的zone</span><br></pre></td></tr></table></figure>
-
-<h1 id="10-22-firewalld关于service的操作"><a href="#10-22-firewalld关于service的操作" class="headerlink" title="10.22 firewalld关于service的操作"></a>10.22 firewalld关于service的操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --get-services 查看所有的servies</span><br><span class="line">firewall-cmd --list-services //查看当前zone下有哪些service</span><br><span class="line">firewall-cmd --zone=work --list-services//查看work下有哪些service</span><br><span class="line">firewall-cmd --zone=public --add-service=http //把http增加到public的zone下面</span><br><span class="line">firewall-cmd --zone=public --remove-service=http//移除public的zone的http服务</span><br><span class="line">firewall-cmd --zone=public --add-service=http --permanent //更改配置文件，新增的service会得到保存，之后会在/etc/firewalld/zones目录下面生成配置文件</span><br><span class="line">ls /etc/firewalld/zones/</span><br><span class="line">ls /usr/lib/firewalld/services/ //查看service的配置文件模板</span><br></pre></td></tr></table></figure>
-
 
           
         
@@ -1854,7 +1936,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/11.32 LAMP架构-php扩展模块安装/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/11.28 - 11.30 LAMP架构-apache限定某个目录禁止解析php、限制user_agent、php相关配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1873,7 +1955,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/11.32 LAMP架构-php扩展模块安装/" itemprop="url">11.32 LAMP架构-php扩展模块安装</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/11.28 - 11.30 LAMP架构-apache限定某个目录禁止解析php、限制user_agent、php相关配置/" itemprop="url">11.28 - 11.30 LAMP架构-apache限定某个目录禁止解析php、限制user_agent、php相关配置</a></h1>
         
 
         <div class="post-meta">
@@ -1947,29 +2029,34 @@
       
         
           
-            <p>#11.32 php扩展模块安装</p>
-<p>有时候，编译好PHP后，发现还有其他模块需要添加进去，那么就需要安装php扩展模块安装。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/php/bin/php -m //查看模块</span><br></pre></td></tr></table></figure>
+            <p>#11.28 限定某个目录禁止解析php</p>
+<p>如果有一个目录是允许上传图片的，保不准有些人通过手段上传了php文件，那么就有可能被运行，造成安全隐患，被拿到root权限。</p>
+<h2 id="1-编辑虚拟主机配置文件"><a href="#1-编辑虚拟主机配置文件" class="headerlink" title="1. 编辑虚拟主机配置文件"></a>1. 编辑虚拟主机配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host 111.com]# vim /usr/local/apache2.4/conf/extra/httpd-vhosts.conf </span><br><span class="line">    &lt;Directory /data/wwwroot/111.com/upload&gt;</span><br><span class="line">        php_admin_flag engine off</span><br><span class="line">    &lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
 
-<p>下面安装一个redis的模块，当做php中的缓存来用</p>
-<h2 id="1-下载redis的安装包到src目录"><a href="#1-下载redis的安装包到src目录" class="headerlink" title="1. 下载redis的安装包到src目录"></a>1. 下载redis的安装包到src目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/</span><br><span class="line">wget https://codeload.github.com/phpredis/phpredis/zip/develop</span><br></pre></td></tr></table></figure>
+<h2 id="2-创建相应的目录"><a href="#2-创建相应的目录" class="headerlink" title="2. 创建相应的目录"></a>2. 创建相应的目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host 111.com]# mkdir upload</span><br><span class="line">……</span><br><span class="line">[root@host 111.com]# ls upload/</span><br><span class="line">123.php  qq.png</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-把包改名字并解压"><a href="#2-把包改名字并解压" class="headerlink" title="2. 把包改名字并解压"></a>2. 把包改名字并解压</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv develop phpredis-develop.zip</span><br><span class="line">unzip phpredis-develop.zip</span><br></pre></td></tr></table></figure>
+<h2 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host 111.com]# curl -x127.0.0.1:80 111.com/upload/123.php -I</span><br><span class="line">HTTP/1.1 403 Forbidden</span><br><span class="line">Date: Mon, 04 Sep 2017 22:31:52 GMT</span><br><span class="line">Server: Apache/2.4.27 (Unix) PHP/5.6.30</span><br><span class="line">Content-Type: text/html; charset=iso-8859-1</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-编译并安装"><a href="#3-编译并安装" class="headerlink" title="3. 编译并安装"></a>3. 编译并安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd phpredis-develop</span><br><span class="line">/usr/local/php/bin/phpize      //为了生成configure文件 </span><br><span class="line">./configure --with-php-config=/usr/local/php/bin/php-config</span><br><span class="line">make </span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>#11.29 限制user_agent</p>
+<blockquote>
+<p>User Agent中文名为用户代理，简称 UA，它是一个特殊字符串头，使得服务器能够识别客户使用的操作系统及版本、CPU 类型、浏览器及版本、浏览器渲染引擎、浏览器语言、浏览器插件等。user_agent可以理解为浏览器标识。</p>
+</blockquote>
+<p>CC攻击（Challenge Collapsar）是DDOS（分布式拒绝服务）的一种，攻击者通过代理服务器或者肉鸡向向受害主机不停地发大量数据包，造成对方服务器资源耗尽，一直到宕机崩溃，我们可以通过限制攻击者useragent的方法来阻断其攻击（这只是初级的防御方法）。</p>
+<p>核心配置文件内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">      RewriteEngine on</span><br><span class="line">      RewriteCond %&#123;HTTP_USER_AGENT&#125;  .*curl.* [NC,OR]</span><br><span class="line">      RewriteCond %&#123;HTTP_USER_AGENT&#125;  .*baidu.com.* [NC]</span><br><span class="line">      RewriteRule  .*  -  [F]</span><br><span class="line">  &lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="4-加载redis模块"><a href="#4-加载redis模块" class="headerlink" title="4. 加载redis模块"></a>4. 加载redis模块</h2><p>现在php还是不支持redis的，需要编辑php的配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/php/bin/php -i |grep extension_dir     //查看扩展模块存放目录，我们可以在php.ini中去自定义该路径 </span><br><span class="line">vim /usr/local/php/etc/php.ini              //增加一行配置（可以放到文件最后一行）</span><br><span class="line">extension = redis.so  //添加进去</span><br></pre></td></tr></table></figure>
+<p>curl -A “123123” 指定user_agent</p>
+<p>#11.30/11.31 php相关配置</p>
+<h2 id="查看php配置文件位置"><a href="#查看php配置文件位置" class="headerlink" title="查看php配置文件位置"></a>查看php配置文件位置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/php/bin/php -i | grep -i &quot;loaded configuration file&quot;</span><br></pre></td></tr></table></figure>
 
-<h3 id="5-关于扩展模块"><a href="#5-关于扩展模块" class="headerlink" title="5. 关于扩展模块"></a>5. 关于扩展模块</h3><p>除了像redis这种第三方模块，在php的源码包里的ext目录下，有很多这种本地已经存在的模块，我们可以直接编译安装。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/php-7.1.6/ext</span><br><span class="line">ls</span><br><span class="line">cd zip/</span><br><span class="line">ls</span><br><span class="line">cd /usr/local/src/phpize</span><br><span class="line">./configure --with-php-config=/usr/local/php/bin/php-config</span><br><span class="line">make </span><br><span class="line">make install</span><br><span class="line">vim /usr/local/php/etc/php.ini              //增加一行配置（可以放到文件最后一行）</span><br><span class="line">extension = zip.so  //添加进去</span><br></pre></td></tr></table></figure>
+<h2 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">date.timezone=Asia/Shanghai     #设定时区,设定到上海或者重庆都可以</span><br><span class="line"></span><br><span class="line">disable_functions  # 限制安全函数</span><br><span class="line">disable_functions=eval,assert,popen,passthru,escapeshellarg,escapeshellcmd,passthru,exec,system,chroot,scandir,chgrp,chown,escapeshellcmd,escapeshellarg,shell_exec,proc_get_status,ini_alter,ini_restore,dl,pfsockopen,openlog,syslog,readlink,symlink,leak,popepassthru,stream_socket_server,popen,proc_open,proc_close #某些生产环境有时会禁掉phpinfo</span><br><span class="line">eval,assert,popen,passthru,escapeshellarg,escapeshellcmd,passthru,exec,system,chroot,scandir,chgrp,chown,escapeshellcmd,escapeshellarg,shell_exec,proc_get_status,ini_alter,ini_restore,dl,pfsockopen,openlog,syslog,readlink,symlink,leak,popepassthru,stream_socket_server,popen,proc_open,proc_close  #这些都是比较危险的函数，这样设置 </span><br><span class="line"></span><br><span class="line">error_log, log_errors, display_errors, error_reporting   # 日志相关</span><br><span class="line">display_errors=On/Off   #设定是否显示错误原因，一般关掉，防止用户看到。但是配置Off后，必须设置错误日志的的路径和错误日志的级别，否则后面无法查找出错的原因。</span><br><span class="line">log_errors=On/Off 开启/关闭错误日志</span><br><span class="line">error_log=/tmp/php_errors.log   #设定错误日志的保存路径。如果定义好路径后无法生产日志，此时需要检查日志文件所在目录是否有写（w）权限</span><br><span class="line">error_reporting = E_ ALL &amp; ~E_ NOTICE                        #设定错误日志级别，级别有：E_ ALL 、~E_ NOTICE 、~E_ STRICT 、~E_DEPRECATED（可以自由组合）。生产环境使用：E_ ALL &amp; ~E_ NOTICE就可以。</span><br><span class="line"></span><br><span class="line">open_basedir =  /data/wwwroot/111.com:/tmp/  #安全参数选项，设置了open_basedir选项，将会把所有关于文件的操作限制在指定目录及其子目录</span><br><span class="line"># 一台服务器运行着不止一台虚拟主机，所以在该文件下设置该选项并不合适。那么，该如何设定该配置呢？</span><br><span class="line"></span><br><span class="line">答案是分别在每个虚拟主机的配置文件进行相关设置</span><br><span class="line">php_admin_value open_basedir &quot;/data/wwwroot/111.com:/tmp/&quot;  # “php_admin_value”可以定义php.ini中的参数。分别在每个虚拟主机设定相关的“open_basedir”即可。</span><br></pre></td></tr></table></figure>
 
 <p>#扩展</p>
-<h2 id="apache-rewrite教程"><a href="#apache-rewrite教程" class="headerlink" title="apache rewrite教程"></a>apache rewrite教程</h2><p><a href="http://coffeelet.blog.163.com/blog/static/13515745320115842755199/" target="_blank" rel="noopener">http://coffeelet.blog.163.com/blog/static/13515745320115842755199/</a>  <a href="http://www.cnblogs.com/top5/archive/2009/08/12/1544098.html" target="_blank" rel="noopener">http://www.cnblogs.com/top5/archive/2009/08/12/1544098.html</a></p>
-<h2 id="apache-rewrite-出现死循环"><a href="#apache-rewrite-出现死循环" class="headerlink" title="apache rewrite 出现死循环"></a>apache rewrite 出现死循环</h2><p><a href="http://ask.apelearn.com/question/1043" target="_blank" rel="noopener">http://ask.apelearn.com/question/1043</a></p>
-<h2 id="php错误日志级别参考"><a href="#php错误日志级别参考" class="headerlink" title="php错误日志级别参考"></a>php错误日志级别参考</h2><p><a href="http://ask.apelearn.com/question/6973" target="_blank" rel="noopener">http://ask.apelearn.com/question/6973</a></p>
-<h2 id="php开启短标签"><a href="#php开启短标签" class="headerlink" title="php开启短标签"></a>php开启短标签</h2><p><a href="http://ask.apelearn.com/question/120" target="_blank" rel="noopener">http://ask.apelearn.com/question/120</a></p>
-<h2 id="php-ini详解"><a href="#php-ini详解" class="headerlink" title="php.ini详解"></a>php.ini详解</h2><p><a href="http://legolas.blog.51cto.com/2682485/493917" target="_blank" rel="noopener">http://legolas.blog.51cto.com/2682485/493917</a></p>
+<p>##apache开启压缩<br><a href="http://www.aminglinux.com/bbs/thread-5528-1-1.html" target="_blank" rel="noopener">http://www.aminglinux.com/bbs/thread-5528-1-1.html</a></p>
+<p>##apache2.2到2.4配置文件变更<br><a href="http://www.aminglinux.com/bbs/thread-7292-1-1.html" target="_blank" rel="noopener">http://www.aminglinux.com/bbs/thread-7292-1-1.html</a></p>
+<p>##apache options参数<br><a href="http://www.aminglinux.com/bbs/thread-1051-1-1.html" target="_blank" rel="noopener">http://www.aminglinux.com/bbs/thread-1051-1-1.html</a></p>
+<p>##apache禁止trace或track防止xss<br><a href="http://www.aminglinux.com/bbs/thread-1045-1-1.html" target="_blank" rel="noopener">http://www.aminglinux.com/bbs/thread-1045-1-1.html</a></p>
+<p>##apache 配置https 支持ssl<br><a href="http://www.aminglinux.com/bbs/thread-1029-1-1.html" target="_blank" rel="noopener">http://www.aminglinux.com/bbs/thread-1029-1-1.html</a></p>
 
           
         
