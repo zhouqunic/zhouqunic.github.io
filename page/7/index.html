@@ -383,11 +383,7 @@
           18.6 负载均衡集群介绍
 主流开源软件LVS、keepalived、haproxy、nginx等 
 
-其中LVS属于4层（网络OSI 7层模型），nginx属于7层，haproxy既可以认为是4层，也可以当做7层使用
-
-keepalived的负载均衡功能其实就是lvs 
-
-lvs这种4层的负载均衡
+其中LVS属于4层（网络OSI 7层模型），nginx属于7层，haproxy既可以认为是4层，
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -537,9 +533,7 @@ lvs这种4层的负载均衡
           
           19.1 Linux监控平台介绍常见的Linux监控平台有cacti、nagios、zabbix、smokeping、open-falcon等等  
 
-cacti、smokeping偏向于基础监控，成图非常漂亮  
-
-cacti、nagios、zabbix服务端监控中心，需要php环境支持，其中za
+cacti、smokeping偏向于基础监控，成
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -690,9 +684,7 @@ cacti、nagios、zabbix服务端监控中心，需要php环境支持，其中za
           21.1 nosql介绍1. 什么是NoSQL？
 非关系型数据库就是NoSQL，而关系型数据库代表MySQL  
 
-对于关系型数据库来说，是需要把数据存储到库、表、行、字段里，查询的时候根据条件一行一行地去匹配，当量非常大的时候就很耗费时间和资源，*尤其是数据是需要从磁盘里去检索 * 
-
-NoSQL
+对于关系型数据库来说，是需要把数据存储到库、表、行、字段里，查询的时候根据条件一行一
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -841,8 +833,7 @@ NoSQL
         
           
           21.13/21.14/21.15 redis常用操作1 Redis常用操作 for String数据
-SETNX 检测键值是否有value，如果有直接返回一个 0，如果没有直接返回一个 1 并且创建此 value。(string)
-1234567891011121314151617181920如果
+SETNX 检测键值是否有value，如果有直接返回一个 0，如果没有直接返回一个 1 并且创建
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -991,7 +982,7 @@ SETNX 检测键值是否有value，如果有直接返回一个 0，如果没有�
         
           
           21.5 memcached命令行Memcached类似于mysql一样，同样支持类似于mysql中创建一个库，创建一个表，插入一个表，查看表数据等。
-1 登录 Memcached123456789101112131415161718192021222324252627282930313233343
+1 登录 Memcached1234567891
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1141,7 +1132,7 @@ SETNX 检测键值是否有value，如果有直接返回一个 0，如果没有�
           
           21.9 redis介绍
 Redis和Memcached类似，也属于k-v数据存储 ，但是功能和操作性要比Memcached好很多。
-Redis官网 redis.io,当前最新稳定版4.0.9，支持更多value类型，除了和string外，还支持hash、lists（链表）、sets（集合）和sor
+Redis官网 redis.io,当前最新稳定版4.0.9，支持更
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1290,9 +1281,7 @@ Redis官网 redis.io,当前最新稳定版4.0.9，支持更多value类型，除�
         
           
           二十二周三次课（10月25日）[toc]
-22.9 分支管理1 查看分支12345[root@yt-01 LNMP]# cd /data/gitroot[root@yt-01 gitroot]# git branch* master[root@yt-01 gitroot]# ls1.txt
-
-2 创
+22.9 分支管理1 查看分支12345[root@yt-01 LNMP]# cd /data/gitroot[root@yt-01 gitroot]# gi
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1440,7 +1429,7 @@ Redis官网 redis.io,当前最新稳定版4.0.9，支持更多value类型，除�
       
         
           
-          22.5/22.6 单机上使用git1 准备1234567891011121314151617181920安装git[root@yt-01 /]# yum install -y git建立git版本库目录[root@yt-01 /]# mkdir /data/gitroot/初始化gi版本仓库[ro
+          22.5/22.6 单机上使用git1 准备1234567891011121314151617181920安装git[root@yt-01 /]# yum install -y git建立git版本库
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1588,7 +1577,7 @@ Redis官网 redis.io,当前最新稳定版4.0.9，支持更多value类型，除�
       
         
           
-          22.1 代码管理平台介绍1.关于代码管理平台的常识当大家谈论到代码管理平台的时候，会简单的把它认为就是一个放代码的地方，类似于FTP直接上传到指定位置就可以了。对于一个网站来说，这样理解没问题的。但是对于一个业务来说，每天都有很多代码需要不断的去更新，当然此过程不是想象的那么简单，上传即可，这个是
+          22.1 代码管理平台介绍1.关于代码管理平台的常识当大家谈论到代码管理平台的时候，会简单的把它认为就是一个放代码的地方，类似于FTP直接上传到指定位置就可以了。对于一个网站来说，这样理解没问题的。但
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1744,7 +1733,7 @@ yum工具
 7.2 rpm包介绍安装或卸载rpm包，如果该包有依赖则要先安装或卸载其依赖包。
 
 设置光驱并挂载
-12345mount /dev/cdrom /mnt/      把光驱挂载到mnt目录下其中，package目录下面都是rpm
+12345mount /de
           ...
           <!--noindex-->
           <div class="post-button text-center">

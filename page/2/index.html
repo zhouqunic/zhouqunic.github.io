@@ -382,7 +382,7 @@
           
           #11.28 限定某个目录禁止解析php
 如果有一个目录是允许上传图片的，保不准有些人通过手段上传了php文件，那么就有可能被运行，造成安全隐患，被拿到root权限。
-1. 编辑虚拟主机配置文件1234[root@host 111.com]# vim /usr/local/apache2.4/con
+1. 编辑虚拟主机配置文件123
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -532,7 +532,7 @@
           
           #12.10 Nginx访问日志
 ##日志格式
-1234567[root@host ~]# vim /usr/local/nginx/conf/nginx.conf   //搜索log_format... ...log_format combined_realip &apos;$remote_add
+1234567[root@host ~]# vim /usr/local/nginx/conf/nginx.conf   //搜索log_format.
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -681,7 +681,7 @@
         
           
           #12.13 Nginx防盗链Nginx防盗链可结合日志管理一起配置，因为该配置也要使用location板块
-1234567891011121314151617181920212223242526272829[root@host ~]# vim /usr/local/nginx/conf/vhost
+123456789101112131415161718192021222324252627
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -830,10 +830,7 @@
         
           
           #12.21 php-fpm的pool
-为了避免因多站点使用同一个pool时，因为一个站点故障导致pool出问题，进而影响使用同一个pool的其他站点的正常运行，我们有必要对每一个站点设置一个单独的pool。
-##为php-fpm配置多个pool
-###编辑php-fpm配置文件：
-12345678
+为了避免因多站点使用同一个pool时，因为一个站点故障导致pool出问题，进而影响使用同一个pool的其他站点的正常运行，我们有必要对每一个站点设置一个单独的p
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -982,7 +979,7 @@
         
           
           #13.1 设置更改root密码MySQL的root和Linux的root是不一样的，默认是没有密码的，需要设置。
-##配置MySQL环境变量首次直接使用mysql会提示‘未找到命令’，这是因为将该命令没有加入环境变量。如果要使用命令，需要使用它的绝对路径：/usr/local/mysql/bin/
+##配置MySQL环境变量首次直接使用mysql会提示‘未找到命令’，这是因为将该命
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1132,10 +1129,7 @@
           
           #14.1 NFS介绍
 
-NFS（Network File System）即网络文件系统，是FreeBSD支持的文件系统中的一种，它允许网络中的计算机之间通过TCP/IP网络共享资源。在NFS的应用中，本地NFS的客户端应用可以透明地读写位于远端NFS服务器上的文件，就像访问本地文件一样。
-
-
-NF
+NFS（Network File System）即网络文件系统，是FreeBSD支持的文件系统中的一种，它允许网络中的计算机之间通过TCP/IP网络共享资源。在NFS的应用中
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1283,7 +1277,7 @@ NF
       
         
           
-          16.4 配置Tomcat监听80端口编辑Tomcat配置文件123456[root@localhost ~]# vim /usr/local/tomcat/conf/server.xml ……#搜索8080，修改下面的内容位80&lt;Connector port=&quot;80&quot; p
+          16.4 配置Tomcat监听80端口编辑Tomcat配置文件123456[root@localhost ~]# vim /usr/local/tomcat/conf/server.xml ……#搜索
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1436,7 +1430,7 @@ NF
 exportfs 命令用来管理当前NFS共享的文件系统列表。
 
 ##常用参数-a 全部挂载或者全部卸载-r 重新挂载-u 卸载某一个目录-v 显示共享目录
-1exportfs -arv    //服务端更改配置文件后，不重启服务，直接执行该命令就可以使更改后的配置
+1exp
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1586,7 +1580,7 @@ exportfs 命令用来管理当前NFS共享的文件系统列表。
           
           #16.1 Tomcat介绍
 
-Tomcat 服务器是一个免费的开放源代码的Web 应用服务器，是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目，由Apache、Sun 和其他一些公司及个人共同开发而成。由于有了Sun 的参与和
+Tomcat 服务器是一个免费的开放源代码的Web 应用服务器，是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1736,7 +1730,7 @@ Tomcat 服务器是一个免费的开放源代码的Web 应用服务器，是Apa
           
           19.12 添加自定义监控项目该配置的用途是监控模板中没有的监控项目。
 1 需求监控某台web的80端口连接数，并出图。步骤：1） zabbix监控中心创建监控项目2） 针对该监控项目以图形展现
-2 配置客户端80端口的监控脚本12345678[root@yt-02 ~]# vim /usr/loc
+2 
           ...
           <!--noindex-->
           <div class="post-button text-center">

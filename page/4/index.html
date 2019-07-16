@@ -381,7 +381,7 @@
         
           
           1. / - 根每一个文件和目录从根目录开始。只有root用户具有该目录下的写权限。请注意，/root是root用户的主目录，这与/.不一样
-2. /bin - 用户二进制文件包含二进制可执行文件。在单用户模式下，你需要使用的常见Linux命令都位于此目录下。系统的所有用户使用的命令都设在这里。例如
+2. /bin - 用户二进制文件包含二进制可执行文件。在
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -530,9 +530,7 @@
         
           
           22.13 搭建git服务器
-github毕竟是公开的，而私有仓库又得花钱买。所以我们可以想办法搭建一个私有的，只自己公司使用的。Gitlab是个不错的选择。在介绍它之前，先讲述一下命令行的git服务器
-
-服务端配置123456789101112131415161718192021222324252
+github毕竟是公开的，而私有仓库又得花钱买。所以我们可以想办法搭建一个私有的，只自己公司使用的。Gitlab是个不错的选择。在介绍它之前，先讲述一下命令行的git服务
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -684,7 +682,7 @@ github毕竟是公开的，而私有仓库又得花钱买。所以我们可以�
 1. su 命令的用法su+ [参数]  [用户名]
 -；-l 登录并改变到所切换的用户环境
 -c  执行一个命令，然后退出所切换到的用户环境
-2. su 命令的范例su 在不加任何参数，默认为切换到root用户，但没有转到root用户家目录下，也就是说
+2. su
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -835,7 +833,7 @@ github毕竟是公开的，而私有仓库又得花钱买。所以我们可以�
           18.1 集群介绍Linux集群概述
 根据功能划分为两大类：高可用和负载均衡  
 高可用集群通常为两台服务器，一台工作，另外一台作为冗余，当提供服务的机器宕机，冗余将接替继续提供服务  
-实现高可用的开源软件有：heartbeat(由于版本不再更新，在CentOS 6上面Bug比较多，不推荐使用了)
+实现高可用的
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -983,7 +981,7 @@ github毕竟是公开的，而私有仓库又得花钱买。所以我们可以�
       
         
           
-          4.1 df命令1. df命令1234567891011121314151617df    \\可以查看到系统一共有几个分区，但swap（虚拟交换分区，内存）不会显示在此。df -h  \\自动变换单位*文件系统            容量  已用  可用 已用% 挂载点/dev/mapper/cl
+          4.1 df命令1. df命令1234567891011121314151617df    \\可以查看到系统一共有几个分区，但swap（虚拟交换分区，内存）不会显示在此。df -h  \\自动变换单
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1132,7 +1130,7 @@ github毕竟是公开的，而私有仓库又得花钱买。所以我们可以�
         
           
           4.5/4.6 磁盘格式化1. mke2fs命令被用于创建磁盘分区上文件系统（格式化）
-123456789101112mke2fs -t ext4 -b 2048 -m 1 -L yule /dev/sdb1-t 指定磁盘格式  mke2fs目前不支持xfs格式-b 指定块block大小，默认值是4
+123456789101112mke2fs -t ext4 -b 2048 -m 1 -L yule /dev/
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1281,8 +1279,7 @@ github毕竟是公开的，而私有仓库又得花钱买。所以我们可以�
         
           
           1. LVM简介
-LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM利用Linux内核的device-mapper来实现存储系统的虚拟化（系统分区独立于底层硬件）。
-通过LVM，你可以实现存储空间的
+LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM利用Linux内核的devic
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1431,9 +1428,7 @@ LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshage
         
           
           5.1 vim介绍vi 和 vim 的区别vi 是早期版本，vim是后来改进版本。直观的是，vim编辑文件可以显示不同颜色，一般电脑都有vi，而vim有的没有，需要安装。
-12yum install vim-enhanced安装vim包的命令
-
-2. vim和vi的一些用法12345vim 1.tx
+12yum install 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1582,7 +1577,7 @@ LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshage
         
           
           10.16/10.17/10.18 iptables nat表应用nat表应用实验第一步 准备工作
-A机器两块网卡ens33(192.168.2.106)、再添加一块自定义网卡ens37(192.168.100.1)，添加到LAN内网区段（自定义名字，写什么无所谓），ens33可以上外网，ens37
+A机器两块网卡ens33(192.168.2.106)、再添加一块自定义网卡ens37(192.16
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1731,7 +1726,7 @@ A机器两块网卡ens33(192.168.2.106)、再添加一块自定义网卡ens37(19
         
           
           5.5 进入编辑模式1. 进入vim编辑模式vim命令后，输入 i 键，进入编辑模式（i, I, a, A, o,O,r,R都可以），按 Esc 键退出。
-2. 输入不同字母，进入编辑模式后的情况不同123456（1）按 i 键，此时光标在当前位置，并进入编辑模式（2）按 I 键，此时光标移动到当前
+2. 输入不同字母，进入编辑模式后的情况不同
           ...
           <!--noindex-->
           <div class="post-button text-center">

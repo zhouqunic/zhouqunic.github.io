@@ -382,8 +382,7 @@
           
           19.7 主动模式和被动模式主动模式和被动模式所针对的对象是客户端。意思是客户端主动向服务端上报数据和由服务端到客户端采集数据。数据的提交时间在监控中心设置。
 配置建议
-当客户端数量非常多时，建议使用主动模式，这样可以降低服务端的压力。
-当服务端有公网IP，客户端只有内网IP但是可以连接外网（使用i
+当客户端数量非常多时，建议使用
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -539,9 +538,7 @@ shell是一种脚本语言
 shell是系统命令的集合
 shell脚本可以实现自动化运维，能大大增加我们的运维效率
 
-#20.2 shell脚本结构和执行
-
-开头需要加#!/bin/bash，告诉系统该脚本是要以bin/b
+#2
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -689,8 +686,7 @@ shell脚本可以实现自动化运维，能大大增加我们的运维效率
       
         
           
-          17.1 MySQL主从介绍MySQL主从又叫做Replication、AB复制。简单讲就是A和B两台机器做主从后，在A上写数据，另外一台B也会跟着写数据，两者数据实时同步的。也就是说，当你在A机器写入一个表，再次查看B机器也会同步一个表。
-MySQL主从是基于binlog的，主上须开启binlog
+          17.1 MySQL主从介绍MySQL主从又叫做Replication、AB复制。简单讲就是A和B两台机器做主从后，在A上写数据，另外一台B也会跟着写数据，两者数据实时同步的。也就是说，当你在A机器写
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -838,7 +834,7 @@ MySQL主从是基于binlog的，主上须开启binlog
       
         
           
-          3.1 用户配置文件和密码配置文件1. /etc/passwd 文件解释1234567891011[root@zhouqunic-01 ~]# cat /etc/passwd | headroot:x:0:0:root:/root:/bin/bashbin:x:1:1:bin:/bin:/sbin/
+          3.1 用户配置文件和密码配置文件1. /etc/passwd 文件解释1234567891011[root@zhouqunic-01 ~]# cat /etc/passwd | headroot:x
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -989,7 +985,7 @@ MySQL主从是基于binlog的，主上须开启binlog
           ##20.16/20.17 shell中的函数、数组
 函数就是把一段代码整理到了一个小单元中，并给这个小单元起一个名字，当用到这段代码时直接调用这个小单元的名字即可。
 ###格式:
-1234function f_name() &#123;                             
+1234func
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1140,7 +1136,7 @@ MySQL主从是基于binlog的，主上须开启binlog
           [toc]
 ##20.23/20.24/20.25 告警系统邮件引擎
 mail.sh内容 
-1234567891011121314151617181920212223242526272829  log=$1t_s=`date +%s`t_s2=`date -d &quot;2 hours ago&q
+1234567891011121314151617181920212223242526272829  log
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1293,7 +1289,7 @@ mail.sh内容
 1for 变量名 in 条件; do …; done
 
 ###案例1计算1到100的和
-1234567891011121314151617181920212223242526272829303132#!/bin/bashsum=0for i in `seq 
+12345678910111213141516171819202122
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1447,9 +1443,7 @@ mail.sh内容
 
 思路：指定一个脚本包，包含主程序、子程序、配置文件、邮件引擎、输出日志等。
 
-主程序：作为整个脚本的入口，是整个系统的命脉。
-
-配置文件：是一个控制中心，用它来开关各个子程序，指定各个相
+主程序：
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1599,7 +1593,7 @@ mail.sh内容
           
           ##20.5 shell脚本中的if逻辑判断Shell脚本中，充满着各种逻辑判断，是脚本中必备的。
 ###逻辑判断表达式：
-123456789101112-gt (&gt;);    大于    great than-lt(&lt;);      小于     less than-ge(&gt;=)
+123456789101112-gt (&gt;);    大于    gr
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1748,7 +1742,7 @@ mail.sh内容
         
           
           21.18 redis慢查询日志针对慢查询日志可以设置两个参数，一个是执行时长，单位是微妙，另一个是慢查询日志的长度。当一个新的命令被写入日志时，最老的一条会从命令日志队列被移除。
-1234567891011121314151617[root@yt-01 ~]# vim /etc/redis.con
+123456789
           ...
           <!--noindex-->
           <div class="post-button text-center">

@@ -383,11 +383,7 @@
           6.5 zip压缩工具
 Windows 的zip文件传送到Linux时，是可以通过Linux的zip工具进行解压缩。压缩文件或目录时，源文件不会消失
 zip文件不可以直接查看文件的内容。
-在Linux（CentOS）中，安装zip压缩工具命令1yum install zip unzip
-
-
-
-1. 
+在Linux
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -535,7 +531,7 @@ zip文件不可以直接查看文件的内容。
       
         
           
-          10.11 Linux网络相关123456789101112131415161718192021222324252627282930ifconfig查看网卡ip（需要安装包yum install net-tools）ifconfig -a 当网卡down掉也可以查看到ifdown ens33  关闭
+          10.11 Linux网络相关123456789101112131415161718192021222324252627282930ifconfig查看网卡ip（需要安装包yum install ne
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -685,9 +681,7 @@ zip文件不可以直接查看文件的内容。
           
           10.19 iptables规则备份和恢复
 保存和备份iptables规则
-12service iptables save  会把规则保存到/etc/sysconfig/iptables如果想要一开机就启动规则，最好把规则保存到配置文件中
-
-有时候想把iptables规则备份其他文件中，比如到my.
+12service iptables save  会把规则保存到/etc/sysconfig/iptables如果想要一开机
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -836,7 +830,7 @@ zip文件不可以直接查看文件的内容。
         
           
           10.28 rsync工具介绍
-rsync命令是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快。 rsync是一个功能非常强大的
+rsync命令是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -987,7 +981,7 @@ rsync命令是一个远程数据同步工具，可通过LAN/WAN快速同步多�
           10.32/10.33 rsync通过服务同步rsync 有2种同步数据的方式：一种是通过ssh，另外一种是通过服务的方式通过。
 
 通过ssh同步
-12rsync -av test1/ 192.168.133.132:/tmp/test2/rsync -av -e &quot;ssh -p 22&q
+12rsync -av test1/ 192.168
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1136,7 +1130,7 @@ rsync命令是一个远程数据同步工具，可通过LAN/WAN快速同步多�
         
           
           11.1 LAMP架构介绍
-LAMP 是Linux Apache MySQL PHP的简写，其实就是把Apache, MySQL以及PHP安装在Linux系统上，组成一个环境来运行php的脚本语言。至于什么是php脚本语言，阿铭不介绍，请自己查资料吧。Apache是最常用的WEB服务软件，而MySQ
+LAMP 是Linux Apache MySQL PHP的简写，其实就是把Apache, MySQL以及PHP安装在Linux系统上，组成一个环境来运行php的脚本语言。至
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1285,7 +1279,7 @@ LAMP 是Linux Apache MySQL PHP的简写，其实就是把Apache, MySQL以及PHP�
         
           
           PHP官网www.php.net当前主流版本为5.6/7.1
-1. 编译安装PHP5.6123456789101112131415161718192021222324252627282930313233343536373839404142434445464748[root@host apache2.
+1. 编译安装PHP5.612345678910111213141516171819202122232425262728293031323
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1433,10 +1427,7 @@ LAMP 是Linux Apache MySQL PHP的简写，其实就是把Apache, MySQL以及PHP�
       
         
           
-          11.14/11.15 Apache和PHP结合1. 配置ApacheApache(httpd) 的主配置文件： /usr/local/apache2.4/conf/httpd.conf需要修改以下4个地方
-
-ServerName localhost:80
-Require all denied  修
+          11.14/11.15 Apache和PHP结合1. 配置ApacheApache(httpd) 的主配置文件： /usr/local/apache2.4/conf/httpd.conf需要修改以下4
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1586,7 +1577,7 @@ Require all denied  修
           
           #11.25 配置防盗链
 编辑虚拟主机配置文件：
-1234567891011121314151617181920212223242526272829303132333435363738[root@host ~]# vim /usr/local/apache2.4/conf/extra/httpd-v
+1234567891011121314151617181920212223242526272829303132333435363738[root@ho
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1738,8 +1729,7 @@ Require all denied  修
 有时候，编译好PHP后，发现还有其他模块需要添加进去，那么就需要安装php扩展模块安装。
 1/usr/local/php/bin/php -m //查看模块
 
-下面安装一个redis的模块，当做php中的缓存来用
-1. 下载redis的安装包到src目录12cd /
+下面安
           ...
           <!--noindex-->
           <div class="post-button text-center">
