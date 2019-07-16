@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/22.9-22.12 git分支管理、远程分支管理、标签管理、git别名/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/new post/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -306,7 +306,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/22.9-22.12 git分支管理、远程分支管理、标签管理、git别名/" itemprop="url">22.9-22.12 git分支管理、远程分支管理、标签管理、git别名</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/new post/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -380,61 +380,15 @@
       
         
           
-            <p>二十二周三次课（10月25日）<br>[toc]</p>
-<h1 id="22-9-分支管理"><a href="#22-9-分支管理" class="headerlink" title="22.9 分支管理"></a>22.9 分支管理</h1><h2 id="1-查看分支"><a href="#1-查看分支" class="headerlink" title="1 查看分支"></a>1 查看分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 LNMP]# cd /data/gitroot</span><br><span class="line">[root@yt-01 gitroot]# git branch</span><br><span class="line">* master</span><br><span class="line">[root@yt-01 gitroot]# ls</span><br><span class="line">1.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-创建分支"><a href="#2-创建分支" class="headerlink" title="2 创建分支"></a>2 创建分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 gitroot]# git branch yuntai</span><br><span class="line">[root@yt-01 gitroot]# git branch</span><br><span class="line">* master</span><br><span class="line">  yuntai</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-分支管理"><a href="#3-分支管理" class="headerlink" title="3 分支管理"></a>3 分支管理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 切换到分支</span><br><span class="line">[root@yt-01 gitroot]# git checkout yuntai</span><br><span class="line">切换到分支 &apos;yuntai&apos;</span><br><span class="line">[root@yt-01 gitroot]# git branch    //*号在yuntai分支前，表示目前的分支</span><br><span class="line">  master</span><br><span class="line">* yuntai</span><br><span class="line">[root@yt-01 gitroot]# ls    //2个分支下文件相同</span><br><span class="line">1.txt</span><br><span class="line"></span><br><span class="line"># 新分支下创建新文件</span><br><span class="line">[root@yt-01 gitroot]# vim 2.txt</span><br><span class="line">[root@yt-01 gitroot]# git add 2.txt</span><br><span class="line">[root@yt-01 gitroot]# git commit -m &quot;jjjjjj&quot;</span><br><span class="line">[yuntai 98bf627] jjjjjj</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"> create mode 100644 2.txt</span><br><span class="line">[root@yt-01 gitroot]# cat 2.txt</span><br><span class="line">1234hghklal</span><br><span class="line"></span><br><span class="line"># 切换回master分支</span><br><span class="line">[root@yt-01 gitroot]# git checkout master</span><br><span class="line">切换到分支 &apos;master&apos;</span><br><span class="line">[root@yt-01 gitroot]# ls</span><br><span class="line">1.txt</span><br><span class="line">由此可见，在不同的分支可看到的文件的内容是不同的，在所有分支都能看到master分支的文件。</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-分支合并与冲突"><a href="#4-分支合并与冲突" class="headerlink" title="4 分支合并与冲突"></a>4 分支合并与冲突</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"># 分支合并</span><br><span class="line">[root@yt-01 gitroot]# git merge yuntai   //把yuntai分支合并到了master分支</span><br><span class="line">更新 5acf95f..98bf627</span><br><span class="line">Fast-forward</span><br><span class="line"> 2.txt | 1 +</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"> create mode 100644 2.txt</span><br><span class="line"></span><br><span class="line">[root@yt-01 gitroot]# ls</span><br><span class="line">1.txt 2.txt</span><br><span class="line"></span><br><span class="line"># 分支合并的冲突问题</span><br><span class="line">[root@yt-01 gitroot]# vim 2.txt</span><br><span class="line">[root@yt-01 gitroot]# git add 2.txt</span><br><span class="line">[root@yt-01 gitroot]# git commit -m &quot;sdjjjjjj&quot;</span><br><span class="line">[master cf73e6e] sdjjjjjj</span><br><span class="line"> 1 file changed, 1 insertion(+), 1 deletion(-)</span><br><span class="line">[root@yt-01 gitroot]# git branch</span><br><span class="line">* master</span><br><span class="line">  yuntai</span><br><span class="line"></span><br><span class="line">[root@yt-01 gitroot]# git checkout yuntai</span><br><span class="line">切换到分支 &apos;yuntai&apos;</span><br><span class="line"></span><br><span class="line">[root@yt-01 gitroot]# vim 2.txt</span><br><span class="line">[root@yt-01 gitroot]# git add 2.txt</span><br><span class="line">[root@yt-01 gitroot]# git commit -m &quot;dddjjjj&quot;</span><br><span class="line">[yuntai ba7c380] dddjjjj</span><br><span class="line"> 1 file changed, 1 insertion(+), 1 deletion(-)</span><br><span class="line">[root@yt-01 gitroot]# git merge master</span><br><span class="line">自动合并 2.txt</span><br><span class="line">冲突（内容）：合并冲突于 2.txt</span><br><span class="line">自动合并失败，修正冲突然后提交修正的结果。</span><br><span class="line"></span><br><span class="line"># 发生冲突！！！需要先修复冲突后才能合并</span><br><span class="line"># 解决冲突</span><br><span class="line"></span><br><span class="line"># 使用git diff或cat查看冲突在哪：</span><br><span class="line"></span><br><span class="line">[root@yt-01 gitroot]# git diff</span><br><span class="line">diff --cc 2.txt</span><br><span class="line">index 4311c21,4c236d2..0000000</span><br><span class="line">--- a/2.txt</span><br><span class="line">+++ b/2.txt</span><br><span class="line">@@@ -1,1 -1,1 +1,5 @@@</span><br><span class="line">++&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line"> +1234hghklal1234hghklal1234hghklal1234hghklal1234hghklal1234hghklal1234hghklal</span><br><span class="line">++=======</span><br><span class="line">+ doaiodwdndian</span><br><span class="line">++&gt;&gt;&gt;&gt;&gt;&gt;&gt; master</span><br><span class="line"></span><br><span class="line"># cat和vim命令中也会提醒冲突的地方</span><br><span class="line">[root@yt-01 gitroot]# cat 2.txt</span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">1234hghklal1234hghklal1234hghklal1234hghklal1234hghklal1234hghklal1234hghklal</span><br><span class="line">=======</span><br><span class="line">doaiodwdndian</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; master</span><br><span class="line"></span><br><span class="line">[root@yt-01 gitroot]# git checkout master   //分支冲突的话，必须先解决冲突才能切换分支，所以分支冲突很麻烦，一定要注意</span><br><span class="line">2.txt: needs merge</span><br><span class="line">error: 您需要先解决当前索引的冲突</span><br><span class="line">[root@yt-01 gitroot]# git branch</span><br><span class="line">  master</span><br><span class="line">* yuntai</span><br><span class="line">[root@yt-01 gitroot]# vim 2.txt</span><br><span class="line"></span><br><span class="line">[root@yt-01 gitroot]# git merge master          //没有提交修改，所以报错</span><br><span class="line">error: &apos;merge&apos; is not possible because you have unmerged files.</span><br><span class="line">提示：请先在工作区改正文件，然后酌情使用</span><br><span class="line">提示：&apos;git add/rm &lt;file&gt;&apos; 标记解决方案，</span><br><span class="line">提示：或使用 &apos;git commit -a&apos;。</span><br><span class="line">fatal: Exiting because of an unresolved conflict.</span><br><span class="line"></span><br><span class="line">修改后提交</span><br><span class="line">[root@yt-01 gitroot]# git add 2.txt</span><br><span class="line">[root@yt-01 gitroot]# git commit -m &quot;修改冲突内容&quot;</span><br><span class="line">[yuntai 0ac22aa] 修改冲突内容</span><br><span class="line"></span><br><span class="line">合并分支</span><br><span class="line">[root@yt-01 gitroot]# git merge master</span><br><span class="line">Already up-to-date.</span><br><span class="line">[root@yt-01 gitroot]# ls</span><br><span class="line">1.txt 2.txt</span><br><span class="line">[root@yt-01 gitroot]# git checkout master</span><br><span class="line">切换到分支 &apos;master&apos;</span><br><span class="line"></span><br><span class="line">解决冲突的办法是更改目标分支下冲突文件和源分支中内容一致，然后在提交、合并。</span><br><span class="line">原则：只能将新分支合并到旧的分支，即merge后面跟内容最新的分支。</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>如果master分支和yuntai分支都对2.txt进行了编辑，当合并时会提示冲突，需要先解决冲突才可以继续合并。</li>
-<li>解决冲突的方法是在master分支下，编辑2.txt，改为aming分支里面2.txt的内容。 然后提交2.txt，再合并yuntai分支。</li>
-<li>但是这样有一个问题，万一master分支更改的内容是我们想要的呢？ 可以编辑2.txt内容，改为想要的，然后提交。切换到yuntai<br>分支，然后合并master分支到yuntai分支即可（倒着合并）。合并分支有一个原则，那就是要把最新的分支合并到旧的分支。也就是说merge后面跟的分支名字一定是最新的分支。</li>
-</ul>
-<h2 id="5-删除分支"><a href="#5-删除分支" class="headerlink" title="5 删除分支"></a>5 删除分支</h2><p>如果我们确定不想要某个分支，我们可以删除分支</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 gitroot]# git branch -d yuntai   //如果分支没有合并，删除之前会提示，那就不合并，强制删除</span><br><span class="line">error: 分支 &apos;yuntai&apos; 没有完全合并。</span><br><span class="line">如果您确认要删除它，执行 &apos;git branch -D yuntai&apos;。</span><br><span class="line"></span><br><span class="line">[root@yt-01 gitroot]# git branch -D yuntai   //强制删除</span><br><span class="line">已删除分支 yuntai（曾为 0ac22aa）。</span><br><span class="line">[root@yt-01 gitroot]# git branch</span><br><span class="line">* master</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-分支使用原则"><a href="#6-分支使用原则" class="headerlink" title="6 分支使用原则"></a>6 分支使用原则</h2><ul>
-<li>master分支是非常重要的，线上发布代码用这个分支，平时开发代码不要在该分支操作；</li>
-<li>创建dev分支，专门用作开发，只有到发布到线上之前再把dev合并到master上</li>
-<li>开发人员应该在dev分支的基础上再分支成个人分支，自己的分支（在自己的pc上）里面开发代码，然后合并到dev分支。 </li>
-</ul>
-<ul>
-<li>在dev分支合并bob分支的命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># git checkout dev</span><br><span class="line"># git merge bob</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="22-10-远程分支管理"><a href="#22-10-远程分支管理" class="headerlink" title="22.10 远程分支管理"></a>22.10 远程分支管理</h1><h2 id="1-我们现在远程创建2个分支"><a href="#1-我们现在远程创建2个分支" class="headerlink" title="1 我们现在远程创建2个分支"></a>1 我们现在远程创建2个分支</h2><h2 id="2-在远程仓库克隆到本地"><a href="#2-在远程仓库克隆到本地" class="headerlink" title="2 在远程仓库克隆到本地"></a>2 在远程仓库克隆到本地</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01~]# cd /data/</span><br><span class="line">[root@yt-01 data]# git clone git@github.com:zhouqunic/gittest.git</span><br><span class="line">正克隆到 &apos;gittest&apos;...</span><br><span class="line">remote: Counting objects: 6, done.</span><br><span class="line">remote: Compressing objects: 100% (3/3), done.</span><br><span class="line">remote: Total 6 (delta 0), reused 6 (delta 0), pack-reused 0</span><br><span class="line">接收对象中: 100% (6/6), done.</span><br><span class="line">[root@yt-01 data]# ls</span><br><span class="line">gitroot gittest mysql svnroot wwwroot</span><br><span class="line"></span><br><span class="line">[root@yt-01 data]# cd gittest/</span><br><span class="line">[root@yt-01 gittest]# ls</span><br><span class="line">123.txt README.md</span><br><span class="line">[root@yt-01 gittest]#</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git branch</span><br><span class="line">* master</span><br><span class="line"># 克隆远程的时候只能把master克隆下来</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看远程分支，并克隆下来"><a href="#查看远程分支，并克隆下来" class="headerlink" title="查看远程分支，并克隆下来"></a>查看远程分支，并克隆下来</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 gittest]# git ls-remote origin   //查看远程所有分支</span><br><span class="line">6007c36bb6151394b59c936deb0f67456fd8c639	HEAD</span><br><span class="line">6007c36bb6151394b59c936deb0f67456fd8c639	refs/heads/dev</span><br><span class="line">6007c36bb6151394b59c936deb0f67456fd8c639	refs/heads/master</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git checkout -b dev origin/dev   //克隆远程分支</span><br><span class="line">分支 dev 设置为跟踪来自 origin 的远程分支 dev。</span><br><span class="line">切换到一个新分支 &apos;dev&apos;</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git branch   //查看分支</span><br><span class="line">* dev</span><br><span class="line">  master</span><br><span class="line">[root@yt-01 gittest]# ls</span><br><span class="line">123.txt README.md</span><br><span class="line">[root@yt-01 gittest]# vim 4.txt</span><br><span class="line">[root@yt-01 gittest]# vim 4.txt</span><br><span class="line">[root@yt-01 gittest]# git add 4.txt</span><br><span class="line">[root@yt-01 gittest]# git commit -m &quot;add 4.txt&quot;</span><br><span class="line">[dev 4585f09] add 4.txt</span><br><span class="line"> 1 file changed, 2 insertions(+)</span><br><span class="line"> create mode 100644 4.txt</span><br><span class="line">[root@yt-01 gittest]# git push     //git push会把所有的分支变更推送到远程分支上</span><br><span class="line">Counting objects: 4, done.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (3/3), 302 bytes | 0 bytes/s, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To git@github.com:zhouqunic/gittest.git</span><br><span class="line">   6007c36..4585f09 dev -&gt; dev</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git push origin dev         //只推送选定的分支</span><br><span class="line">Everything up-to-date</span><br></pre></td></tr></table></figure>
-
-<h2 id="本地分支比远程分支还多"><a href="#本地分支比远程分支还多" class="headerlink" title="本地分支比远程分支还多"></a>本地分支比远程分支还多</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">root@yt-01 gittest]# git branch dev2     //新建本地分支dev2</span><br><span class="line">[root@yt-01 gittest]# git branch</span><br><span class="line">* dev</span><br><span class="line">  dev2</span><br><span class="line">  master</span><br><span class="line">[root@yt-01 gittest]# git checkout dev2   //切换到新分支</span><br><span class="line">切换到分支 &apos;dev2&apos;</span><br><span class="line">[root@yt-01 gittest]# ls</span><br><span class="line">123.txt 4.txt README.md</span><br><span class="line">[root@yt-01 gittest]# echo -e &quot;5555&quot; &gt; 5.txt   //新增新文件，并推送到本地</span><br><span class="line">[root@yt-01 gittest]# ls</span><br><span class="line">123.txt 4.txt 5.txt README.md</span><br><span class="line">[root@yt-01 gittest]# git add 5.txt</span><br><span class="line">[root@yt-01 gittest]# git commit -m &quot;add 5.txt&quot;</span><br><span class="line">[dev2 13cb704] add 5.txt</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"> create mode 100644 5.txt</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git push    //推送到远程，结果出现报错，提示用git push --set-upstream origin dev2命令推送</span><br><span class="line">fatal: 当前分支 dev2 没有对应的上游分支。</span><br><span class="line">为推送当前分支并建立与远程上游的跟踪，使用</span><br><span class="line">    git push --set-upstream origin dev2</span><br><span class="line">[root@yt-01 gittest]# git push --set-upstream origin dev2   //从本地推送远程没有的分支</span><br><span class="line">Counting objects: 4, done.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (3/3), 324 bytes | 0 bytes/s, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To git@github.com:zhouqunic/gittest.git</span><br><span class="line"> * [new branch] dev2 -&gt; dev2</span><br><span class="line">分支 dev2 设置为跟踪来自 origin 的远程分支 dev2。</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git ls-remote origin      //查看远程分支，新分支dev2已经推送成功</span><br><span class="line">6007c36bb6151394b59c936deb0f67456fd8c639	HEAD</span><br><span class="line">4585f09ea5741cd9030c781a5e0a75629683fcef	refs/heads/dev</span><br><span class="line">13cb704ff422999a9d0ec83f67f6e03f61dfaa94	refs/heads/dev2</span><br><span class="line">6007c36bb6151394b59c936deb0f67456fd8c639	refs/heads/master</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>本地新建的分支如果不推送到远程，对其他人就是不可见的 </li>
-<li>查看远程分支 git ls-remote origin，可以看到所有分支</li>
-<li>对于git push分支分两种情况</li>
-<li>当本地分支和远程分支一致时,git push会把所有本地分支的变更一同推送到远程，如果想只推送一个分支，使用git push origin branch-name</li>
-<li>当本地分支比远程分支多,默认git push 只推送本地和远程一致的分支，想要把多出来的本地分支推送到远程时，使用git push origin branch-name 如果推送失败，先用git         pull抓取远程的新提交.</li>
-<li>git clone的时候默认只把master分支克隆下来，如果想把所有分支都克隆下来，需要手动创建，在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称要一致</li>
-</ul>
-<h1 id="22-11-标签管理"><a href="#22-11-标签管理" class="headerlink" title="22.11 标签管理"></a>22.11 标签管理</h1><ul>
-<li>标签类似于快照功能，可以给版本库打一个标签，记录某个时刻库的状态。也可以随时恢复到该状态。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 gittest]# git checkout master    //先切到master分支上</span><br><span class="line">[root@yt-01 gittest]# git tag v1.0     //给master打一个标签v1.0</span><br><span class="line">[root@yt-01 gittest]# git show v1.0     //查看标签信息</span><br><span class="line">commit 6007c36bb6151394b59c936deb0f67456fd8c639</span><br><span class="line">Author: yuntai &lt;zhouqunic@163.com&gt;</span><br><span class="line">Date: Tue Apr 3 16:01:02 2018 +0800</span><br><span class="line">    新建123.txt文件</span><br><span class="line">diff --git a/123.txt b/123.txt</span><br><span class="line">new file mode 100644</span><br><span class="line">index 0000000..f3bed95</span><br><span class="line">--- /dev/null</span><br><span class="line">+++ b/123.txt</span><br><span class="line">@@ -0,0 +1,3 @@</span><br><span class="line">+123 123 123</span><br><span class="line">+123 123</span><br><span class="line">+123</span><br><span class="line"></span><br><span class="line"># tag是针对commit来打标签的，所以可以针对历史的commit来打tag</span><br><span class="line"># git tag 可以查看所有的标签</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git log --pretty=oneline --abbrev-commit //先查看历史的commit</span><br><span class="line">6007c36 新建123.txt文件</span><br><span class="line">f7045bf 创建README.md</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git tag v0.8  f7045bf //针对历史commit打标签</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git tag -d v0.8 //删除标签</span><br><span class="line">已删除 tag &apos;v0.8&apos;（曾为 f7045bf）</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git tag -a v0.8 -m &quot;tag just v1.1 and so on&quot;  f7045bf    //可以对标签进行描述</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git push origin v1.0 //推送指定标签到远程</span><br><span class="line">Total 0 (delta 0), reused 0 (delta 0)</span><br><span class="line">To git@github.com:zhouqunic/gittest.git</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git push --tag origin   //推送所有标签</span><br><span class="line">Counting objects: 1, done.</span><br><span class="line">Writing objects: 100% (1/1), 166 bytes | 0 bytes/s, done.</span><br><span class="line">Total 1 (delta 0), reused 0 (delta 0)</span><br><span class="line">To git@github.com:zhouqunic/gittest.git</span><br><span class="line"> * [new tag] v0.8 -&gt; v0.8</span><br><span class="line"></span><br><span class="line"> 如果本地删除了一个标签，远程也想要删除需要这样操作：</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git tag v1.0 -d                            //删除本地标签</span><br><span class="line">[root@yt-01 gittest]# git push origin :refs/tags/v1.0     //删除远程标签</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>实际上，tag和分支十分类似，只是概念上的不同。</p>
-<h1 id="22-12-git别名"><a href="#22-12-git别名" class="headerlink" title="22.12 git别名"></a>22.12 git别名</h1><h2 id="git设置别名"><a href="#git设置别名" class="headerlink" title="git设置别名"></a>git设置别名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 把ci设置为commit命令的别名</span><br><span class="line">[root@yt-01 gittest]# git config --global alias.ci commit</span><br><span class="line"></span><br><span class="line"># 把co设置为checkout命令的别名</span><br><span class="line">[root@yt-01 gittest]# git config --global alias.co checkout</span><br><span class="line"></span><br><span class="line"># 设置号的别名会保存在文件/root/.gitconfig中，所以可以通过编辑该文件来设置别名</span><br><span class="line">[root@yt-01 gittest]# cat /root/.gitconfig</span><br><span class="line">[user]</span><br><span class="line"> email = zhouqunic@163.com</span><br><span class="line"> name = yuntai</span><br><span class="line">[push]</span><br><span class="line"> default = simple</span><br><span class="line">[alias]</span><br><span class="line"> ci = commit</span><br><span class="line"> co = checkout</span><br><span class="line"></span><br><span class="line"># 查看git别名使用命令</span><br><span class="line">[root@yt-01 gittest]# git config --list |grep alias</span><br><span class="line">alias.ci=commit</span><br><span class="line">alias.co=checkout</span><br></pre></td></tr></table></figure>
-
-<h2 id="查询log小技巧"><a href="#查询log小技巧" class="headerlink" title="查询log小技巧"></a>查询log小技巧</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 gittest]# git config --global alias.lg &quot;log --color --graph --pretty=format:&apos;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&apos; --abbrev-commit&quot;     //把git lg彩色排列的历史记录</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git lg</span><br><span class="line">* 6007c36 - (HEAD, tag: v1.0, origin/master, origin/HEAD, master) 新建123.txt文件 (2 小时之前) &lt;yuntai&gt;</span><br><span class="line">* f7045bf - (tag: v0.8) 创建README.md (3 小时之前) &lt;yuntai&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="取消别名"><a href="#取消别名" class="headerlink" title="取消别名"></a>取消别名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 gittest]# git config --global --unset alias.co //取消co的别名</span><br><span class="line">[root@yt-01 gittest]# vim vim /root/.gitconfig  //或者直接去配置文件里面删除alias的配置</span><br><span class="line">[user]</span><br><span class="line"> email = zhouqunic@163.com</span><br><span class="line"> name = yuntai</span><br><span class="line">[push]</span><br><span class="line"> default = simple</span><br><span class="line">[alias]</span><br><span class="line"> ci = commit</span><br><span class="line"> lg = log --color --graph --pretty=format:&apos;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&apos; --abbrev-commit</span><br></pre></td></tr></table></figure>
-
-
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/new post/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -481,7 +435,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/22.5-22.8 单机上使用git、建立远程仓库、克隆远程仓库/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/new post - 副本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -500,7 +454,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/22.5-22.8 单机上使用git、建立远程仓库、克隆远程仓库/" itemprop="url">22.5-22.8 单机上使用git、建立远程仓库、克隆远程仓库</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/new post - 副本/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -574,26 +528,15 @@
       
         
           
-            <h1 id="22-5-22-6-单机上使用git"><a href="#22-5-22-6-单机上使用git" class="headerlink" title="22.5/22.6 单机上使用git"></a>22.5/22.6 单机上使用git</h1><h2 id="1-准备"><a href="#1-准备" class="headerlink" title="1 准备"></a>1 准备</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">安装git</span><br><span class="line">[root@yt-01 /]# yum install -y git</span><br><span class="line"></span><br><span class="line">建立git版本库目录</span><br><span class="line">[root@yt-01 /]# mkdir /data/gitroot/</span><br><span class="line"></span><br><span class="line">初始化gi版本仓库</span><br><span class="line">[root@yt-01 /]# cd /data/gitroot/</span><br><span class="line">[root@yt-01 gitroot]# git init</span><br><span class="line">初始化空的 Git 版本库于 /data/gitroot/.git/</span><br><span class="line"></span><br><span class="line">配置用户名和邮箱</span><br><span class="line">[root@yt-01 gitroot]# git config --global user.email &quot;zhouqunic@163.com&quot;</span><br><span class="line">[root@yt-01 gitroot]# git config --global user.name &quot;yuntai&quot;</span><br><span class="line"></span><br><span class="line">配置文件</span><br><span class="line">[root@yt-01 gitroot]# cat /root/.gitconfig</span><br><span class="line">[user]</span><br><span class="line"> email = zhouqunic@163.com</span><br><span class="line"> name = yuntai</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-上传，对比和查看状态"><a href="#2-上传，对比和查看状态" class="headerlink" title="2. 上传，对比和查看状态"></a>2. 上传，对比和查看状态</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">创建新文件</span><br><span class="line">[root@yt-01 gitroot]# echo -e &quot;123/234/456/789&quot; &gt; 1.txt</span><br><span class="line">[root@yt-01 gitroot]# ll</span><br><span class="line">总用量 4</span><br><span class="line">-rw-r--r-- 1 root root 16 4月 3 14:39 1.txt</span><br><span class="line"></span><br><span class="line">把1.txt添加到git仓库</span><br><span class="line">[root@yt-01 gitroot]# git add 1.txt         //打标记</span><br><span class="line">[root@yt-01 gitroot]# git commit -m &quot;creat new file 1.txt&quot;   //上传</span><br><span class="line">[master（根提交） 44609a5] creat new file 1.txt</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"> create mode 100644 1.txt</span><br><span class="line"># 记住，上传文件到仓库，每次都要 git add filename 和 git commit -m &quot;注释&quot; 两句命令</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">再次变更1.txt</span><br><span class="line">[root@yt-01 gitroot]# echo -e &quot;1 new added/END&quot; &gt;&gt; 1.txt</span><br><span class="line">[root@yt-01 gitroot]# cat 1.txt</span><br><span class="line">123/234/456/789</span><br><span class="line">1 new added/END</span><br><span class="line"></span><br><span class="line">查看当前仓库中的状态，比如是否有改动的文件</span><br><span class="line">[root@yt-01 gitroot]# git status</span><br><span class="line"># 位于分支 master</span><br><span class="line"># 尚未暂存以备提交的变更：</span><br><span class="line"># （使用 &quot;git add &lt;file&gt;...&quot; 更新要提交的内容）</span><br><span class="line"># （使用 &quot;git checkout -- &lt;file&gt;...&quot; 丢弃工作区的改动）</span><br><span class="line">#</span><br><span class="line">#	修改： 1.txt</span><br><span class="line">#</span><br><span class="line">修改尚未加入提交（使用 &quot;git add&quot; 和/或 &quot;git commit -a&quot;）</span><br><span class="line"></span><br><span class="line"># 每部操作之后都可以使用“git status”查看当前状态，可以根据提示信息进行后续操作。</span><br><span class="line"></span><br><span class="line">不同版本文件对比</span><br><span class="line">[root@yt-01 gitroot]# git diff 1.txt</span><br><span class="line">diff --git a/1.txt b/1.txt</span><br><span class="line">index a53950c..49384d8 100644</span><br><span class="line">--- a/1.txt</span><br><span class="line">+++ b/1.txt</span><br><span class="line">@@ -1 +1,2 @@</span><br><span class="line"> 123/234/456/789</span><br><span class="line">+1 new added/END</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-版本变更"><a href="#3-版本变更" class="headerlink" title="3 版本变更"></a>3 版本变更</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">更新版本</span><br><span class="line">[root@yt-01 gitroot]# git add 1.txt</span><br><span class="line">[root@yt-01 gitroot]# git commit -m &quot;add 1.txt again&quot;</span><br><span class="line">[master 01803b5] add 1.txt again</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"></span><br><span class="line">查看版本变更日志</span><br><span class="line">[root@yt-01 gitroot]# git log</span><br><span class="line">commit 01803b54e07b9842da0c2c4558fdafd66b05ada6</span><br><span class="line">Author: yuntai &lt;zhouqunic@163.com&gt;</span><br><span class="line">Date: Tue Apr 3 15:04:36 2018 +0800</span><br><span class="line">    add 1.txt again</span><br><span class="line">commit 2ab6b801dd207ef35d102c240173dc69d2ff3dc2</span><br><span class="line">Author: yuntai &lt;zhouqunic@163.com&gt;</span><br><span class="line">Date: Tue Apr 3 15:02:00 2018 +0800</span><br><span class="line">    add 1.txt again</span><br><span class="line">commit 44609a553eef00abe45e45a3c1bd54cc8fe9a402</span><br><span class="line">Author: yuntai &lt;zhouqunic@163.com&gt;</span><br><span class="line">Date: Tue Apr 3 14:41:50 2018 +0800</span><br><span class="line">    creat new file 1.txt</span><br><span class="line"></span><br><span class="line">删除文件2行，并更新版本</span><br><span class="line">[root@yt-01 gitroot]# vim 1.txt</span><br><span class="line">[root@yt-01 gitroot]# git add 1.txt</span><br><span class="line">[root@yt-01 gitroot]# git commit -m &quot;删除最后2行 &quot;</span><br><span class="line">[master 5acf95f] 删除最后2行</span><br><span class="line"> 1 file changed, 2 deletions(-)</span><br><span class="line"></span><br><span class="line">版本变更日志，一行显示</span><br><span class="line">[root@yt-01 gitroot]# git log --pretty=oneline   //版本变更日志，一行显示</span><br><span class="line">5acf95fd5e06f1fc01acc0f28f5753610a292a07 删除最后2行</span><br><span class="line">01803b54e07b9842da0c2c4558fdafd66b05ada6 add 1.txt again</span><br><span class="line">2ab6b801dd207ef35d102c240173dc69d2ff3dc2 add 1.txt again</span><br><span class="line">44609a553eef00abe45e45a3c1bd54cc8fe9a402 creat new file 1.txt</span><br><span class="line"># 代码表示版本代码</span><br><span class="line"></span><br><span class="line">版本回退</span><br><span class="line">[root@yt-01 gitroot]# git reset --hard 2ab6b801dd207</span><br><span class="line">HEAD 现在位于 2ab6b80 add 1.txt again</span><br><span class="line"># hard后面跟的代码可以只填写一部分</span><br><span class="line">[root@yt-01 gitroot]# git log --pretty=oneline</span><br><span class="line">2ab6b801dd207ef35d102c240173dc69d2ff3dc2 add 1.txt again</span><br><span class="line">44609a553eef00abe45e45a3c1bd54cc8fe9a402 creat new file 1.txt</span><br><span class="line"></span><br><span class="line">撤销版本回退（假如忘了版本代码）</span><br><span class="line">[root@yt-01 gitroot]# git reflog        //查看所有历史版本</span><br><span class="line">2ab6b80 HEAD@&#123;0&#125;: reset: moving to 2ab6b801dd207</span><br><span class="line">5acf95f HEAD@&#123;1&#125;: commit: 删除最后2行</span><br><span class="line">01803b5 HEAD@&#123;2&#125;: commit: add 1.txt again</span><br><span class="line">2ab6b80 HEAD@&#123;3&#125;: commit: add 1.txt again</span><br><span class="line">44609a5 HEAD@&#123;4&#125;: commit (initial): creat new file 1.txt</span><br><span class="line"># 版本回退</span><br><span class="line">[root@yt-01 gitroot]# git log --pretty=oneline</span><br><span class="line">5acf95fd5e06f1fc01acc0f28f5753610a292a07 删除最后2行</span><br><span class="line">01803b54e07b9842da0c2c4558fdafd66b05ada6 add 1.txt again</span><br><span class="line">2ab6b801dd207ef35d102c240173dc69d2ff3dc2 add 1.txt again</span><br><span class="line">44609a553eef00abe45e45a3c1bd54cc8fe9a402 creat new file 1.txt</span><br><span class="line"></span><br><span class="line">假如文件1.txt被删除了</span><br><span class="line">[root@yt-01 gitroot]# rm -rf 1.txt</span><br><span class="line">[root@yt-01 gitroot]# ls</span><br><span class="line">[root@yt-01 gitroot]# git checkout -- 1.txt    //恢复原来文件</span><br><span class="line">[root@yt-01 gitroot]# ls</span><br><span class="line">1.txt</span><br><span class="line"></span><br><span class="line">假如更改了1.txt，然后git add了，但是没有git commit，不想更新了，想回退到当时版本</span><br><span class="line">[root@yt-01 gitroot]# echo -e &quot;xxxxxx&quot; &gt; 1.txt</span><br><span class="line">[root@yt-01 gitroot]# git add 1.txt</span><br><span class="line">[root@yt-01 gitroot]# git reset HEAD 1.txt   //重置缓存</span><br><span class="line">重置后撤出暂存区的变更：</span><br><span class="line">M	1.txt</span><br><span class="line">[root@yt-01 gitroot]# cat 1.txt</span><br><span class="line">xxxxxx</span><br><span class="line">[root@yt-01 gitroot]# git checkout -- 1.txt     //恢复原来文件</span><br><span class="line">[root@yt-01 gitroot]# cat 1.txt</span><br><span class="line">123/234/456/789</span><br></pre></td></tr></table></figure>
-
-<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 gitroot]# git rm 1.txt    //删除文件</span><br><span class="line">rm &apos;1.txt&apos;</span><br><span class="line">[root@yt-01 gitroot]# git commit -m &quot;删除1.txt文件&quot;     //提交删除</span><br><span class="line">[master 7215021] 删除1.txt文件</span><br><span class="line"> 1 file changed, 1 deletion(-)</span><br><span class="line"> delete mode 100644 1.txt</span><br><span class="line">[root@yt-01 gitroot]# ls</span><br><span class="line"></span><br><span class="line">git checkout已经不能恢复了</span><br><span class="line">[root@yt-01 gitroot]# git checkout -- 1.txt</span><br><span class="line">error: pathspec &apos;1.txt&apos; did not match any file(s) known to git.</span><br><span class="line"></span><br><span class="line">恢复git rm删除的文件</span><br><span class="line">[root@yt-01 gitroot]# git log --pretty=oneline     //查看版本日志</span><br><span class="line">721502178db58654977d89635423afaa806e3c27 删除1.txt文件</span><br><span class="line">5acf95fd5e06f1fc01acc0f28f5753610a292a07 删除最后2行</span><br><span class="line">01803b54e07b9842da0c2c4558fdafd66b05ada6 add 1.txt again</span><br><span class="line">2ab6b801dd207ef35d102c240173dc69d2ff3dc2 add 1.txt again</span><br><span class="line">44609a553eef00abe45e45a3c1bd54cc8fe9a402 creat new file 1.txt</span><br><span class="line"></span><br><span class="line">[root@yt-01 gitroot]# git reset --hard 721502178d     //最后的版本已经是删除掉的时候，恢复不了</span><br><span class="line">HEAD 现在位于 7215021 删除1.txt文件</span><br><span class="line">[root@yt-01 gitroot]# ls</span><br><span class="line">[root@yt-01 gitroot]# git reset --hard 5acf95fd5e06f1fc01acc0f28f5753610a292a07    //回退到对应版本才可以</span><br><span class="line">HEAD 现在位于 5acf95f 删除最后2行</span><br><span class="line">[root@yt-01 gitroot]# ls</span><br><span class="line">1.txt</span><br></pre></td></tr></table></figure>
-
-<h1 id="22-7-建立远程仓库"><a href="#22-7-建立远程仓库" class="headerlink" title="22.7 建立远程仓库"></a>22.7 建立远程仓库</h1><h2 id="1-创建远程仓库"><a href="#1-创建远程仓库" class="headerlink" title="1 创建远程仓库"></a>1 创建远程仓库</h2><p>GitHub官网：github.com<br>注册账号并激活，然后开始创建主机的仓库！<br>创建完成后，添加key：<br>点击浏览器右上角头像——setting——SSH and GPG keys（选择SSH keys）——在服务器（虚拟机）执行ssh-keygen命令生成密钥对（/root/.ssh/id_rsa-私钥， /root/.ssh/id_rsa.pub-公钥）——将公钥复制到浏览器后点“添加”。</p>
-<h2 id="2-创建同名本地仓库，并连接"><a href="#2-创建同名本地仓库，并连接" class="headerlink" title="2 创建同名本地仓库，并连接"></a>2 创建同名本地仓库，并连接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">创建本地版本仓库</span><br><span class="line">[root@yt-01 tmp]# mkdir /tmp/gittest/</span><br><span class="line">[root@yt-01 tmp]# cd gittest/</span><br><span class="line">[root@yt-01 tmp]# echo &quot;# gittest&quot; &gt;&gt; README.md</span><br><span class="line">[root@yt-01 gittest]# git add README.md    </span><br><span class="line">[root@yt-01 gittest]# git commit -m &quot;创建README.md&quot;</span><br><span class="line">[master（根提交） f7045bf] 创建README.md</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"> create mode 100644 README.md</span><br><span class="line"></span><br><span class="line">远程连接</span><br><span class="line">[root@yt-01 gittest]# git remote add origin git@github.com:zhouqunic/gittest.git</span><br><span class="line">[root@yt-01 gittest]# git push -u origin master</span><br><span class="line">Counting objects: 3, done.</span><br><span class="line">Writing objects: 100% (3/3), 232 bytes | 0 bytes/s, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To git@github.com:zhouqunic/gittest.git</span><br><span class="line"> * [new branch] master -&gt; master</span><br><span class="line">分支 master 设置为跟踪来自 origin 的远程分支 master。</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-文件推送"><a href="#3-文件推送" class="headerlink" title="3 文件推送"></a>3 文件推送</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">新建文件</span><br><span class="line">[root@yt-01 gittest]# vim 123.txt</span><br><span class="line">[root@yt-01 gittest]# cat 123.txt</span><br><span class="line">123 123 123</span><br><span class="line">123 123</span><br><span class="line">123</span><br><span class="line"></span><br><span class="line">推送到本地仓库</span><br><span class="line">[root@yt-01 gittest]# git add 123.txt</span><br><span class="line">[root@yt-01 gittest]# git commit -m &quot;新建123.txt文件&quot;</span><br><span class="line">[master 6007c36] 新建123.txt文件</span><br><span class="line"> 1 file changed, 3 insertions(+)</span><br><span class="line"> create mode 100644 123.txt</span><br><span class="line"></span><br><span class="line">推送到远程仓库</span><br><span class="line">[root@yt-01 gittest]# git push</span><br><span class="line">warning: push.default 未设置，它的默认值将会在 Git 2.0 由 &apos;matching&apos;</span><br><span class="line">修改为 &apos;simple&apos;。若要不再显示本信息并在其默认值改变后维持当前使用习惯，</span><br><span class="line">进行如下设置：</span><br><span class="line">  git config --global push.default matching</span><br><span class="line">若要不再显示本信息并从现在开始采用新的使用习惯，设置：</span><br><span class="line">  git config --global push.default simple</span><br><span class="line">参见 &apos;git help config&apos; 并查找 &apos;push.default&apos; 以获取更多信息。</span><br><span class="line">（&apos;simple&apos; 模式由 Git 1.7.11 版本引入。如果您有时要使用老版本的 Git，</span><br><span class="line">为保持兼容，请用 &apos;current&apos; 代替 &apos;simple&apos; 模式）</span><br><span class="line">Counting objects: 4, done.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (3/3), 300 bytes | 0 bytes/s, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To git@github.com:zhouqunic/gittest.git</span><br><span class="line">   f7045bf..6007c36 master -&gt; master</span><br><span class="line"></span><br><span class="line"># 上面有好多无用的提示信息，为了之后不显示这些信息，根据提示执行命令</span><br><span class="line"></span><br><span class="line">[root@yt-01 gittest]# git config --global push.default simple</span><br></pre></td></tr></table></figure>
-
-<h1 id="22-8-克隆远程仓库"><a href="#22-8-克隆远程仓库" class="headerlink" title="22.8 克隆远程仓库"></a>22.8 克隆远程仓库</h1><h2 id="克隆远程仓库"><a href="#克隆远程仓库" class="headerlink" title="克隆远程仓库"></a>克隆远程仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">创建一个本地文件夹，来放克隆的内容</span><br><span class="line">[root@yt-01 gittest]# cd /usr/local/sbin/</span><br><span class="line">[root@yt-01 sbin]# ls</span><br><span class="line"></span><br><span class="line">克隆远程仓库</span><br><span class="line">[root@yt-01 sbin]# git clone https://github.com/maicong/LNMP.git     //克隆</span><br><span class="line">正克隆到 &apos;LNMP&apos;...</span><br><span class="line">remote: Counting objects: 420, done.</span><br><span class="line">remote: Total 420 (delta 0), reused 0 (delta 0), pack-reused 420</span><br><span class="line">接收对象中: 100% (420/420), 612.72 KiB | 95.00 KiB/s, done.</span><br><span class="line">处理 delta 中: 100% (224/224), done.</span><br><span class="line">[root@yt-01 sbin]# ls</span><br><span class="line">LNMP</span><br><span class="line">[root@yt-01 sbin]# cd LNMP/</span><br><span class="line">[root@yt-01 LNMP]# ls</span><br><span class="line">DBMGT etc home keys LICENSE lnmp.sh README.md source.sh svnserve svn.sh</span><br></pre></td></tr></table></figure>
-
-<h2 id="编辑仓库"><a href="#编辑仓库" class="headerlink" title="编辑仓库"></a>编辑仓库</h2><p>要是自己的仓库，别人的仓库的话，必须fork到自己的仓库，克隆后才能编辑</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 sbin]# git clone git@github.com:zhouqunic/LNMP.git</span><br><span class="line">正克隆到 &apos;LNMP&apos;...</span><br><span class="line">remote: Counting objects: 420, done.</span><br><span class="line">remote: Total 420 (delta 0), reused 0 (delta 0), pack-reused 420</span><br><span class="line">接收对象中: 100% (420/420), 612.72 KiB | 62.00 KiB/s, done.</span><br><span class="line">处理 delta 中: 100% (224/224), done.</span><br><span class="line">[root@yt-01 sbin]# ls</span><br><span class="line">LNMP</span><br><span class="line">[root@yt-01 sbin]# cd LNMP/</span><br><span class="line">[root@yt-01 LNMP]# ls</span><br><span class="line">DBMGT etc home keys LICENSE lnmp.sh README.md source.sh svnserve svn.sh</span><br><span class="line">[root@yt-01 LNMP]# echo &quot;^^^^&quot; &gt;&gt; lnmp.sh</span><br><span class="line">[root@yt-01 LNMP]# git add lnmp.sh</span><br><span class="line">[root@yt-01 LNMP]# git commit -m &quot;瞎改&quot;</span><br><span class="line">[master c67bc06] 瞎改</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"></span><br><span class="line"># 此时只是提交到了本地仓库</span><br></pre></td></tr></table></figure>
-
-<h2 id="推送到远程仓库"><a href="#推送到远程仓库" class="headerlink" title="推送到远程仓库"></a>推送到远程仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 LNMP]# git push</span><br><span class="line">Warning: Permanently added the RSA host key for IP address &apos;192.30.253.112&apos; to the list of known hosts.</span><br><span class="line">Counting objects: 5, done.</span><br><span class="line">Compressing objects: 100% (3/3), done.</span><br><span class="line">Writing objects: 100% (3/3), 293 bytes | 0 bytes/s, done.</span><br><span class="line">Total 3 (delta 2), reused 0 (delta 0)</span><br><span class="line">remote: Resolving deltas: 100% (2/2), completed with 2 local objects.</span><br><span class="line">To git@github.com:zhouqunic/LNMP.git</span><br><span class="line">   027e59a..c67bc06 master -&gt; master</span><br></pre></td></tr></table></figure>
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/new post - 副本/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -640,7 +583,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/3.7 -3.9 su和sudo用户切换/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/10.23 - 10.27 linux任务计划和systemd管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -659,7 +602,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/3.7 -3.9 su和sudo用户切换/" itemprop="url">3.7 -3.9 su和sudo用户切换</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/10.23 - 10.27 linux任务计划和systemd管理/" itemprop="url">10.23 - 10.27 linux任务计划和systemd管理</a></h1>
         
 
         <div class="post-meta">
@@ -733,37 +676,15 @@
       
         
           
-            <h1 id="3-7-su命令"><a href="#3-7-su命令" class="headerlink" title="3.7 su命令"></a>3.7 su命令</h1><p>su 命令就是切换用户的工具</p>
-<h2 id="1-su-命令的用法"><a href="#1-su-命令的用法" class="headerlink" title="1. su 命令的用法"></a>1. su 命令的用法</h2><p><code>su</code>+ [参数]  [用户名]</p>
-<p><code>-；-l</code> 登录并改变到所切换的用户环境</p>
-<p><code>-c</code>  执行一个命令，然后退出所切换到的用户环境</p>
-<h2 id="2-su-命令的范例"><a href="#2-su-命令的范例" class="headerlink" title="2. su 命令的范例"></a>2. su 命令的范例</h2><p>su 在不加任何参数，默认为切换到root用户，但没有转到root用户家目录下，也就是说这时虽然是切换为root用户了，但并没有改变root登录环境；用户默认的登录环境，可以在/etc/passwd 中查得到，包括家目录，SHELL定义等</p>
-<h1 id="3-8-sudo命令"><a href="#3-8-sudo命令" class="headerlink" title="3.8 sudo命令"></a>3.8 sudo命令</h1><h2 id="1-sudo的使用范围"><a href="#1-sudo的使用范围" class="headerlink" title="1. sudo的使用范围"></a>1. sudo的使用范围</h2><p>sudo 执行命令的流程是当前用户切换到root（或其它指定切换到的用户），然后以root（或其它指定的切换到的用户）身份执行命令，执行完成后，直接退回到当前用户；而这些的前提是要通过sudo的配置文件/etc/sudoers来进行授权；<strong>但是不直接vi编辑，因为系统不能识别语法错误，所以我们使用visudo命令。</strong>为了更好的审计各个用户。</p>
-<h2 id="2-sudo的配置文件"><a href="#2-sudo的配置文件" class="headerlink" title="2. sudo的配置文件"></a>2. sudo的配置文件</h2><p>sudo的配置文件/etc/sudoers，但是不直接vi编辑，我们使用使用visudo命令（需要root权限才能使用），因为系统可以通过visudo命令来识别修改后配置文件的语法错误。</p>
-<p><strong>为什么需要使用sodo而不直接使用root直接登录了？</strong><br>是为了更好的审计各个用户的使用历史，最大限度的规范行为和杜绝二次发生。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# visudo</span><br><span class="line">## Sudoers allows particular users to run various commands as  </span><br><span class="line">## the root user, without needing the root password.  </span><br><span class="line">## 该文件允许特定用户像root用户一样使用各种各样的命令，而不需要root用户的密码  </span><br><span class="line">##  </span><br><span class="line">## Examples are provided at the bottom of the file for collections  </span><br><span class="line">## of related commands, which can then be delegated out to particular  </span><br><span class="line">## users or groups.  </span><br><span class="line">## 在文件的底部提供了很多相关命令的示例以供选择，这些示例都可以被特定用户或  </span><br><span class="line">## 用户组所使用  </span><br><span class="line">##  </span><br><span class="line">## This file must be edited with the &apos;visudo&apos; command.  </span><br><span class="line">## 该文件必须使用&quot;visudo&quot;命令编辑  </span><br><span class="line">  </span><br><span class="line">## Host Aliases  </span><br><span class="line">## Groups of machines. You may prefer to use hostnames (perhaps using  </span><br><span class="line">## wildcards for entire domains) or IP addresses instead.  </span><br><span class="line">## 对于一组服务器，你可能会更喜欢使用主机名（可能是全域名的通配符）、或IP地址，这时可以配置主机别名  </span><br><span class="line"># Host_Alias    FILESERVERS = fs1, fs2  </span><br><span class="line"># Host_Alias    MAILSERVERS = smtp, smtp2  </span><br><span class="line">  </span><br><span class="line">## User Aliases  </span><br><span class="line">## These aren&apos;t often necessary, as you can use regular groups  </span><br><span class="line">## (ie, from files, LDAP, NIS, etc) in this file - just use %groupname  </span><br><span class="line">## rather than USERALIAS  </span><br><span class="line">## 这并不很常用，因为你可以通过使用组来代替一组用户的别名  </span><br><span class="line"># User_Alias ADMINS = jsmith, mikem  </span><br><span class="line">  </span><br><span class="line">## Command Aliases  </span><br><span class="line">## These are groups of related commands...  </span><br><span class="line">## 指定一系列相互关联的命令（当然可以是一个）的别名，通过赋予该别名sudo权限，  </span><br><span class="line">## 可以通过sudo调用所有别名包含的命令，下面是一些示例  </span><br><span class="line">  </span><br><span class="line">## Networking 网络操作相关命令别名  </span><br><span class="line"># Cmnd_Alias NETWORKING = /sbin/route, /sbin/ifconfig, /bin/ping, /sbin/dhclient  </span><br><span class="line">, /usr/bin/net, /sbin/iptables, /usr/bin/rfcomm, /usr/bin/wvdial, /sbin/iwconfig  </span><br><span class="line">, /sbin/mii-tool  </span><br><span class="line">  </span><br><span class="line">## Installation and management of software 软件安装管理相关命令别名  </span><br><span class="line"># Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum  </span><br><span class="line">  </span><br><span class="line">## Services 服务相关命令别名  </span><br><span class="line"># Cmnd_Alias SERVICES = /sbin/service, /sbin/chkconfig  </span><br><span class="line">  </span><br><span class="line">## Updating the locate database 本地数据库升级命令别名  </span><br><span class="line"># Cmnd_Alias LOCATE = /usr/bin/updatedb  </span><br><span class="line">  </span><br><span class="line">## Storage 磁盘操作相关命令别名  </span><br><span class="line"># Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe  </span><br><span class="line">, /bin/mount, /bin/umount  </span><br><span class="line">  </span><br><span class="line">## Delegating permissions 代理权限相关命令别名  </span><br><span class="line"># Cmnd_Alias DELEGATING = /usr/sbin/visudo, /bin/chown, /bin/chmod, /bin/chgrp  </span><br><span class="line">  </span><br><span class="line">## Processes 进程相关命令别名  </span><br><span class="line"># Cmnd_Alias PROCESSES = /bin/nice, /bin/kill, /usr/bin/kill, /usr/bin/killall  </span><br><span class="line">  </span><br><span class="line">## Drivers 驱动命令别名  </span><br><span class="line"># Cmnd_Alias DRIVERS = /sbin/modprobe  </span><br><span class="line">  </span><br><span class="line"># Defaults specification  </span><br><span class="line">  </span><br><span class="line">#  </span><br><span class="line"># Disable &quot;ssh hostname sudo &lt;cmd&gt;&quot;, because it will show the password in clear.  </span><br><span class="line">#        You have to run &quot;ssh -t hostname sudo &lt;cmd&gt;&quot;.  </span><br><span class="line"># 一些环境变量的相关配置，具体情况可见man soduers  </span><br><span class="line">Defaults    requiretty  </span><br><span class="line">  </span><br><span class="line">Defaults    env_reset  </span><br><span class="line">Defaults    env_keep =  &quot;COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS&quot;  </span><br><span class="line">Defaults    env_keep += &quot;MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE&quot;  </span><br><span class="line">Defaults    env_keep += &quot;LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES&quot;  </span><br><span class="line">Defaults    env_keep += &quot;LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE&quot;  </span><br><span class="line">Defaults    env_keep += &quot;LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY&quot;  </span><br><span class="line">  </span><br><span class="line">Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin  </span><br><span class="line">  </span><br><span class="line">## Next comes the main part: which users can run what software on  </span><br><span class="line">## which machines (the sudoers file can be shared between multiple  </span><br><span class="line">## systems).  </span><br><span class="line">## 下面是规则配置：什么用户在哪台服务器上可以执行哪些命令（sudoers文件可以在多个系统上共享）  </span><br><span class="line">## Syntax(语法):  </span><br><span class="line">##  </span><br><span class="line">##  user    MACHINE=COMMANDS 用户 登录的主机=（可以变换的身份） 可以执行的命令  </span><br><span class="line">##  </span><br><span class="line">## The COMMANDS section may have other options added to it.  </span><br><span class="line">## 命令部分可以附带一些其它的选项  </span><br><span class="line">##  </span><br><span class="line">## Allow root to run any commands anywhere  </span><br><span class="line">## 允许root用户执行任意路径下的任意命令  </span><br><span class="line">root    ALL=(ALL)  ALL  </span><br><span class="line">  </span><br><span class="line">## Allows members of the &apos;sys&apos; group to run networking, software,  </span><br><span class="line">## service management apps and more.  </span><br><span class="line">## 允许sys中户组中的用户使用NETWORKING等所有别名中配置的命令  </span><br><span class="line"># %sys ALL = NETWORKING, SOFTWARE, SERVICES, STORAGE, DELEGATING, PROCESSES, LOCATE  </span><br><span class="line">, DRIVERS  </span><br><span class="line">  </span><br><span class="line">## Allows people in group wheel to run all commands  </span><br><span class="line">## 允许wheel用户组中的用户执行所有命令  </span><br><span class="line">%wheel  ALL=(ALL)  ALL  </span><br><span class="line">  </span><br><span class="line">## Same thing without a password  </span><br><span class="line">## 允许wheel用户组中的用户在不输入该用户的密码的情况下使用所有命令  </span><br><span class="line"># %wheel    ALL=(ALL)  NOPASSWD: ALL  </span><br><span class="line">  </span><br><span class="line">## Allows members of the users group to mount and unmount the  </span><br><span class="line">## cdrom as root  </span><br><span class="line">## 允许users用户组中的用户像root用户一样使用mount、unmount、chrom命令  </span><br><span class="line"># %users  ALL=/sbin/mount /mnt/cdrom, /sbin/umount /mnt/cdrom  </span><br><span class="line">  </span><br><span class="line">## Allows members of the users group to shutdown this system  </span><br><span class="line">## 允许users用户组中的用户关闭localhost这台服务器  </span><br><span class="line"># %users  localhost=/sbin/shutdown -h now  </span><br><span class="line">  </span><br><span class="line">## Read drop-in files from /etc/sudoers.d (the # here does not mean a comment)  </span><br><span class="line">## 读取放置在/etc/sudoers.d/文件夹中的文件（此处的#不意味着这是一个声明）  </span><br><span class="line">#includedir /etc/sudoers.d</span><br></pre></td></tr></table></figure>
-
-<p>特别要注意的是==别名==一定要==使用大写==</p>
-<h1 id="3-9-限制root远程登录"><a href="#3-9-限制root远程登录" class="headerlink" title="3.9 限制root远程登录"></a>3.9 限制root远程登录</h1><h2 id="1-思路"><a href="#1-思路" class="headerlink" title="1. 思路"></a>1. 思路</h2><ul>
-<li>禁止root用户登录</li>
-<li>允许用户 aming user5 user6  使用 su - root</li>
-<li>root‘s passwd  xxxx 禁止登录</li>
-<li>普通用户使用 sudo su - root</li>
-</ul>
-<h2 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h2><ul>
-<li><p>配置/etc/ssh/sshd_config，使系统禁止root用户登录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br><span class="line">/Root  搜索Root</span><br><span class="line">#PermitRootLogin yes  允许Root远程登录，将此选项改为 no &gt;&gt;</span><br><span class="line">PermitRootLogin no  &gt;&gt;  ：wq</span><br><span class="line">systemctl restart sshd.service  重启服务</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置visudo，使普通用户可以临时用root权限使用sudo命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">visudo</span><br><span class="line">User_Alias AMINGS = aming, user5, user6</span><br><span class="line">AMINGS  ALL=(ALL)  NOPASSWD: /usr/bin/su</span><br><span class="line">:wq</span><br><span class="line">sudo su -</span><br><span class="line">whoami</span><br><span class="line">root</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo su -  约等于  sudo -i </span><br><span class="line">sudo -s    完全等于  sudo  /bin/bash  约等于 sudo su </span><br><span class="line">sudo      终究被一个&quot;临时权限的帽子&quot;扣住，不能等价于纯粹的登录到系统里。</span><br></pre></td></tr></table></figure>
-
-<p><a href="www.opensource.apple.com/source/sudo/sudo-16/sudo/sample.sudoers">sudo配置文件样例</a>[<a href="http://www.opensource.apple.com/source/sudo/sudo-16/sudo/sample.sudoers]" target="_blank" rel="noopener">www.opensource.apple.com/source/sudo/sudo-16/sudo/sample.sudoers]</a></p>
-
-          
+          10.23 linux任务计划cron12345678910111213141516171819202122232425262728293031323334353637383940414243[root@host ~]# cat /etc/crontab  任务计划的配置文件SHELL=/bin/b
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/10.23 - 10.27 linux任务计划和systemd管理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -810,7 +731,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/5.1 - 5.4 Vim命令入门01/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/11.18 - 11.21 LAMP架构-Apache用户认证，域名跳转，Apache访问日志/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -829,7 +750,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/5.1 - 5.4 Vim命令入门01/" itemprop="url">5.1 - 5.4 Vim命令入门01</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/11.18 - 11.21 LAMP架构-Apache用户认证，域名跳转，Apache访问日志/" itemprop="url">11.18 - 11.21 LAMP架构-Apache用户认证，域名跳转，Apache访问日志</a></h1>
         
 
         <div class="post-meta">
@@ -903,78 +824,16 @@
       
         
           
-            <h1 id="5-1-vim介绍"><a href="#5-1-vim介绍" class="headerlink" title="5.1 vim介绍"></a>5.1 vim介绍</h1><h2 id="vi-和-vim-的区别"><a href="#vi-和-vim-的区别" class="headerlink" title="vi 和 vim 的区别"></a>vi 和 vim 的区别</h2><p>vi 是早期版本，vim是后来改进版本。直观的是，vim编辑文件可以显示不同颜色，一般电脑都有vi，而vim有的没有，需要安装。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install vim-enhanced</span><br><span class="line">安装vim包的命令</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-vim和vi的一些用法"><a href="#2-vim和vi的一些用法" class="headerlink" title="2. vim和vi的一些用法"></a>2. vim和vi的一些用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim 1.txt</span><br><span class="line">vim /etc/init.d/iptables</span><br><span class="line">vi !$      \\在这里，!$=/etc/init.d/iptables.表示上一条命令中，</span><br><span class="line">如果有空格隔开的命令，那么!$可以代指它。</span><br><span class="line">vim +10 !$ \\打开/etc/init.d/iptables文件的第十行。</span><br></pre></td></tr></table></figure>
-
-<h1 id="5-2-vim颜色显示和移动光标"><a href="#5-2-vim颜色显示和移动光标" class="headerlink" title="5.2 vim颜色显示和移动光标"></a>5.2 vim颜色显示和移动光标</h1><h2 id="1-vim颜色显示配置文件"><a href="#1-vim颜色显示配置文件" class="headerlink" title="1. vim颜色显示配置文件"></a>1. vim颜色显示配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vimrc 的存放位置： </span><br><span class="line">系统 vimrc 文件: &quot;$VIM/vimrc&quot; </span><br><span class="line">用户 vimrc 文件: &quot;$HOME/.vimrc&quot; </span><br><span class="line">用户 exrc 文件: &quot;$HOME/.exrc&quot; </span><br><span class="line">系统 gvimrc 文件: &quot;$VIM/gvimrc&quot; </span><br><span class="line">用户 gvimrc 文件: &quot;$HOME/.gvimrc&quot; </span><br><span class="line">系统菜单文件: &quot;$VIMRUNTIME/menu.vim&quot; </span><br><span class="line">$VIM 预设值: &quot;/usr/share/vim&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-vim的3种模式"><a href="#2-vim的3种模式" class="headerlink" title="2. vim的3种模式"></a>2. vim的3种模式</h2><ul>
-<li>一般模式  <strong>光标移动  复制  粘贴  剪切</strong></li>
-<li>编辑模式  <strong>输入字母</strong></li>
-<li>命令模式  <strong>使用命令</strong></li>
-</ul>
-<h1 id="5-3-vim一般模式下移动光标"><a href="#5-3-vim一般模式下移动光标" class="headerlink" title="5.3 vim一般模式下移动光标"></a>5.3 vim一般模式下移动光标</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">j  光标向下</span><br><span class="line">k 光标向上</span><br><span class="line">h 光标左移</span><br><span class="line">l  光标右移</span><br><span class="line">Ctrl+b 或者 Pageup      页面内容上翻一页</span><br><span class="line">Ctrl+f 或者 Pagedown 页面内容下翻一页</span><br><span class="line">gg 光标移到首行</span><br><span class="line">G  光标移到尾行</span><br><span class="line">0或者shift+6  光标移动到本行行首</span><br><span class="line">shift+4          光标移动到本行行尾</span><br><span class="line">nG（n是任意一个数字）  光标移动到第n行</span><br></pre></td></tr></table></figure>
-
-<h1 id="5-4-vim一般模式下复制、剪切和粘贴"><a href="#5-4-vim一般模式下复制、剪切和粘贴" class="headerlink" title="5.4 vim一般模式下复制、剪切和粘贴"></a>5.4 vim一般模式下复制、剪切和粘贴</h1><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>x</td>
-<td>向后删除一个字符</td>
-</tr>
-<tr>
-<td>X</td>
-<td>向前删除一个字符</td>
-</tr>
-<tr>
-<td>dd</td>
-<td>剪切光标所在的那一行</td>
-</tr>
-<tr>
-<td>ndd</td>
-<td>剪切光标所在的那一行以及向下行一起的n行</td>
-</tr>
-<tr>
-<td>p</td>
-<td>粘贴到光标所在行的下一行</td>
-</tr>
-<tr>
-<td>P</td>
-<td>粘贴到光标所在行的上一行</td>
-</tr>
-<tr>
-<td>u</td>
-<td>还原上一步操作（最多50步）</td>
-</tr>
-<tr>
-<td>Ctrl+r</td>
-<td>反撤销</td>
-</tr>
-<tr>
-<td>yy</td>
-<td>复制光标所在行</td>
-</tr>
-<tr>
-<td>nyy</td>
-<td>复制光标所在的那一行以及向下行一起的n行</td>
-</tr>
-<tr>
-<td>v</td>
-<td>按v后移动光标会选中指定字符，然后可以复制、粘贴等</td>
-</tr>
-</tbody></table>
-<h1 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h1><h2 id="1-出错题目"><a href="#1-出错题目" class="headerlink" title="1. 出错题目"></a>1. 出错题目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. vim一般模式下，如何快速删除某些字符串（这些字符串并非为一整行）？ (错误答案 B)</span><br><span class="line">A 先按v（小写）进入可选模式，然后移动光标选择要删除的字符串，选好后按x</span><br><span class="line">B 先按v进入可选模式，然后移动光标选择要删除的字符串，选好后按dd</span><br><span class="line">C 先按V（大写）进入可选模式，然后移动光标选择要删除的字符串，选好后按x</span><br><span class="line">D 先按V进入可选模式，然后移动光标选择要删除的字符串，选好后按dd</span><br><span class="line">正确答案: A</span><br><span class="line"></span><br><span class="line">因为dd是指删除/剪切一整行，而选中的字符删除需要用x/X。</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-实操练习题"><a href="#2-实操练习题" class="headerlink" title="2. 实操练习题"></a>2. 实操练习题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/dnsmasq.conf  /tmp/1.txt</span><br><span class="line"></span><br><span class="line">(1) 分别向下、向右、向左、向上移动6个字符（6j 6l 6h 6k）。</span><br><span class="line">(2) 分别向下、向上翻两页（分别按两次ctrl+f和ctrl+b）。</span><br><span class="line">(3) 把光标移动到第49行（49G）。</span><br><span class="line">(4) 把光标移动到行尾，再移动到行首（Shift+4, Shift+6）。</span><br><span class="line">(5) 移动到1.txt文件的最后一行（G）。</span><br><span class="line">(6) 移动到文件的首行（gg）。</span><br><span class="line">(7) 搜索文件中出现的“dnsmasq”，并数一下该字符串出现的次数（/dnsmsq 然后按n）。</span><br><span class="line">(8) 把从第1行到第10行出现的dnsmasq替换成dns（:1,10s/dnsmasq/dns/g）。</span><br><span class="line">(9) 还原上一步操作（u）。</span><br><span class="line">(10) 把整个文件中所有的etc替换成cte（:1,$s/etc/cte/g）。</span><br><span class="line">(11) 把光标移动到第25行，删除字符串 “ly”（25G 然后按j向右移动光标找到&quot;ly&quot;，按v选中，然后按x）。</span><br><span class="line">(12) 还原上一步操作（u）。</span><br><span class="line">(13) 删除第50行（50G dd）。</span><br><span class="line">(14) 还原上一步操作（u）。</span><br><span class="line">(15) 删除第37-42行的所有内容（37G 6dd）。</span><br><span class="line">(16) 还原上一步操作（u）。</span><br><span class="line">(17) 复制第48行的内容并粘贴到第52行下面（48G yy 52G p）。</span><br><span class="line">(18) 还原上一步操作（u）。</span><br><span class="line">(19) 复制第37-42行的内容并粘贴到第44行上面（37G 6yy 44G P）。</span><br><span class="line">(20) 还原上一步操作（按u）。</span><br><span class="line">(21) 把第37-42行的内容移动到第19行下面（37G 6dd 19G p）。</span><br><span class="line">(22) 还原上一步操作（按u）。</span><br><span class="line">(23) 把光标移动到首行，把第1行内容改为“#!/bin/bash”</span><br><span class="line">（先按gg，把光标定位到第1行，然后按字母A，进入编辑模式，</span><br><span class="line">同时&gt;光标到行末尾，进行修改操作，完成后按ESC）。</span><br><span class="line">(24) 在第1行下面插入新的一行，并输入“# Hello!”</span><br><span class="line">（按o进入编辑模式，同时光标向下另起一行，输入“# Hello!”）。</span><br><span class="line">(25) 保存文档并退出（按Esc键，输入“:wq”）。</span><br></pre></td></tr></table></figure>
-
-
-          
+          11.18 Apache用户认证
+经常上网的读者会遇到这种情况：访问一些网站的某些资源时，浏览器弹出一个对话框，要求输入用户名和密码来获取对资源的访问。这就是用户认证的一种技术。用户认证是保护网络系统资源的第一道防线，它控制着所有登录并检查访问用户的合法性，其目标是仅让合法用户以合法的权限访问网络系
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/11.18 - 11.21 LAMP架构-Apache用户认证，域名跳转，Apache访问日志/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1021,7 +880,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/6.1 - 6.4 linux下压缩打包工具01-bzip2、xz、gzip/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/11.22 - 11.24 LAMP架构-访问日志不记录静态文件，访问日志切割，静态元素过期时间/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1040,7 +899,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/6.1 - 6.4 linux下压缩打包工具01-bzip2、xz、gzip/" itemprop="url">6.1 - 6.4 linux下压缩打包工具01-bzip2、xz、gzip</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/11.22 - 11.24 LAMP架构-访问日志不记录静态文件，访问日志切割，静态元素过期时间/" itemprop="url">11.22 - 11.24 LAMP架构-访问日志不记录静态文件，访问日志切割，静态元素过期时间</a></h1>
         
 
         <div class="post-meta">
@@ -1114,54 +973,16 @@
       
         
           
-            <h1 id="6-1-压缩打包介绍"><a href="#6-1-压缩打包介绍" class="headerlink" title="6.1 压缩打包介绍"></a>6.1 压缩打包介绍</h1><h2 id="1-windows压缩工具"><a href="#1-windows压缩工具" class="headerlink" title="1. windows压缩工具"></a>1. windows压缩工具</h2><p>.rar .zip .7z</p>
-<h2 id="2-linux压缩工具"><a href="#2-linux压缩工具" class="headerlink" title="2. linux压缩工具"></a>2. linux压缩工具</h2><p>.zip, .gz, .bz2, .xz,<br>.tar.gz,tar.bz2,.tar.xz</p>
-<h1 id="6-2-gzip压缩工具"><a href="#6-2-gzip压缩工具" class="headerlink" title="6.2 gzip压缩工具"></a>6.2 gzip压缩工具</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gzip [-d#] filename 其中#为1-9的数字</span><br><span class="line">gzip压缩有10个级别，默认是gzip -6 级别的，1是压缩最少，速度最快，10是压缩最大，速度最慢</span><br><span class="line">压缩的文件后缀位.gz</span><br><span class="line">解压缩位gzip -d</span><br><span class="line">gzip不支持压缩目录</span><br><span class="line">zcat 直接查看.gz压缩包的内容</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-将etc目录中含有conf文件名的文件列并追加都1-txt"><a href="#1-将etc目录中含有conf文件名的文件列并追加都1-txt" class="headerlink" title="1. 将etc目录中含有conf文件名的文件列并追加都1.txt"></a>1. 将etc目录中含有conf文件名的文件列并追加都1.txt</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# find /etc/ -type f -name &quot;*conf&quot; -exec cat &#123;&#125; &gt;&gt;1.txt \</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-压缩文件"><a href="#2-压缩文件" class="headerlink" title="2. 压缩文件"></a>2. 压缩文件</h2><blockquote>
-<p>文件压缩之后再解压，就会将原文件中虚的空间挤掉。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip 1.txt</span><br><span class="line">[root@localhost]# ls</span><br><span class="line">1.txt.gz</span><br><span class="line">[root@localhost]# du -sh 1.txt.gz</span><br><span class="line">596K    1.txt.gz</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-解压文件："><a href="#3-解压文件：" class="headerlink" title="3. 解压文件："></a>3. 解压文件：</h2><blockquote>
-<p>1.txt压缩前是4M，压缩再解压变成了2.3M，文件内容的行数是不变的。 压缩等级1~9，默认是6级，1级别压缩后，压缩文件稍大，9级压缩文件文件最小。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip -d 1.txt.gz</span><br><span class="line">[root@localhost]# du -sh 1.txt</span><br><span class="line">2.3M    1.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h2><ul>
-<li><p>使用1级别压缩</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip -1 1.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其他压缩方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gunzip 1.txt.gz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>解压并查看内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# zcat 1.txt.gz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>压缩文件到指定目录并且原文件不消失</p>
-<blockquote>
-<p>gzip不能压缩目录</p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# gzip -c 1.txt &gt; /tmp/1.txt.gz</span><br></pre></td></tr></table></figure>
-
-<h1 id="6-3-bzip2压缩工具"><a href="#6-3-bzip2压缩工具" class="headerlink" title="6.3 bzip2压缩工具"></a>6.3 bzip2压缩工具</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bzip2 [-d]  [-d] filename</span><br><span class="line">不支持压缩目录</span><br><span class="line">压缩级别10 默认压缩级别是9</span><br><span class="line">-d 解压缩</span><br><span class="line"></span><br><span class="line">bzcat 可以直接查看.bz2压缩包的内容</span><br><span class="line">[root@localhost]# bzcat 1.txt.bz2</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-压缩文件"><a href="#1-压缩文件" class="headerlink" title="1. 压缩文件"></a>1. 压缩文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost tmp]# bzip2 1.txt</span><br><span class="line"></span><br><span class="line">压缩到指定目录下：</span><br><span class="line">[root@localhost]# bzip2 -c 1.txt &gt; /tmp/1.txt.bz2</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-解压"><a href="#2-解压" class="headerlink" title="2. 解压"></a>2. 解压</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# bzip2 -d 1.txt.bz2</span><br><span class="line">或者</span><br><span class="line">[root@localhost]# bunzip2 1.txt.bz2</span><br></pre></td></tr></table></figure>
-
-<h1 id="6-4-xz压缩工具"><a href="#6-4-xz压缩工具" class="headerlink" title="6.4 xz压缩工具"></a>6.4 xz压缩工具</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）xz压缩工具与gzip,bzip2的压缩方式类似，只是压缩算法不一样，喜欢用哪个，就用哪个</span><br><span class="line">（2）xz压缩文件时，源文件会消失</span><br><span class="line">（3）通过xzcat可以看xz文件</span><br><span class="line">（4）xz也是与bzip2一样有压缩级别的</span><br><span class="line">（5）如果想解压到指定目录可以用-c选项</span><br><span class="line">（6）xz不能压缩目录</span><br><span class="line">(7) 默认压缩级别为9, 压缩最狠的是xz，其次是bzip2，最不狠的是gzip</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-压缩文件-1"><a href="#1-压缩文件-1" class="headerlink" title="1. 压缩文件"></a>1. 压缩文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# xz 2.txt</span><br><span class="line"></span><br><span class="line">压缩文件到指定目录</span><br><span class="line">[root@localhost]# xz -c 2.txt &gt;</span><br><span class="line">/tmp/d6z/2.txt.xz</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-解压-1"><a href="#2-解压-1" class="headerlink" title="2. 解压"></a>2. 解压</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# xz -d 2.txt.xz</span><br><span class="line">或者</span><br><span class="line">[root@localhost]# unxz 2.txt.xz</span><br><span class="line"></span><br><span class="line">解压文件并指定目录：</span><br><span class="line"></span><br><span class="line">[root@localhost]# xz -d -c /tmp/d6z/2.txt.xz &gt; ./4.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-查看压缩文件内容"><a href="#3-查看压缩文件内容" class="headerlink" title="3. 查看压缩文件内容"></a>3. 查看压缩文件内容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]# xzcat /tmp/2.txt.xz</span><br></pre></td></tr></table></figure>
-          
+          #11.22 访问日志不记录静态文件网站大多元素为静态文件，如图片、css、js等，这些元素可以不用记录，没有意义。限制访问日志，让系统不记录静态文件，可以有效的减少无用的日志的空间占用。把虚拟主机配置文件 “httpd-vhosts.conf” 改成如下： 
+1234567891011121314
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/11.22 - 11.24 LAMP架构-访问日志不记录静态文件，访问日志切割，静态元素过期时间/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1208,7 +1029,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/4.5 - 4.9 磁盘格式化与挂载/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/12.1 - 12.5 LNMP架构介绍、MySQL安装、PHP安装、Nginx介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1227,7 +1048,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/4.5 - 4.9 磁盘格式化与挂载/" itemprop="url">4.5 - 4.9 磁盘格式化与挂载</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/12.1 - 12.5 LNMP架构介绍、MySQL安装、PHP安装、Nginx介绍/" itemprop="url">12.1 - 12.5 LNMP架构介绍、MySQL安装、PHP安装、Nginx介绍</a></h1>
         
 
         <div class="post-meta">
@@ -1301,64 +1122,22 @@
       
         
           
-            <h1 id="4-5-4-6-磁盘格式化"><a href="#4-5-4-6-磁盘格式化" class="headerlink" title="4.5/4.6 磁盘格式化"></a>4.5/4.6 磁盘格式化</h1><h2 id="1-mke2fs命令"><a href="#1-mke2fs命令" class="headerlink" title="1. mke2fs命令"></a>1. mke2fs命令</h2><p>被用于创建磁盘分区上文件系统（格式化）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mke2fs -t ext4 -b 2048 -m 1 -L yule /dev/sdb1</span><br><span class="line">-t 指定磁盘格式  mke2fs目前不支持xfs格式</span><br><span class="line">-b 指定块block大小，默认值是4K</span><br><span class="line">-m 指定给root保留区块的比例，默认值是5%</span><br><span class="line">-L 设定磁盘分区的卷标</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mke2fs -i 8192 -t ext4 /dev/sdb1</span><br><span class="line">-i 指定&quot;字节/inode&quot;的比例，最低至少一个块对应一个inode。</span><br><span class="line">默认大概是4个块对应一个inode，4个块=16K=16,384b；</span><br><span class="line">那么默认的&quot;字节/inode&quot;的比例是16384；</span><br><span class="line">将数字改小的话，inode数量就会变多，相反，改大的话，inode数量就会变少，最小值为4096。</span><br></pre></td></tr></table></figure>
+          #12.1 LNMP架构介绍
 
-<h2 id="2-格式化分区的一些注意事项"><a href="#2-格式化分区的一些注意事项" class="headerlink" title="2. 格式化分区的一些注意事项"></a>2. 格式化分区的一些注意事项</h2><ul>
-<li>新添加的磁盘分好区以后，不能直接使用，得先格式化  </li>
-<li>主分区和逻辑分区可以被格式化，扩展分区不能格式化。只能格式化扩展下面的逻辑分区。</li>
-<li>查看Linux系统支持的磁盘文件系统格式的配置文件<br><code>cat /etc/filesystems</code></li>
-<li>查看一个分区的文件系统是什么<br><code>mount</code>后，查看<code>dev/</code>开头的文件全名就可以知道了，如 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/mapper/cl-root on / type xfs (rw,relatime,attr2,inode64,noquota)</span><br></pre></td></tr></table></figure>
+ LNMP代表的就是：Linux系统下Nginx+MySQL+PHP这种网站服务器架构。
 
-</li>
-</ul>
-<h2 id="3-如何格式化新的磁盘分区"><a href="#3-如何格式化新的磁盘分区" class="headerlink" title="3. 如何格式化新的磁盘分区"></a>3. 如何格式化新的磁盘分区</h2><h3 id="3-1-创建新的分区"><a href="#3-1-创建新的分区" class="headerlink" title="3.1. 创建新的分区"></a>3.1. 创建新的分区</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sdb</span><br><span class="line">n</span><br><span class="line">p</span><br><span class="line">+3G</span><br><span class="line">w</span><br><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-2-格式化分区（2种方法）"><a href="#3-2-格式化分区（2种方法）" class="headerlink" title="3.2. 格式化分区（2种方法）"></a>3.2. 格式化分区（2种方法）</h3><ul>
-<li><p>用mkfs命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkfs -t ext4 /dev/sdb5</span><br><span class="line">将磁盘分区sdb5格式化为ext4格式分区，默认会给root用户预留原有的2%的空间</span><br><span class="line">在centos7中，如果想把分区格式化位xfs格式，只有使用mkfs.xfs或mkfs -t /dev/sdb5</span><br><span class="line">mke2fs默认不支持格式化为xfs格式</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>用mke2fs命令 (mke2fs是mkfs命令的进化版本，功能更加丰富)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mke2fs -t ext4 -b 2048 -m 1 -L game /dev/sdb1</span><br><span class="line">将分区sdb1格式化为ext4文件系统，块大小设为2048b，预留1%空间其中给root用户，并将磁盘命名位 game</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="3-3-mkfs补充"><a href="#3-3-mkfs补充" class="headerlink" title="3.3 mkfs补充"></a>3.3 mkfs补充</h3><blockquote>
-<p>mkfs  mkfs.cramfs  mkfs.ext2  mkfs.ext3  mkfs.ext4  mkfs.ext4dev  mkfs.msdos  mkfs.vfat mkfs.xfs</p>
-</blockquote>
-<p>这里面<br>mkfs -t ext4 == mkfs.ext4<br>mkfs -t ext3 == mkfs.ext3<br>所以，直接可以用 mkfs.ext4命令 来代替 mkfs -t ext4</p>
-<h2 id="4-blkid命令"><a href="#4-blkid命令" class="headerlink" title="4. blkid命令"></a>4. blkid命令</h2><p>主要用来对系统的块设备（包括交换分区）所使用的文件系统类型、LABEL、UUID等信息进行查询。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# blkid /dev/sdb1</span><br><span class="line">/dev/sdb1: UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot; TYPE=&quot;xfs&quot;</span><br><span class="line">可以用来查看为挂载分区的文件类型</span><br><span class="line"></span><br><span class="line">[root@zhouqunic-01 ~]# blkid</span><br><span class="line">/dev/sdb1: UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot; TYPE=&quot;xfs&quot; </span><br><span class="line">/dev/sdb3: UUID=&quot;a17dcca1-6da1-42f1-b955-caacc22bb1fc&quot; TYPE=&quot;ext4&quot; </span><br><span class="line">/dev/sda1: UUID=&quot;0ae79bcd-e732-46fc-9213-6118c491a714&quot; TYPE=&quot;xfs&quot; </span><br><span class="line">/dev/sda2: UUID=&quot;AwDLCG-5vsY-OMmL-XeKE-RNEr-y12K-styMJV&quot; TYPE=&quot;LVM2_member&quot; </span><br><span class="line">/dev/sr0: UUID=&quot;2016-12-05-13-55-45-00&quot; LABEL=&quot;CentOS 7 x86_64&quot; TYPE=&quot;iso9660&quot; PTTYPE=&quot;dos&quot; </span><br><span class="line">/dev/mapper/cl-root: UUID=&quot;120c5b93-2bee-4af8-9868-140e9de6f281&quot; TYPE=&quot;xfs&quot; </span><br><span class="line">/dev/mapper/cl-swap: UUID=&quot;49d49d46-b6c2-4a1c-925a-a8e68bdc79b2&quot; TYPE=&quot;swap&quot; </span><br><span class="line">列出当前系统中所有文件系统的类型</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-7-4-8-磁盘挂载"><a href="#4-7-4-8-磁盘挂载" class="headerlink" title="4.7/4.8 磁盘挂载"></a>4.7/4.8 磁盘挂载</h1><h2 id="1-挂载"><a href="#1-挂载" class="headerlink" title="1. 挂载"></a>1. 挂载</h2><h3 id="1-1-路径-挂载"><a href="#1-1-路径-挂载" class="headerlink" title="1.1 路径 挂载"></a>1.1 路径 挂载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sdb5 /mnt/  /mnt/挂载点 </span><br><span class="line">df -T 查看磁盘类型</span><br><span class="line">df -h 查看磁盘信息</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>不管有没有分区，都可以格式化，磁盘分完区以后，需要挂载 才能写文件进去</li>
-<li>一个挂载点只能给一个分区进行服务，</li>
-<li>假设有两个分区放在一个挂载点下，只能服务第二个分区,第二个会遮盖第一个，但是卸载掉第二个，第一个分区的数据就会出现</li>
-</ul>
-<h3 id="1-2-label卷标-UUID-挂载"><a href="#1-2-label卷标-UUID-挂载" class="headerlink" title="1.2 label卷标/UUID 挂载"></a>1.2 label卷标/UUID 挂载</h3><ul>
-<li>通过blkid来获得要挂载分区的UUID<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mount LABEL=aming /home/aming/123/</span><br><span class="line">mount UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot;  /mnt/</span><br><span class="line">umount /mnt/ 卸载  或者 umount /dev/dev1/</span><br><span class="line">umount -l  直接卸载(无需退出挂载点)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="2-mount命令"><a href="#2-mount命令" class="headerlink" title="2. mount命令"></a>2. mount命令</h2><p>用于加载文件系统到指定的加载点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mount [-t vfstype(ext4,ntfs...)] [-o options(rw,ro...)] device dir</span><br><span class="line">-l 无需退出卸出挂载  </span><br><span class="line">  remount 重新挂载</span><br><span class="line"></span><br><span class="line">mount -o remount,rw /dev/foo /dir 重新挂载      </span><br><span class="line"></span><br><span class="line">umount（卸载）磁盘分区</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-etc-fstab配置文件"><a href="#3-etc-fstab配置文件" class="headerlink" title="3. /etc/fstab配置文件"></a>3. /etc/fstab配置文件</h2><p>fstab包含了开机需要挂载的设备，相应的挂载点，以及属性等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# cat /etc/fstab</span><br><span class="line">**6列分别表示：设备号，挂载点，分区格式，挂载选项，是否备份，设置优先级，</span><br><span class="line">（1，2要检测，1级别更高，0 不检测）**</span><br><span class="line">#</span><br><span class="line"># /etc/fstab</span><br><span class="line"># Created by anaconda on Fri May 26 06:46:23 2017</span><br><span class="line">#</span><br><span class="line"># Accessible filesystems, by reference, are maintained under &apos;/dev/disk&apos;</span><br><span class="line"># See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info</span><br><span class="line">#</span><br><span class="line">/dev/mapper/cl-root    /                      xfs    defaults        0 0</span><br><span class="line">UUID=0ae79bcd-e732-46fc-9213-6118c491a714 /boot                  xfs    defaults        0 0</span><br><span class="line">/dev/mapper/cl-swap    swap                    swap    defaults        0 0</span><br><span class="line">把分区挂载到挂载点 添加进去</span><br><span class="line">mount UUID=&quot;95ed0ccb-c6ff-4b65-9921-a68dd5d7035b&quot;  /mnt/  xfs defaults  0 0</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-9-手动增加swap空间"><a href="#4-9-手动增加swap空间" class="headerlink" title="4.9 手动增加swap空间"></a>4.9 手动增加swap空间</h1><p>当某一个服务就是需要比较大的swap空间的时候，我们可以手动增加swap空间</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">首先弄一个模拟磁盘，在服务器的文件系统里模拟一个100M 的磁盘</span><br><span class="line">dd if=/dev/zero of=/tmp/newdisk bs=1M count=100</span><br><span class="line">&gt; dd 用于操作磁盘，可以写可以读  </span><br><span class="line">&gt; if 指定从哪里去读  </span><br><span class="line">&gt; /dev/zero 是Linux系统里面的一个造零器，可以产生无数的&quot;0&quot;  </span><br><span class="line">&gt; of 将/dev/zero 造出来的&quot;0&quot;，写到哪里去  </span><br><span class="line">&gt; bs 指定块的大小  </span><br><span class="line">&gt; count 计数，总共多少个块  </span><br><span class="line"></span><br><span class="line">创建虚拟磁盘以后，需要进行格式化  </span><br><span class="line">mkswap -f /tmp/newdisk</span><br><span class="line"></span><br><span class="line">格式化以后进行挂载</span><br><span class="line">swapon /tmp/newdisk</span><br><span class="line"></span><br><span class="line">执行命令之后会提示“权限不安全”。为了安全起见，建议使用0600的权限</span><br><span class="line">chmod 0600 /tmp/newdisk</span><br><span class="line"></span><br><span class="line">当使用完毕以后，卸载swap挂载</span><br><span class="line">swapoff /tmp/newdisk</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>free -m 可以查看 swap 的使用情况</li>
-</ul>
-<h1 id="拓展：LVM-学习"><a href="#拓展：LVM-学习" class="headerlink" title="拓展：LVM 学习"></a>拓展：LVM 学习</h1><blockquote>
-<p>LVM(Logical Volume Manager)逻辑卷管理，是一种将一个或多个硬盘的分区在逻辑上集合，<br>相当于一个大硬盘来使用，当硬盘的空间不够使用的时候，可以继续将其它的硬盘的<br>分区加入其中，这样可以事项一种磁盘空间的动态管理，相对于普通的磁盘分区有很<br>大的灵活性，使用普通的磁盘分区，当一个磁盘的分区空间不够使用的时候，可能就<br>会带来很大的麻烦。使用LVM在一定程度上就可以解决普通磁盘分区带来的问题。 </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">创建分区--更改类型t(8e)---创建物理卷--创建卷组</span><br><span class="line">  pvcreate /dev/sdb1 以此类推创建见三个物理卷</span><br><span class="line">  pvdisplay 查看LVM物理卷=pvs</span><br><span class="line">  vgcreate vg1 /dev/sdb(物理卷</span><br><span class="line">  vgcdisplay查看VM物理卷组=vgs</span><br><span class="line">  lvcreate -L 100M(指定大小） -n lv1(lvm）vg1(卷组） ##以此类推做LV2.LV3</span><br><span class="line">  mkfs.ext4 /dev/vh1/lv1 格式化lv1</span><br><span class="line">  mount /dev/vg1/lv1 /mnt  挂载到/mnt</span><br><span class="line"></span><br><span class="line">扩容逻辑卷</span><br><span class="line">  lvresize -L 300M /dev/vg1/lv1 重新设置卷大小</span><br><span class="line">  e2fsck -f /dev/vg1/lv1 检查磁盘错误(ext4执行）</span><br><span class="line">  resize2fs /dev/vg1/lv1 更新逻辑卷信息（ext4执行）</span><br><span class="line">  xfs_growfs /dev/vg1/lv1 xfs文件系统需要执行</span><br><span class="line"></span><br><span class="line">缩减逻辑卷（xfs不支持）</span><br><span class="line">  先卸载umount</span><br><span class="line">  e2fsck -f /dev/vg1/lv1 检查磁盘错误(ext)</span><br><span class="line">  resize2fs /dev/vg1/lv1 100M 更新逻辑卷信息（ext)</span><br><span class="line">  lvresize -L 100M /dev/vg1/lv1 更新设置卷大小 </span><br><span class="line">  </span><br><span class="line">扩展卷组</span><br><span class="line">  fdisk /dev/sdb 新增/dev/sdb5(辑分区8e) 2G</span><br><span class="line">  pvcreate /dev/sdb5</span><br><span class="line">  vgextend vg1 /dev/sdb5 创建物理卷</span><br><span class="line">  lvresize -L 100M /dev/vg1/lv1 重新设置卷大小</span><br></pre></td></tr></table></figure>
-          
+和LAMP不同的是，提供web服务的是Nginx
+并且php是作为一个独立服务存在的，这个服务叫做php-fpm
+Nginx直接处理静态请求，动态请求会转发给php-fpm。
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/12.1 - 12.5 LNMP架构介绍、MySQL安装、PHP安装、Nginx介绍/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1405,7 +1184,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/5.5 - 5.7 Vim入门02/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/11.6 - 11.9 LAMP架构-mariadb、apache httpd安装/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1424,7 +1203,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/5.5 - 5.7 Vim入门02/" itemprop="url">5.5 - 5.7 Vim入门02</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/11.6 - 11.9 LAMP架构-mariadb、apache httpd安装/" itemprop="url">11.6 - 11.9 LAMP架构-mariadb、apache httpd安装</a></h1>
         
 
         <div class="post-meta">
@@ -1498,88 +1277,16 @@
       
         
           
-            <h1 id="5-5-进入编辑模式"><a href="#5-5-进入编辑模式" class="headerlink" title="5.5 进入编辑模式"></a>5.5 进入编辑模式</h1><h2 id="1-进入vim编辑模式"><a href="#1-进入vim编辑模式" class="headerlink" title="1. 进入vim编辑模式"></a>1. 进入vim编辑模式</h2><p>vim命令后，输入 i 键，进入编辑模式（i, I, a, A, o,O,r,R都可以），按 Esc 键退出。</p>
-<h2 id="2-输入不同字母，进入编辑模式后的情况不同"><a href="#2-输入不同字母，进入编辑模式后的情况不同" class="headerlink" title="2. 输入不同字母，进入编辑模式后的情况不同"></a>2. 输入不同字母，进入编辑模式后的情况不同</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">（1）按 i 键，此时光标在当前位置，并进入编辑模式</span><br><span class="line">（2）按 I 键，此时光标移动到当前行的行首，并进入编辑模式</span><br><span class="line">（3）按 a 键，此时光标向后移动一个位置，并进入编辑模式</span><br><span class="line">（4）按 A 键，此时光标移动到当前行的末尾一个位置，并进入编辑模式</span><br><span class="line">（5）按 o 键，此时光标移动到当前行的下一新插的行的行首，并进入编辑模式</span><br><span class="line">（6）按 O 键，此时光标移动到当前行的上一新插的行的行首，并进入编辑模式</span><br></pre></td></tr></table></figure>
-
-<h1 id="5-6-vim命令模式"><a href="#5-6-vim命令模式" class="headerlink" title="5.6 vim命令模式"></a>5.6 vim命令模式</h1><h2 id="1-如何进图vim命令行模式"><a href="#1-如何进图vim命令行模式" class="headerlink" title="1. 如何进图vim命令行模式"></a>1. 如何进图vim命令行模式</h2><p>在一般模式，输入 : 或者 / 就可以进入命令模式，在改模式下，可以搜索，保存，替换，退出，显示行号等等操作。</p>
-<h2 id="2-命令"><a href="#2-命令" class="headerlink" title="2. 命令"></a>2. 命令</h2><ul>
-<li>命令模式下查找和替换</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>/word</td>
-<td>向光标之后寻找一个字符串位word，按n向后继续</td>
-</tr>
-<tr>
-<td>?word</td>
-<td>向光标之前寻找一个字符串位word，按n向后继续</td>
-</tr>
-<tr>
-<td>:n1,n2s/word1/word2/g</td>
-<td>在n1,n2行之间查找word1并替换位word2，不加g则只替换每行的第一个word1</td>
-</tr>
-<tr>
-<td>:1,$s/word1/word2/g</td>
-<td>替换文档中所有的word1位word2，不加g只替换每行的第一个</td>
-</tr>
-</tbody></table>
-<ul>
-<li>命令模式其他功能</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>:w</td>
-<td>保存文本</td>
-</tr>
-<tr>
-<td>:q</td>
-<td>退出vim</td>
-</tr>
-<tr>
-<td>:w!</td>
-<td>强制保存，root用户下即使文本只读也可以完成保存</td>
-</tr>
-<tr>
-<td>:q！</td>
-<td>强制退出，所有改动不生效</td>
-</tr>
-<tr>
-<td>:wq</td>
-<td>保存并退出</td>
-</tr>
-<tr>
-<td>: set nu</td>
-<td>显示行号</td>
-</tr>
-<tr>
-<td>: set nonu</td>
-<td>不显示行号</td>
-</tr>
-<tr>
-<td>:nohl</td>
-<td>取消文档中的高亮</td>
-</tr>
-</tbody></table>
-<h2 id="3-示例"><a href="#3-示例" class="headerlink" title="3. 示例"></a>3. 示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1,100s/iptables/seLinux</span><br><span class="line">**把1到100行之间的iptables替换位seLinux，只替换每行的第一个iptables**</span><br><span class="line"></span><br><span class="line">1,$s/iptables/seLinux/g      **把文件中所有的iptables替换位seLinux**</span><br><span class="line"></span><br><span class="line">%s/iptables/seLinux/g      **把文件中所有的iptables替换位seLinux**</span><br><span class="line"></span><br><span class="line">解释： %=1,s</span><br><span class="line">%s/ \ /etc \ /init.d/ \ /bin/ \ ls    **把文件中，所有的 /etc/init.d</span><br><span class="line">替换为 /bin/ls， 其中 \ 为退意符号，因为目录用的/和命令中的/有意义冲突，</span><br><span class="line">那么在目录中的/前面使用\符号，可以使冲突的意义去掉，只保留原来的意义。</span><br></pre></td></tr></table></figure>
-
-<h1 id="5-7-vim实践"><a href="#5-7-vim实践" class="headerlink" title="5.7 vim实践"></a>5.7 vim实践</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/dnsmasq.conf  /tmp/1.txt</span><br><span class="line"></span><br><span class="line">(1) 分别向下、向右、向左、向上移动6个字符（6j 6l 6h 6k）。</span><br><span class="line">(2) 分别向下、向上翻两页（分别按两次ctrl+f和ctrl+b）。</span><br><span class="line">(3) 把光标移动到第49行（49G）。</span><br><span class="line">(4) 把光标移动到行尾，再移动到行首（Shift+4, Shift+6）。</span><br><span class="line">(5) 移动到1.txt文件的最后一行（G）。</span><br><span class="line">(6) 移动到文件的首行（gg）。</span><br><span class="line">(7) 搜索文件中出现的“dnsmasq”，并数一下该字符串出现的次数（/dnsmsq 然后按n）。</span><br><span class="line">(8) 把从第1行到第10行出现的dnsmasq替换成dns（:1,10s/dnsmasq/dns/g）。</span><br><span class="line">(9) 还原上一步操作（u）。</span><br><span class="line">(10) 把整个文件中所有的etc替换成cte（:1,$s/etc/cte/g）。</span><br><span class="line">(11) 把光标移动到第25行，删除字符串 “ly”（25G 然后按j向右移动光标找到&quot;ly&quot;，按v选中，然后按x）。</span><br><span class="line">(12) 还原上一步操作（u）。</span><br><span class="line">(13) 删除第50行（50G dd）。</span><br><span class="line">(14) 还原上一步操作（u）。</span><br><span class="line">(15) 删除第37-42行的所有内容（37G 6dd）。</span><br><span class="line">(16) 还原上一步操作（u）。</span><br><span class="line">(17) 复制第48行的内容并粘贴到第52行下面（48G yy 52G p）。</span><br><span class="line">(18) 还原上一步操作（u）。</span><br><span class="line">(19) 复制第37-42行的内容并粘贴到第44行上面（37G 6yy 44G P）。</span><br><span class="line">(20) 还原上一步操作（按u）。</span><br><span class="line">(21) 把第37-42行的内容移动到第19行下面（37G 6dd 19G p）。</span><br><span class="line">(22) 还原上一步操作（按u）。</span><br><span class="line">(23) 把光标移动到首行，把第1行内容改为“#!/bin/bash”</span><br><span class="line">（先按gg，把光标定位到第1行，然后按字母A，进入编辑模式，</span><br><span class="line">同时&gt;光标到行末尾，进行修改操作，完成后按ESC）。</span><br><span class="line">(24) 在第1行下面插入新的一行，并输入“# Hello!”</span><br><span class="line">（按o进入编辑模式，同时光标向下另起一行，输入“# Hello!”）。</span><br><span class="line">(25) 保存文档并退出（按Esc键，输入“:wq”）。</span><br></pre></td></tr></table></figure>
-
-<h1 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">（1）vim下:/keyword,可以查找全文的关键字。假设我只想在1-50行之间查找这个关键字，要怎么写？ （感觉应该是没有这种写法的吧）</span><br><span class="line"></span><br><span class="line">aming</span><br><span class="line">没有。</span><br><span class="line"></span><br><span class="line">870566512</span><br><span class="line">**可以通过替换的方式实现**</span><br><span class="line">:1,10s/111/111/g</span><br><span class="line"></span><br><span class="line">（2）用什么方法可以在vim里面搜索关键词？  错误答案 AB</span><br><span class="line">A 一般模式下，直接输入/word</span><br><span class="line">B 一般模式下，直接输入?word</span><br><span class="line">C 一般模式下，直接输入:word</span><br><span class="line">D 一般模式下，直接输入:/word</span><br><span class="line">正确答案: A,B,D</span><br></pre></td></tr></table></figure>
-
-<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vim的特殊用法 </span><br><span class="line">http://www.apelearn.com/bbs/thread-9334-1-1.html</span><br><span class="line"></span><br><span class="line">vim常用快捷键总结</span><br><span class="line">http://www.apelearn.com/bbs/thread-407-1-1.html</span><br><span class="line"></span><br><span class="line">vim快速删除一段字符</span><br><span class="line">http://www.apelearn.com/bbs/thread-842-1-1.html</span><br><span class="line"></span><br><span class="line">vim乱码 </span><br><span class="line">http://www.apelearn.com/bbs/thread-6753-1-1.html</span><br><span class="line"></span><br><span class="line">小键盘问题 </span><br><span class="line">http://www.apelearn.com/bbs/thread-7215-1-1.html</span><br><span class="line"></span><br><span class="line">vim加密 </span><br><span class="line">http://www.apelearn.com/bbs/thread-7750-1-1.html</span><br></pre></td></tr></table></figure>
-          
+          [toc]
+11.6 MariaDB安装123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960cd /usr/local/src  
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/11.6 - 11.9 LAMP架构-mariadb、apache httpd安装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1626,7 +1333,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/6.5 - 6.7 linux下压缩打包工具02-zip、tar/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1645,7 +1352,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/6.5 - 6.7 linux下压缩打包工具02-zip、tar/" itemprop="url">6.5 - 6.7 linux下压缩打包工具02-zip、tar</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl/" itemprop="url">12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl</a></h1>
         
 
         <div class="post-meta">
@@ -1719,26 +1426,18 @@
       
         
           
-            <h1 id="6-5-zip压缩工具"><a href="#6-5-zip压缩工具" class="headerlink" title="6.5 zip压缩工具"></a>6.5 zip压缩工具</h1><ol>
-<li>Windows 的zip文件传送到Linux时，是可以通过Linux的zip工具进行解压缩。压缩文件或目录时，源文件不会消失</li>
-<li>zip文件不可以直接查看文件的内容。</li>
-<li>在Linux（CentOS）中，安装zip压缩工具命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install zip unzip</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="1-zip压缩"><a href="#1-zip压缩" class="headerlink" title="1. zip压缩"></a>1. zip压缩</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">压缩文件</span><br><span class="line">zip 123.txt.zip 123.txt</span><br><span class="line">压缩目录</span><br><span class="line">zip -r 345.zip  345/  /tmp/</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-zip解压缩"><a href="#2-zip解压缩" class="headerlink" title="2. zip解压缩"></a>2. zip解压缩</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">unzip 1.txt.zip      \\压缩、解压缩源文件均不删除</span><br><span class="line">unzip 123.zip -d /root/456/  \\-d：解压到指定目录</span><br><span class="line">unzip -l 123.zip      \\查看123目录内的列表</span><br></pre></td></tr></table></figure>
-
-<h1 id="6-6-tar打包"><a href="#6-6-tar打包" class="headerlink" title="6.6 tar打包"></a>6.6 tar打包</h1><ul>
-<li>tar打包不会改变文件的大小。即打包不压缩</li>
-</ul>
-<h2 id="1-tar命令"><a href="#1-tar命令" class="headerlink" title="1. tar命令"></a>1. tar命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">tar</span><br><span class="line">-z: 同时用gzip压缩</span><br><span class="line">-j: 同时用bzip2压缩</span><br><span class="line">-J: 同时用xz压缩</span><br><span class="line">-x: 解包或者解压缩</span><br><span class="line">-t: 查看tar包里面的文件</span><br><span class="line">-c: 建立一个tar包或者压缩文件</span><br><span class="line">-v: 可视化</span><br><span class="line">-f: 后面跟文件名，压缩时跟 “-f 文件名”，意思是压缩后的文件名为filename，</span><br><span class="line">              解压时跟 “-f 文件名”，意思是解压后的文件名为filename</span><br><span class="line">    请注意，多个参数组合的情况下，带有-f，请把-f写到最后面</span><br><span class="line">-p: 使用源文件的属性，压缩前什么属性，压缩后就是什么属性。 （不常用）</span><br><span class="line">-P: 可以使用绝对路径。 （不常用）</span><br><span class="line">--exclude</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-tar运用"><a href="#2-tar运用" class="headerlink" title="2. tar运用"></a>2. tar运用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf 123.tar 123</span><br><span class="line">tar -cvf zhouqun.tar 1.txt 123</span><br><span class="line">tar -xvf zhouqun.tar </span><br><span class="line">tar -tf zhouqun.tar          </span><br><span class="line">tar -cvf zhouqun.tar –exclude 1.txt –exclude 2 123</span><br><span class="line">tar -vcf zhouqun.tar –exclude 22 “*.txt” 123</span><br></pre></td></tr></table></figure>
-
-<h1 id="6-7-打包并压缩"><a href="#6-7-打包并压缩" class="headerlink" title="6.7 打包并压缩"></a>6.7 打包并压缩</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">打包、解包                        </span><br><span class="line">tar -zcvf 1.tar.gz 111 222  打包gzip  </span><br><span class="line">tar -zxvf 1.tar.gz  解包gzip</span><br><span class="line"></span><br><span class="line">tar -jcvf 1.tar.bz2 111 222  打包bzip2        </span><br><span class="line">tar -jxvf 1.tar.zh2  解包bzip2 </span><br><span class="line"></span><br><span class="line">tar -Jcvf 1.tar.xz 111 222  打包xz      </span><br><span class="line">tar -Jxvf 1.tar.xz  解包xz</span><br><span class="line"></span><br><span class="line">查看包</span><br><span class="line">tar -tf 1.tar.gz</span><br><span class="line">tar -tf 1.tar.bz2</span><br><span class="line">tar -tJf 1.tar.xz</span><br><span class="line"></span><br><span class="line">过滤</span><br><span class="line">tar --exclude 456 --exclude 5.txt -zcvf 3.tar.gz 111 222</span><br><span class="line">打包和压缩111，222目录到3.tar.gz 但是排除111目录内的456子目录和5.txt</span><br><span class="line">---</span><br><span class="line">111目录结构如下</span><br><span class="line">111</span><br><span class="line">      234</span><br><span class="line">            456</span><br><span class="line">                  5.txt</span><br><span class="line">           zhouqunic</span><br></pre></td></tr></table></figure>
-          
+          #12.17 Nginx负载均衡Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。
+##负载均衡配置
+###配置参数
+123456789101112131415161718
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1785,7 +1484,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/7.6 - 7.9 YUM工具、epel源和源码包的使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/13.4 - 13.6 mysql用户管理、常用sql语句、mysql数据库备份恢复/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1804,7 +1503,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/7.6 - 7.9 YUM工具、epel源和源码包的使用/" itemprop="url">7.6 - 7.9 YUM工具、epel源和源码包的使用</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/13.4 - 13.6 mysql用户管理、常用sql语句、mysql数据库备份恢复/" itemprop="url">13.4 - 13.6 mysql用户管理、常用sql语句、mysql数据库备份恢复</a></h1>
         
 
         <div class="post-meta">
@@ -1878,42 +1577,19 @@
       
         
           
-            <h1 id="7-6-yum更换国内源"><a href="#7-6-yum更换国内源" class="headerlink" title="7.6 yum更换国内源"></a>7.6 yum更换国内源</h1><h2 id="1-原因"><a href="#1-原因" class="headerlink" title="1. 原因"></a>1. 原因</h2><p>因为系统里自带的很多源都是国外的，有时候下载大一点的包就会很慢。这个时候就可以更换成国内的源，如 163、搜狐，这样会快很多，也稳定很多。</p>
-<h2 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2. 步骤"></a>2. 步骤</h2><h3 id="2-1-备份原来的yum源"><a href="#2-1-备份原来的yum源" class="headerlink" title="2.1 备份原来的yum源"></a>2.1 备份原来的yum源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget                          安装wget工具</span><br><span class="line">cp -r /etc/yum.repos.d /etc/yum.repos.d.bak  将原配置文件进行备份</span><br></pre></td></tr></table></figure>
+          #13.4 mysql用户管理因为日常使用中，需要给人员的权限进行限制，所以需要对用户进行管理。
+##创建用户并授权
 
-<h3 id="2-2-设置aliyun的yum源"><a href="#2-2-设置aliyun的yum源" class="headerlink" title="2.2 设置aliyun的yum源"></a>2.2 设置aliyun的yum源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.163.com/.help/CentOS7-Base-163 http://mirrors.163.com/.help/CentOS7-Base-163.repo</span><br><span class="line">或者 在没有wget的情况下</span><br><span class="line">curl -O http://mirrors.163.com/.help/CentOS7-Base-163.repo</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-3-安装扩展源epel"><a href="#2-3-安装扩展源epel" class="headerlink" title="2.3 安装扩展源epel"></a>2.3 安装扩展源epel</h3><p>有的包，163的基础源里面也会没有，这种时候，就需要安装一个扩展源了（epel）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release      安装扩展源</span><br><span class="line">ls /etc/yum.repos.d/            查看epel扩展源安装好了没</span><br><span class="line">  CentOS7-Base-163.repo  CentOS-Debuginfo.repo  CentOS-Sources.repo  epel-testing.repo</span><br><span class="line">  CentOS-Base.repo.bak  CentOS-fasttrack.repo  CentOS-Vault.repo</span><br><span class="line">  CentOS-CR.repo        CentOS-Media.repo      epel.repo</span><br><span class="line">yum list |grep epel              过滤出epel扩展包</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-4-清理缓存"><a href="#2-4-清理缓存" class="headerlink" title="2.4 清理缓存"></a>2.4 清理缓存</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all          清除缓存</span><br><span class="line">yum repolist all      查看拥有仓库的状态</span><br></pre></td></tr></table></figure>
-
-<h1 id="7-7-yum下载rpm包"><a href="#7-7-yum下载rpm包" class="headerlink" title="7.7 yum下载rpm包"></a>7.7 yum下载rpm包</h1><p>前面讲的都是直接安装，然而有些时候，我们需要下载一个安装包但不需要安装它，或者帮内网其他用户下载一个安装包该怎么处理呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install 包名 -y --downloadonly                      仅下载一个没有安装过的包    </span><br><span class="line">yum install 包名 -y  --downloadonly --downloaddir=路径  下载一个包，并指定路径</span><br><span class="line"></span><br><span class="line">yum reinstall -y 包名 -–downloadonly -–downloaddir=路径</span><br><span class="line">如果一个包，已经安装过了，你就不能再次安装下载，只有重新安装一下，才可以下载这个包</span><br></pre></td></tr></table></figure>
-
-<h1 id="7-8-7-9-源码包安装"><a href="#7-8-7-9-源码包安装" class="headerlink" title="7.8/7.9 源码包安装"></a>7.8/7.9 源码包安装</h1><h2 id="1-LINUX安装源码软件经典三部曲"><a href="#1-LINUX安装源码软件经典三部曲" class="headerlink" title="1. LINUX安装源码软件经典三部曲"></a>1. LINUX安装源码软件经典三部曲</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. ./configure [options]</span><br><span class="line">2. make</span><br><span class="line">3. make install</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li>第一步，就是configure配置。配置项还是很多的，可以通过./configure –help查看有哪些配置项。很多源码的readme文档直接指出，一般使用./configure就可以看了。我个人喜欢将源码安装到指定的位置，使用./configure –prefix=我安装的目录。这样做的好处就是我知道将软件装在哪里了，将来还有他用；</li>
-<li>第二步，使用make开始编译。这一步是根据上一步configure的结果来编译的；</li>
-<li>第三步，使用make install开始安装，这一步结束后，软件就被安装到我指定的目录下；</li>
-<li>注意：有时候使用系统自带的make时，编译会报出一些错误，原因是系统自带的make版本太老了，可以装个新的，官网可以再百度上搜下。</li>
-<li>这里再补充几点：<br>　　1. 上面make后，可以使用make clean将编译参数清空，接着重新make；<br>　　2. 上面configure发现错误，可以使用make distclean，将configure参数全部清空，接着重新./configure–&gt;make。</li>
-<li>出自：<a href="http://www.cnblogs.com/itblog/archive/2011/11/20/2255953.html" target="_blank" rel="noopener">http://www.cnblogs.com/itblog/archive/2011/11/20/2255953.html</a></li>
-</ul>
-</blockquote>
-<h2 id="2-源码包安装步骤"><a href="#2-源码包安装步骤" class="headerlink" title="2. 源码包安装步骤"></a>2. 源码包安装步骤</h2><p>==按照铭哥的约定，一定要把自己所需的源码包下载到此目录 cd /usr/local/src/，方便别人，也方便自己。==</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/                          按照约定，一定要把自己所需的源码包下载到此目录</span><br><span class="line">wget http://mirrors.cnnic.cn/apache/httpd/httpd-2.2.32.tar.gz      从官网获取下载地址</span><br><span class="line">tar zxvf httpd-2.2.32.tar.gz                解压下载的源码包</span><br><span class="line">cd httpd-2.2.32                              切换到目录下</span><br><span class="line">more INSTALL                                查看如何安装,养成习惯去查看 </span><br><span class="line">./configure –prefix=/usr/local/apache2      配置安装位置</span><br><span class="line">如果看不出自己安装的是否对，使用命令 echo $? 来查看， 0 即为正确，其它均为没有正常安装</span><br><span class="line"></span><br><span class="line">下面几步，一定要用  echo $? 来步步检查，为了防止后期不必要的错误！！！</span><br><span class="line">make                                        编译</span><br><span class="line">make install                                编译安装</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-卸载源码包"><a href="#3-卸载源码包" class="headerlink" title="3. 卸载源码包"></a>3. 卸载源码包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">例如：</span><br><span class="line">rm -rf /usr/local/apache2                  卸载上面的源码包</span><br></pre></td></tr></table></figure>
-
-<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><ol>
-<li>配置yum源优先级 <a href="http://www.aminglinux.com/bbs/thread-7168-1-1.html" target="_blank" rel="noopener">http://www.aminglinux.com/bbs/thread-7168-1-1.html</a></li>
-<li>把源码包打包成rpm包 <a href="http://www.linuxidc.com/Linux/2012-09/70096.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2012-09/70096.htm</a></li>
-</ol>
-
-          
+指定登录IP
+1234567891011[root@host ~]# mysql -uroot -pEnter password: Welcome to the MySQL mon
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/13.4 - 13.6 mysql用户管理、常用sql语句、mysql数据库备份恢复/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1960,7 +1636,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/8.10 - 8.13 Shell基础介绍03-cut、sort、wc、unoq、tee、tr、split/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/18.11-18.12 LVS DR模式搭建、keepalived + LVS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1979,7 +1655,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/8.10 - 8.13 Shell基础介绍03-cut、sort、wc、unoq、tee、tr、split/" itemprop="url">8.10 - 8.13 Shell基础介绍03-cut、sort、wc、unoq、tee、tr、split</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/18.11-18.12 LVS DR模式搭建、keepalived + LVS/" itemprop="url">18.11-18.12 LVS DR模式搭建、keepalived + LV</a></h1>
         
 
         <div class="post-meta">
@@ -2053,81 +1729,17 @@
       
         
           
-            <h1 id="8-10-shell特殊符号cut命令"><a href="#8-10-shell特殊符号cut命令" class="headerlink" title="8.10 shell特殊符号cut命令"></a>8.10 shell特殊符号cut命令</h1><h1 id="8-11-sort-wc-uniq命令"><a href="#8-11-sort-wc-uniq命令" class="headerlink" title="8.11 sort_wc_uniq命令"></a>8.11 sort_wc_uniq命令</h1><h1 id="8-12-tee-tr-split命令"><a href="#8-12-tee-tr-split命令" class="headerlink" title="8.12 tee_tr_split命令"></a>8.12 tee_tr_split命令</h1><h1 id="8-13-shell特殊符号下"><a href="#8-13-shell特殊符号下" class="headerlink" title="8.13 shell特殊符号下"></a>8.13 shell特殊符号下</h1><h1 id="1-特殊符号"><a href="#1-特殊符号" class="headerlink" title="1. 特殊符号"></a>1. 特殊符号</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">* 通配，任意多个任意字符</span><br><span class="line">? 通配，任意一个字符</span><br><span class="line"># 注释字符</span><br><span class="line">\ 脱义字符</span><br><span class="line">| 管道符  </span><br><span class="line">$ 变量前缀，</span><br><span class="line">!$组合，正则里面表示行尾</span><br><span class="line">；多条命令写到一行，用分号分割，不管前面的命令执行成功与否，后面的命令都执行</span><br><span class="line">~ 用户家目录，后面正则表达式表示匹配符</span><br><span class="line">&amp; 放到命令后面，会把命令丢到后台</span><br><span class="line">&gt; &gt;&gt; 2&gt; 2&gt;&gt; &amp;&gt;（&amp;&gt;表示把正确和错误结果都定向出来）</span><br><span class="line">[ ] 指定字符中的一个，[0-9],[a-zA-Z],[abc]</span><br><span class="line">|| 和 &amp;&amp; ，用于命令之间</span><br><span class="line">|| 只有前面的命令执行失败，后面命令才执行</span><br><span class="line">&amp;&amp; 只有后面的命令执行成功，后面命令才执行</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-和管道符相关的命令"><a href="#2-和管道符相关的命令" class="headerlink" title="2. 和管道符相关的命令"></a>2. 和管道符相关的命令</h1><h2 id="cut"><a href="#cut" class="headerlink" title="cut"></a>cut</h2><p>一般用来截取字符串</p>
-<ul>
-<li>-d 分隔符  </li>
-<li>-f 指定段号，可以是号码，中间用<code>1,2</code>隔开，也可以是区间<code>1-3</code>  </li>
-<li>-c 指定第几个字符,同上，可以是号码，中间用<code>1,2</code>隔开，也可以是区间<code>1-3</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd | head                              显示passwd的前10行（默认10）</span><br><span class="line">cat /etc/passwd | haed -3                          显示passwd的前3行（指定）</span><br><span class="line">cat /etc/passwd | haed -2 | cut -c 1-10    显示/etc/passwd前2行，1到10个字符</span><br><span class="line">cat /etc/passwd | haed -2 | cut -d “:” -f 1，2      显示passwd的第一段和第二段</span><br><span class="line">cat /etc/passwd | haed -2 | cut -d “:” -f 1-3      显示passwd的第一段到第三段</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><blockquote>
-<p>sort命令是在Linux里非常有用，一般sort会和uniq合用。它将文件进行排序，并将排序结果标准输出。sort命令既可以从特定的文件，也可以从stdin中获取输入。- 来自 <a href="http://man.linuxde.net/sort" target="_blank" rel="noopener">http://man.linuxde.net/sort</a></p>
-</blockquote>
-<p>sort将文件的每一行作为一个单位，相互比较，比较原则是从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。</p>
-<p>参数</p>
-<ul>
-<li>-n 以数字大小排序，字母和特殊符号默认为0</li>
-<li>-r 反向排序</li>
-<li>-t 指定分隔符</li>
-<li>-k 指定需要排序的栏位</li>
-<li>（-t 不经常用）</li>
-</ul>
-<p>例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># cat sort.txt    </span><br><span class="line">AAA:BB:CC </span><br><span class="line">aaa:30:1.6 </span><br><span class="line">ccc:50:3.3 </span><br><span class="line">ddd:20:4.2 </span><br><span class="line">bbb:10:2.5 </span><br><span class="line">eee:40:5.4 </span><br><span class="line">eee:60:5.1</span><br><span class="line"># sort -nk 2 -t: sort.txt    将BB列按照数字从小到大顺序排列</span><br><span class="line">AAA:BB:CC </span><br><span class="line">bbb:10:2.5 </span><br><span class="line">ddd:20:4.2 </span><br><span class="line">aaa:30:1.6 </span><br><span class="line">eee:40:5.4 </span><br><span class="line">ccc:50:3.3 </span><br><span class="line">eee:60:5.1</span><br><span class="line"># sort -nrk 3 -t: sort.txt    将CC列数字从大到小顺序排列</span><br><span class="line">eee:40:5.4 </span><br><span class="line">eee:60:5.1 </span><br><span class="line">ddd:20:4.2 </span><br><span class="line">ccc:50:3.3 </span><br><span class="line">bbb:10:2.5 </span><br><span class="line">aaa:30:1.6 </span><br><span class="line">AAA:BB:CC</span><br></pre></td></tr></table></figure>
-
-<h2 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h2><blockquote>
-<p>wc命令用来计算数字。利用wc指令我们可以计算文件的Byte数、字数或是列数，若不指定文件名称，或是所给予的文件名为“-”，则wc指令会从标准输入设备读取数据。</p>
-</blockquote>
-<ul>
-<li>-l 统计行数  </li>
-<li>-m 统计字符数 </li>
-<li>-w 统计词数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># wc -l 1.txt    统计行数 </span><br><span class="line">11 1.txt</span><br><span class="line"># wc -w 1.txt    统计词数</span><br><span class="line">22 1.txt</span><br><span class="line"># wc -m 1.txt    统计字符数 </span><br><span class="line">620 1.txt</span><br><span class="line"># wc 1.txt        统计行数 词数 字符数 </span><br><span class="line">  11  22 620 1.txt</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h2><blockquote>
-<p>uniq命令用于报告或忽略文件中的重复行，一般与sort命令结合使用</p>
-<ul>
-<li>-c 统计行数</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">删除重复行</span><br><span class="line">uniq file.txt </span><br><span class="line">sort file.txt | uniq </span><br><span class="line">sort -u file.txt</span><br><span class="line"></span><br><span class="line">sort file.txt | uniq -c          统计各行在文件中出现的次数</span><br><span class="line">sort file.txt | uniq -d          在文件中找出重复的行</span><br></pre></td></tr></table></figure>
-
-<h2 id="tee"><a href="#tee" class="headerlink" title="tee"></a>tee</h2><blockquote>
-<p>tee命令用于将数据重定向到文件，另一方面还可以提供一份重定向数据的副本作为后续命令的stdin。简单的说就是把数据重定向到给定文件和屏幕上。</p>
-<ul>
-<li>-a 追加重定向</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ls | tee out.txt | cat -n  显示行号并打印out.txt，同时重定向到文件中</span><br><span class="line">1  1.sh </span><br><span class="line">2  1.txt </span><br><span class="line">3  2.txt </span><br><span class="line">4  eee.tst </span><br><span class="line">5  EEE.tst </span><br><span class="line">6  one </span><br><span class="line">7  out.txt </span><br><span class="line">8  string2 </span><br><span class="line">9  www.pdf </span><br><span class="line">10  WWW.pdf </span><br><span class="line">11  WWW.pef</span><br></pre></td></tr></table></figure>
-
-<h2 id="tr"><a href="#tr" class="headerlink" title="tr"></a>tr</h2><blockquote>
-<p>tr命令可以对来自标准输入的字符进行替换、压缩和删除。它可以将一组字符变成另一组字符，经常用来编写优美的单行命令，作用很强大。常用来处理文档中出现的特殊符号。</p>
-<ul>
-<li>-c：取代所有不属于第一字符集的字符； </li>
-<li>-d：删除所有属于第一字符集的字符； </li>
-<li>-s：把连续重复的字符以单独一个字符表示； </li>
-<li>-t：先删除第一字符集较第二字符集多出的字符；</li>
-<li>字符集：指定要转换或删除的原字符集。当执行转换操作时，必须使用参数“字符集2”指定转换的目标字符集。但执行删除操作时，不需要参数“字符集2”。</li>
-</ul>
-</blockquote>
-<p>来自: <a href="http://man.linuxde.net/tr" target="_blank" rel="noopener">http://man.linuxde.net/tr</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;HELLO WORLD&quot; | tr &apos;A-Z&apos; &apos;a-z&apos;  将输入字符HELLO WORLD由大写转换为小写</span><br><span class="line">hello world                          &apos;A-Z&apos; 和 &apos;a-z&apos;都是集合，集合是可以自己制定的，例如：&apos;ABD-&#125;&apos;、&apos;bB.,&apos;、&apos;a-de-h&apos;、&apos;a-c0-9&apos;都属于集合，</span><br><span class="line">                                      集合里可以使用&apos;\n&apos;、&apos;\t&apos;，可以可以使用其他ASCII字符。</span><br><span class="line"></span><br><span class="line">echo &quot;thissss is a text linnnnnnne.&quot; | tr -s &apos; sn&apos;  压缩输入中重复的字符</span><br><span class="line">this is a text line.</span><br><span class="line"></span><br><span class="line">echo aa.,a 1 b#$bb 2 c*/cc 3 ddd 4 | tr -d -c &apos;0-9 \n&apos;  字符集补集，从输入文本中将不在补集中的所有字符删除</span><br><span class="line">1 2 3 4</span><br></pre></td></tr></table></figure>
-
-<h2 id="split"><a href="#split" class="headerlink" title="split"></a>split</h2><blockquote>
-<p>split命令可以将一个大文件分割成很多个小文件，有时需要将文件分割成更小的片段，比如为提高可读性，生成日志等。</p>
-<ul>
-<li>-b：值为每一输出档案的大小，单位为 byte。 </li>
-<li>-l：值为每一输出档的列数大小。</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero bs=100k count=1 of=date.file  生成一个大小为100KB的测试文件</span><br><span class="line">split -b 10k date.file                        将date.file文件分割成大小为10KB的小文件</span><br><span class="line">ls</span><br><span class="line">date.file xaa xab xac xad xae xaf xag xah xai xaj</span><br><span class="line"></span><br><span class="line">split -l 10 date.file                          把文件分割成每个包含10行的小文件</span><br><span class="line"></span><br><span class="line">split -b 50k date.file new_                    把文件分割成每个50k的小文件，切割成的文件以new_开头命名</span><br><span class="line">ls</span><br><span class="line">new_aa  new_ab  new_ac  date.file</span><br></pre></td></tr></table></figure>
-
-
-          
+          18.11 LVS DR模式搭建为什么不使用IP TUNNEL模式呢？
+在生产环境中用的比较多的情况就是DR模式，NAT模式用的也不是太多，因为我们也说到了NAT的瓶颈问题。
+如果规模在10台以内访问量不是很大且硬件配置+网络环境都可以的话建议使用NAT模式，可以节省公网IP，因为公网IP的成本也比
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/18.11-18.12 LVS DR模式搭建、keepalived + LVS/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

@@ -287,393 +287,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/2.1-2.2 系统目录结构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhouqun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joking的Linux世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux入门笔记/2.1-2.2 系统目录结构/" itemprop="url">3.1 - 3.3 用户文件及管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">linux入门笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="3-1-用户配置文件和密码配置文件"><a href="#3-1-用户配置文件和密码配置文件" class="headerlink" title="3.1 用户配置文件和密码配置文件"></a>3.1 用户配置文件和密码配置文件</h1><h2 id="1-etc-passwd-文件解释"><a href="#1-etc-passwd-文件解释" class="headerlink" title="1. /etc/passwd 文件解释"></a>1. /etc/passwd 文件解释</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# cat /etc/passwd | head</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line">sync:x:5:0:sync:/sbin:/bin/sync</span><br><span class="line">shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown</span><br><span class="line">halt:x:7:0:halt:/sbin:/sbin/halt</span><br><span class="line">mail:x:8:12:mail:/var/spool/mail:/sbin/nologin</span><br><span class="line">operator:x:11:0:operator:/root:/sbin/nologin</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>/etc/passwd 文件分7个字段</li>
-</ul>
-<ol>
-<li>用户名(login_name)</li>
-<li>密码(passwd)  实际密码数据放在/etc/shadow 中，所以此处显示为×</li>
-<li>UID  用户标识符</li>
-<li>GID  组名</li>
-<li>用户名(user_name)</li>
-<li>用户主目录(home_directory)</li>
-<li>命令解释程序(Shell)</li>
-</ol>
-<h1 id="2-etc-shadow-文件解释"><a href="#2-etc-shadow-文件解释" class="headerlink" title="2. /etc/shadow 文件解释"></a>2. /etc/shadow 文件解释</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# cat /etc/shadow | head</span><br><span class="line">root:$6$s8WMXWea$YBPEIrOm8djENWPVaXQizcZ5..aQkMn3r/tbeQLitob.p/4YyHN54FD9AJeCwfiS0a2wK8aubDrM7j1LZrpTj1:17318:0:99999:7:::</span><br><span class="line">bin:*:17110:0:99999:7:::</span><br><span class="line">daemon:*:17110:0:99999:7:::</span><br><span class="line">adm:*:17110:0:99999:7:::</span><br><span class="line">lp:*:17110:0:99999:7:::</span><br><span class="line">sync:*:17110:0:99999:7:::</span><br><span class="line">shutdown:*:17110:0:99999:7:::</span><br><span class="line">halt:*:17110:0:99999:7:::</span><br><span class="line">mail:*:17110:0:99999:7:::</span><br><span class="line">operator:*:17110:0:99999:7:::</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>/etc/shadow 文件分为9个字段</li>
-</ul>
-<ol>
-<li>用户名（也被称为登录名），在/etc/shadow中，用户名和/etc/passwd 是相同的，这样就把passwd 和shadow中用的用户记录联系在一起；这个字段是非空的；</li>
-<li>密码（已被加密），如果是有些用户在这段是x，表示这个用户不能登录到系统；这个字段是非空的；</li>
-<li>上次修改口令的时间；这个时间是从1970年01月01日算起到最近一次修改口令的时间间隔（天数），您可以通过passwd 来修改用户的密码，然后查看/etc/shadow中此字段的变化；</li>
-<li>两次修改口令间隔最少的天数；如果设置为0,则禁用此功能；也就是说用户必须经过多少天才能修改其口令；此项功能用处不是太大；默认值是通过/etc/login.defs文件定义中获取，PASS_MIN_DAYS 中有定义；</li>
-<li>两次修改口令间隔最多的天数；这个能增强管理员管理用户口令的时效性，应该说在增强了系统的安全性；如果是系统默认值，是在添加用户时由/etc/login.defs文件定义中获取，在PASS_MAX_DAYS 中定义；</li>
-<li>提前多少天警告用户口令将过期；当用户登录系统后，系统登录程序提醒用户口令将要作废；如果是系统默认值，是在添加用户时由/etc/login.defs文件定义中获取，在PASS_WARN_AGE 中定义；</li>
-<li>在口令过期之后多少天禁用此用户；此字段表示用户口令作废多少天后，系统会禁用此用户，也就是说系统会不能再让此用户登录，也不会提示用户过期，是完全禁用；</li>
-<li>用户过期日期；此字段指定了用户作废的天数（从1970年的1月1日开始的天数），如果这个字段的值为空，帐号永久可用；</li>
-<li>保留字段，目前为空，以备将来Linux发展之用。</li>
-</ol>
-<h1 id="3-2-用户组管理"><a href="#3-2-用户组管理" class="headerlink" title="3.2 用户组管理"></a>3.2 用户组管理</h1><h2 id="groupadd-用户组管理命令"><a href="#groupadd-用户组管理命令" class="headerlink" title="groupadd 用户组管理命令"></a>groupadd 用户组管理命令</h2><ul>
-<li><p>groupadd 增加组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# groupadd grouptest1</span><br><span class="line">[root@localhost ~]# tail -n1 /etc/group</span><br><span class="line">grouptest1:x:501:</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>groupadd -g uid groupname -g 指定所增加组的uid </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# groupadd -g 520 grouptest2</span><br><span class="line">[root@localhost ~]# tail -n1 /etc/group</span><br><span class="line">grouptest2:x:520:</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>groupdel 删除组<br>若组里含有用户则不可以删除该组。</p>
-</li>
-</ul>
-<h1 id="3-3-用户管理"><a href="#3-3-用户管理" class="headerlink" title="3.3 用户管理"></a>3.3 用户管理</h1><h2 id="1-useradd-增加用户命令"><a href="#1-useradd-增加用户命令" class="headerlink" title="1. useradd 增加用户命令"></a>1. useradd 增加用户命令</h2><p>-u  自定义UID<br>-g  使其属于已经存在的某个组，后面可跟组名or组id号<br>-d  自定义用户的家目录<br>-M  不建立家目录<br>-s  自定义shell  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@zhouqunic-01 ~]# useradd user2</span><br><span class="line">[root@zhouqunic-01 ~]# tail -n2 /etc/passwd</span><br><span class="line">zhouqunic:x:1000:1000:zhouqunic:/home/zhouqunic:/bin/bash</span><br><span class="line">user2:x:1001:1001::/home/user2:/bin/bash</span><br><span class="line">[root@zhouqunic-01 ~]# groupadd grp2</span><br><span class="line">[root@zhouqunic-01 ~]# useradd -u 1004 -g grp2  user3</span><br><span class="line">[root@zhouqunic-01 ~]# tail -n3 /etc/passwd</span><br><span class="line">zhouqunic:x:1000:1000:zhouqunic:/home/zhouqunic:/bin/bash</span><br><span class="line">user2:x:1001:1001::/home/user2:/bin/bash</span><br><span class="line">user3:x:1004:1002::/home/user3:/bin/bash</span><br><span class="line">[root@zhouqunic-01 ~]# useradd -u 1009 -g grp2 -d /home/aming/ -s /sbin/nologin  user5</span><br><span class="line">[root@zhouqunic-01 ~]# tail -n5 /etc/passwd</span><br><span class="line">zhouqunic:x:1000:1000:zhouqunic:/home/zhouqunic:/bin/bash</span><br><span class="line">user2:x:1001:1001::/home/user2:/bin/bash</span><br><span class="line">user3:x:1004:1002::/home/user3:/bin/bash</span><br><span class="line">user4:x:1008:1002::/home/zhouqunic/:/sbin/nologin</span><br><span class="line">user5:x:1009:1002::/home/aming/:/sbin/nologin</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-userdel-删除用户"><a href="#2-userdel-删除用户" class="headerlink" title="2. userdel 删除用户"></a>2. userdel 删除用户</h2><p>-r 删除账户的时候，连带账户的家目录一起删除</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/21.22-21.25 redis集群介绍、搭建配置、操作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhouqun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joking的Linux世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux入门笔记/21.22-21.25 redis集群介绍、搭建配置、操作/" itemprop="url">21.22-21.25 redis集群介绍、搭建配置、操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">linux入门笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="21-22-redis集群介绍"><a href="#21-22-redis集群介绍" class="headerlink" title="21.22 redis集群介绍"></a>21.22 redis集群介绍</h1><ul>
-<li>集群概念应该不陌生了，多台机器组成，用来解决像存储空间，查询速度，负载等提供一个或多个服务支持！</li>
-<li>Redis集群 是一个分布式的一种架构，支持横向扩展，也就是说之前咱们配置的LVS+keepalived需要配置好基础环境，然后加入到集群系统。现在的Redis分布式，是*<em>只需要把Redis这个集群配置到当前配置内就可以自动的去工作了~ *</em></li>
-</ul>
-<h2 id="Redis-Cluster设计要点"><a href="#Redis-Cluster设计要点" class="headerlink" title="Redis Cluster设计要点"></a>Redis Cluster设计要点</h2><ul>
-<li><p>redis cluster在设计的时候，就考虑到了<strong>去中心化，去中间件</strong>，也就是说，集群中的每个节点都是平等的关系，都是对等的，每个节点都保存各自的数据和整个集群的状态。每个节点都和其他所有节点连接，而且这些连接保持活跃，这样就保证了我们只需要连接集群中的任意一个节点，就可以获取到其他节点的数据。</p>
-</li>
-<li><p><strong>那么redis 是如何合理分配这些节点和数据的呢？</strong></p>
-</li>
-<li><p>Redis 集群没有并使用传统的一致性哈希来分配数据，而是采用另外一种叫做哈希槽 (hash slot)的方式来分配的。redis cluster 默认分配了 16384 个slot，当我们set一个key 时，会用CRC16算法来取模得到所属的slot，然后将这个key 分到哈希槽区间的节点上，具体算法就是：CRC16(key) % 16384。</p>
-</li>
-<li><p>注意的是：必须要3个以后的主节点，否则在创建集群时会失败，我们在后续会实践到。</p>
-</li>
-<li><p>所以，我们假设现在有3个节点已经组成了集群，分别是：A, B, C 三个节点，它们可以是一台机器上的三个端口，也可以是三台不同的服务器。那么，采用哈希槽 (hash slot)的方式来分配16384个slot 的话，它们三个节点分别承担的slot 区间是：</p>
-</li>
-<li><p>节点A覆盖0－5460; 节点B覆盖5461－10922; 节点C覆盖10923－16383. 如下图所示： </p>
-</li>
-</ul>
-<p>那么，现在我想设置一个key ,比如叫my_name:</p>
-<ul>
-<li>set my_name xyz 按照redis cluster的哈希槽算法：CRC16(‘my_name’)%16384 = 2412。 那么就会把这个key 的存储分配到 A 上了。</li>
-<li>同样，当我连接(A,B,C)任何一个节点想获取my_name这个key时，也会这样的算法，然后内部跳转到B节点上获取数据。</li>
-<li>这种哈希槽的分配方式有好也有坏，好处就是很清晰，比如我想新增一个节点D，redis cluster的这种做法是从各个节点的前面各拿取一部分slot到D上，我会在接下来的实践中实验。大致就会变成这样：</li>
-<li>节点A覆盖1365-5460 节点B覆盖6827-10922 节点C覆盖12288-16383 节点D覆盖0-1364,5461-6826,10923-12287 同样删除一个节点也是类似，移动完成后就可以删除这个节点了。</li>
-<li>所以redis cluster 就是这样的一个形状：</li>
-</ul>
-<p>Redis cluster是分布式集群，支持横向扩展，Redis从V3.0版本后才支持集群功能。Redis集群的工作原理类似于磁盘的raid5。</p>
-<ul>
-<li>多个redis节点网络互联，数据共享。</li>
-<li>所有的节点都是一主一从（可以是多个从），其中从不提供服务，仅作为备用（主一旦宕机，从马上顶替工作！）。</li>
-<li>不支持同时处理多个键（如mset/mget），因为redis需要把键均匀分布在各个节点上，并发量很高的情况下同时创建键值会降低性能并导致不可预测的行为。</li>
-<li>支持在线增加、删除节点。</li>
-<li>客户端可以连任何一个主节点进行读写。</li>
-</ul>
-<p><strong>误区</strong>：<br>好多人会认为Redis集群上的数据都是一致的，大错特错！Redis 上面的数据是共享式的，也就是A server有的B server不一定有。类似于Raid 5，写入数据可能是A磁盘 可能是B磁盘。你可以正常读取，但真正的存储位置你是不晓得在哪儿的！</p>
-<h1 id="21-23-21-24-redis集群搭建配置"><a href="#21-23-21-24-redis集群搭建配置" class="headerlink" title="21.23/21.24 redis集群搭建配置"></a>21.23/21.24 redis集群搭建配置</h1><h2 id="1-场景设置"><a href="#1-场景设置" class="headerlink" title="1 场景设置"></a>1 场景设置</h2><ul>
-<li>两台机器，分别开启三个Redis服务（端口）</li>
-<li>A机器上三个端口：7000、7002、7004，全部为主</li>
-<li>B机器上三个端口：7001、7003、7005，全部为从</li>
-<li>两台机器上都要编译安装Redis，然后编译并复制三个不同的Redis.conf，分别设置不同的端口号、dir等参数，还需要增加cluster相关参数，然后分别启动6个Redis服务</li>
-<li><strong>注意：</strong>一定需要关闭selinux，iptables放行对应端口</li>
-</ul>
-<h2 id="2-安装Ruby-v2-2（master）"><a href="#2-安装Ruby-v2-2（master）" class="headerlink" title="2 安装Ruby v2.2（master）"></a>2 安装Ruby v2.2（master）</h2><p>Redis集群需要ruby的支持，需要先安装ruby（Ruby只需在一台机器上运行）。<br>Redis4.0需要使用Ruby2.2，安装方法如下（因为本机自带的是2.0版本的ruby，所以需要使用如下方法把源码包包制作成yum安装包，然后借助yum工具安装ruby2.2——升级ruby版本）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">安装yum开发工具组：</span><br><span class="line">[root@yt-01 ~]# yum -y groupinstall &quot;Development Tools&quot;</span><br><span class="line"></span><br><span class="line">升级库文件：</span><br><span class="line">[root@yt-01 ~]# yum -y install gdbm-devel libdb4-devel libffi-devel libyaml libyaml-devel ncurses-devel openssl-devel readline-devel tcl-devel</span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# cd /root/</span><br><span class="line"></span><br><span class="line">创建制作rpm包的目录：</span><br><span class="line">[root@yt-01 ~]# mkdir -p rpmbuild/&#123;BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS&#125;</span><br><span class="line"></span><br><span class="line">下载Ruby的源码包：</span><br><span class="line">[root@yt-01 ~]# wget http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.3.tar.gz -P rpmbuild/SOURCES</span><br><span class="line"></span><br><span class="line">下载specs文件，用于制作rpm包：</span><br><span class="line">[root@yt-01 ~]# wget https://raw.githubusercontent.com/tjinjin/automate-ruby-rpm/master/ruby22x.spec -P rpmbuild/SPECS</span><br><span class="line"></span><br><span class="line">制作rpm包：</span><br><span class="line">[root@yt-01 ~]# rpmbuild -bb rpmbuild/SPECS/ruby22x.spec</span><br><span class="line">#此处需要耐心等待，大约需要5分钟</span><br><span class="line"></span><br><span class="line">安装Ruby2.2：</span><br><span class="line">[root@yt-01 ~]# yum -y localinstall rpmbuild/RPMS/x86_64/ruby-2.2.3-1.el7.centos.x86_64.rpm</span><br><span class="line">[root@yt-01 ~]# ruby -v</span><br><span class="line">ruby 2.2.3p173 (2015-08-18 revision 51636) [x86_64-linux]</span><br></pre></td></tr></table></figure>
-
-<p>注意： 除此方法之外，还可以编译安装ruby。<br>好了，ruby 2.2已经安装完成。</p>
-<h2 id="3-准备机器master-ip-192-168-122-130"><a href="#3-准备机器master-ip-192-168-122-130" class="headerlink" title="3 准备机器master(ip:192.168.122.130)"></a>3 准备机器master(ip:192.168.122.130)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# vim /etc/redis_7000.conf</span><br><span class="line">port 7000</span><br><span class="line">bind 192.168.122.130</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile /var/run/redis_7000.pid</span><br><span class="line">dir /data/redis_data/7000</span><br><span class="line">cluster-enabled yes</span><br><span class="line">#开启cluster功能</span><br><span class="line">cluster-config-file nodes_7000.conf</span><br><span class="line">#该配置文件可以在dir目录下自动生成</span><br><span class="line">cluster-node-timeout 10100</span><br><span class="line">appendonly yes</span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# vim /etc/redis_7002.conf</span><br><span class="line">port 7002</span><br><span class="line">bind 192.168.122.130</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile /var/run/redis_7002.pid</span><br><span class="line">dir /data/redis_data/7002</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_7002.conf</span><br><span class="line">cluster-node-timeout 10100</span><br><span class="line">appendonly yes</span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# vim /etc/redis_7004.conf</span><br><span class="line">port 7004</span><br><span class="line">bind 192.168.122.130</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile /var/run/redis_7004.pid</span><br><span class="line">dir /data/redis_data/7004</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_7004.conf</span><br><span class="line">cluster-node-timeout 10100</span><br><span class="line">appendonly yes</span><br><span class="line"></span><br><span class="line">创建各配置文件对应的数据库目录：</span><br><span class="line">[root@yt-01 ~]# mkdir /data/redis_data</span><br><span class="line">[root@yt-01 ~]# mkdir /data/redis_data/&#123;7000,7002,7004&#125;</span><br><span class="line"></span><br><span class="line">依次启动Redis服务7000，7002，7004：</span><br><span class="line">[root@yt-01 ~]# redis-server /etc/redis_7000.conf</span><br><span class="line">33019:C 08 Apr 11:37:10.782 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo</span><br><span class="line">33019:C 08 Apr 11:37:10.782 # Redis version=4.0.9, bits=64, commit=00000000, modified=0, pid=33019, just started</span><br><span class="line">33019:C 08 Apr 11:37:10.782 # Configuration loaded</span><br><span class="line">[root@yt-01 ~]# redis-server /etc/redis_7002.conf</span><br><span class="line">[root@yt-01 ~]# redis-server /etc/redis_7004.conf</span><br><span class="line"></span><br><span class="line">启动完成后，结果如下：</span><br><span class="line">[root@yt-01 ~]# ps aux |grep redis</span><br><span class="line">root 33020 0.0 0.1 145264 2632 ? Ssl 11:37 0:00 redis-server 192.168.122.130:7000 [cluster]</span><br><span class="line">root 33032 0.0 0.1 145264 2628 ? Ssl 11:37 0:00 redis-server 192.168.122.130:7002 [cluster]</span><br><span class="line">root 33054 0.0 0.1 145264 2644 ? Ssl 11:37 0:00 redis-server 192.168.122.130:7004 [cluster]</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-准备slave（IP-192168-122-131）"><a href="#4-准备slave（IP-192168-122-131）" class="headerlink" title="4 准备slave（IP:192168.122.131）"></a>4 准备slave（IP:192168.122.131）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">安装redis</span><br><span class="line">先在yt-01上传redis到yt-02上</span><br><span class="line">[root@yt-01 ~]# cd /usr/local/src/</span><br><span class="line">[root@yt-01 src]# ll</span><br><span class="line">[root@yt-01 src]# scp -r redis-4.0.9 192.168.122.131:/usr/local/src/</span><br><span class="line">root@192.168.122.131&apos;s password:</span><br><span class="line">在yt-02上</span><br><span class="line">[root@yt-02 ~]# cd /usr/local/src</span><br><span class="line">[root@yt-02 src]# ll</span><br><span class="line">[root@yt-02 src]# cd redis-4.0.9/</span><br><span class="line">[root@yt-02 redis-4.0.9]# make install </span><br><span class="line">cd src &amp;&amp; make install</span><br><span class="line">make[1]: 进入目录“/usr/local/src/redis-4.0.9/src”</span><br><span class="line">Hint: It&apos;s a good idea to run &apos;make test&apos; ;)</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">make[1]: 离开目录“/usr/local/src/redis-4.0.9/src”</span><br><span class="line"># 因为之前在yt-01上编译过，这里只需要install就可以了</span><br><span class="line"></span><br><span class="line">[root@yt-02 ~]# vim /etc/redis_7001.conf</span><br><span class="line">port 7001</span><br><span class="line">bind 192.168.122.131</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile /var/run/redis_7001.pid</span><br><span class="line">dir /data/redis_data/7001</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_7001.conf</span><br><span class="line">cluster-node-timeout 10100</span><br><span class="line">appendonly yes</span><br><span class="line"></span><br><span class="line">[root@yt-02 ~]# vim /etc/redis_7003.conf</span><br><span class="line">port 7003</span><br><span class="line">bind 192.168.122.131</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile /var/run/redis_7003.pid</span><br><span class="line">dir /data/redis_data/7003</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_7003.conf</span><br><span class="line">cluster-node-timeout 10100</span><br><span class="line">appendonly yes</span><br><span class="line"></span><br><span class="line">[root@yt-02 ~]# vim /etc/redis_7005.conf</span><br><span class="line">port 7005</span><br><span class="line">bind 192.168.122.131</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile /var/run/redis_7005.pid</span><br><span class="line">dir /data/redis_data/7005</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_7005.conf</span><br><span class="line">cluster-node-timeout 10100</span><br><span class="line">appendonly yes</span><br><span class="line"></span><br><span class="line">创建各配置文件对应的数据库目录：</span><br><span class="line">[root@yt-02 ~]# mkdir /data/redis_data</span><br><span class="line">[root@yt-02 ~]# mkdir /data/redis_data/&#123;7001,7003,7005&#125;</span><br><span class="line"></span><br><span class="line">依次启动Redis服务7001，7003，7005：</span><br><span class="line">[root@yt-02 ~]# redis-server /etc/redis_7001.conf</span><br><span class="line">[root@yt-02 ~]# redis-server /etc/redis_7003.conf</span><br><span class="line">[root@yt-02 ~]# redis-server /etc/redis_7005.conf</span><br><span class="line"></span><br><span class="line">启动完成后结果如下：</span><br><span class="line">[root@yt-02 ~]# ps aux |grep redis</span><br><span class="line">root 25413 0.0 0.4 145264 7564 ? Ssl 11:50 0:00 redis-server 192.168.122.131:7001 [cluster]</span><br><span class="line">root 25418 0.0 0.4 145264 7564 ? Ssl 11:50 0:00 redis-server 192.168.122.131:7003 [cluster]</span><br><span class="line">root 25427 0.0 0.4 145264 7564 ? Ssl 11:50 0:00 redis-server 192.168.122.131:7005 [cluster]</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-配置redis集群"><a href="#5-配置redis集群" class="headerlink" title="5 配置redis集群"></a>5 配置redis集群</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">安装Redis配置集群的工具：</span><br><span class="line">[root@yt-01 ~]# gem install redis</span><br><span class="line"></span><br><span class="line">将命令redis-trib.rb加入环境变量目录下：</span><br><span class="line">[root@yt-01 ~]# cp /usr/local/src/redis-4.0.2/src/redis-trib.rb /usr/bin/</span><br><span class="line">[root@yt-01 ~]# redis-trib.rb create --replicas 1 192.168.122.130:7000 192.168.122.130:7002 192.168.122.130:7004 192.168.122.131:7001 192.168.122.131:7003 192.168.122.131:7005</span><br><span class="line">&gt;&gt;&gt; Creating cluster</span><br><span class="line">&gt;&gt;&gt; Performing hash slots allocation on 6 nodes...</span><br><span class="line">Using 3 masters:</span><br><span class="line">192.168.122.130:7000</span><br><span class="line">192.168.122.131:7001</span><br><span class="line">192.168.122.130:7002</span><br><span class="line">Adding replica 192.168.122.131:7005 to 192.168.122.130:7000</span><br><span class="line">Adding replica 192.168.122.130:7004 to 192.168.122.131:7001</span><br><span class="line">Adding replica 192.168.122.131:7003 to 192.168.122.130:7002</span><br><span class="line">M: 8c76e2bcb05c8d911b57989b973376a1a4ae8d0e 192.168.122.130:7000</span><br><span class="line">   slots:0-5460 (5461 slots) master</span><br><span class="line">M: 89b6e94a7c8c5b3660aa94b8492ebf2bb8684b5b 192.168.122.130:7002</span><br><span class="line">   slots:10923-16383 (5461 slots) master</span><br><span class="line">S: 702d2db77c3a9a5e5b5a2fb3348e5a894479ad93 192.168.122.130:7004</span><br><span class="line">   replicates c097cca2ac912c6d867336683d31cf4dbdbb8818</span><br><span class="line">M: c097cca2ac912c6d867336683d31cf4dbdbb8818 192.168.122.131:7001</span><br><span class="line">   slots:5461-10922 (5462 slots) master</span><br><span class="line">S: 3ef5d3b9a607259ff7b57f722c9eda9b38a1b083 192.168.122.131:7003</span><br><span class="line">   replicates 89b6e94a7c8c5b3660aa94b8492ebf2bb8684b5b</span><br><span class="line">S: 0e3946acca8ee2f093ea5951591b592a9bee4d45 192.168.122.131:7005</span><br><span class="line">   replicates 8c76e2bcb05c8d911b57989b973376a1a4ae8d0e</span><br><span class="line">Can I set the above configuration? (type &apos;yes&apos; to accept): yes</span><br><span class="line">&gt;&gt;&gt; Nodes configuration updated</span><br><span class="line">&gt;&gt;&gt; Assign a different config epoch to each node</span><br><span class="line">&gt;&gt;&gt; Sending CLUSTER MEET messages to join the cluster</span><br><span class="line">Waiting for the cluster to join..</span><br><span class="line">&gt;&gt;&gt; Performing Cluster Check (using node 192.168.122.130:7000)</span><br><span class="line">M: 8c76e2bcb05c8d911b57989b973376a1a4ae8d0e 192.168.122.130:7000</span><br><span class="line">   slots:0-5460 (5461 slots) master</span><br><span class="line">   1 additional replica(s)</span><br><span class="line">M: 89b6e94a7c8c5b3660aa94b8492ebf2bb8684b5b 192.168.122.130:7002</span><br><span class="line">   slots:10923-16383 (5461 slots) master</span><br><span class="line">   1 additional replica(s)</span><br><span class="line">S: 702d2db77c3a9a5e5b5a2fb3348e5a894479ad93 192.168.122.130:7004</span><br><span class="line">   slots: (0 slots) slave</span><br><span class="line">   replicates c097cca2ac912c6d867336683d31cf4dbdbb8818</span><br><span class="line">S: 3ef5d3b9a607259ff7b57f722c9eda9b38a1b083 192.168.122.131:7003</span><br><span class="line">   slots: (0 slots) slave</span><br><span class="line">   replicates 89b6e94a7c8c5b3660aa94b8492ebf2bb8684b5b</span><br><span class="line">S: 0e3946acca8ee2f093ea5951591b592a9bee4d45 192.168.122.131:7005</span><br><span class="line">   slots: (0 slots) slave</span><br><span class="line">   replicates 8c76e2bcb05c8d911b57989b973376a1a4ae8d0e</span><br><span class="line">M: c097cca2ac912c6d867336683d31cf4dbdbb8818 192.168.122.131:7001</span><br><span class="line">   slots:5461-10922 (5462 slots) master</span><br><span class="line">   1 additional replica(s)</span><br><span class="line">[OK] All nodes agree about slots configuration.</span><br><span class="line">&gt;&gt;&gt; Check for open slots...</span><br><span class="line">&gt;&gt;&gt; Check slots coverage...</span><br><span class="line">[OK] All 16384 slots covered.</span><br><span class="line"></span><br><span class="line"># 注意：redis-trib.rb create --replicas 1 表示一个master对应几个slave，此处的参数“1”表示master和slave一一对应</span><br><span class="line"># 主从是redis-trib.rb自动分配的</span><br></pre></td></tr></table></figure>
-
-<p>Redis集群配置完成!</p>
-<h1 id="21-25-redis集群操作"><a href="#21-25-redis集群操作" class="headerlink" title="21.25 redis集群操作"></a>21.25 redis集群操作</h1><h2 id="1-连接redis集群"><a href="#1-连接redis集群" class="headerlink" title="1 连接redis集群"></a>1 连接redis集群</h2><p>因为Redis集群是分布式结构，所以可以连接任何一个端口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">连接：</span><br><span class="line">[root@yt-02 ~]# redis-cli -c -h 192.168.122.130 -p 7000</span><br><span class="line">#-c：=cluster，表示以集群方式连接</span><br><span class="line"></span><br><span class="line">创建数据：</span><br><span class="line">192.168.122.130:7000&gt; set key1 123</span><br><span class="line">-&gt; Redirected to slot [9189] located at 192.168.122.131:7001</span><br><span class="line">OK</span><br><span class="line">#该操作会被重定向到192.168.122.131:7001</span><br><span class="line"></span><br><span class="line">192.168.122.131:7001&gt; set key2 abc</span><br><span class="line">-&gt; Redirected to slot [4998] located at 192.168.122.130:7000</span><br><span class="line">OK</span><br><span class="line">192.168.122.130:7000&gt; set key3 cbd</span><br><span class="line">OK</span><br><span class="line"># 该操作会被重定向到本地</span><br><span class="line"></span><br><span class="line">192.168.122.130:7000&gt; set key5 test5</span><br><span class="line">-&gt; Redirected to slot [9057] located at 192.168.122.131:7001</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">查看数据：</span><br><span class="line">192.168.122.130:7000&gt; get key1</span><br><span class="line">-&gt; Redirected to slot [9189] located at 192.168.122.131:7001</span><br><span class="line">&quot;123&quot;</span><br><span class="line">192.168.122.131:7001&gt; get key2</span><br><span class="line">-&gt; Redirected to slot [4998] located at 192.168.122.130:7000</span><br><span class="line">&quot;abc&quot;</span><br><span class="line">192.168.122.130:7000&gt; get key3</span><br><span class="line">&quot;cbd&quot;</span><br><span class="line">192.168.122.130:7000&gt; get key4</span><br><span class="line">-&gt; Redirected to slot [13120] located at 192.168.122.130:7002</span><br><span class="line">(nil)</span><br><span class="line">192.168.122.130:7002&gt; get key5</span><br><span class="line">-&gt; Redirected to slot [9057] located at 192.168.122.131:7001</span><br><span class="line">&quot;test5&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-集群的操作"><a href="#2-集群的操作" class="headerlink" title="2 集群的操作"></a>2 集群的操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">查看集群的状态：</span><br><span class="line">[root@yt-01 ~]# redis-trib.rb check 192.168.122.130:7000</span><br><span class="line">&gt;&gt;&gt; Performing Cluster Check (using node 192.168.122.130:7000)</span><br><span class="line">M: 8c76e2bcb05c8d911b57989b973376a1a4ae8d0e 192.168.122.130:7000</span><br><span class="line">   slots:0-5460 (5461 slots) master</span><br><span class="line">   1 additional replica(s)</span><br><span class="line">M: 89b6e94a7c8c5b3660aa94b8492ebf2bb8684b5b 192.168.122.130:7002</span><br><span class="line">   slots:10923-16383 (5461 slots) master</span><br><span class="line">   1 additional replica(s)</span><br><span class="line">S: 702d2db77c3a9a5e5b5a2fb3348e5a894479ad93 192.168.122.130:7004</span><br><span class="line">   slots: (0 slots) slave</span><br><span class="line">   replicates c097cca2ac912c6d867336683d31cf4dbdbb8818</span><br><span class="line">S: 3ef5d3b9a607259ff7b57f722c9eda9b38a1b083 192.168.122.131:7003</span><br><span class="line">   slots: (0 slots) slave</span><br><span class="line">   replicates 89b6e94a7c8c5b3660aa94b8492ebf2bb8684b5b</span><br><span class="line">S: 0e3946acca8ee2f093ea5951591b592a9bee4d45 192.168.122.131:7005</span><br><span class="line">   slots: (0 slots) slave</span><br><span class="line">   replicates 8c76e2bcb05c8d911b57989b973376a1a4ae8d0e</span><br><span class="line">M: c097cca2ac912c6d867336683d31cf4dbdbb8818 192.168.122.131:7001</span><br><span class="line">   slots:5461-10922 (5462 slots) master</span><br><span class="line">   1 additional replica(s)</span><br><span class="line">[OK] All nodes agree about slots configuration.</span><br><span class="line">&gt;&gt;&gt; Check for open slots...</span><br><span class="line">&gt;&gt;&gt; Check slots coverage...</span><br><span class="line">[OK] All 16384 slots covered.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">列出节点：</span><br><span class="line">[root@yt-01 ~]# redis-cli -c -h 192.168.122.130 -p 7000</span><br><span class="line">192.168.122.130:7000&gt; cluster nodes</span><br><span class="line">89b6e94a7c8c5b3660aa94b8492ebf2bb8684b5b 192.168.122.130:7002@17002 master - 0 1523160379000 2 connected 10923-16383</span><br><span class="line">702d2db77c3a9a5e5b5a2fb3348e5a894479ad93 192.168.122.130:7004@17004 slave c097cca2ac912c6d867336683d31cf4dbdbb8818 0 1523160380000 4 connected</span><br><span class="line">8c76e2bcb05c8d911b57989b973376a1a4ae8d0e 192.168.122.130:7000@17000 myself,master - 0 1523160380000 1 connected 0-5460</span><br><span class="line">3ef5d3b9a607259ff7b57f722c9eda9b38a1b083 192.168.122.131:7003@17003 slave 89b6e94a7c8c5b3660aa94b8492ebf2bb8684b5b 0 1523160378767 5 connected</span><br><span class="line">0e3946acca8ee2f093ea5951591b592a9bee4d45 192.168.122.131:7005@17005 slave 8c76e2bcb05c8d911b57989b973376a1a4ae8d0e 0 1523160378000 6 connected</span><br><span class="line">c097cca2ac912c6d867336683d31cf4dbdbb8818 192.168.122.131:7001@17001 master - 0 1523160377000 4 connected 5461-10922</span><br><span class="line"></span><br><span class="line">查看集群信息：</span><br><span class="line">192.168.122.130:7000&gt; cluster info</span><br><span class="line">cluster_state:ok</span><br><span class="line">cluster_slots_assigned:16384</span><br><span class="line">cluster_slots_ok:16384</span><br><span class="line">cluster_slots_pfail:0</span><br><span class="line">cluster_slots_fail:0</span><br><span class="line">cluster_known_nodes:6</span><br><span class="line">cluster_size:3</span><br><span class="line">cluster_current_epoch:6</span><br><span class="line">cluster_my_epoch:1</span><br><span class="line">cluster_stats_messages_ping_sent:548</span><br><span class="line">cluster_stats_messages_pong_sent:581</span><br><span class="line">cluster_stats_messages_sent:1129</span><br><span class="line">cluster_stats_messages_ping_received:576</span><br><span class="line">cluster_stats_messages_pong_received:548</span><br><span class="line">cluster_stats_messages_meet_received:5</span><br><span class="line">cluster_stats_messages_received:1129</span><br><span class="line"></span><br><span class="line">添加节点（执行该操作前先在slave创建redis_7007.conf并启动）：</span><br><span class="line">192.168.122.130:7000&gt; cluster meet 192.168.122.131 7007</span><br><span class="line">OK</span><br><span class="line">192.168.122.130:7000&gt; cluster nodes</span><br><span class="line">84fa982c0a3314bb239eeba869238502752d2682 192.168.122.131:7007@17007 master - 0 1523160579000 0 connected</span><br><span class="line">##此时7007以master身份存在</span><br><span class="line"></span><br><span class="line">再添加一个节点：</span><br><span class="line">192.168.122.130:7000&gt; cluster meet 192.168.122.130 7006</span><br><span class="line">OK</span><br><span class="line">192.168.122.130:7000&gt; cluster nodes</span><br><span class="line">1daa74e086e82eee1dd091189f1a06547a149e26 192.168.122.130:7006@17006 master - 0 1523160976000 7 connected</span><br><span class="line">#也是以master身份存在</span><br><span class="line">#使用以上方式添加的新节点都是以master身份存在！</span><br></pre></td></tr></table></figure>
-
-<p>将当前节点设置为指定节点的从</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">先更换到要设置的节点：</span><br><span class="line">[root@yt-01 ~]# redis-cli -c -h 192.168.122.130 -p 7006</span><br><span class="line"></span><br><span class="line">设定为7007的从：</span><br><span class="line">192.168.122.130:7006&gt; cluster replicate 84fa982c0a3314bb239eeba869238502752d2682</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">查看：</span><br><span class="line">192.168.122.130:7006&gt; cluster nodes</span><br><span class="line">1daa74e086e82eee1dd091189f1a06547a149e26 192.168.122.130:7006@17006 myself,slave 84fa982c0a3314bb239eeba869238502752d2682 0 1523161084000 7 connected</span><br><span class="line">84fa982c0a3314bb239eeba869238502752d2682 192.168.122.131:7007@17007 master - 0 1523161084000 0 connected</span><br><span class="line">#对比node号，即7006为7007的从。。</span><br><span class="line"></span><br><span class="line">移除某节点：</span><br><span class="line">192.168.122.130:7006&gt; cluster forget 84fa982c0a3314bb239eeba869238502752d2682</span><br><span class="line">(error) ERR Can&apos;t forget my master!</span><br><span class="line">192.168.122.130:7006&gt; 1daa74e086e82eee1dd091189f1a06547a149e26</span><br><span class="line">(error) ERR I tried hard but I can&apos;t forget myself...</span><br><span class="line"># 从节点不能移除master节点和也不能移除自己</span><br><span class="line"></span><br><span class="line">切换到一个主节点</span><br><span class="line">[root@yt-01 ~]# redis-cli -c -h 192.168.122.130 -p 7000</span><br><span class="line">192.168.122.130:7000&gt; cluster forget 677f27fb209ce45c823126fe38dbcf0b9fc43d93</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">查看：</span><br><span class="line">192.168.122.130:7000&gt; cluster nodes</span><br><span class="line">#此时7006已经不存在了。</span><br><span class="line"></span><br><span class="line">保存当前配置：</span><br><span class="line">192.168.122.130:7000&gt; CLUSTER SAVECONFIG</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/19.7-19.11 Zabbix主动模式和被动模式、添加监控主机、添加自定义模板、处理图形中的乱码、自动发现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -767,56 +380,18 @@
       
         
           
-            <h1 id="19-7-主动模式和被动模式"><a href="#19-7-主动模式和被动模式" class="headerlink" title="19.7 主动模式和被动模式"></a>19.7 主动模式和被动模式</h1><p>主动模式和被动模式所针对的对象是客户端。<br>意思是客户端主动向服务端上报数据和由服务端到客户端采集数据。<br>数据的提交时间在监控中心设置。</p>
-<h2 id="配置建议"><a href="#配置建议" class="headerlink" title="配置建议"></a>配置建议</h2><ul>
-<li>当客户端数量非常多时，建议使用主动模式，这样可以降低服务端的压力。</li>
-<li>当服务端有公网IP，客户端只有内网IP但是可以连接外网（使用iptables的nat表规则实现），这种场景适合使用主动模式</li>
-<li>如果server量不是太多的话，两种模式都可。</li>
-</ul>
-<h1 id="19-8-添加监控主机"><a href="#19-8-添加监控主机" class="headerlink" title="19.8 添加监控主机"></a>19.8 添加监控主机</h1><ul>
-<li>主机群组：在此先创建主机群组，然后再添加要监控的机器到已有群组中。这样做的好处是，在不同的主机群组设置不同监控规则，然后可以把想要使用同样规则的主机添加到指定群组进行管理，避免为每台主机去配置规则。</li>
-<li>模板：预设的监控项目集合（监控规则末班）</li>
-<li>主机：在监控中的所有机器</li>
-</ul>
-<h2 id="1-添加主机组"><a href="#1-添加主机组" class="headerlink" title="1 添加主机组"></a>1 添加主机组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">配置 → 主机群组 → 创建主机群组（添加主机前先要创建组）</span><br><span class="line"></span><br><span class="line">组名：yt-test → 添加即可。</span><br><span class="line"></span><br><span class="line">配置 → 主机 → 创建主机</span><br><span class="line"></span><br><span class="line">主机名称：yt-02（在被监控主机内有配置Hostname，此处填写这个）</span><br><span class="line">可见名称：yt-02（与上面保持一致即可）</span><br><span class="line"></span><br><span class="line">添加刚刚创建的组</span><br><span class="line"></span><br><span class="line">IP 地址：192.168.122.131（客户端的IP）</span><br><span class="line">DNS名称：目前用不到，不用写，如果该IP有对应的域名，则需要添加到“DNS名称”中</span><br><span class="line">端口：10050（默认，或填写自定义的）</span><br><span class="line"></span><br><span class="line">第二个选项 模板 稍后讲，其他不用管</span><br><span class="line">点击最后的 添加 即可！</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-参数解析"><a href="#2-参数解析" class="headerlink" title="2 参数解析"></a>2 参数解析</h2><ul>
-<li>应用集：监控项目的组集合</li>
-<li>监控项：所有的监控项目</li>
-<li>触发器：针对某一个监控项的监控规则（不填级别的规则颜色不同，会显示在首页主机状态中）</li>
-<li>图形：根据监控历史数据绘制的图标</li>
-<li>自动发现规则：zabbix自动监控系统文件，磁盘分区，网卡流量等，该部分自定义比较繁琐，所以使用自动发现规则</li>
-<li>Web场景：在此可设置对主机上的某个站点进行监控，监控站点的任何非200页面的状态，并报警。</li>
-</ul>
-<h1 id="19-9-添加自定义模板"><a href="#19-9-添加自定义模板" class="headerlink" title="19.9 添加自定义模板"></a>19.9 添加自定义模板</h1><p>在“模板”中自定义监控规则，然后应用到监控主机中，方便个性化管理。<br>在模板里面我们可以增加很多自定义监控的项目，然后再次把模板链接到一个组内，当我们在组内增加了新的客户端就不需要我们再次去配置监控项目，直接加入组就ok了。</p>
-<h2 id="1-创建自定义模版"><a href="#1-创建自定义模版" class="headerlink" title="1 创建自定义模版"></a>1 创建自定义模版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">配置 → 模板 → 创建模版</span><br><span class="line">模板名称：yuntai（自定义即可）</span><br><span class="line">群组：Templetes</span><br><span class="line">简单设置，添加即可。</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-快速的添加监控模板"><a href="#2-快速的添加监控模板" class="headerlink" title="2 快速的添加监控模板"></a>2 快速的添加监控模板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 选择预设的一个模板（Template OS Linux）</span><br><span class="line">2. 点击“监控” → 选择一些我们需要的监控项 → 点击最下面的“复制” → 选择模板 → 找到刚刚创建的模板zhdy_monitor → 再次点击最下面的 “复制” 即可。</span><br><span class="line">3. 使用同样的方法，把其它的监控项完成。</span><br><span class="line">但是我们发现，其它选项都可以按照之前的步骤去操作，但是“自动发现”选项却没有“复制”这个选项。</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-复制其它模板的“自动发现”选项"><a href="#3-复制其它模板的“自动发现”选项" class="headerlink" title="3 复制其它模板的“自动发现”选项"></a>3 复制其它模板的“自动发现”选项</h2><ul>
-<li><p>方案1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">导出有“自动发现”选项,模版的配置文件xxx.xml。用编辑器打开，删除其他多余的选项代码，再导入到自定义的模版里面</span><br><span class="line"># 工作量比较大，也容易出错，不推荐</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>方案2</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把已有的模版链接到自定义模版上，然后 取消链接，更新规则后，删除 不需要的监控项，删除 多余的应用集，就可以保留“自动发现”选项</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="19-10-处理图形中的乱码"><a href="#19-10-处理图形中的乱码" class="headerlink" title="19.10 处理图形中的乱码"></a>19.10 处理图形中的乱码</h1><ol>
-<li>点击刚刚创建的主机 → 点击上面的选项“模板” → “链接指示器” → “添加” → “更新” → 然后我们就会看到模板的中的监控项全部复制到了新添加的主机中。</li>
-<li>点击“图形” → 点击任意一个 → “预览” → 我们会发现其中出现了乱码：</li>
-</ol>
-<p><strong>这种情况是因为我们虚拟主机中没有能够解析这个字体的字体库。如何能够解决问题呢？</strong><br>这种情况其实很容易去处理，直接copy windows中的一个字体，放在linux中指定的路径即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# vim /usr/share/zabbix/include/defines.inc.php</span><br><span class="line"></span><br><span class="line"># 搜索ZBX_FONTPATH</span><br><span class="line"># 它定义的路径是“fonts”，它是一个相对路径</span><br><span class="line"># 绝对路径为/usr/share/zabbix/fonts</span><br><span class="line"># 而字体文件为“ZBX_GRAPH_FONT_NAME”所定义的“graphfont”</span><br><span class="line"># 它是一个文件，绝对路径为  /usr/share/zabbix/fonts/graphfont </span><br><span class="line"></span><br><span class="line">先把windows下面的字体上传到服务器，然后再次mv到/usr/share/zabbix/fonts/</span><br><span class="line">lrwxrwxrwx 1 root root 33 4月 2 11:12 graphfont.ttf -&gt; /etc/alternatives/zabbix-web-font</span><br><span class="line">[root@yt-01 ~]# mv STLITI.TTF /usr/share/zabbix/fonts/</span><br><span class="line"></span><br><span class="line">然后把原有的字体改个名字，再次把我们上传的字体做个软链接即可。 </span><br><span class="line">[root@yt-01 ~]# cd /usr/share/zabbix/fonts/</span><br><span class="line">[root@yt-01 fonts]# ls</span><br><span class="line">graphfont.ttf STLITI.TTF</span><br><span class="line">[root@yt-01 fonts]# mv graphfont.ttf graphfont.ttf.bak</span><br><span class="line">[root@yt-01 fonts]# ln -s STLITI.TTF graphfont.ttf</span><br><span class="line"></span><br><span class="line">zabbix web页刷新，就可以看不到乱码了</span><br></pre></td></tr></table></figure>
-
-<h1 id="19-11-自动发现"><a href="#19-11-自动发现" class="headerlink" title="19.11 自动发现"></a>19.11 自动发现</h1><p>点击“自动发现规则” → 按理来说，我们已经配置了自动发现规则，为什么在图形中没有看到任何图表显示呢？ 其原因是 我们虽然配置了，但是自动发现规则是1小时候才可以显示，我们可以手动编辑调节“数据更新间隔”为10分钟或者为了让其快速显示，也可以临时设置1分钟，当出来图表再次把更新时间间隔调节为600秒即可。 点击“更新”即可。 至于说压力问题，只要不是监控太多的客户端，这个值还是可以的。</p>
-<p>然后（重启服务器与客户端的zabbix服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server端：</span><br><span class="line"># systemctl restart zabbix-server</span><br><span class="line">client端：</span><br><span class="line"># systemctl restart zabbix-agent</span><br></pre></td></tr></table></figure>
-
-<p>然后我们再次回到“图形”，我们就发现了被监控的网卡。<br>如果需要修改模板内的状态显示风格或者颜色，可以进入“模板” → “自定义的模板” → “自动发现” → “点击监控的名称即可进去修改”。</p>
-<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>zabbix监控交换机（思科） <a href="http://tryrus.blog.51cto.com/10914693/1789847" target="_blank" rel="noopener">http://tryrus.blog.51cto.com/10914693/1789847</a><br>zabbix远程执行命令 <a href="http://www.ywnds.com/?p=6610" target="_blank" rel="noopener">http://www.ywnds.com/?p=6610</a><br>zabbix分布式部署 <a href="http://sfzhang88.blog.51cto.com/4995876/1364399" target="_blank" rel="noopener">http://sfzhang88.blog.51cto.com/4995876/1364399</a><br>zabbix监控tomcat（版本有点老，大家只需要参考步骤，不能照搬） <a href="http://www.jianshu.com/p/e3825a885a1b" target="_blank" rel="noopener">http://www.jianshu.com/p/e3825a885a1b</a> <a href="http://www.fblinux.com/?p=616" target="_blank" rel="noopener">http://www.fblinux.com/?p=616</a></p>
-
-          
+          19.7 主动模式和被动模式主动模式和被动模式所针对的对象是客户端。意思是客户端主动向服务端上报数据和由服务端到客户端采集数据。数据的提交时间在监控中心设置。
+配置建议
+当客户端数量非常多时，建议使用主动模式，这样可以降低服务端的压力。
+当服务端有公网IP，客户端只有内网IP但是可以连接外网（使用i
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/19.7-19.11 Zabbix主动模式和被动模式、添加监控主机、添加自定义模板、处理图形中的乱码、自动发现/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -956,68 +531,25 @@
       
         
           
-            <p>#20.1 shell脚本介绍</p>
-<ul>
-<li>shell是一种脚本语言</li>
-<li>可以使用逻辑判断、循环等语法</li>
-<li>可以自定义函数</li>
-<li>shell是系统命令的集合</li>
-<li>shell脚本可以实现自动化运维，能大大增加我们的运维效率</li>
-</ul>
-<p>#20.2 shell脚本结构和执行</p>
-<ul>
-<li>开头需要加#!/bin/bash，告诉系统该脚本是要以bin/bash文件解释器执行</li>
-<li>以#开头的行作为解释说明</li>
-<li>脚本的名字以.sh结尾，用于区分这是一个shell脚本</li>
-<li>执行方法有两种<br>  chmod +x 1.sh; ./1.sh<br>  bash 1.sh</li>
-<li>查看脚本执行过程 bash -x 1.sh</li>
-<li>查看脚本是否语法错误  bash -n 1.sh</li>
-</ul>
-<p>#20.3 date命令用法</p>
-<blockquote>
-<p>很多shell脚本里面需要打印不同格式的时间或日期，以及要根据时间和日期执行操作。延时通常用于脚本执行过程中提供一段等待的时间。日期可以以多种格式去打印，也可以使用命令设置固定的格式。在类UNIX系统中，日期被存储为一个整数，其大小为自世界标准时间（UTC）1970年1月1日0时0分0秒起流逝的秒数。 </p>
-</blockquote>
-<p>date命令是显示或设置系统时间与日期。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# date    //显示当前时区的当前时间</span><br><span class="line">Fri Sep 15 06:08:45 CST 2017</span><br></pre></td></tr></table></figure>
+          #20.1 shell脚本介绍
 
-<p>##语法<br>date(选项)(参数)</p>
-<p>##选项<br>-d&lt;字符串&gt;：显示字符串所指的日期与时间。字符串前后必须加上双引号；<br>-s&lt;字符串&gt;：根据字符串来设置日期与时间。字符串前后必须加上双引号；<br>-u：显示GMT；<br>–help：在线帮助；<br>–version：显示版本信息。</p>
-<p>##参数<br>&lt;+时间日期格式&gt;：指定显示时使用的日期时间格式。</p>
-<p>##用法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- date  +%Y-%m-%d, date +%y-%m-%d 年月日</span><br><span class="line">- date  +%H:%M:%S = date +%T 时间</span><br><span class="line">- date +%s  时间戳</span><br><span class="line">- date -d @1504620492</span><br><span class="line">- date -d &quot;+1day&quot;  一天后</span><br><span class="line">- date -d &quot;-1 day&quot;  一天前</span><br><span class="line">- date -d &quot;-1 month&quot; 一月前</span><br><span class="line">- date -d &quot;-1 min&quot;  一分钟前</span><br><span class="line">- date +%w, date +%W 星期</span><br></pre></td></tr></table></figure>
+shell是一种脚本语言
+可以使用逻辑判断、循环等语法
+可以自定义函数
+shell是系统命令的集合
+shell脚本可以实现自动化运维，能大大增加我们的运维效率
 
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><ul>
-<li><p>查看系统日历</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# cal</span><br><span class="line">  September 2017  </span><br><span class="line">Su Mo Tu We Th Fr Sa</span><br><span class="line">                1  2</span><br><span class="line">3  4  5  6  7  8  9</span><br><span class="line">10 11 12 13 14 15 16</span><br><span class="line">17 18 19 20 21 22 23</span><br><span class="line">24 25 26 27 28 29 30</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>显示年份</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# date +%Y   //以四位数显示年份</span><br><span class="line">2017</span><br><span class="line">[root@host ~]# date +%y   //以两位数显示年份</span><br><span class="line">17</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>分别显示：年、月、日、时、分、秒、星期</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# date &quot;+%Y-%m-%d %H:%M:%S %w&quot;</span><br><span class="line">2017-09-15 06:15:44 5</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>显示年月日</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# date +%D</span><br><span class="line">09/15/17</span><br><span class="line">[root@host ~]# date +%Y%m%d</span><br><span class="line">20170915</span><br><span class="line">[root@host ~]# date +%F</span><br><span class="line">2017-09-15</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其他时间显示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# date +%h    //显示现在的月份</span><br><span class="line">Sep</span><br><span class="line">[root@host ~]# date +%W   //显示今年的第几周</span><br><span class="line">37</span><br><span class="line">[root@host ~]# date +%T   //显示当前时间几点几分几秒</span><br><span class="line">06:21:34</span><br><span class="line">[root@host ~]# date +%s   //显示时间戳，表示距离 从1970年1月1日00:00:00到现在 经历的秒数</span><br><span class="line">1505427580</span><br><span class="line"></span><br><span class="line">#时间戳换算</span><br><span class="line">[root@host ~]# date +%s -d &quot;2017-09-15 12:00:00&quot;</span><br><span class="line">1505448000</span><br><span class="line">[root@host ~]# date -d @1505448000</span><br><span class="line">Fri Sep 15 12:00:00 CST 2017</span><br></pre></td></tr></table></figure>
+#20.2 shell脚本结构和执行
 
-</li>
-</ul>
-<p>##打印指定日期&amp;时间<br>工作中，有时候需要使用N天前的日期或时间<br>格式是<code>date -d &quot;1 day&quot; +%d</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# date +%F             //今天的日期</span><br><span class="line">2017-09-15</span><br><span class="line">[root@host ~]# date -d &quot;-2 day&quot; +%d   //两天前多少号</span><br><span class="line">13</span><br><span class="line">[root@host ~]# date -d &quot;1 day ago&quot; +&quot;%Y-%m-%d&quot;    （=date -d &quot;1 day ago&quot; +%F）   //1天前的日期</span><br><span class="line">2017-09-14</span><br><span class="line">[root@host ~]# date -d &quot;-1 year -1 month -1 day&quot; +%Y-%m-%d    //前一年一个月一天的日期</span><br><span class="line">2016-08-14</span><br></pre></td></tr></table></figure>
-
-<p>#20.4 shell脚本中的变量</p>
-<ul>
-<li>当脚本中使用某个字符串较频繁并且字符串长度很长时就应该使用变量代替</li>
-<li>使用条件语句时，常使用变量    if [ $a -gt 1 ]; then … ; fi</li>
-<li>引用某个命令的结果时，用变量替代  n=<code>wc -l 1.txt</code></li>
-<li>写和用户交互的脚本时，变量也是必不可少的  read -p “Input a number: “ n; echo $n  如果没写这个n，可以直接使用$REPLY</li>
-<li>内置变量 $0, $1, $2…    $0表示脚本本身，$1 第一个参数，$2 第二个 ….      $#表示参数个数</li>
-<li>数学运算a=1;b=2; c=$(($a+$b))或者$[$a+$b] </li>
-</ul>
-
-          
+开头需要加#!/bin/bash，告诉系统该脚本是要以bin/b
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/20.1 - 20.4 shell脚本结构和执行、变量、date命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1064,7 +596,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/20.10-20.15 for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/17.1-17.5 MySQL主从配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1083,7 +615,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/20.10-20.15 for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本/" itemprop="url">20.10-20.15 for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/17.1-17.5 MySQL主从配置/" itemprop="url">17.1-17.5 MySQL主从配置</a></h1>
         
 
         <div class="post-meta">
@@ -1157,47 +689,164 @@
       
         
           
-            <p>##20.10 for循环</p>
-<p>###语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for 变量名 in 条件; do …; done</span><br></pre></td></tr></table></figure>
+          17.1 MySQL主从介绍MySQL主从又叫做Replication、AB复制。简单讲就是A和B两台机器做主从后，在A上写数据，另外一台B也会跟着写数据，两者数据实时同步的。也就是说，当你在A机器写入一个表，再次查看B机器也会同步一个表。
+MySQL主从是基于binlog的，主上须开启binlog
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/17.1-17.5 MySQL主从配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
 
-<p>###案例1<br>计算1到100的和</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">sum=0</span><br><span class="line">for i in `seq 1 100`</span><br><span class="line">do</span><br><span class="line">    echo &quot;$sum+$i&quot;</span><br><span class="line">    sum=$[$sum+$i]</span><br><span class="line">done</span><br><span class="line">echo $sum</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh -x for1.sh </span><br><span class="line">+ sum=0</span><br><span class="line">++ seq 1 100</span><br><span class="line">+ for i in &apos;`seq 1 100`&apos;</span><br><span class="line">+ echo 0+1</span><br><span class="line">0+1</span><br><span class="line">+ sum=1</span><br><span class="line">+ for i in &apos;`seq 1 100`&apos;</span><br><span class="line">+ echo 1+2</span><br><span class="line">1+2</span><br><span class="line">+ sum=3</span><br><span class="line">... ...</span><br><span class="line">+ sum=4851</span><br><span class="line">+ for i in &apos;`seq 1 100`&apos;</span><br><span class="line">+ echo 4851+99</span><br><span class="line">4851+99</span><br><span class="line">+ sum=4950</span><br><span class="line">+ for i in &apos;`seq 1 100`&apos;</span><br><span class="line">+ echo 4950+100</span><br><span class="line">4950+100</span><br><span class="line">+ sum=5050</span><br><span class="line">+ echo 5050</span><br><span class="line">5050</span><br></pre></td></tr></table></figure>
+    
 
-<p>###案例2<br>文件列表循环</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">cd /etc/</span><br><span class="line">for a in `ls /etc/`</span><br><span class="line">do</span><br><span class="line">    if [ -d $a ]</span><br><span class="line">    then</span><br><span class="line">      ls -d $a</span><br><span class="line">    fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+    
 
-<p>###for循环的分隔符<br>for默认情况下会把空格或换行符（回车）作为分隔符</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@host /]# mkdir yuntai/</span><br><span class="line">[root@host /]# cd yuntai</span><br><span class="line">[root@host yuntai]# touch 1 2 3\ 4.txt</span><br><span class="line">[root@host yuntai]# ls -l</span><br><span class="line">total 0</span><br><span class="line">-rw-r--r-- 1 root root 0 Oct 19 09:14 1</span><br><span class="line">-rw-r--r-- 1 root root 0 Oct 19 09:14 2</span><br><span class="line">-rw-r--r-- 1 root root 0 Oct 19 09:14 3 4.txt   </span><br><span class="line">#新建了一个名称中有空格的文件</span><br><span class="line">[root@host yuntai]# for i in `ls ./`; do echo $i ; done</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4.txt</span><br></pre></td></tr></table></figure>
+    
 
-<p>##20.11/20.12 while循环</p>
-<p>###语法 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">while 条件; do … ; done</span><br></pre></td></tr></table></figure>
+    <footer class="post-footer">
+      
 
-<p>###案例1<br>当系统负载大于10的时候，发送邮件，每隔30秒执行一次。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">while :</span><br><span class="line">#后面加冒号表示死循环的意思，也可以换成ture或者1</span><br><span class="line">do</span><br><span class="line">    load=`w|head -1|awk -F &apos;load average: &apos; &apos;&#123;print $2&#125;&apos;|cut -d. -f1`</span><br><span class="line">    if [ $load -gt 10 ]</span><br><span class="line">    then</span><br><span class="line">        top|mail -s &quot;load is high: $load&quot; xxxx@qq.com</span><br><span class="line">    fi</span><br><span class="line">    sleep 30</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+      
 
-<p>###案例2<br>一种交互模式，当用户输入对应内容，检测该字符是否符合条件，如：空、非数字、数字。分别对字符做出判断，然后做出不同的回应。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">while :</span><br><span class="line">do</span><br><span class="line">    read -p &quot;Please input a number: &quot; n</span><br><span class="line">    if [ -z &quot;$n&quot; ]</span><br><span class="line">    then</span><br><span class="line">        echo &quot;you need input sth.&quot;</span><br><span class="line">        continue</span><br><span class="line">    fi</span><br><span class="line">    n1=`echo $n|sed &apos;s/[0-9]//g&apos;`</span><br><span class="line">    if [ -n &quot;$n1&quot; ]</span><br><span class="line">    then</span><br><span class="line">        echo &quot;you just only input numbers.&quot;</span><br><span class="line">        continue</span><br><span class="line">    fi</span><br><span class="line">    break</span><br><span class="line">#continue: 中断本次while循环后重新开始；</span><br><span class="line">#break: 表示跳出本层循环，即该while循环结束</span><br><span class="line">done</span><br><span class="line">echo $n</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh -x while2.sh </span><br><span class="line">+ :</span><br><span class="line">+ read -p &apos;Please input a number: &apos; n</span><br><span class="line">Please input a number:  </span><br><span class="line">+ &apos;[&apos; -z &apos;&apos; &apos;]&apos;</span><br><span class="line">+ echo &apos;you need input sth.&apos;</span><br><span class="line">you need input sth.</span><br><span class="line">+ continue</span><br><span class="line">+ :</span><br><span class="line">+ read -p &apos;Please input a number: &apos; n</span><br><span class="line">Please input a number: z</span><br><span class="line">+ &apos;[&apos; -z z &apos;]&apos;</span><br><span class="line">++ sed &apos;s/[0-9]//g&apos;</span><br><span class="line">++ echo z</span><br><span class="line">+ n1=z</span><br><span class="line">+ &apos;[&apos; -n z &apos;]&apos;</span><br><span class="line">+ echo &apos;you just only input numbers.&apos;</span><br><span class="line">you just only input numbers.</span><br><span class="line">+ continue</span><br><span class="line">+ :</span><br><span class="line">+ read -p &apos;Please input a number: &apos; n</span><br><span class="line">Please input a number: 3</span><br><span class="line">+ &apos;[&apos; -z 3 &apos;]&apos;</span><br><span class="line">++ sed &apos;s/[0-9]//g&apos;</span><br><span class="line">++ echo 3</span><br><span class="line">+ n1=</span><br><span class="line">+ &apos;[&apos; -n &apos;&apos; &apos;]&apos;</span><br><span class="line">+ break</span><br><span class="line">+ echo 3</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+      
 
-<p>##20.13 break跳出循环<br>用于跳出循环语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for i in `seq 1 5`</span><br><span class="line">do</span><br><span class="line">    echo $i</span><br><span class="line">    if [ $i == 3 ]</span><br><span class="line"># 数字最好用 -eq，如果是字符串，那么最好用 ==，这里用-eq更好</span><br><span class="line">    then</span><br><span class="line">        break</span><br><span class="line">    fi</span><br><span class="line">    echo $i</span><br><span class="line">done</span><br><span class="line">echo aaaaaaa</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh -x break1.sh </span><br><span class="line">++ seq 1 5</span><br><span class="line">+ for i in &apos;`seq 1 5`&apos;</span><br><span class="line">+ echo 1</span><br><span class="line">1</span><br><span class="line">+ &apos;[&apos; 1 -eq 3 &apos;]&apos;</span><br><span class="line">+ echo 1</span><br><span class="line">1</span><br><span class="line">+ for i in &apos;`seq 1 5`&apos;</span><br><span class="line">+ echo 2</span><br><span class="line">2</span><br><span class="line">+ &apos;[&apos; 2 -eq 3 &apos;]&apos;</span><br><span class="line">+ echo 2</span><br><span class="line">2</span><br><span class="line">+ for i in &apos;`seq 1 5`&apos;</span><br><span class="line">+ echo 3</span><br><span class="line">3</span><br><span class="line">+ &apos;[&apos; 3 -eq 3 &apos;]&apos;</span><br><span class="line">+ break</span><br><span class="line">+ echo aaaaaaa</span><br><span class="line">aaaaaaa</span><br></pre></td></tr></table></figure>
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
-<p>##20.14 continue结束本次循环<br>用于结束本次循环，直接进入下次循环语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for i in `seq 1 5`</span><br><span class="line">do</span><br><span class="line">    echo $i</span><br><span class="line">    if [ $i == 3 ]</span><br><span class="line">    then</span><br><span class="line">        continue</span><br><span class="line">#忽略continue之下的代码，直接进行下一次循环</span><br><span class="line">    fi</span><br><span class="line">    echo $i</span><br><span class="line">done</span><br><span class="line">echo $i</span><br><span class="line">echo aaaaaaa</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh  continue1.sh </span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">2</span><br><span class="line">3    </span><br><span class="line">4</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">5</span><br><span class="line">5</span><br><span class="line">aaaaaaa</span><br></pre></td></tr></table></figure>
 
-<p>##20.15 exit退出整个脚本<br>直接退出整个脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for i in `seq 1 5`</span><br><span class="line">do</span><br><span class="line">    echo $i</span><br><span class="line">    if [ $i == 3 ]</span><br><span class="line">    then</span><br><span class="line">        exit</span><br><span class="line">    fi</span><br><span class="line">    echo $i</span><br><span class="line">done</span><br><span class="line">echo aaaaaaa</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh exit1.sh </span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+    
+      
 
-<p>##扩展 select用法<br>select也是循环的一种，它比较适合用在用户选择的情况下。<br>比如，我们有一个这样的需求，运行脚本后，让用户去选择数字，选择1，会运行w命令，选择2运行top命令，选择3运行free命令，选择4退出。脚本这样实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">echo &quot;Please chose a number, 1: run w, 2: run top, 3: run free, 4: quit&quot;</span><br><span class="line">echo</span><br><span class="line">select command in w top free quit</span><br><span class="line">do</span><br><span class="line">    case $command in</span><br><span class="line">    w)</span><br><span class="line">        w</span><br><span class="line">        ;;</span><br><span class="line">    top)</span><br><span class="line">        top</span><br><span class="line">        ;;</span><br><span class="line">    free)</span><br><span class="line">        free</span><br><span class="line">        ;;</span><br><span class="line">    quit)</span><br><span class="line">        exit</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo &quot;Please input a number:(1-4).&quot;</span><br><span class="line">        ;;</span><br><span class="line">    esac</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">执行结果如下：</span><br><span class="line">sh select.sh</span><br><span class="line">Please chose a number, 1: run w, 2: run top, 3: run free, 4: quit</span><br><span class="line"></span><br><span class="line">1) w</span><br><span class="line">2) top</span><br><span class="line">3) free</span><br><span class="line">4) quit</span><br><span class="line">#? 1</span><br><span class="line">16:03:40 up 32 days,  2:42,  1 user,  load average: 0.01, 0.08, 0.08</span><br><span class="line">USER    TTY      FROM              LOGIN@  IDLE  JCPU  PCPU WHAT</span><br><span class="line">root    pts/0    61.135.172.68    15:33    0.00s  0.02s  0.00s sh select.sh</span><br><span class="line"></span><br><span class="line">#? 3</span><br><span class="line">            total      used      free    shared    buffers    cached</span><br><span class="line">Mem:      1020328    943736      76592          0      86840    263624</span><br><span class="line">-/+ buffers/cache:    593272    427056</span><br><span class="line">Swap:      2097144      44196    2052948</span><br><span class="line">#?</span><br></pre></td></tr></table></figure>
+  
 
-<p>我们发现，select会默认把序号对应的命令列出来，每次输入一个数字，则会执行相应的命令，命令执行完后并不会退出脚本。它还会继续让我们再次输如序号。序号前面的提示符，我们也是可以修改的，利用变量PS3即可，再次修改脚本如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PS3=&quot;Please select a number: &quot;</span><br><span class="line">echo &quot;Please chose a number, 1: run w, 2: run top, 3: run free, 4: quit&quot;</span><br><span class="line">echo</span><br><span class="line">select command in w top free quit</span><br><span class="line">do</span><br><span class="line">    case $command in</span><br><span class="line">    w)</span><br><span class="line">        w</span><br><span class="line">        ;;</span><br><span class="line">    top)</span><br><span class="line">        top</span><br><span class="line">        ;;</span><br><span class="line">    free)</span><br><span class="line">        free</span><br><span class="line">        ;;</span><br><span class="line">    quit)</span><br><span class="line">        exit</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo &quot;Please input a number:(1-4).&quot;</span><br><span class="line">    esac</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+  
+  
+  
 
-<p>如果想要脚本每次输入一个序号后就自动退出，则需要再次更改脚本如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PS3=&quot;Please select a number: &quot;</span><br><span class="line">echo &quot;Please chose a number, 1: run w, 2: run top, 3: run free, 4: quit&quot;</span><br><span class="line">echo</span><br><span class="line">select command in w top free quit</span><br><span class="line">do</span><br><span class="line">    case $command in</span><br><span class="line">    w)</span><br><span class="line">        w;exit</span><br><span class="line">        ;;</span><br><span class="line">    top)</span><br><span class="line">        top;exit</span><br><span class="line">        ;;</span><br><span class="line">    free)</span><br><span class="line">        free;exit</span><br><span class="line">        ;;</span><br><span class="line">    quit)</span><br><span class="line">        exit</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo &quot;Please input a number:(1-4).&quot;;exit</span><br><span class="line">    esac</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/2.1-2.2 系统目录结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux入门笔记/2.1-2.2 系统目录结构/" itemprop="url">3.1 - 3.3 用户文件及管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          3.1 用户配置文件和密码配置文件1. /etc/passwd 文件解释1234567891011[root@zhouqunic-01 ~]# cat /etc/passwd | headroot:x:0:0:root:/root:/bin/bashbin:x:1:1:bin:/bin:/sbin/
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/2.1-2.2 系统目录结构/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1337,415 +986,18 @@
       
         
           
-            <p>##20.16/20.17 shell中的函数、数组</p>
-<p>函数就是把一段代码整理到了一个小单元中，并给这个小单元起一个名字，当用到这段代码时直接调用这个小单元的名字即可。</p>
-<p>###格式:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function f_name() &#123;                      </span><br><span class="line">                 command            </span><br><span class="line"> &#125;</span><br><span class="line">#单词“function”可以省略，直接写函数的名字；函数必须放在脚本的最前面；调用函数的方法，是直接写函数名。</span><br></pre></td></tr></table></figure>
-
-<p>###示例1 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# cd /shell/</span><br><span class="line">#!/bin/bash</span><br><span class="line">input() &#123;</span><br><span class="line">    echo &quot;The first parameter is $1&quot;</span><br><span class="line">    echo &quot;The second parameter is $2&quot;</span><br><span class="line">    echo &quot;The third parameter is  $3&quot;</span><br><span class="line">    echo &quot;The number of parameter is $#&quot;</span><br><span class="line">    echo &quot;The script&apos;s name is $0&quot;</span><br><span class="line">#定义函数</span><br><span class="line">&#125;</span><br><span class="line">input    a b c asd  sdg</span><br><span class="line">#引用函数</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh func.sh</span><br><span class="line">The first parameter is a</span><br><span class="line">The second parameter is b</span><br><span class="line">The third parameter is  c</span><br><span class="line">The number of parameter is 5</span><br><span class="line">The script&apos;s name is func.sh</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">sum() &#123;</span><br><span class="line">    s=$[$1+$2]</span><br><span class="line">    echo $s</span><br><span class="line">&#125;</span><br><span class="line">sum 1 2</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh func2.sh</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例3"><a href="#示例3" class="headerlink" title="示例3"></a>示例3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">ip() &#123;</span><br><span class="line">    ifconfig|grep -A1 &quot;$e: &quot;|tail -1|awk &apos;&#123;print $2&#125;&apos;</span><br><span class="line">&#125;</span><br><span class="line">read -p &quot;Please input the eth name: &quot; e</span><br><span class="line">myip=`ip $e`</span><br><span class="line">echo &quot;$e address is $myip&quot;</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh func3.sh </span><br><span class="line">Please input the eth name: eth0</span><br><span class="line">eth0 address is 172.18.192.237</span><br><span class="line"></span><br><span class="line">#知识点</span><br><span class="line">#grep -A1 keyword filename  找出filename中带有keyword的行，输出中除显示该行外，还显示之后的一行(After 1)</span><br><span class="line">#grep -B1 keyword filename  找出filename中带有keyword的行，输出中除显示该行外，还显示之前的一行(Before 1)</span><br><span class="line">#grep -1 keyword filename     找出filename中带有keyword的行，输出中除显示该行外，还显示之前的一行(After 1)和显示之后的一行(After 1）</span><br><span class="line">#awk &apos;&#123;pattern + action&#125;&apos; &#123;filenames&#125;</span><br><span class="line">#awk [-F  field-separator]  &apos;commands&apos;  input-file(s)</span><br><span class="line">#cat /etc/passwd |awk  -F &apos;:&apos;  &apos;&#123;print $1&quot;\t&quot;$7&#125;&apos;  </span><br><span class="line">#加-F &apos;.&apos; 是以.为分隔符，不加默认以空格或者tab为分隔符，$1为被分割的第一个域，$0为全部域，\t是tab键</span><br><span class="line">root    /bin/bash</span><br><span class="line">daemon  /bin/sh</span><br><span class="line">bin    /bin/sh</span><br><span class="line">sys    /bin/sh</span><br><span class="line">#cat /etc/passwd |awk  -F &apos;:&apos;  &apos;BEGIN &#123;print &quot;name,shell&quot;&#125;  &#123;print $1&quot;,&quot;$7&#125; END &#123;print &quot;blue,/bin/nosh&quot;&#125;&apos;</span><br><span class="line">name,shell</span><br><span class="line">root,/bin/bash</span><br><span class="line">daemon,/bin/sh</span><br><span class="line">bin,/bin/sh</span><br><span class="line">sys,/bin/sh</span><br><span class="line">....</span><br><span class="line">blue,/bin/nosh</span><br></pre></td></tr></table></figure>
-
-<p>###改进例子3<br>加上2个判断，判定输入的是不是系统里面的网卡；判定如果输入的是系统里的网卡，那么到底有没有ip？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">这个细节错了，需要重新改进</span><br><span class="line">#!/bin/bash</span><br><span class="line">while</span><br><span class="line">    read -p &quot;Please input the eth name: &quot; e</span><br><span class="line">    if  [ -z  ifconfig|grep -w &quot;$e&quot; ]</span><br><span class="line">    then</span><br><span class="line">         echo &quot;The eth you typed is none, please type a right one&quot;</span><br><span class="line">         continue</span><br><span class="line">             if  [ -z ifconfig|grep -A1 &quot;$e: &quot;|tail -1|awk &apos;&#123;print $2&#125;&apos; ]</span><br><span class="line">             then </span><br><span class="line">                     echo &quot;The eth has no ip&quot; </span><br><span class="line">             fi</span><br><span class="line">    else</span><br><span class="line">           break           </span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line">ip() &#123;</span><br><span class="line">    ifconfig|grep -A1 &quot;$e: &quot;|tail -1|awk &apos;&#123;print $2&#125;&apos;</span><br><span class="line">&#125;</span><br><span class="line">myip=`ip $e`</span><br><span class="line">echo &quot;$e address is $myip&quot;</span><br></pre></td></tr></table></figure>
-
-<p>##20.18 shell中的数组</p>
-<p>平时工作中，很少用到过数组，到那时这个概念还是要弄明白。</p>
-<p>###定义数组 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host shell]# vim shuzu.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">a=(1 2 3 4 5)</span><br><span class="line">echo $a</span><br><span class="line">echo $&#123;#a[@]&#125; </span><br><span class="line">#获取数组的元素个数 </span><br><span class="line">echo $&#123;a[2]&#125; </span><br><span class="line">#读取第三个元素，数组从0开始，a[0]是第一个元素</span><br><span class="line">echo $&#123;a[*]&#125; </span><br><span class="line">#等同于 $&#123;a[@]&#125;  显示整个数组的元素</span><br><span class="line"></span><br><span class="line">[root@host shell]# sh shuzu.sh </span><br><span class="line">1</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">1 2 3 4 5</span><br></pre></td></tr></table></figure>
-
-<p>###数组赋值<br>直接通过  <code>数组名[下标]</code> 就可以对其进行引用赋值，如果下标不存在，那么自动添加新一个数组元素进去。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@host shell]# vim shuzu.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">a=(1 2 3 4 5)</span><br><span class="line">echo $a</span><br><span class="line">echo $&#123;#a[@]&#125;</span><br><span class="line">echo $&#123;a[2]&#125;</span><br><span class="line">echo $&#123;a[*]&#125;</span><br><span class="line"></span><br><span class="line">a[1]=100</span><br><span class="line">echo $&#123;a[@]&#125;</span><br><span class="line"></span><br><span class="line">a[5]=100</span><br><span class="line">echo $&#123;a[@]&#125; </span><br><span class="line"></span><br><span class="line">[root@host shell]# sh shuzu.sh </span><br><span class="line">1</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">1 2 3 4 5</span><br><span class="line">1 100 3 4 5</span><br><span class="line">1 100 3 4 5 100</span><br></pre></td></tr></table></figure>
-
-<p>###数组的删除<br>uset a; unset a[1]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@host shell]# vim shuzudelete.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">a=(1 2 3 4 5)</span><br><span class="line">unset a</span><br><span class="line">echo $&#123;a[*]&#125; </span><br><span class="line">a=(1 2 3 4 5)</span><br><span class="line">unset a[1]</span><br><span class="line">echo $&#123;a[*]&#125; </span><br><span class="line">echo $&#123;#a[*]&#125;  </span><br><span class="line"></span><br><span class="line">[root@host shell]# sh shuzudelete.sh </span><br><span class="line"></span><br><span class="line">1 3 4 5</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
-
-<p>###数组的分片.<br>在某些特殊的复杂的情况下，会运用到</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># a=(`seq 1 5`)</span><br><span class="line"># echo $&#123;a[@]:0:3&#125;</span><br><span class="line">1 2 3</span><br><span class="line"></span><br><span class="line"># echo $&#123;a[@]:1:4&#125;</span><br><span class="line">2 3 4 5</span><br></pre></td></tr></table></figure>
-
-<p>###数组替换，可以echo替换，也可以直接赋值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># a=(1 2 3 4 5)</span><br><span class="line">#echo $&#123;a[@/3/100]&#125;</span><br><span class="line">1 2 100 4 5</span><br><span class="line"></span><br><span class="line">#echo $&#123;a[@]&#125;</span><br><span class="line">1 2 3 4 5</span><br><span class="line"></span><br><span class="line">#a=($&#123;a[@]/3/100&#125;)</span><br><span class="line">#echo $&#123;a[@]&#125;</span><br><span class="line">1 2 100 4 5</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/20.5 - 20.9 shell脚本中的if逻辑判断、文件目录属性判断、if特殊用法、case判断/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhouqun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joking的Linux世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux入门笔记/20.5 - 20.9 shell脚本中的if逻辑判断、文件目录属性判断、if特殊用法、case判断/" itemprop="url">20.5 - 20.9 shell脚本中的if逻辑判断、文件目录属性判断、if特殊用法、case判断</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">linux入门笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##20.5 shell脚本中的if逻辑判断<br>Shell脚本中，充满着各种逻辑判断，是脚本中必备的。</p>
-<p>###逻辑判断表达式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-gt (&gt;);    大于    great than</span><br><span class="line">-lt(&lt;);      小于     less than</span><br><span class="line">-ge(&gt;=);  大于或等于   </span><br><span class="line">-le(&lt;=);   小于或等于</span><br><span class="line">-eq(==);  等于     equal</span><br><span class="line">-ne(!=)    不等于  not equa</span><br><span class="line">- - -</span><br><span class="line"></span><br><span class="line">例如</span><br><span class="line">if [ $a -gt $b ]; </span><br><span class="line">if [ $a -lt 5 ]; </span><br><span class="line">if [ $b -eq 10 ]等</span><br></pre></td></tr></table></figure>
-
-<p>###if逻辑判断格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">格式1：if 条件 ; then 语句; fi</span><br><span class="line">格式2：if 条件; then 语句; else 语句; fi</span><br><span class="line">格式3：if …; then … ;elif …; then …; else …; fi</span><br><span class="line">- - -</span><br><span class="line"></span><br><span class="line">可以使用 &amp;&amp; || 结合多个条件</span><br><span class="line">条件A&amp;&amp;条件B：A并且B</span><br><span class="line">条件A||条件B：A或者B</span><br><span class="line">if [ $a -gt 5 ] &amp;&amp; [ $a -lt 10 ]; then</span><br><span class="line">if [ $b -gt 5 ] || [ $b -lt 3 ]; then</span><br></pre></td></tr></table></figure>
-
-<p>###if逻辑判断例子<br>格式1：if 条件 ; then 语句; fi</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">a=5</span><br><span class="line">if [ $a -gt 3 ]</span><br><span class="line">#注意[]里面有大量空格</span><br><span class="line">then</span><br><span class="line">       echo &quot;ok&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-<p>格式2：if 条件; then 语句; else 语句; fi</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">a=5</span><br><span class="line">if [ $a -gt 3 ]</span><br><span class="line">then</span><br><span class="line">    echo &quot;ok&quot;</span><br><span class="line">else</span><br><span class="line">    echo &quot;nook&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-<p>格式3：if …; then … ;elif …; then …; else …; fi</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">a=3</span><br><span class="line">if [ $a -gt 4 ]</span><br><span class="line">then</span><br><span class="line">    echo &quot;&gt;1&quot;</span><br><span class="line">elif [ $a -gt 6 ]</span><br><span class="line">#注意elif可以嵌套多次的</span><br><span class="line">then</span><br><span class="line">    echo &quot;&lt;6 &amp;&amp; &gt;1&quot;</span><br><span class="line">else</span><br><span class="line">    echo &quot;nook&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-<p>##20.6 文件目录属性判断<br>在shell中通常要和文件或者目录打交道，那么对于他们的属性判断十分重要。</p>
-<p>###文件目录属性判断</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[ -f file ]判断是否是普通文件，且存在     [ -f /usr/bin/grep ]</span><br><span class="line">[ -d file ] 判断是否是目录，且存在   [ -d /tmp/mydir ]</span><br><span class="line">[ -e file ] 判断文件或目录是否存在   [ -e /var/log/syslog ]</span><br><span class="line">[ -r file ] 判断文件是否可读   [ -r /var/log/syslog ]</span><br><span class="line">[ -w file ] 判断文件是否可写  [ -w /var/mytmp.txt ]</span><br><span class="line">[ -x file ] 判断文件是否可执行  [ -x /usr/bin/grep ]</span><br></pre></td></tr></table></figure>
-
-<p>###例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">f=&quot;/tmp/zhouquniclinux&quot;</span><br><span class="line">if [ -e $f ]</span><br><span class="line">then </span><br><span class="line">       echo $f exist</span><br><span class="line">else</span><br><span class="line">      touch $f</span><br></pre></td></tr></table></figure>
-
-<p>上例可以简化为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">[ -e $f ] ||  touch $f</span><br><span class="line">[ ! -e $f ] || echo $f exist   </span><br><span class="line"># || 当前面的执行成功后再执行后面的命令</span><br><span class="line"># 如果是&amp;&amp;，则不管前面的命令是否执行成功，都会执行后面的命令</span><br><span class="line"># ! 表示取反</span><br></pre></td></tr></table></figure>
-
-<p>##20.7 if特殊用法</p>
-<h3 id="if特殊用法"><a href="#if特殊用法" class="headerlink" title="if特殊用法"></a>if特殊用法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if [ -z &quot;$a&quot; ]  这个表示当变量a的值为空时会怎么样</span><br><span class="line">if [ -n &quot;$a&quot; ]  表示当变量a的值不为空</span><br><span class="line">if grep -q &apos;123&apos; 1.txt; then  表示如果1.txt中含有&apos;123&apos;的行时会怎么样</span><br><span class="line">if [ ! -e file ]; then 表示文件不存在时会怎么样</span><br><span class="line">if (($a&lt;1)); then …等同于 if [ $a -lt 1 ]; then… </span><br><span class="line">[ ] 中不能使用&lt;,&gt;,==,!=,&gt;=,&lt;=这样的符号</span><br></pre></td></tr></table></figure>
-
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>if [ -z “$a” ]  这个表示当变量a的值为空时会怎么样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">n=&apos;wc -l /tmp/lalala&apos;</span><br><span class="line">if [ $n -lt 100 ]</span><br><span class="line">then</span><br><span class="line">       echo &quot;line num less than 100&quot;</span><br><span class="line">fi</span><br><span class="line"># 如果/tmp/lalala文件为空，或者被删除的话，脚本就会运行出错，出现bug</span><br><span class="line"></span><br><span class="line">应该加上一个判断条件</span><br><span class="line">#!/bin/bash</span><br><span class="line">n=&apos;wc -l /tmp/lalala&apos;</span><br><span class="line">if [ $n -z &quot;$n&quot; ]</span><br><span class="line"># [ $n -z &quot;$n&quot; ]  = [ ! $n -n &quot;$n&quot; ]，-z 和 -n 是一对相反的条件</span><br><span class="line">then</span><br><span class="line">       echo &quot;error&quot;</span><br><span class="line">       exit</span><br><span class="line">elif [ $n -lt 100 ]</span><br><span class="line">then</span><br><span class="line">        echo &quot;line num less than 100&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line">#!/bin/bash</span><br><span class="line">if [ ! -f /tmp/lalala ]</span><br><span class="line">then</span><br><span class="line">       echo &quot;/tmp/lalala is not exist&quot;</span><br><span class="line">       exit</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">n=&apos;wc -l /tmp/lalala&apos;</span><br><span class="line">if [ $n -lt 100 ]</span><br><span class="line">then</span><br><span class="line">        echo &quot;line num less than 100&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-<p>if [ -n “$a” ]  表示当变量a的值不为空，也可以判断文件，判断文件时可以不加双引号</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">if [ -n 01.sh ]; then echo &quot;ok&quot;; fi</span><br><span class="line"></span><br><span class="line">另外</span><br><span class="line">#!/bin/bash</span><br><span class="line">if [ -n &quot;$b&quot; ]</span><br><span class="line">then  </span><br><span class="line">       echo $b</span><br><span class="line">else</span><br><span class="line">        echo &quot;b is null&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-<p>一条命令也可以作为判断条件。判断user1用户是否存在</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if grep -wq &apos;user1&apos;  /etc/passwd; then echo &quot;user1 is exist&quot;; else echo &quot;user1 is not exist&quot;; fi</span><br><span class="line">#grep -w 显示过滤信息，加-q可以不显示过滤信息</span><br></pre></td></tr></table></figure>
-
-<p>##20.8/20.9 case判断</p>
-<p>###case判断格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">case 变量名 in</span><br><span class="line">    value1)</span><br><span class="line">      commond1</span><br><span class="line">      ;;</span><br><span class="line">    value2)</span><br><span class="line">      commod2</span><br><span class="line">      ;;</span><br><span class="line">    value3)</span><br><span class="line">      commod3</span><br><span class="line">      ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
-
-<p>###在case中，可以在条件中使用“|”，表示或的意思，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2|3)</span><br><span class="line">    commond</span><br><span class="line">    ;;</span><br></pre></td></tr></table></figure>
-
-<p>###例子: 输入一个同学的分数，判断成绩是否及格，优秀。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">[root@host shell]# vim case1.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">read -p &quot;Please input a number: &quot; n</span><br><span class="line"># read -p 是读取用户的输入数据，定义到变量里面</span><br><span class="line">if [ -z &quot;$n&quot; ]</span><br><span class="line">then</span><br><span class="line">    echo &quot;Please input a number.&quot;</span><br><span class="line">    exit 1</span><br><span class="line">#“exit 1”表示非正常运行导致退出程序</span><br><span class="line">#退出之后，echo $?会返回1值，表示程序退出是因为出错了</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">n1=`echo $n|sed &apos;s/[0-9]//g&apos;`</span><br><span class="line">#判断用户输入的字符是否为纯数字</span><br><span class="line">#如果是数字，则将其替换为空，赋值给$n1</span><br><span class="line">if [ -n &quot;$n1&quot; ]</span><br><span class="line">then</span><br><span class="line">echo &quot;Please input a number.&quot;</span><br><span class="line">exit 1</span><br><span class="line">#判断$n1不为空时（即$n不是纯数字）再次提示用户输入数字并退出</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">#如果用户输入的是纯数字则执行以下命令：</span><br><span class="line">if [ $n -lt 60 ] &amp;&amp; [ $n -ge 0 ]</span><br><span class="line">then</span><br><span class="line">    tag=1</span><br><span class="line">elif [ $n -ge 60 ] &amp;&amp; [ $n -lt 80 ]</span><br><span class="line">then</span><br><span class="line">    tag=2</span><br><span class="line">elif [ $n -ge 80 ]  &amp;&amp; [ $n -lt 90 ]</span><br><span class="line">then</span><br><span class="line">    tag=3</span><br><span class="line">elif [ $n -ge 90 ] &amp;&amp; [ $n -le 100 ]</span><br><span class="line">then</span><br><span class="line">    tag=4</span><br><span class="line">else</span><br><span class="line">    tag=0</span><br><span class="line">fi</span><br><span class="line">#tag的作用是为判断条件设定标签，方便后面引用</span><br><span class="line">case $tag in</span><br><span class="line">    1)</span><br><span class="line">        echo &quot;not ok&quot;</span><br><span class="line">        ;;</span><br><span class="line">    2)</span><br><span class="line">        echo &quot;ok&quot;</span><br><span class="line">        ;;</span><br><span class="line">    3)</span><br><span class="line">        echo &quot;ook&quot;</span><br><span class="line">        ;;</span><br><span class="line">    4)</span><br><span class="line">        echo &quot;oook&quot;</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo &quot;The number range is 0-100.&quot;</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
-
-<p>###运行结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@host shell]# sh case1.sh</span><br><span class="line">Please input a number: 45</span><br><span class="line">not ok</span><br><span class="line">[root@host shell]# sh case1.sh</span><br><span class="line">Please input a number: 66</span><br><span class="line">ok</span><br><span class="line">[root@host shell]# sh case1.sh</span><br><span class="line">Please input a number: 80</span><br><span class="line">ook</span><br><span class="line">[root@host shell]# sh case1.sh</span><br><span class="line">Please input a number: 99</span><br><span class="line">oook</span><br><span class="line">[root@host shell]# sh case1.sh</span><br><span class="line">Please input a number: xxx</span><br><span class="line">Please input a number.</span><br><span class="line">[root@host shell]# echo $?</span><br><span class="line">1</span><br><span class="line">[root@host shell]# sh case1.sh</span><br><span class="line">Please input a number: 120</span><br><span class="line">The number range is 0-100.</span><br><span class="line">[root@host shell]# echo $?</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/20.19-20.22 告警系统需求分析、告警系统主脚本、配置文件、监控项目/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhouqun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joking的Linux世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux入门笔记/20.19-20.22 告警系统需求分析、告警系统主脚本、配置文件、监控项目/" itemprop="url">20.19-20.22 告警系统需求分析、告警系统主脚本、配置文件、监控项目</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">linux入门笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##20.19 告警系统需求分析</p>
-<ul>
-<li><p>需求：使用shell定制各种个性化告警工具，但需要统一化管理、规范化管理。</p>
-</li>
-<li><p>思路：指定一个脚本包，包含主程序、子程序、配置文件、邮件引擎、输出日志等。</p>
-</li>
-<li><p>主程序：作为整个脚本的入口，是整个系统的命脉。</p>
-</li>
-<li><p>配置文件：是一个控制中心，用它来开关各个子程序，指定各个相关联的日志文件。</p>
-</li>
-<li><p>子程序：这个才是真正的监控脚本，用来监控各个指标。</p>
-</li>
-<li><p>邮件引擎：是由一个python程序来实现，它可以定义发邮件的服务器、发邮件人以及发件人密码</p>
-</li>
-<li><p>输出日志：整个监控系统要有日志输出。</p>
-</li>
-<li><p>要求：我们的机器角色多种多样，但是所有机器上都要部署同样的监控系统，也就说所有机器不管什么角色，整个程序框架都是一致的，不同的地方在于根据不同的角色，定制不同的配置文件。</p>
-</li>
-<li><p>程序架构： </p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin下是主程序</span><br><span class="line">conf下是配置文件</span><br><span class="line">shares下是各个监控脚本</span><br><span class="line">mail下是邮件引擎</span><br><span class="line">log下是日志。</span><br></pre></td></tr></table></figure>
-
-<p>##20.20 告警系统主脚本</p>
-<blockquote>
-<p>主角本就是整个告警系统的入口，在使用中，我们直接执行它就可以了。</p>
-</blockquote>
-<p>###定义主角本的各个目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">以后工作中，我们就默认把脚本都放到/usr/local/sbin目录下，这样我们就可以轻松找到我们想要的脚本</span><br><span class="line">[root@host ~]# cd /usr/local/sbin     </span><br><span class="line"></span><br><span class="line">创建主目录和子目录</span><br><span class="line">[root@host sbin]# mkdir mon</span><br><span class="line">[root@host sbin]# cd mon</span><br><span class="line">[root@host mon]# mkdir mail log bin conf shares</span><br><span class="line">[root@host mon]# ls</span><br><span class="line">bin  conf  log  mail  shares</span><br><span class="line"></span><br><span class="line">把主脚本放大bin目录下</span><br><span class="line">[root@host mon]# cd bin</span><br></pre></td></tr></table></figure>
-
-<p>###创建主脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@host bin]# vim main.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line"># 是否发送邮件的开关</span><br><span class="line">export send=1</span><br><span class="line"># 过滤ip地址，关键词eth0可以根据主机网卡情况修改</span><br><span class="line">export addr=`/sbin/ifconfig |grep -A1 &quot;eth0: &quot;|awk &apos;/inet/ &#123;print $2&#125;&apos;`</span><br><span class="line">dir=`pwd`</span><br><span class="line"># 只需要最后一级目录名</span><br><span class="line">last_dir=`echo $dir|awk -F&apos;/&apos; &apos;&#123;print $NF&#125;&apos;`</span><br><span class="line"># 下面的判断目的是，保证执行脚本的时候，我们在bin目录里，不然监控脚本、邮件和日志很有可能找不到</span><br><span class="line">if [ $last_dir == &quot;bin&quot; ] || [ $last_dir == &quot;bin/&quot; ]; then</span><br><span class="line">    conf_file=&quot;../conf/mon.conf&quot;</span><br><span class="line">else</span><br><span class="line">    echo &quot;you shoud cd bin dir&quot;</span><br><span class="line">    exit</span><br><span class="line">fi</span><br><span class="line">exec 1&gt;&gt;../log/mon.log 2&gt;&gt;../log/err.log</span><br><span class="line">echo &quot;`date +&quot;%F %T&quot;` load average&quot;</span><br><span class="line">/bin/bash ../shares/load.sh</span><br><span class="line">#先检查配置文件中是否需要监控502</span><br><span class="line">if grep -q &apos;to_mon_502=1&apos; $conf_file; then</span><br><span class="line">    export log=`grep &apos;logfile=&apos; $conf_file |awk -F &apos;=&apos; &apos;&#123;print $2&#125;&apos; |sed &apos;s/ //g&apos;`</span><br><span class="line">    /bin/bash  ../shares/502.sh</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-<p>##20.21 告警系统配置文件</p>
-<p>###配置文件的意义<br>主要是为了配合脚本的规范化，通过划分不同功能的文件，来方便查找、更改和控制脚本的各种参数。<br>我们可以在配置文件中统一定义一些开关参数、日志路径、用户名、密码、IP、端口等信息，主要是脚本中需要调用到的一些资源信息。</p>
-<p>###创建配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@host bin]# cd /usr/local/sbin/mon</span><br><span class="line"></span><br><span class="line">[root@host mon]# vim conf/mon.conf</span><br><span class="line">## to config the options if to monitor</span><br><span class="line">## 定义mysql的服务器地址、端口以及user、password</span><br><span class="line">to_mon_cdb=0  </span><br><span class="line">##是否监控数据库，0 or 1, 默认是0，如果是1则监控，为0不监控</span><br><span class="line">db_ip=10.20.3.13</span><br><span class="line">db_port=3315</span><br><span class="line">db_user=username</span><br><span class="line">db_pass=passwd</span><br><span class="line">## 监控httpd  如果是1则监控，为0不监控</span><br><span class="line">to_mon_httpd=0</span><br><span class="line">## 监控php 如果是1则监控，为0不监控</span><br><span class="line">to_mon_php_socket=0</span><br><span class="line">## 监控http_code_502  需要定义访问日志的路径</span><br><span class="line">to_mon_502=1</span><br><span class="line">logfile=/data/log/xxx.xxx.com/access.log</span><br><span class="line">#定义日子文件路径</span><br><span class="line">## 监控request_count  定义日志路径以及域名</span><br><span class="line">to_mon_request_count=0</span><br><span class="line">req_log=/data/log/www.discuz.net/access.log</span><br><span class="line">domainname=www.discuz.net</span><br></pre></td></tr></table></figure>
-
-<p>##20.22 告警系统监控项目</p>
-<p>###监控系统负载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@host mon]# vim shares/load.sh</span><br><span class="line">#! /bin/bash</span><br><span class="line">##Writen by yuntai##</span><br><span class="line">load=`uptime |awk -F &apos;average:&apos; &apos;&#123;print $2&#125;&apos;|cut -d&apos;,&apos; -f1|sed &apos;s/ //g&apos; |cut -d. -f1`</span><br><span class="line">#获取负载值</span><br><span class="line">if [ $load -gt 10 ] &amp;&amp; [ $send -eq &quot;1&quot; ]</span><br><span class="line">#判断是否超负载，同时判断是否开启负载监控项</span><br><span class="line">then</span><br><span class="line">    echo &quot;$addr `date +%T` load is $load&quot; &gt;../log/load.tmp</span><br><span class="line">    /bin/bash ../mail/mail.sh yuntai_mail@163.com &quot;$addr\_load:$load&quot; `cat ../log/load.tmp`</span><br><span class="line">#超出设定的负载值后，发送邮件</span><br><span class="line">fi</span><br><span class="line">echo &quot;`date +%T` load is $load&quot;</span><br><span class="line">#日志文件（定义在系统配置脚本中）</span><br></pre></td></tr></table></figure>
-
-<p>###监控web服务器502错误</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@host mon]# cd shares/</span><br><span class="line">[root@host shares]# vim 502.sh</span><br><span class="line">#! /bin/bash</span><br><span class="line">d=`date -d &quot;-1 min&quot; +%H:%M`</span><br><span class="line">#因为监控主脚本一分钟执行一次，所以监控的内容为系统一分钟之前的状态</span><br><span class="line">c_502=`grep :$d:  $log  |grep &apos; 502 &apos;|wc -l`</span><br><span class="line">if [ $c_502 -gt 10 ] &amp;&amp; [ $send == 1 ]; then</span><br><span class="line">    echo &quot;$addr $d 502 count is $c_502&quot;&gt;../log/502.tmp</span><br><span class="line">    /bin/bash ../mail/mail.sh $addr\_502 $c_502  ../log/502.tmp</span><br><span class="line">fi</span><br><span class="line">echo &quot;`date +%T` 502 $c_502&quot;</span><br></pre></td></tr></table></figure>
-
-<p>###监控磁盘使用率</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@host shares]# vim disk.sh</span><br><span class="line">#! /bin/bash</span><br><span class="line">##Writen by yuntai##</span><br><span class="line">rm -f ../log/disk.tmp</span><br><span class="line">for r in `df -h |awk -F &apos;[ %]+&apos; &apos;&#123;print $5&#125;&apos;|grep -v Use`</span><br><span class="line">##awk -F &apos;[ %]+&apos;  以一个或多个“[ %]”空格和百分号作为分隔符</span><br><span class="line">##即，awk可以一次指定多种分隔符（同时生效）</span><br><span class="line">do</span><br><span class="line">    if [ $r -gt 90 ] &amp;&amp; [ $send -eq &quot;1&quot; ]</span><br><span class="line">then</span><br><span class="line">    echo &quot;$addr `date +%T` disk useage is $r&quot; &gt;&gt;../log/disk.tmp</span><br><span class="line">fi</span><br><span class="line">if [ -f ../log/disk.tmp ]</span><br><span class="line">#判断该文件是否存在</span><br><span class="line">then</span><br><span class="line">    df -h &gt;&gt; ../log/disk.tmp</span><br><span class="line">    /bin/bash ../mail/mail.sh $addr\_disk $r ../log/disk.tmp</span><br><span class="line">    echo &quot;`date +%T` disk useage is nook&quot;</span><br><span class="line">else</span><br><span class="line">    echo &quot;`date +%T` disk useage is ok&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-          
+          ##20.16/20.17 shell中的函数、数组
+函数就是把一段代码整理到了一个小单元中，并给这个小单元起一个名字，当用到这段代码时直接调用这个小单元的名字即可。
+###格式:
+1234function f_name() &#123;                             
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/20.16-20.18 shell中的函数、数组/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1885,14 +1137,477 @@
       
         
           
-            <p>[toc]</p>
-<p>##20.23/20.24/20.25 告警系统邮件引擎</p>
-<p>mail.sh内容 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">  log=$1</span><br><span class="line">t_s=`date +%s`</span><br><span class="line">t_s2=`date -d &quot;2 hours ago&quot; +%s`</span><br><span class="line">if [ ! -f /tmp/$log ]</span><br><span class="line">then</span><br><span class="line">    echo $t_s2 &gt; /tmp/$log</span><br><span class="line">fi</span><br><span class="line">t_s2=`tail -1 /tmp/$log|awk &apos;&#123;print $1&#125;&apos;`</span><br><span class="line">echo $t_s&gt;&gt;/tmp/$log</span><br><span class="line">v=$[$t_s-$t_s2]</span><br><span class="line">echo $v</span><br><span class="line">if [ $v -gt 3600 ]</span><br><span class="line">then</span><br><span class="line">    ./mail.py  $1  $2  $3</span><br><span class="line">    echo &quot;0&quot; &gt; /tmp/$log.txt</span><br><span class="line">else</span><br><span class="line">    if [ ! -f /tmp/$log.txt ]</span><br><span class="line">    then</span><br><span class="line">        echo &quot;0&quot; &gt; /tmp/$log.txt</span><br><span class="line">    fi</span><br><span class="line">    nu=`cat /tmp/$log.txt`</span><br><span class="line">    nu2=$[$nu+1]</span><br><span class="line">    echo $nu2&gt;/tmp/$log.txt</span><br><span class="line">    if [ $nu2 -gt 10 ]</span><br><span class="line">    then</span><br><span class="line">        ./mail.py  $1 &quot;trouble continue 10 min $2&quot; &quot;$3&quot;</span><br><span class="line">        echo &quot;0&quot; &gt; /tmp/$log.txt</span><br><span class="line">    fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+          [toc]
+##20.23/20.24/20.25 告警系统邮件引擎
+mail.sh内容 
+1234567891011121314151617181920212223242526272829  log=$1t_s=`date +%s`t_s2=`date -d &quot;2 hours ago&q
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/20.23-20.26 告警系统邮件引擎、运行告警系统/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
 
-<p>##20.26 运行告警系统<br>略</p>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/20.10-20.15 for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux入门笔记/20.10-20.15 for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本/" itemprop="url">20.10-20.15 for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          ##20.10 for循环
+###语法：
+1for 变量名 in 条件; do …; done
+
+###案例1计算1到100的和
+1234567891011121314151617181920212223242526272829303132#!/bin/bashsum=0for i in `seq 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/20.10-20.15 for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/20.19-20.22 告警系统需求分析、告警系统主脚本、配置文件、监控项目/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux入门笔记/20.19-20.22 告警系统需求分析、告警系统主脚本、配置文件、监控项目/" itemprop="url">20.19-20.22 告警系统需求分析、告警系统主脚本、配置文件、监控项目</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          ##20.19 告警系统需求分析
+
+需求：使用shell定制各种个性化告警工具，但需要统一化管理、规范化管理。
+
+思路：指定一个脚本包，包含主程序、子程序、配置文件、邮件引擎、输出日志等。
+
+主程序：作为整个脚本的入口，是整个系统的命脉。
+
+配置文件：是一个控制中心，用它来开关各个子程序，指定各个相
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/20.19-20.22 告警系统需求分析、告警系统主脚本、配置文件、监控项目/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/20.5 - 20.9 shell脚本中的if逻辑判断、文件目录属性判断、if特殊用法、case判断/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux入门笔记/20.5 - 20.9 shell脚本中的if逻辑判断、文件目录属性判断、if特殊用法、case判断/" itemprop="url">20.5 - 20.9 shell脚本中的if逻辑判断、文件目录属性判断、if特殊用法、case判断</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          ##20.5 shell脚本中的if逻辑判断Shell脚本中，充满着各种逻辑判断，是脚本中必备的。
+###逻辑判断表达式：
+123456789101112-gt (&gt;);    大于    great than-lt(&lt;);      小于     less than-ge(&gt;=)
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/20.5 - 20.9 shell脚本中的if逻辑判断、文件目录属性判断、if特殊用法、case判断/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2032,28 +1747,16 @@
       
         
           
-            <h1 id="21-18-redis慢查询日志"><a href="#21-18-redis慢查询日志" class="headerlink" title="21.18 redis慢查询日志"></a>21.18 redis慢查询日志</h1><p>针对慢查询日志可以设置两个参数，一个是执行时长，单位是微妙，另一个是慢查询日志的长度。当一个新的命令被写入日志时，最老的一条会从命令日志队列被移除。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# vim /etc/redis.conf</span><br><span class="line">slowlog-log-slower-than 10000</span><br><span class="line">#单位：微秒</span><br><span class="line">slowlog-max-len 128</span><br><span class="line">#定义日志长度，表示最多存128条</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">列出所有慢查询日志：</span><br><span class="line">[root@yt-01 ~]# redis-cli</span><br><span class="line">127.0.0.1:6379&gt; slowlog get</span><br><span class="line">(empty list or set)</span><br><span class="line">列出两条慢查询日志：</span><br><span class="line">127.0.0.1:6379&gt; slowlog get 2</span><br><span class="line">(empty list or set)</span><br><span class="line">查看慢查询日志条数：</span><br><span class="line">127.0.0.1:6379&gt; slowlog len</span><br><span class="line">(integer) 0</span><br></pre></td></tr></table></figure>
-
-<h1 id="21-19-21-20-php安装redis扩展，redis存储php的session"><a href="#21-19-21-20-php安装redis扩展，redis存储php的session" class="headerlink" title="21.19-21.20 php安装redis扩展，redis存储php的session"></a>21.19-21.20 php安装redis扩展，redis存储php的session</h1><p>PHP和Redis通过模块相结合，使用前先查看PHP是否有Redis模块，如果没有，按如下方式安装并配置。</p>
-<h2 id="1-安装php-redis扩展模块"><a href="#1-安装php-redis扩展模块" class="headerlink" title="1 安装php-redis扩展模块"></a>1 安装php-redis扩展模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 src]# wget https://coding.net/u/aminglinux/p/yuanke_centos7/git/raw/master/21NOSQL/phpredis.zip</span><br><span class="line">[root@yt-01 src]# unzip phpredis.zip</span><br><span class="line">[root@yt-01 src]# cd phpredis-develop/</span><br><span class="line">[root@yt-01 phpredis-develop]# /usr/local/php/bin/phpize</span><br><span class="line">[root@yt-01 phpredis-develop]# ./configure --with-php-config=/usr/local/php/bin/php-config</span><br><span class="line">[root@yt-01 phpredis-develop]# make &amp;&amp; make install</span><br><span class="line">增加如下配置：</span><br><span class="line">[root@yt-01 phpredis-develop]# vim /usr/local/php/etc/php.ini</span><br><span class="line">extension=redis.so</span><br><span class="line">[root@yt-01 phpredis-develop]# /usr/local/php/bin/php -m</span><br><span class="line">redis</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-Redis和PHP连接"><a href="#2-Redis和PHP连接" class="headerlink" title="2 Redis和PHP连接"></a>2 Redis和PHP连接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">方法1：编辑php.ini</span><br><span class="line">[root@yt-01 www]# vim /usr/local/php/etc/php.ini</span><br><span class="line">session.save_handler = redis</span><br><span class="line">session.save_path = &quot;tcp://127.0.0.1:6379&quot;</span><br><span class="line">方法2：编辑pool文件：</span><br><span class="line">[root@yt-01 ~]# vim /usr/local/php-fpm/etc/php-fpm.d/www.conf</span><br><span class="line">php_value[session.save_handler] = redis</span><br><span class="line">php_value[session.save_path] = &quot;tcp://127.0.0.1:6379&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-测试"><a href="#3-测试" class="headerlink" title="3 测试"></a>3 测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 www]# pwd</span><br><span class="line">/data/wwwroot/111.com</span><br><span class="line">[root@yt-01 www]# ls</span><br><span class="line">index.php</span><br><span class="line">#1.php为测试文件</span><br><span class="line">[root@yt-01 www]# vim 1.php</span><br><span class="line">&lt;?php</span><br><span class="line">session_start();</span><br><span class="line">if (!isset($_SESSION[&apos;TEST&apos;])) &#123;</span><br><span class="line">$_SESSION[&apos;TEST&apos;] = time();</span><br><span class="line">&#125;</span><br><span class="line">$_SESSION[&apos;TEST3&apos;] = time();</span><br><span class="line">print $_SESSION[&apos;TEST&apos;];</span><br><span class="line">print &quot;&lt;br&gt;&lt;br&gt;&quot;;</span><br><span class="line">print $_SESSION[&apos;TEST3&apos;];</span><br><span class="line">print &quot;&lt;br&gt;&lt;br&gt;&quot;;</span><br><span class="line">print session_id();</span><br><span class="line">?&gt;</span><br><span class="line">[root@yt-01 www]# curl localhost/1.php</span><br><span class="line">1523162689&lt;br&gt;&lt;br&gt;1523162689&lt;br&gt;&lt;br&gt;0fp6g1hi1q6ktdoogfplvlpo91</span><br><span class="line">[root@yt-01 www]# redis-cli</span><br><span class="line">127.0.0.1:6379&gt; keys *</span><br><span class="line">10) &quot;PHPREDIS_SESSION:6rtu66hia6rjq9rpadstnsqb61&quot;</span><br><span class="line">11) &quot;PHPREDIS_SESSION:hdi4f5r122gg1n9sj5lllbqf42&quot;</span><br><span class="line">12) &quot;PHPREDIS_SESSION:8tf4q887ti8m11sknl5oto82m4&quot;</span><br><span class="line">13) &quot;PHPREDIS_SESSION:hc1h18jtkrvk3secno4nmk7km2&quot;</span><br></pre></td></tr></table></figure>
-
-<p>这样就配置完成了。</p>
-<p><strong>注意</strong>： 注： 如果是在集群架构中，需要使用predis扩展模块，扩展地址 <a href="https://github.com/nrk/predis" target="_blank" rel="noopener">https://github.com/nrk/predis</a> 。</p>
-<h1 id="21-21-redis主从配置"><a href="#21-21-redis主从配置" class="headerlink" title="21.21 redis主从配置"></a>21.21 redis主从配置</h1><p>为了节省资源，本实验在一台机器进行。即，在一台机器上启动两个端口，模拟两台机器。</p>
-<h2 id="1-redis主从搭建"><a href="#1-redis主从搭建" class="headerlink" title="1 redis主从搭建"></a>1 redis主从搭建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">准备</span><br><span class="line">还是之前的yt-01主机，环境是LAMP+redis</span><br><span class="line"></span><br><span class="line">复制redis配置文件</span><br><span class="line">[root@adailinux ~]# cp /etc/redis.conf /etc/redis2.conf</span><br><span class="line"></span><br><span class="line">配置redis从的配置文件</span><br><span class="line">[root@adailinux ~]# vim /etc/redis2.conf    //需要修改port,dir,pidfile,logfile</span><br><span class="line">port 6380   //因为是同一台服务器，2个进程，所以需要换一个端口</span><br><span class="line">pidfile /var/run/redis_6380.pid</span><br><span class="line">logfile &quot;/tmp/logs/redis2.log&quot;</span><br><span class="line">dir /data/redis2</span><br><span class="line"># slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br><span class="line">slaveof 127.0.0.1 6379        //添加这一行</span><br><span class="line">###指定主服务器IP和端口</span><br><span class="line"># masterauth passwd123</span><br><span class="line">###如果主服务器设定了密码，需要在从服务器上添加该参数</span><br><span class="line"></span><br><span class="line">创建redis从的库文件夹</span><br><span class="line">[root@adailinux ~]# mkdir /data/redis2</span><br><span class="line"></span><br><span class="line">启动Redis</span><br><span class="line">[root@adailinux ~]# redis-server /etc/redis.conf</span><br><span class="line">[root@adailinux ~]# redis-server /etc/redis2.conf </span><br><span class="line"></span><br><span class="line">[root@adailinux ~]# ps aux |grep redis</span><br><span class="line">root 2454 0.2 0.4 145244 2356 ? Ssl 17:18 0:00 redis-server 127.0.0.1:6379</span><br><span class="line">root 2459 0.3 0.4 145244 2332 ? Ssl 17:19 0:00 redis-server 127.0.0.1:6380</span><br><span class="line">[root@adailinux ~]# netstat -lntp |grep redis</span><br><span class="line">tcp 0 0 127.0.0.1:6379 0.0.0.0:* LISTEN 2454/redis-server 1</span><br><span class="line">tcp 0 0 127.0.0.1:6380 0.0.0.0:* LISTEN 2459/redis-server 1</span><br><span class="line">启动成功，redis主从搭建完毕！</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-查看slave上的数据"><a href="#2-查看slave上的数据" class="headerlink" title="2 查看slave上的数据"></a>2 查看slave上的数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@adailinux ~]# redis-cli -p 6380</span><br><span class="line">127.0.0.1:6380&gt; keys *</span><br><span class="line"> 1) &quot;list1&quot;</span><br><span class="line"> 2) &quot;hseta&quot;</span><br><span class="line"> 3) &quot;set1&quot;</span><br><span class="line"> 4) &quot;set3&quot;</span><br><span class="line"> 5) &quot;key2&quot;</span><br><span class="line"> 6) &quot;k1&quot;</span><br><span class="line"> 7) &quot;set4&quot;</span><br><span class="line"> 8) &quot;seta&quot;</span><br><span class="line"> 9) &quot;k2&quot;</span><br><span class="line">10) &quot;k3&quot;</span><br><span class="line">11) &quot;zseta&quot;</span><br><span class="line">12) &quot;setb&quot;</span><br><span class="line">13) &quot;hash1&quot;</span><br><span class="line">14) &quot;set5&quot;</span><br><span class="line">15) &quot;list2&quot;</span><br><span class="line">16) &quot;mykey&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-测试主从"><a href="#3-测试主从" class="headerlink" title="3 测试主从"></a>3 测试主从</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">在master上创建数据：</span><br><span class="line">[root@adailinux ~]# redis-cli -p 6379</span><br><span class="line">127.0.0.1:6379&gt; del key</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; select 1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379[1]&gt; set test 00001</span><br><span class="line">OK</span><br><span class="line">在slave上查看：</span><br><span class="line">[root@adailinux ~]# redis-cli -p 6380</span><br><span class="line">127.0.0.1:6380&gt; select 1</span><br><span class="line">127.0.0.1:6380[1]&gt; keys *</span><br><span class="line">1) &quot;test&quot;</span><br><span class="line">127.0.0.1:6380[1]&gt; get test</span><br><span class="line">&quot;00001&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意</strong>： Redis主从和mysql主从不一样，Redis主从不用事先同步数据，它会自动同步。因为master上设置有参数“slave-read-only yes”，即该slave为只读数据库！</p>
-
-          
+          21.18 redis慢查询日志针对慢查询日志可以设置两个参数，一个是执行时长，单位是微妙，另一个是慢查询日志的长度。当一个新的命令被写入日志时，最老的一条会从命令日志队列被移除。
+1234567891011121314151617[root@yt-01 ~]# vim /etc/redis.con
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/21.18-21.21 redis慢查询日志、php安装redis扩展、存储session、主从配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

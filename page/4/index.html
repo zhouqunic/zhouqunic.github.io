@@ -380,27 +380,16 @@
       
         
           
-            <h1 id="1-根"><a href="#1-根" class="headerlink" title="1. / - 根"></a>1. / - 根</h1><p>每一个文件和目录从根目录开始。<br>只有root用户具有该目录下的写权限。请注意，/root是root用户的主目录，这与/.不一样</p>
-<h1 id="2-bin-用户二进制文件"><a href="#2-bin-用户二进制文件" class="headerlink" title="2. /bin - 用户二进制文件"></a>2. /bin - 用户二进制文件</h1><p>包含二进制可执行文件。<br>在单用户模式下，你需要使用的常见Linux命令都位于此目录下。系统的所有用户使用的命令都设在这里。<br>例如：ps、ls、ping、grep、cp</p>
-<h1 id="3-boot-引导加载程序文件"><a href="#3-boot-引导加载程序文件" class="headerlink" title="3. /boot - 引导加载程序文件"></a>3. /boot - 引导加载程序文件</h1><p>包含引导加载程序相关的文件。<br>内核的initrd、vmlinux、grub文件位于/boot下。<br>例如：initrd.img-2.6.32-24-generic、vmlinuz-2.6.32-24-generic</p>
-<h1 id="4-dev-设备文件"><a href="#4-dev-设备文件" class="headerlink" title="4. /dev - 设备文件"></a>4. /dev - 设备文件</h1><p>包含设备文件。<br>这些包括终端设备、USB或连接到系统的任何设备。例如：/dev/tty1、/dev/usbmon0</p>
-<h1 id="5-etc-配置文件"><a href="#5-etc-配置文件" class="headerlink" title="5. /etc - 配置文件"></a>5. /etc - 配置文件</h1><p>包含所有程序所需的配置文件。<br>也包含了用于启动/停止单个程序的启动和关闭shell脚本。例如：/etc/resolv.conf、/etc/logrotate.conf</p>
-<h1 id="6-home-HOME目录"><a href="#6-home-HOME目录" class="headerlink" title="6. /home - HOME目录"></a>6. /home - HOME目录</h1><p>所有用户用home目录来存储他们的个人档案。<br>例如：/home/john、/home/nikita</p>
-<h1 id="7-lib-和-lib64-系统库"><a href="#7-lib-和-lib64-系统库" class="headerlink" title="7./lib 和 /lib64 - 系统库"></a>7./lib 和 /lib64 - 系统库</h1><p>包含支持位于/bin和/sbin下的二进制文件的库文件.<br>库文件名为 ld<em>或lib</em>.so.*<br>例如：ld-2.11.1.so，libncurses.so.5.7</p>
-<h1 id="8-media-可移动媒体设备"><a href="#8-media-可移动媒体设备" class="headerlink" title="8. /media - 可移动媒体设备"></a>8. /media - 可移动媒体设备</h1><p>用于挂载可移动设备的临时目录。<br>举例来说，挂载CD-ROM的/media/cdrom，挂载软盘驱动器的/media/floppy</p>
-<h1 id="9-mnt-挂载目录"><a href="#9-mnt-挂载目录" class="headerlink" title="9. /mnt - 挂载目录"></a>9. /mnt - 挂载目录</h1><p>临时安装目录，系统管理员可以挂载文件系统</p>
-<h1 id="10-opt-可选的附加应用程序"><a href="#10-opt-可选的附加应用程序" class="headerlink" title="10. /opt - 可选的附加应用程序"></a>10. /opt - 可选的附加应用程序</h1><p>opt代表可选的。<br>包含从个别厂商的附加应用程序。<br>附加应用程序应该安装在/opt/或者/opt/的子目录下</p>
-<h1 id="11-proc-进程信息"><a href="#11-proc-进程信息" class="headerlink" title="11. /proc - 进程信息"></a>11. /proc - 进程信息</h1><p>包含系统进程的相关信息。<br>这是一个虚拟的文件系统，包含有关正在运行的进程的信息。例如：/proc/{pid}目录中包含的与特定pid相关的信息。<br>这是一个虚拟的文件系统，系统资源以文本信息形式存在。例如：/proc/uptime</p>
-<h1 id="12-root-系统数据"><a href="#12-root-系统数据" class="headerlink" title="12. /root - 系统数据"></a>12. /root - 系统数据</h1><p>root根用户目录。<br>包含root配置文件。</p>
-<h1 id="13-run-运行数据"><a href="#13-run-运行数据" class="headerlink" title="13. /run  运行数据"></a>13. /run  运行数据</h1><p>run代表运行。<br>包含运行时相关的数据。<br>例如，ssid.pid、syslogs.pid等相关数据</p>
-<h1 id="14-sbin-系统二进制文件"><a href="#14-sbin-系统二进制文件" class="headerlink" title="14. /sbin   系统二进制文件"></a>14. /sbin   系统二进制文件</h1><p>二进制文件 = 可执行文件。<br>在这个目录下的linux命令通常由系统管理员使用，对系统进行维护。<br>例如：iptables、reboot、fdisk、ifconfig、swapon命令</p>
-<h1 id="15-srv-服务数据"><a href="#15-srv-服务数据" class="headerlink" title="15. /srv   服务数据"></a>15. /srv   服务数据</h1><p>srv代表服务。<br>包含服务器特定服务相关的数据。<br>例如，/srv/cvs/包含cvs相关的数据。</p>
-<h1 id="16-sys-系统数据"><a href="#16-sys-系统数据" class="headerlink" title="16. /sys   系统数据"></a>16. /sys   系统数据</h1><p>sys代表系统。<br>包含系统进程数据文件。<br>例如，/sys/fs/包含文件、/sys/bus/包含总线等相关数据</p>
-<h1 id="17-tmp-临时文件"><a href="#17-tmp-临时文件" class="headerlink" title="17. /tmp   临时文件"></a>17. /tmp   临时文件</h1><p>包含系统和用户创建的临时文件。<br>      当系统重新启动时，这个目录下的文件都将被删除。</p>
-<h1 id="18-usr-用户程序"><a href="#18-usr-用户程序" class="headerlink" title="18. /usr   用户程序"></a>18. /usr   用户程序</h1><p>包含二进制文件、库文件、文档和二级程序的源代码。<br>/usr/bin中包含用户程序的二进制文件。如果你在/bin中找不到用户二进制文件，到/usr/bin目录看看。<br>例如：at、awk、cd、less、scp。<br>/usr/sbin中包含系统管理员的二进制文件。如果在/sbin/中找不到系统二进制文件，到/usr/sbin目录看看。<br>例如：atd、cron、sshd、useradd、userdel。<br>/usr/lib中包含了/usr/bin和/usr/sbin用到的库。<br>/usr/local中包含了从源安装的用户程序。</p>
-<h1 id="19-var-变量文件"><a href="#19-var-变量文件" class="headerlink" title="19. /var   变量文件"></a>19. /var   变量文件</h1><p>包含变量文件<br>这个目录下可以找到内容可能增长的文件。<br>例如：系统日志文件（/var/log）;包和数据库文件（/var/lib）；电子邮件（/var/mail）；打印队列（/var/spool）；锁文件（var/lock）；多次重新启动需要的临时文件（/var/tmp）</p>
-
-          
+          1. / - 根每一个文件和目录从根目录开始。只有root用户具有该目录下的写权限。请注意，/root是root用户的主目录，这与/.不一样
+2. /bin - 用户二进制文件包含二进制可执行文件。在单用户模式下，你需要使用的常见Linux命令都位于此目录下。系统的所有用户使用的命令都设在这里。例如
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/3.1 - 3.3 用户文件及管理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -540,28 +529,170 @@
       
         
           
-            <h1 id="22-13-搭建git服务器"><a href="#22-13-搭建git服务器" class="headerlink" title="22.13 搭建git服务器"></a>22.13 搭建git服务器</h1><blockquote>
-<p>github毕竟是公开的，而私有仓库又得花钱买。所以我们可以想办法搭建一个私有的，只自己公司使用的。Gitlab是个不错的选择。在介绍它之前，先讲述一下命令行的git服务器</p>
-</blockquote>
-<h2 id="服务端配置"><a href="#服务端配置" class="headerlink" title="服务端配置"></a>服务端配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">先准备一台服务器</span><br><span class="line"></span><br><span class="line">yum安装git服务</span><br><span class="line">[root@yt-02 ~]# yum install -y git  </span><br><span class="line"></span><br><span class="line">创建用户，并限定shell</span><br><span class="line">[root@yt-02 ~]# useradd -s /usr/bin/git-shell git </span><br><span class="line">#目的是不让git用户远程登录</span><br><span class="line"></span><br><span class="line">创建authorized_keys文件，并更改属主、数组权限，用来存放客户端机器上的公钥：</span><br><span class="line">[root@yt-02 ~]# cd /home/git/</span><br><span class="line">[root@yt-02 git]# ls</span><br><span class="line">[root@yt-02 git]# mkdir .ssh</span><br><span class="line">[root@yt-02 git]# touch .ssh/authorized_keys</span><br><span class="line">[root@yt-02 git]# chmod 600 .ssh/authorized_keys</span><br><span class="line">[root@yt-02 git]# chown -R git:git .ssh</span><br><span class="line"></span><br><span class="line">客户端生成密钥对，公钥粘贴到authorized_keys文件</span><br><span class="line">[root@yt-02 git]# ssh-keygen</span><br><span class="line">[root@yt-02 git]# cat /root/.ssh/id_rsa.pub</span><br><span class="line">[root@yt-02 git]# vim .ssh/authorized_keys</span><br><span class="line"></span><br><span class="line">测试（下面ssh表示可以登录）</span><br><span class="line">[root@yt-02 git]# ssh git@192.168.122.131</span><br><span class="line">fatal: Interactive git shell is not enabled.</span><br><span class="line">hint: ~/git-shell-commands should exist and have read and execute access.</span><br><span class="line">Connection to 192.168.122.131 closed.</span><br><span class="line"></span><br><span class="line">定好存储git仓库的目录</span><br><span class="line">[root@yt-02 git]# mkdir /data/gitroot/</span><br><span class="line"></span><br><span class="line">创建一个裸仓库，裸仓库没有工作区，因为服务器上的Git仓库纯粹是为了共享，</span><br><span class="line">所以不让用户直接登录到服务器上去改工作区，并且服务器上的Git仓库通常都以.git结尾</span><br><span class="line">[root@yt-02 gitroot]# git init --bare sample.git</span><br><span class="line">初始化空的 Git 版本库于 /data/gitroot/sample.git/</span><br><span class="line">[root@yt-02 gitroot]# ls</span><br><span class="line">sample.git</span><br><span class="line"></span><br><span class="line">配置好权限</span><br><span class="line">[root@yt-02 gitroot]# chown -R git:git sample.git</span><br></pre></td></tr></table></figure>
+          22.13 搭建git服务器
+github毕竟是公开的，而私有仓库又得花钱买。所以我们可以想办法搭建一个私有的，只自己公司使用的。Gitlab是个不错的选择。在介绍它之前，先讲述一下命令行的git服务器
 
-<h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">安装git仓库</span><br><span class="line">[root@yt-01 ~]# yum install -y epel-release git</span><br><span class="line"></span><br><span class="line">克隆sample.git 库到本地</span><br><span class="line">[root@yt-01 gitroot]# git clone git@192.168.122.131:/data/gitroot/sample.git</span><br><span class="line">正克隆到 &apos;sample&apos;...</span><br><span class="line">warning: 您似乎克隆了一个空版本库。</span><br><span class="line"></span><br><span class="line">进入sample仓库的目录</span><br><span class="line">[root@yt-01 gitroot]# cd /data/gitroot/</span><br><span class="line">[root@yt-01 gitroot]# ls</span><br><span class="line">1.txt 2.txt sample</span><br><span class="line">[root@yt-01 gitroot]# cd sample/</span><br><span class="line">[root@yt-01 sample]# ls</span><br><span class="line">[root@yt-01 sample]# ls -la</span><br><span class="line">总用量 0</span><br><span class="line">drwxr-xr-x 3 root root 18 4月 3 19:10 .</span><br><span class="line">drwxr-xr-x 4 root root 58 4月 3 19:10 ..</span><br><span class="line">drwxr-xr-x 7 root root 119 4月 3 19:10 .git</span><br><span class="line"></span><br><span class="line">提交到本地</span><br><span class="line">[root@yt-01 sample]# git add 1.txt</span><br><span class="line">[root@yt-01 sample]# git commit -m &quot;add 1.txt&quot;</span><br><span class="line">[master（根提交） 48e10c5] add 1.txt</span><br><span class="line"> 1 file changed, 2 insertions(+)</span><br><span class="line"> create mode 100644 1.txt</span><br><span class="line"></span><br><span class="line">推送到服务器master分支</span><br><span class="line">[root@yt-01 sample]# git push -u origin master</span><br><span class="line">Counting objects: 3, done.</span><br><span class="line">Writing objects: 100% (3/3), 210 bytes | 0 bytes/s, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To git@192.168.122.131:/data/gitroot/sample.git</span><br><span class="line"> * [new branch] master -&gt; master</span><br><span class="line">分支 master 设置为跟踪来自 origin 的远程分支 master。</span><br></pre></td></tr></table></figure>
+服务端配置123456789101112131415161718192021222324252
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/22.13-22.17 搭建git服务器、安装gitlab、使用gitlab、gitlab备份和恢复/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
 
-<p>这样就搭建完成了。</p>
-<h1 id="22-14-22-15-安装gitlab"><a href="#22-14-22-15-安装gitlab" class="headerlink" title="22.14/22.15 安装gitlab"></a>22.14/22.15 安装gitlab</h1><ol>
-<li>安装gitlab服务<br>因为github在美国有点慢，连接和推送不方便。国内众多的代码管理平台也是非常的不错，例如：coding，码云，码市等。但是有些企业为了方便自己去搭建一个基于web界面的代码管理平台gitlab！<br>建议后期搭建Gitlab平台，一定要让其服务独立运行在一台机器上，两方面： ①机器比较耗费硬件资源。 ②一旦出现问题维护起来困难比较大，为了不造成冲突！<ul>
-<li>gitlab官网 <a href="https://about.gitlab.com/gitlab-com/" target="_blank" rel="noopener">https://about.gitlab.com/gitlab-com/</a></li>
-<li>官方安装文档 <a href="https://about.gitlab.com/installation/?version=ce#centos-7" target="_blank" rel="noopener">https://about.gitlab.com/installation/?version=ce#centos-7</a> (ce/ee)</li>
-<li>要求服务器内存不少于2g</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@yt-01 sample]# vim /etc/yum.repos.d/gitlab.repo</span><br><span class="line"># 写入下面这一段</span><br><span class="line">[gitlab-ce]</span><br><span class="line">name=Gitlab CE Repository</span><br><span class="line">baseurl=https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el$releasever/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">[root@yt-01 sample]# yum install -y gitlab-ce  //yum安装</span><br></pre></td></tr></table></figure>
+    
 
-<h1 id="22-16-使用gitlab"><a href="#22-16-使用gitlab" class="headerlink" title="22.16 使用gitlab"></a>22.16 使用gitlab</h1><h1 id="22-17-gitlab备份和恢复"><a href="#22-17-gitlab备份和恢复" class="headerlink" title="22.17 gitlab备份和恢复"></a>22.17 gitlab备份和恢复</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># netstat -lnpt //查看监听端口</span><br><span class="line">#  gitlab-ctl stop/restart/start/status</span><br><span class="line"># 浏览器访问gitlab，输入ip即可</span><br><span class="line"># 默认管理员root，无密码，它会让我们去定义一个密码</span><br><span class="line"># gitlab常用命令 https://www.cnyunwei.cc/archives/1204</span><br><span class="line"># gitlab备份 gitlab-rake gitlab:backup:create   //在线备份</span><br><span class="line"># 备份目录在/var/opt/gitlab/backups</span><br><span class="line">[root@yt-01 /]# ll /var/opt/gitlab/backups</span><br><span class="line">总用量 72</span><br><span class="line">-rw------- 1 git git 71680 4月 3 20:00 1522756818_2018_04_03_10.6.2_gitlab_backup.tar</span><br><span class="line"></span><br><span class="line"># gitlab 恢复 先停服务 gitlab-ctl stop unicorn ; gitlab-ctl stop sidekiq</span><br><span class="line">[root@yt-01 /]# gitlab-ctl stop unicorn ; gitlab-ctl stop sidekiq</span><br><span class="line">ok: down: unicorn: 0s, normally up</span><br><span class="line">ok: down: sidekiq: 0s, normally up</span><br><span class="line"></span><br><span class="line"># gitlab-rake gitlab:backup:restore BACKUP=xxxxx （这里是一个编号，即备份文件的前缀）</span><br><span class="line">[root@yt-01 /]# gitlab-rake gitlab:backup:restore BACKUP=1522756818_2018_04_03_10.6.2</span><br><span class="line"></span><br><span class="line"># 再启动服务 gitlab-ctl start</span><br></pre></td></tr></table></figure>
+    
 
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/3.7 -3.9 su和sudo用户切换/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux入门笔记/3.7 -3.9 su和sudo用户切换/" itemprop="url">3.7 -3.9 su和sudo用户切换</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          3.7 su命令su 命令就是切换用户的工具
+1. su 命令的用法su+ [参数]  [用户名]
+-；-l 登录并改变到所切换的用户环境
+-c  执行一个命令，然后退出所切换到的用户环境
+2. su 命令的范例su 在不加任何参数，默认为切换到root用户，但没有转到root用户家目录下，也就是说
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/3.7 -3.9 su和sudo用户切换/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -701,306 +832,18 @@
       
         
           
-            <h2 id="18-1-集群介绍"><a href="#18-1-集群介绍" class="headerlink" title="18.1 集群介绍"></a>18.1 集群介绍</h2><h3 id="Linux集群概述"><a href="#Linux集群概述" class="headerlink" title="Linux集群概述"></a>Linux集群概述</h3><ul>
-<li>根据功能划分为两大类：高可用和负载均衡  </li>
-<li>高可用集群通常为两台服务器，一台工作，另外一台作为冗余，当提供服务的机器宕机，冗余将接替继续提供服务  </li>
-<li>实现高可用的开源软件有：heartbeat(由于版本不再更新，在CentOS 6上面Bug比较多，不推荐使用了)、keepalived （既可以实现高可用，又可以实现负载均衡） </li>
-<li>负载均衡集群，需要有一台服务器作为分发器，它负责把用户的请求分发给后端的服务器处理，在这个集群里，除了分发器外，就是给用户提供服务的服务器了，这些服务器数量至少为2  </li>
-<li>实现负载均衡的开源软件有LVS、keepalived、haproxy、nginx，商业的有F5、Netscaler 专用商业服务器，价格很高，从几万到几十万都有</li>
-</ul>
-<h2 id="18-2-keepalived介绍"><a href="#18-2-keepalived介绍" class="headerlink" title="18.2 keepalived介绍"></a>18.2 keepalived介绍</h2><ul>
-<li>在这里我们使用keepalived来实现高可用集群，因为heartbeat在centos6上有一些问题，影响实验效果（比如，切换不及时）</li>
-<li>keepalived通过 VRRP（Virtual Router Redundancy Protocl）虚拟路由冗余协议 来实现高可用。</li>
-<li>在这个协议里会将多台功能相同的路由器组成一个小组，这个小组里会有1个master角色和N（N&gt;=1）个backup角色。</li>
-<li>master会通过组播的形式向各个backup发送VRRP协议的数据包，当backup收不到master发来的VRRP数据包时，就会认为master宕机了。此时就需要根据各个backup的优先级来决定谁成为新的mater。</li>
-<li>Keepalived要有三个模块，分别是core、check和vrrp。其中core模块为keepalived的核心，负责主进程的启动、维护以及全局配置文件的加载和解析，check模块负责健康检查，vrrp模块是来实现VRRP协议的。</li>
-</ul>
-<h2 id="18-3-18-4-18-5-用keepalived配置高可用集群"><a href="#18-3-18-4-18-5-用keepalived配置高可用集群" class="headerlink" title="18.3/18.4/18.5 用keepalived配置高可用集群"></a>18.3/18.4/18.5 用keepalived配置高可用集群</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
-<li><p>两台机器 192.168.2.180（Master/yt-01）、192..168.2.183（backupyt-02）</p>
-</li>
-<li><p>keepalived的VIP设为192.168.2.100（在keepalived配置里面设置）。关于VIP，即Vitrual IP。当我们有主从两台机器，我们需要绑定域名到指定的IP，如果绑定在主上面。如果主宕机，我们就无法提供服务，所以Vitrual IP就起到了关键性作用。默认配置在主服务器上面，但是一旦宕机，从服务器就会立即启动，并且把这个IP绑定在从上面从而不会影响业务的状态！</p>
-</li>
-<li><p>机器都要联网</p>
-</li>
-<li><p>两台机器都要安装keepalived</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum install -y keepalived</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>两台机器都安装nginx<br>安装nginx作为实验对象，其中因为180上之前已经源码包安装过nginx，所以只需要181上安装就可以了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum install -y nginx</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>两台机器都要关闭防火墙</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># iptables -nvL</span><br><span class="line"># systemctl stop firewalld</span><br><span class="line"># getenforce</span><br><span class="line"># setenforce 0</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="配置主keepalived服务器"><a href="#配置主keepalived服务器" class="headerlink" title="配置主keepalived服务器"></a>配置主keepalived服务器</h3><h4 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h4><ul>
-<li>编辑180上keepalived配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># &gt; /etc/keepalived/keepalived.conf              #清空原始配置文件</span><br><span class="line"># vim /etc/keepalived/keepalived.conf          #复制下面代码，代替原配置文件</span><br><span class="line"></span><br><span class="line"># 全局定义参数</span><br><span class="line">global_defs &#123;         </span><br><span class="line">  notification_email &#123;                                      #出现问题后接收提示的邮箱</span><br><span class="line">    test@test.com</span><br><span class="line">  &#125;</span><br><span class="line">  notification_email_from test@test.com       #发件人邮箱</span><br><span class="line">  smtp_server 127.0.0.1                                #邮件服务器</span><br><span class="line">  smtp_connect_timeout 30                          #延时</span><br><span class="line">  router_id LVS_DEVEL                                #运行keepalived机器的一个标识</span><br><span class="line">&#125;</span><br><span class="line">vrrp_script chk_nginx &#123;                                 #检测vrrp服务是否正常</span><br><span class="line">    script &quot;/usr/local/sbin/check_ng.sh&quot;          #检测脚本的路径</span><br><span class="line">    interval 3                                                   #检测间断是3s</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;                                     #定义相关Master的东西</span><br><span class="line">    state MASTER                                         #设定角色</span><br><span class="line">    interface ens33                                        #指定ens33这块网卡，通过vrrp协议去发广播</span><br><span class="line">    virtual_router_id 51                                  #指定虚拟路由器的ID，一定要和从上的保持一致</span><br><span class="line">    priority 100                                               #指定权重，数字越大优先级越高</span><br><span class="line">    advert_int 1                    </span><br><span class="line">    authentication &#123;                                       #认证的相关信息</span><br><span class="line">        auth_type PASS                                 #定义认证数据类型为密码</span><br><span class="line">        auth_pass 123456                              #密码暂定123456</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;                                  #定义VIP，VIP指的是高可用指定的固定IP地址，不论主从切换后IP都是这个</span><br><span class="line">        192.168.2.100</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_nginx                                           #加载定义的chk_nginx脚本</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="写监控脚本"><a href="#写监控脚本" class="headerlink" title="写监控脚本"></a>写监控脚本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# vim /usr/local/sbin/check_ng.sh     #keepalived的监控脚本，把下面代码粘贴进去</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line">#时间变量，用于记录日志</span><br><span class="line">d=`date --date today +%Y%m%d_%H:%M:%S`</span><br><span class="line">#计算nginx进程数量</span><br><span class="line">n=`ps -C nginx --no-heading|wc -l`</span><br><span class="line">#如果进程为0，则启动nginx，并且再次检测nginx进程数量，</span><br><span class="line">#如果还为0，说明nginx无法启动，此时需要关闭keepalived</span><br><span class="line">if [ $n -eq &quot;0&quot; ]; then</span><br><span class="line">        /etc/init.d/nginx start</span><br><span class="line">        n2=`ps -C nginx --no-heading|wc -l`</span><br><span class="line">        if [ $n2 -eq &quot;0&quot;  ]; then</span><br><span class="line">                echo &quot;$d nginx down,keepalived will stop&quot; &gt;&gt; /var/log/check_ng.log</span><br><span class="line">#杀掉keepalived，是为了防止脑裂。脑裂指的是高可用集群中，当主从切换时，主上的keepalived还在启动，会和从争抢VIP，导致后台链接服务器时，不知道连接哪台服务器好，导致出错。</span><br><span class="line">                systemctl stop keepalived</span><br><span class="line">        fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# chmod 755  /usr/local/sbin/check_ng.sh      ##给脚本755权限</span><br></pre></td></tr></table></figure>
-
-<p>脚本解读：<br>如果进程里面没发现nginx那就代表着服务宕机了，然后脚本自动的再次启动nginx服务。 如果服务还是不可以启动，就把启动报错日志输入到指定的位置，然后把keepalived也关闭。</p>
-<p>为什么需要关闭keepalived呢？ 行业里面有个名词叫做“脑裂”，如果主服务宕机，从服务势必会马上启动顶替主服务再次服务，如果主服务的keepalived没有关闭，一定会造成混乱，两台机器都争抢服务。</p>
-<p>在高可用（HA）系统中，当联系2个节点的“心跳线”断开时，本来为一整体、动作协调的HA系统，就分裂成为2个独立的个体。由于相互失去了联系，都以为是对方出了故障。两个节点上的HA软件像“裂脑人”一样，争抢“共享资源”、争起“应用服务”，就会发生严重后果——或者共享资源被瓜分、2边服务都起不来了；或者2边服务都起来了，但同时读写“共享存储”，导致数据损坏。</p>
-<p>高可用中，绝对不可以发生的脑裂问题！</p>
-<h4 id="启动keepalived服务"><a href="#启动keepalived服务" class="headerlink" title="启动keepalived服务"></a>启动keepalived服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# systemctl start  keepalived</span><br><span class="line">[root@yt-01 ~]# ps aux |grep keep</span><br><span class="line">root      3887  0.0  0.1 120724  1400 ?        Ss  15:57  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      3888  0.0  0.2 120724  2748 ?        S    15:57  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      3889  0.0  0.2 124980  2744 ?        S    15:57  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      3914  0.0  0.0 112680  972 pts/1    R+  15:57  0:00 grep --color=auto keep</span><br><span class="line">[root@yt-01 ~]# ps aux |grep nginx</span><br><span class="line">root      3866  0.0  0.0  20500  628 ?        Ss  15:54  0:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">nobody    3867  0.0  0.3  22944  3216 ?        S    15:54  0:00 nginx: worker process</span><br><span class="line">nobody    3868  0.0  0.3  22944  3216 ?        S    15:54  0:00 nginx: worker process</span><br><span class="line">root      3946  0.0  0.0 112680  972 pts/1    R+  15:57  0:00 grep --color=auto nginx</span><br></pre></td></tr></table></figure>
-
-<h4 id="停掉keepalived，测试是否会重新加载"><a href="#停掉keepalived，测试是否会重新加载" class="headerlink" title="停掉keepalived，测试是否会重新加载"></a>停掉keepalived，测试是否会重新加载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# /etc/init.d/nginx stop</span><br><span class="line">[root@yt-01 ~]# ps aux |grep nginx</span><br><span class="line">root      4093  0.0  0.0  20500  628 ?        Ss  15:58  0:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">nobody    4097  0.0  0.3  22944  3216 ?        S    15:58  0:00 nginx: worker process</span><br><span class="line">nobody    4098  0.0  0.3  22944  3216 ?        S    15:58  0:00 nginx: worker process</span><br><span class="line">root      4106  0.0  0.0 112680  968 pts/1    R+  15:58  0:00 grep --color=auto nginx</span><br><span class="line">还是会再加载</span><br><span class="line"></span><br><span class="line">#查看日志#</span><br><span class="line">[root@yt-01 ~]# tail /var/log/messages</span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# ifconfig -a  ##这个命令查看不到VIP</span><br><span class="line">ens33: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 192.168.2.180  netmask 255.255.255.0  broadcast 192.168.2.255</span><br><span class="line">        inet6 fe80::6b0e:c2eb:de7a:3662  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:0c:29:14:f6:1b  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 16608  bytes 11284525 (10.7 MiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 10439  bytes 3068832 (2.9 MiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</span><br><span class="line">        loop  txqueuelen 1  (Local Loopback)</span><br><span class="line">        RX packets 617885  bytes 308269731 (293.9 MiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 617885  bytes 308269731 (293.9 MiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">[root@yt-01 ~]# ip add         ##查看到的到VIP  xxx/32</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN qlen 1</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000</span><br><span class="line">    link/ether 00:0c:29:14:f6:1b brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.2.180/24 brd 192.168.2.255 scope global ens33</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet 192.168.2.100/32 scope global ens33             ##VIP为192.168.2.100/32##</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::6b0e:c2eb:de7a:3662/64 scope link </span><br><span class="line">      valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置keepalived从"><a href="#配置keepalived从" class="headerlink" title="配置keepalived从"></a>配置keepalived从</h3><h4 id="更改配置文件-1"><a href="#更改配置文件-1" class="headerlink" title="更改配置文件"></a>更改配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-02 ~]# &gt; /etc/keepalived/keepalived.conf    ##清空原始配置文件</span><br><span class="line">[root@yt-02 ~]# vim /etc/keepalived/keepalived.conf  ##复制下面代码，代替原配置文件</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">  notification_email &#123;</span><br><span class="line">    test@test.com</span><br><span class="line">  &#125;</span><br><span class="line">  notification_email_from test@test.com</span><br><span class="line">  smtp_server 127.0.0.1</span><br><span class="line">  smtp_connect_timeout 30</span><br><span class="line">  router_id LVS_DEVEL</span><br><span class="line">&#125;</span><br><span class="line">vrrp_script chk_nginx &#123;</span><br><span class="line">    script &quot;/usr/local/sbin/check_ng.sh&quot;</span><br><span class="line">    interval 3</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP               #指定角色为从</span><br><span class="line">    interface ens33              </span><br><span class="line">    virtual_router_id 51        </span><br><span class="line">    priority 90                       #指定权重为90，低于主</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 123456</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.2.100</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_nginx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="编辑监控脚本"><a href="#编辑监控脚本" class="headerlink" title="编辑监控脚本"></a>编辑监控脚本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-02 ~]# vim /usr/local/sbin/check_ng.sh     ##keepalived监控脚本路径是在keepalived配置文件中指定的，把下面代码粘贴进去</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line">#时间变量，用于记录日志</span><br><span class="line">d=`date --date today +%Y%m%d_%H:%M:%S`</span><br><span class="line">#计算nginx进程数量</span><br><span class="line">n=`ps -C nginx --no-heading|wc -l`</span><br><span class="line">#如果进程为0，则启动nginx，并且再次检测nginx进程数量，</span><br><span class="line">#如果还为0，说明nginx无法启动，此时需要关闭keepalived</span><br><span class="line">if [ $n -eq &quot;0&quot; ]; then</span><br><span class="line">        systemctl start nginx    ##因为是yum安装，启动有点不一样</span><br><span class="line">        n2=`ps -C nginx --no-heading|wc -l`</span><br><span class="line">        if [ $n2 -eq &quot;0&quot;  ]; then</span><br><span class="line">                echo &quot;$d nginx down,keepalived will stop&quot; &gt;&gt; /var/log/check_ng.log</span><br><span class="line">                systemctl stop keepalived</span><br><span class="line">        fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">[root@yt-02 ~]# chmod 755  /usr/local/sbin/check_ng.sh      ##给脚本755权限</span><br></pre></td></tr></table></figure>
-
-<h4 id="启动keepalived"><a href="#启动keepalived" class="headerlink" title="启动keepalived"></a>启动keepalived</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-02 ~]# systemctl start  keepalived</span><br><span class="line">[root@yt-02 ~]# ps aux |grep keep</span><br><span class="line">root      7174  0.0  0.1 120720  1404 ?        Ss  20:46  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      7175  0.0  0.2 120720  2752 ?        S    20:46  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      7176  0.0  0.2 124976  2740 ?        S    20:46  0:00 /usr/sbin/keepalived -D</span><br><span class="line">root      7218  0.0  0.0 112632  660 pts/0    D+  20:46  0:00 grep --color=auto keep</span><br><span class="line">[root@yt-02 ~]# ps aux |grep nginx</span><br><span class="line">root      7199  0.0  0.2 122904  2108 ?        Ss  20:46  0:00 nginx: master process /usr/sbin/nginx</span><br><span class="line">nginx    7200  0.0  0.3 123368  3152 ?        S    20:46  0:00 nginx: worker process</span><br><span class="line">root      7232  0.0  0.0 112676  976 pts/0    S+  20:47  0:00 grep --color=auto nginx</span><br></pre></td></tr></table></figure>
-
-<h4 id="停掉keepalived，测试是否会重新加载-1"><a href="#停掉keepalived，测试是否会重新加载-1" class="headerlink" title="停掉keepalived，测试是否会重新加载"></a>停掉keepalived，测试是否会重新加载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-02 ~]# systemctl stop nginx</span><br><span class="line">[root@yt-02 ~]# ps aux |grep nginx</span><br><span class="line">root      7413  0.0  0.2 122904  2108 ?        Ss  20:48  0:00 nginx: master process /usr/sbin/nginx</span><br><span class="line">nginx    7414  0.0  0.3 123368  3152 ?        S    20:48  0:00 nginx: worker process</span><br><span class="line">root      7485  0.0  0.0 112676  972 pts/0    S+  20:48  0:00 grep --color=auto nginx</span><br><span class="line">还是会再加载</span><br><span class="line"></span><br><span class="line">[root@yt-02 ~]# ifconfig -a  ##查看不到VIP</span><br><span class="line">ens33: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 192.168.2.183  netmask 255.255.255.0  broadcast 192.168.2.255</span><br><span class="line">        inet6 fe80::62d6:aa12:bb83:d01a  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:0c:29:0d:54:47  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 16098  bytes 18728112 (17.8 MiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 4869  bytes 499007 (487.3 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</span><br><span class="line">        loop  txqueuelen 1  (Local Loopback)</span><br><span class="line">        RX packets 16  bytes 1360 (1.3 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 16  bytes 1360 (1.3 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">[root@yt-02 ~]# ip add        ##查看到的到VIP  xxx/32</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN qlen 1</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000</span><br><span class="line">    link/ether 00:0c:29:0d:54:47 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.2.183/24 brd 192.168.2.255 scope global ens33</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet 192.168.2.100/32 scope global ens33</span><br><span class="line">      valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::62d6:aa12:bb83:d01a/64 scope link </span><br><span class="line">      valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
-
-<h3 id="怎么区分主从上的nginx"><a href="#怎么区分主从上的nginx" class="headerlink" title="怎么区分主从上的nginx"></a>怎么区分主从上的nginx</h3><p>更改nginx默认主页的文件内容，比如：主上改成This is Master，从上改成This is backup。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nginx默认主页的文件地址</span><br><span class="line">主上：更改 /data/wwwroot/default/index.html 文件  （编译安装）</span><br><span class="line">                  如果找不到，就去/usr/local/nginx/html/index.html</span><br><span class="line">从上：/usr/share/nginx/html/index.html 文件            （yum安装）</span><br></pre></td></tr></table></figure>
-
-<p>主：</p>
-<p>从：</p>
-<p>VIP：</p>
-<h3 id="测试高可用"><a href="#测试高可用" class="headerlink" title="测试高可用"></a>测试高可用</h3><p>先确定好两台机器上nginx差异，比如可以通过curl -I 来查看nginx版本，通过浏览器访问各个IP测试。</p>
-<ul>
-<li><p>测试1：关闭master上的nginx服务<br>chkng脚本可以再次启动nginx的，我们上面测试过，无法关闭的</p>
-</li>
-<li><p>测试2：在master上增加iptabls规则 iptables -I OUTPUT -p vrrp -j DROP<br>用防火墙关闭vrrp协议，也不能让keepalived的主达到切换到从的目的。<br>我们还是恢复过来，iptables -F</p>
-</li>
-<li><p>测试3：关闭master上的keepalived服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# systemctl stop keepalived</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>访问VIP成功切换到从上。</p>
-<ul>
-<li>测试4：启动master上的keepalived服务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yt-01 ~]# systemctl start keepalived</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>VIP马上有调到了主上面，这些过程，都可以在/var/log/messages日志里面看到。</p>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="高可用开源方案-Keepalived-VS-Heartbeat对比"><a href="#高可用开源方案-Keepalived-VS-Heartbeat对比" class="headerlink" title="高可用开源方案 Keepalived VS Heartbeat对比"></a>高可用开源方案 Keepalived VS Heartbeat对比</h3><p>出处：<a href="http://blog.csdn.net/yunhua_lee/article/details/9788433" target="_blank" rel="noopener">http://blog.csdn.net/yunhua_lee/article/details/9788433</a></p>
-<h3 id="DRBD工作原理和配置"><a href="#DRBD工作原理和配置" class="headerlink" title="DRBD工作原理和配置"></a>DRBD工作原理和配置</h3><p>出处：<a href="http://502245466.blog.51cto.com/7559397/1298945" target="_blank" rel="noopener">http://502245466.blog.51cto.com/7559397/1298945</a></p>
-<h3 id="mysql-keepalived"><a href="#mysql-keepalived" class="headerlink" title="mysql+keepalived"></a>mysql+keepalived</h3><p>出处：<a href="http://lizhenliang.blog.51cto.com/7876557/1362313" target="_blank" rel="noopener">http://lizhenliang.blog.51cto.com/7876557/1362313</a><br>环境描述：<br>OS：CentOS6.5_X64<br>MASTER：192.168.0.202<br>BACKUP：192.168.0.203<br>VIP：192.168.0.204<br>1、配置两台Mysql主主同步<br>[root@master ~]# yum install mysql-server mysql -y<br>[root@master ~]# service mysqld start<br>[root@master ~]# mysqladmin -u root password 123.com<br>[root@master ~]# vi /etc/my.cnf  #开启二进制日志，设置id<br>[mysqld]<br>server-id = 1                    #backup这台设置2<br>log-bin = mysql-bin<br>binlog-ignore-db = mysql,information_schema       #忽略写入binlog日志的库<br>auto-increment-increment = 2             #字段变化增量值<br>auto-increment-offset = 1              #初始字段ID为1<br>slave-skip-errors = all                       #忽略所有复制产生的错误<br>[root@master ~]# service mysqld restart</p>
-<p>#先查看下log bin日志和pos值位置<br>wKiom1MJYSngwysqAADkFn9zcK8686.jpg<br>master配置如下：<br>[root@ master ~]# mysql -u root -p123.com<br>mysql&gt; GRANT  REPLICATION SLAVE ON <em>.</em> TO ‘replication’@’192.168.0.%’ IDENTIFIED  BY ‘replication’;<br>mysql&gt; flush  privileges;<br>mysql&gt; change  master to<br>    -&gt;  master_host=’192.168.0.203’,<br>    -&gt;  master_user=’replication’,<br>    -&gt;  master_password=’replication’,<br>    -&gt;  master_log_file=’mysql-bin.000002’,<br>    -&gt;  master_log_pos=106;  #对端状态显示的值<br>mysql&gt; start  slave;         #启动同步<br>backup配置如下：<br>[root@backup ~]#  mysql -u root -p123.com<br>mysql&gt; GRANT  REPLICATION SLAVE ON <em>.</em> TO ‘replication’@’192.168.0.%’ IDENTIFIED  BY ‘replication’;<br>mysql&gt; flush  privileges;<br>mysql&gt; change  master to<br>    -&gt;  master_host=’192.168.0.202’,<br>    -&gt;  master_user=’replication’,<br>    -&gt;  master_password=’replication’,<br>    -&gt;  master_log_file=’mysql-bin.000002’,<br>    -&gt;  master_log_pos=106;<br>mysql&gt; start  slave;</p>
-<p>#主主同步配置完毕，查看同步状态Slave_IO和Slave_SQL是YES说明主主同步成功。<br>wKioL1MJYQ7QfZfXAAGQt0H1o1c742.jpg<br>在master插入数据测试下：<br>wKiom1MJYUCC0nlQAAEk4ruZ3ys652.jpg<br>在backup查看是否同步成功：<br>wKioL1MJYXyyChXUAADPZraUk3Y684.jpg<br>可以看到已经成功同步过去，同样在backup插入到user表数据，一样同步过去，双主就做成功了。<br>2、配置keepalived实现热备<br>[root@backup ~]# yum install -y pcre-devel openssl-devel popt-devel #安装依赖包<br>[root@master ~]# wget <a href="http://www.keepalived.org/software/keepalived-1.2.7.tar.gz" target="_blank" rel="noopener">http://www.keepalived.org/software/keepalived-1.2.7.tar.gz</a><br>[root@master ~]# tar zxvf keepalived-1.2.7.tar.gz<br>[root@master ~]# cd keepalived-1.2.7<br>[root@master ~]#./configure –prefix=/usr/local/keepalived<br>make &amp;&amp; make install</p>
-<p>#将keepalived配置成系统服务<br>[root@master ~]# cp /usr/local/keepalived/etc/rc.d/init.d/keepalived /etc/init.d/<br>[root@master ~]# cp /usr/local/keepalived/etc/sysconfig/keepalived /etc/sysconfig/<br>[root@master ~]# mkdir /etc/keepalived/<br>[root@master ~]# cp /usr/local/keepalived/etc/keepalived/keepalived.conf /etc/keepalived/<br>[root@master ~]# cp /usr/local/keepalived/sbin/keepalived /usr/sbin/<br>[root@master ~]# vi /etc/keepalived/keepalived.conf<br>! Configuration File forkeepalived<br>global_defs {<br>notification_email {<br><a href="mailto:test@sina.com" target="_blank" rel="noopener">test@sina.com</a><br> }<br>notification_email_from  <a href="mailto:admin@test.com" target="_blank" rel="noopener">admin@test.com</a><br>smtp_server 127.0.0.1<br>smtp_connect_timeout 30<br>router_id MYSQL_HA      #标识，双主相同<br> }<br>vrrp_instance VI_1 {<br> state BACKUP           #两台都设置BACKUP<br> interface eth0<br> virtual_router_id 51       #主备相同<br> priority 100           #优先级，backup设置90<br> advert_int 1<br> nopreempt             #不主动抢占资源，只在master这台优先级高的设置，backup不设置<br> authentication {<br> auth_type PASS<br> auth_pass 1111<br> }<br> virtual_ipaddress {<br> 192.168.0.204<br> }<br>}<br>virtual_server 192.168.0.204 3306 {<br> delay_loop 2</p>
-<p> #lb_algo rr              #LVS算法，用不到，我们就关闭了</p>
-<p> #lb_kind DR              #LVS模式，如果不关闭，备用服务器不能通过VIP连接主MySQL<br> persistence_timeout 50  #同一IP的连接60秒内被分配到同一台真实服务器<br> protocol TCP<br> real_server 192.168.0.202 3306 {   #检测本地mysql，backup也要写检测本地mysql<br> weight 3<br> notify_down /usr/local/keepalived/mysql.sh    #当mysq服down时，执行此脚本，杀死keepalived实现切换<br> TCP_CHECK {<br> connect_timeout 3    #连接超时<br> nb_get_retry 3       #重试次数<br> delay_before_retry 3 #重试间隔时间<br>  }<br>}<br>[root@master ~]# vi /usr/local/keepalived/mysql.sh</p>
-<p>#!/bin/bash<br>pkill keepalived<br>[root@master ~]# chmod +x /usr/local/keepalived/mysql.sh<br>[root@master ~]# /etc/init.d/keepalived start</p>
-<p>#backup服务器只修改priority为90、nopreempt不设置、real_server设置本地IP。</p>
-<p>#授权两台Mysql服务器允许root远程登录，用于在其他服务器登陆测试！<br>mysql&gt; grant all on <em>.</em> to’root’@’192.168.0.%’ identified by ‘123.com’;<br>mysql&gt; flush privileges;<br>3、测试高可用性<br>1、通过Mysql客户端通过VIP连接，看是否连接成功。<br>2、停止master这台mysql服务，是否能正常切换过去，可通过ip addr命令来查看VIP在哪台服务器上。<br>wKiom1MJYbCBORSGAAHChWpI93k009.jpg<br>3、可通过查看/var/log/messges日志，看出主备切换过程<br>4、master服务器故障恢复后，是否主动抢占资源，成为活动服务器。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/4.10 - 4.13 LVM学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhouqun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joking的Linux世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux入门笔记/4.10 - 4.13 LVM学习/" itemprop="url">4.10 - 4.13 LVM学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">linux入门笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-LVM简介"><a href="#1-LVM简介" class="headerlink" title="1. LVM简介"></a>1. LVM简介</h1><ul>
-<li>LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM利用Linux内核的device-mapper来实现存储系统的虚拟化（系统分区独立于底层硬件）。</li>
-<li>通过LVM，你可以实现存储空间的抽象化并在上面建立虚拟分区（virtual partitions），可以更简便地扩大和缩小分区，可以增删分区时无需担心某个硬盘上没有足够的连续空间，而不会被卷入使用中的磁盘的问题（并且想知道内核是使用旧的还是新的分区表），而不必将其他分区移开。</li>
-<li>LVM是用来方便管理的，不会提供额外的数据安全保证。 </li>
-</ul>
-<h1 id="2-LVM的基本组"><a href="#2-LVM的基本组" class="headerlink" title="2. LVM的基本组"></a>2. LVM的基本组</h1><ul>
-<li>物理卷Physical volume -  (PV)：可以在上面建立卷组的媒介，可以是硬盘分区，也可以是硬盘本身或者回环文件（loopback file）。<ul>
-<li>物理卷包括一个特殊的header，其余部分被切割为一块块物理区域（physical extents）。</li>
-</ul>
-</li>
-<li>卷组Volume group (VG)：<br>将一组物理卷收集为一个管理单元。<ul>
-<li>逻辑卷Logical volume (LV)：虚拟分区，由物理区域（physical extents）组成。</li>
-<li>物理区域Physical extent (PE)：硬盘可供指派给逻辑卷的最小单位（通常为4MB）。</li>
-</ul>
-</li>
-</ul>
-<p><img src="http://wx2.sinaimg.cn/large/005Mk4Aygy1fgqw9fcsq8j30hp09yt99.jpg" alt="LVM结构图"></p>
-<ul>
-<li><p>物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。</p>
-</li>
-<li><p>物理卷（physical volume）：物理卷就是指硬盘分区或从逻辑上与磁盘分区具有同样功能的设备(如RAID)，是LVM的基本存储逻辑块，但和基本的物理存储介质（如分区、磁盘等）比较，却包含有与LVM相关的管理参数。</p>
-</li>
-<li><p>卷组（Volume Group）：LVM卷组类似于非LVM系统中的物理硬盘，其由物理卷组成。可以在卷组上创建一个或多个“LVM分区”（逻辑卷），LVM卷组由一个或多个物理卷组成。</p>
-</li>
-<li><p>逻辑卷（logical volume）：LVM的逻辑卷类似于非LVM系统中的硬盘分区，在逻辑卷之上可以建立文件系统(比如/home或者/usr等)。</p>
-</li>
-<li><p>PE（physical extent）：每一个物理卷被划分为称为PE(Physical Extents)的基本单元，具有唯一编号的PE是可以被LVM寻址的最小单元。PE的大小是可配置的，默认为4MB。</p>
-</li>
-<li><p>LE（logical extent）：逻辑卷也被划分为被称为LE(Logical Extents) 的可被寻址的基本单位。在同一个卷组中，LE的大小和PE是相同的，并且一一对应。</p>
-</li>
-</ul>
-<p>简单来说就是：</p>
-<ul>
-<li><p>PV:是物理的磁盘分区</p>
-</li>
-<li><p>VG:LVM中的物理的磁盘分区，也就是PV，必须加入VG，可以将VG理解为一个仓库或者是几个大的硬盘。</p>
-</li>
-<li><p>LV：也就是从VG中划分的逻辑分区</p>
-</li>
-</ul>
-<h1 id="3-使用LVM的基本步骤"><a href="#3-使用LVM的基本步骤" class="headerlink" title="3. 使用LVM的基本步骤"></a>3. 使用LVM的基本步骤</h1><h2 id="3-1-准备磁盘分区"><a href="#3-1-准备磁盘分区" class="headerlink" title="3.1 准备磁盘分区"></a>3.1 准备磁盘分区</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-fdisk /dev/sdb</span><br><span class="line"></span><br><span class="line">-n 创建三个新分区，分别1G</span><br><span class="line"></span><br><span class="line">-t 改变分区类型为8e</span><br><span class="line"></span><br><span class="line">设备 Boot      Start        End      Blocks  Id  System</span><br><span class="line">/dev/sdb1            2048    2099199    1048576  8e  Linux LVM</span><br><span class="line">/dev/sdb2        2099200    4196351    1048576  8e  Linux LVM</span><br><span class="line">/dev/sdb3        4196352    6293503    1048576  8e  Linux LVM</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">partprobe 将磁盘分区表变化信息通知内核，请求操作系统重新加载分区表</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-2-准备物理卷"><a href="#3-2-准备物理卷" class="headerlink" title="3.2 准备物理卷"></a>3.2 准备物理卷</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-pvcreate /dev/sdb1</span><br><span class="line">WARNING: xfs signature detected on /dev/sdb1 at -offset 0. Wipe it? [y/n]: y</span><br><span class="line">  Wiping xfs signature on /dev/sdb1.</span><br><span class="line">  Physical volume &quot;/dev/sdb1&quot; successfully created.</span><br><span class="line">-pvcreate /dev/sdb2</span><br><span class="line">  Physical volume &quot;/dev/sdb2&quot; successfully created.</span><br><span class="line">-pvcreate /dev/sdb3</span><br><span class="line">  Physical volume &quot;/dev/sdb3&quot; successfully created.</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">pvdisplay 列出当前的物理卷</span><br><span class="line">pvs 列出当前的物理卷(更直观)</span><br><span class="line">pvremove /dev/sdb3 删除物理卷</span><br><span class="line">yun -y install lvm 安装lvm包</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-3-准备卷组"><a href="#3-3-准备卷组" class="headerlink" title="3.3 准备卷组"></a>3.3 准备卷组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-vgcreate vg1 /dev/sdb1 /dev/sdb2</span><br><span class="line">  Volume group &quot;vg1&quot; successfully created</span><br><span class="line">-vgs</span><br><span class="line">  VG  #PV #LV #SN Attr  VSize  VFree</span><br><span class="line">  cl    1  2  0 wz--n- 19.00g    0 </span><br><span class="line">  vg1  2  0  0 wz--n-  1.99g 1.99g</span><br><span class="line"></span><br><span class="line">vgdisplay列出卷组 / vgs 列出卷组（更直观）</span><br><span class="line">vgrmove vg1 删除物理卷</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-4-创建逻辑卷"><a href="#3-4-创建逻辑卷" class="headerlink" title="3.4 创建逻辑卷"></a>3.4 创建逻辑卷</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">-lvcreate -L 100M -n lv1 vg1</span><br><span class="line">Logical volume &quot;lv1&quot; created.</span><br><span class="line">-lva 列出逻辑卷</span><br><span class="line">  LV  VG  Attr      LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span><br><span class="line">  root cl  -wi-ao----  17.00g                                            </span><br><span class="line">  swap cl  -wi-ao----  2.00g                                </span><br><span class="line">  lv1  vg1 -wi-a----- 100.00m    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-mkfs.xfs /dev/vg1/lv1 格式化,再挂载(实际上，格式化为ext4更好，后面会讲到)</span><br><span class="line">meta-data=/dev/vg1/lv1          isize=512    agcount=4, agsize=6400 blks</span><br><span class="line">        =                      sectsz=512  attr=2, projid32bit=1</span><br><span class="line">        =                      crc=1        finobt=0, sparse=0</span><br><span class="line">data    =                      bsize=4096  blocks=25600, imaxpct=25</span><br><span class="line">        =                      sunit=0      swidth=0 blks</span><br><span class="line">naming  =version 2              bsize=4096  ascii-ci=0 ftype=1</span><br><span class="line">log      =internal log          bsize=4096  blocks=855, version=2</span><br><span class="line">        =                      sectsz=512  sunit=0 blks, lazy-count=1</span><br><span class="line">realtime =none                  extsz=4096  blocks=0, rtextents=0</span><br><span class="line"></span><br><span class="line">-mount /dev/vg1/lv1 /mnt/ 挂载逻辑卷lv1到mnt目录下</span><br><span class="line">-ls -l /dev/vg1/lv1</span><br><span class="line">lrwxrwxrwx 1 root root 7 6月  19 22:07 /dev/vg1/lv1 -&gt; ../dm-2</span><br><span class="line">-df -h</span><br><span class="line">文件系统            容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/mapper/cl-root  17G  4.5G  13G  27% /</span><br><span class="line">devtmpfs            906M    0  906M    0% /dev</span><br><span class="line">tmpfs                916M  84K  916M    1% /dev/shm</span><br><span class="line">tmpfs                916M  9.0M  907M    1% /run</span><br><span class="line">tmpfs                916M    0  916M    0% /sys/fs/cgroup</span><br><span class="line">/dev/sda1          1014M  139M  876M  14% /boot</span><br><span class="line">tmpfs                184M  16K  184M    1% /run/user/42</span><br><span class="line">tmpfs                184M    0  184M    0% /run/user/0</span><br><span class="line">/dev/mapper/vg1-lv1  97M  5.2M  92M    6% /mnt</span><br><span class="line"></span><br><span class="line">写开机启动挂载</span><br><span class="line">vi /etc/fstab</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">lvremove /dev/vg1/lv1 删除逻辑卷</span><br><span class="line">lvdisplay列出逻辑卷 / lvs 列出逻辑卷（更直观）</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-5-扩容逻辑卷"><a href="#3-5-扩容逻辑卷" class="headerlink" title="3.5 扩容逻辑卷"></a>3.5 扩容逻辑卷</h2><p>针对ext2,3,4格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-umount /mnt/ 规范操作是先把挂载点卸掉</span><br><span class="line">-lvresize -L 300M  /dev/vg1/lv1  重新设置卷大小</span><br><span class="line">-e2fsck -f /dev/vg1/lv1 检查磁盘错误  (ext执行)</span><br><span class="line">-resize2fs /dev/vg1/lv1 更新逻辑卷信息，识别新的大小(ext执行)</span><br><span class="line">    </span><br><span class="line">xfs_growfs /dev/vg1/lv1  xfs文件系统需要执行</span><br></pre></td></tr></table></figure>
-
-<p>针对xfs格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-lvresize -L 300M  /dev/vg1/lv1  重新设置卷大小</span><br><span class="line">-xfs_growfs /dev/vg1/lv1        xfs文件系统需要执行</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-6-缩减逻辑卷（xfs不支持）"><a href="#3-6-缩减逻辑卷（xfs不支持）" class="headerlink" title="3.6 缩减逻辑卷（xfs不支持）"></a>3.6 缩减逻辑卷（xfs不支持）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-umount /mnt/  卸载挂载点</span><br><span class="line">-e2fsck -f /dev/vg1/lv1 检查磁盘错误（ext）</span><br><span class="line">-resize2fs /dev/vg1/lv1 100M 更新逻辑卷信息（ext）</span><br><span class="line">-lvresize -L 100M  /dev/vg1/lv1  重新设置卷大小</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-7-扩展卷组"><a href="#3-7-扩展卷组" class="headerlink" title="3.7 扩展卷组"></a>3.7 扩展卷组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-fdisk /dev/sdb  新增/dev/sdb5(逻辑分区8e) 1G</span><br><span class="line">-n</span><br><span class="line">-p</span><br><span class="line">-5</span><br><span class="line">+1G</span><br><span class="line">-t</span><br><span class="line">-8e</span><br><span class="line">-pvcreate /dev/sdb5              设置物理卷</span><br><span class="line">-vgextend vg1 /dev/sdb5          把该物理卷扩展到卷组</span><br><span class="line">-lvresize -L 100M  /dev/vg1/lv1  重新设置逻辑卷大小</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-磁盘故障小案例"><a href="#4-磁盘故障小案例" class="headerlink" title="4. 磁盘故障小案例"></a>4. 磁盘故障小案例</h1><p>当我们配置完LVM，并将lvm分区挂载文件写入到/etc/fstab后重启 <strong>（这种问题在生产环境有可能遇到）</strong>，开机会遇到如下问题</p>
-<p><img src="http://wx2.sinaimg.cn/large/005Mk4Aygy1fgqwjqp2isj311y0lcmxi.jpg" alt="image"><br>==解决方案==</p>
-<ol>
-<li>输入root密码</li>
-<li>进入系统，vim /etc/fstab</li>
-<li>dd 刚刚写入文件的那一行分区挂载命令</li>
-<li>保存并退出</li>
-<li>reboot重启</li>
-</ol>
-
-          
+          18.1 集群介绍Linux集群概述
+根据功能划分为两大类：高可用和负载均衡  
+高可用集群通常为两台服务器，一台工作，另外一台作为冗余，当提供服务的机器宕机，冗余将接替继续提供服务  
+实现高可用的开源软件有：heartbeat(由于版本不再更新，在CentOS 6上面Bug比较多，不推荐使用了)
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/18.1-18.5 集群介绍、keepalived介绍和配置高可用集群/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1140,24 +983,15 @@
       
         
           
-            <h1 id="4-1-df命令"><a href="#4-1-df命令" class="headerlink" title="4.1 df命令"></a>4.1 df命令</h1><h2 id="1-df命令"><a href="#1-df命令" class="headerlink" title="1. df命令"></a>1. df命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">df    \\可以查看到系统一共有几个分区，但swap（虚拟交换分区，内存）不会显示在此。</span><br><span class="line">df -h  \\自动变换单位*</span><br><span class="line">文件系统            容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/mapper/cl-root  17G  4.5G  13G  27% /</span><br><span class="line">devtmpfs            906M    0  906M    0% /dev</span><br><span class="line">tmpfs                916M  100K  916M    1% /dev/shm</span><br><span class="line">tmpfs                916M  9.0M  907M    1% /run</span><br><span class="line">tmpfs                916M    0  916M    0% /sys/fs/cgroup</span><br><span class="line">/dev/sda1          1014M  139M  876M  14% /boot</span><br><span class="line">tmpfs                184M  52K  184M    1% /run/user/0</span><br><span class="line"></span><br><span class="line">df -k  \\以K为单位</span><br><span class="line">df -m  \\以M为单位</span><br><span class="line">df -i  \\查看到系统分区下的inode情况</span><br><span class="line">df -T  \\会看到分区文件系统类型</span><br><span class="line"></span><br><span class="line">free  \\可以查看到swap状态*</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-重点-每次登录服务器，第一件事"><a href="#2-重点-每次登录服务器，第一件事" class="headerlink" title="2. @重点 每次登录服务器，第一件事"></a>2. @重点 每次登录服务器，第一件事</h2><ul>
-<li>用df -h  看磁盘空间满了没</li>
-<li>用df -i  看磁盘inode空间占满没有<br>最好，用shell监控起来。</li>
-</ul>
-<h1 id="4-2-du命令"><a href="#4-2-du命令" class="headerlink" title="4.2 du命令"></a>4.2 du命令</h1><h2 id="1-du命令"><a href="#1-du命令" class="headerlink" title="1. du命令"></a>1. du命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">du      \\查看目录或者文件的占用磁盘空间大小，默认以K为单位</span><br><span class="line">du -a    \\显示所有下面的文件和目录，不加的话，不会显示下面目录内的文件</span><br><span class="line">du -b    \\以b为单位</span><br><span class="line">du -m    \\以M为单位</span><br><span class="line">du -h    \\自动匹配合适的单位</span><br><span class="line">du -s    \\只显示总和</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-常用的-du-sh"><a href="#2-常用的-du-sh" class="headerlink" title="2. 常用的 du -sh"></a>2. 常用的 du -sh</h2><p>du -sh 和 ls -sh 的区别 (涉及 块block 的概念)</p>
-<ul>
-<li>du -sh是查询文件占用磁盘空间的大小</li>
-<li>ls -sh 是文件实际的大小</li>
-</ul>
-<h1 id="4-3-4-4-磁盘分区"><a href="#4-3-4-4-磁盘分区" class="headerlink" title="4.3/4.4 磁盘分区"></a>4.3/4.4 磁盘分区</h1><h2 id="1-fdisk命令"><a href="#1-fdisk命令" class="headerlink" title="1. fdisk命令"></a>1. fdisk命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line">查看所有磁盘的分区状况</span><br><span class="line"></span><br><span class="line">fdisk /dev/sdb    \\给小于2T的硬盘分区</span><br><span class="line">p 打印分区表</span><br><span class="line">n 新增一个分区</span><br><span class="line">w 保存</span><br><span class="line">q 退出</span><br><span class="line">d 删除分区</span><br><span class="line"></span><br><span class="line">关于分区</span><br><span class="line">- 主分区：一块物理硬盘上可以被独立使用的一部分，一个硬盘最多可以有4个主分区。</span><br><span class="line">- 扩展分区：为了突破一个物理硬盘只能有4个分区的限制，引入了扩展分区。扩展分区和主分区的地位相当，但是扩展分区本身不能被直接使用，然而可以被继续划分成多个逻辑分区。</span><br><span class="line">- 逻辑分区：逻辑分区可以有任意多个，但是不能独立存在，多个连续的逻辑分区可做为一个扩展分区。一个硬盘只能有一个扩展分区。</span><br><span class="line"></span><br><span class="line">  e扩展分区  逻辑分区是从扩展分区分出来的</span><br><span class="line">  p主分区    p+e不大于4</span><br><span class="line"></span><br><span class="line">- 关于分区号</span><br><span class="line">1-4是主分区和扩展分区，5和以后是逻辑分区</span><br><span class="line"></span><br><span class="line">- 主分区可以分零个</span><br><span class="line">- 扩展分区只能分一个</span><br><span class="line">- 逻辑分区的序列号一定从5开始，而主分区和扩展分区随意1-4</span><br><span class="line"></span><br><span class="line">**parted命令 是专门给大于2T的硬盘分区的**</span><br></pre></td></tr></table></figure>
-
-<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><h2 id="parted分区GPT"><a href="#parted分区GPT" class="headerlink" title="parted分区GPT"></a>parted分区GPT</h2><p>[<a href="http://ask.apelearn.com/question/7243]" target="_blank" rel="noopener">http://ask.apelearn.com/question/7243]</a><br>fdisk分区工具，它的分区格式为MBR，特点是，最多分4个主分区，磁盘大小不能超过2T。而GPT分区格式，突破了这些限制，它没有主分区、扩展分区、逻辑分区之分，在一块磁盘上最多可以分128个分区出来，支持大于2T的分区，最大卷可达18EB。 相信，随着存储级别的升级，将来的分区格式逐渐会淘汰MBR，而GPT成为主流。</p>
-
-          
+          4.1 df命令1. df命令1234567891011121314151617df    \\可以查看到系统一共有几个分区，但swap（虚拟交换分区，内存）不会显示在此。df -h  \\自动变换单位*文件系统            容量  已用  可用 已用% 挂载点/dev/mapper/cl
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/4.1-4.4 磁盘管理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1204,7 +1038,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/10.23 - 10.27 linux任务计划和systemd管理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/4.5 - 4.9 磁盘格式化与挂载/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1223,7 +1057,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/10.23 - 10.27 linux任务计划和systemd管理/" itemprop="url">10.23 - 10.27 linux任务计划和systemd管理</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/4.5 - 4.9 磁盘格式化与挂载/" itemprop="url">4.5 - 4.9 磁盘格式化与挂载</a></h1>
         
 
         <div class="post-meta">
@@ -1297,45 +1131,16 @@
       
         
           
-            <h1 id="10-23-linux任务计划cron"><a href="#10-23-linux任务计划cron" class="headerlink" title="10.23 linux任务计划cron"></a>10.23 linux任务计划cron</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# cat /etc/crontab  任务计划的配置文件</span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">MAILTO=root</span><br><span class="line"></span><br><span class="line"># For details see man 4 crontabs</span><br><span class="line"></span><br><span class="line"># Example of job definition:</span><br><span class="line"># .---------------- minute (0 - 59)      表示分钟</span><br><span class="line"># |  .------------- hour (0 - 23)        表示日</span><br><span class="line"># |  |  .---------- day of month (1 - 31) 表示月份</span><br><span class="line"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span><br><span class="line"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7)  OR sun,mon,tue,wed,thu,fri,sat    表示星期。0或者7都是表示周日</span><br><span class="line"># |  |  |  |  |</span><br><span class="line"># *  *  *  *  * user-name  command to be executed  最后一列是执行的命令</span><br><span class="line"></span><br><span class="line">[root@host ~]# crontab -e  定义任务计划配置，和vim使用方式差不多</span><br><span class="line"></span><br><span class="line">0 3 * * * /bin/bash  /usr/local/sbin/123.sh &gt;&gt;/tmp/123.log  2&gt;&gt;/tmp/123.log</span><br><span class="line">从凌晨的3点开始执行一个脚本，并把脚本的正确输出，与错误的输出重定向到123.log里去。</span><br><span class="line">格式解读：分,时，日，月，周，后跟执行的命令，*表示为所有的。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">0 3 1-10  */2 2,5  /bin/bash  /usr/local/sbin/123.sh &gt;&gt;/tmp/123.log  2&gt;&gt;/tmp/123.log</span><br><span class="line">其中1-10表示1到10天，*/2 表示被2整除的数字比如月份就是双月的。2，5表示周二或周五开始执行命令，逗号表示或。</span><br><span class="line"></span><br><span class="line">[root@host ~]# systemctl start crond    启动服务</span><br><span class="line">[root@host ~]# systemctl status crond  查看crond的服务状态</span><br><span class="line">● crond.service - Command Scheduler</span><br><span class="line">  Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)</span><br><span class="line">  Active: active (running) since Sun 2017-07-16 23:39:04 EDT; 13h ago</span><br><span class="line">Main PID: 796 (crond)</span><br><span class="line">  CGroup: /system.slice/crond.service</span><br><span class="line">          └─796 /usr/sbin/crond -n</span><br><span class="line"></span><br><span class="line">Jul 16 23:39:04 host.localdomain crond[796]: (CRON) INFO (RANDOM_DELAY will be scaled with factor 35% if used.)</span><br><span class="line">Jul 16 23:39:04 host.localdomain crond[796]: (CRON) INFO (running with inotify support)</span><br><span class="line">Jul 16 23:39:04 host.localdomain systemd[1]: Started Command Scheduler.</span><br><span class="line">Jul 16 23:39:04 host.localdomain systemd[1]: Starting Command Scheduler...</span><br><span class="line"></span><br><span class="line">crontab -l  列出任务计划</span><br><span class="line">crontab -r  删除任务计划</span><br><span class="line">crontab -u root -l  制定一个用户，列出它的任务计划</span><br></pre></td></tr></table></figure>
-
-<h1 id="10-24-chkconfig工具"><a href="#10-24-chkconfig工具" class="headerlink" title="10.24 chkconfig工具"></a>10.24 chkconfig工具</h1><blockquote>
-<p>chkconfig命令检查、设置系统的各种服务。这是Red Hat公司遵循GPL规则所开发的程序，它可查询操作系统在每一个执行等级中会执行哪些系统服务，其中包括各类常驻服务。谨记chkconfig不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。 </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">语法: chkconfig(选项)</span><br><span class="line">选项:</span><br><span class="line">--add：增加所指定的系统服务，让chkconfig指令得以管理它，并同时在系统启动的叙述文件内增加相关数据；</span><br><span class="line">--del：删除所指定的系统服务，不再由chkconfig指令管理，并同时在系统启动的叙述文件内删除相关数据；</span><br><span class="line">--level&lt;等级代号&gt;：指定读系统服务要在哪一个执行等级中开启或关毕。</span><br><span class="line"></span><br><span class="line">等级代号列表： </span><br><span class="line"></span><br><span class="line">等级0表示：表示关机 </span><br><span class="line">等级1表示：单用户模式 </span><br><span class="line">等级2表示：无网络连接的多用户命令行模式 </span><br><span class="line">等级3表示：有网络连接的多用户命令行模式 </span><br><span class="line">等级4表示：不可用 </span><br><span class="line">等级5表示：带图形界面的多用户模式 </span><br><span class="line">等级6表示：重新启动 </span><br><span class="line"></span><br><span class="line">需要说明的是，level选项可以指定要查看的运行级而不一定是当前运行级。对于每个运行级，只能有一个启动脚本或者停止脚本。当切换运行级时，init不会重新启动已经启动的服务，也不会再次去停止已经停止的服务。 </span><br><span class="line"></span><br><span class="line">运行级文件： </span><br><span class="line"></span><br><span class="line">每个被chkconfig管理的服务需要在对应的init.d下的脚本加上两行或者更多行的注释。第一行告诉chkconfig缺省启动的运行级以及启动和停止的优先级。如果某服务缺省不在任何运行级启动，那么使用-代替运行级。第二行对服务进行描述，可以用\跨行注释。 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">例如random.init包含三行： </span><br><span class="line"></span><br><span class="line"># chkconfig: 2345 20 80</span><br><span class="line"># description: Saves and restores system entropy pool for \</span><br><span class="line"># higher quality random number generation.</span><br></pre></td></tr></table></figure>
-
-<p>实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# chkconfig --list  列出所有的系统服务</span><br><span class="line"></span><br><span class="line">注意：该输出结果只显示 SysV 服务，并不包含原生 systemd 服务。SysV 配置数据可能被原生 systemd 配置覆盖。 </span><br><span class="line">      如果您想列出 systemd 服务,请执行 &apos;systemctl list-unit-files&apos;。</span><br><span class="line">      欲查看对特定 target 启用的服务请执行</span><br><span class="line">      &apos;systemctl list-dependencies [target]&apos;。</span><br><span class="line"></span><br><span class="line">netconsole        0:off    1:off    2:off    3:off    4:off    5:off    6:off</span><br><span class="line">network            0:off    1:off    2:on    3:on    4:on    5:on    6:off</span><br><span class="line">qemukvmga          0:off    1:off    2:on    3:on    4:on    5:on    6:off</span><br><span class="line">shadowsocks        0:off    1:off    2:on    3:on    4:on    5:on    6:off</span><br><span class="line"></span><br><span class="line">[root@host ~]# ls /etc/init.d/    chkconfig 服务的脚本所在位置</span><br><span class="line">functions  netconsole  network  qemukvmga  README  shadowsocks</span><br><span class="line"></span><br><span class="line">chkconfig network off            chkconfig 关闭一个服务</span><br><span class="line">chkconfig --level 3 network off  关闭3级别的服务</span><br><span class="line"></span><br><span class="line">centos7之前系统的更改系统级别    vi /etc/inittab  centos7已不再使用</span><br><span class="line"></span><br><span class="line">chkconfig --level 345 network off 关闭3，4,5级别的服务</span><br><span class="line">chkconfig --del network          删除</span><br><span class="line">chkconfig --add network          增加</span><br></pre></td></tr></table></figure>
-
-<h1 id="10-25-systemd管理服务"><a href="#10-25-systemd管理服务" class="headerlink" title="10.25 systemd管理服务"></a>10.25 systemd管理服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-units-files                  把systemd下所有的socket，target，service都列出来</span><br><span class="line">systemctl list-units --all --type=service  把systemd下service都列出来</span><br><span class="line">systemctl list-units --type=service        把systemd下所有激活的service都列出来</span><br><span class="line"></span><br><span class="line">几个常用的服务相关的命令  @重点  需要记住</span><br><span class="line">systemctl enable crond.service              让服务开机启动（.service可以省略）</span><br><span class="line">systemctl disable crond                    不让开机启动</span><br><span class="line">systemctl status crond                      查看状态</span><br><span class="line">systemctl stop crond                        停止服务</span><br><span class="line">systemctl start crond                      启动服务</span><br><span class="line">systemctl restart crond                    重启服务</span><br><span class="line">systemctl is-enabled crond                  检查服务是否开机启动</span><br><span class="line"></span><br><span class="line">system的控制service的开机启动，实际是把service源路径的软连接，添加和删除到/etc/systemd/system/multi-user.target.wants/目录的的过程</span><br><span class="line">[root@host ~]# systemctl is-enabled crond</span><br><span class="line">enabled</span><br><span class="line">[root@host ~]# systemctl disable crond</span><br><span class="line">Removed symlink /etc/systemd/system/multi-user.target.wants/crond.service.</span><br><span class="line">[root@host ~]# systemctl enable crond</span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/crond.service to /usr/lib/systemd/system/crond.service.</span><br><span class="line">[root@host ~]# ls -l /etc/systemd/system/multi-user.target.wants/crond.service to /usr/lib/systemd/system/crond.service.</span><br><span class="line">ls: cannot access to: No such file or directory</span><br><span class="line">ls: cannot access /usr/lib/systemd/system/crond.service.: No such file or directory</span><br><span class="line">lrwxrwxrwx 1 root root 37 Jul 18 10:04 /etc/systemd/system/multi-user.target.wants/crond.service -&gt; /usr/lib/systemd/system/crond.service</span><br><span class="line">[root@host ~]# ls -l /usr/lib/systemd/system/crond.service</span><br><span class="line">-rw-r--r--. 1 root root 284 Mar 31  2016 /usr/lib/systemd/system/crond.service</span><br></pre></td></tr></table></figure>
-
-<h1 id="10-26-unit介绍"><a href="#10-26-unit介绍" class="headerlink" title="10.26 unit介绍"></a>10.26 unit介绍</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">ls /usr/lib/systemd/system      系统所有unit</span><br><span class="line">[root@host ~]# ls /usr/lib/systemd/system</span><br><span class="line">acpid.service                          dracut-pre-udev.service            machine.slice                      rhel-autorelabel-mark.service  sysinit.target                          systemd-readahead-done.service</span><br><span class="line">auditd.service                          dracut-shutdown.service            machines.target                    rhel-autorelabel.service      sysinit.target.wants                    systemd-readahead-done.timer</span><br><span class="line">autovt@.service                        ebtables.service                  messagebus.service                  rhel-configure.service        sys-kernel-config.mount                systemd-readahead-drop.service</span><br><span class="line">basic.target                            emergency.service                  microcode.service                  rhel-dmesg.service            sys-kernel-debug.mount                  systemd-readahead-replay.service</span><br><span class="line">basic.target.wants                      emergency.target                  multi-user.target                  rhel-domainname.service        syslog.socket                          systemd-reboot.service</span><br><span class="line">blk-availability.service                final.target                      multi-user.target.wants            rhel-import-state.service      syslog.target.wants                    systemd-remount-fs.service</span><br><span class="line">bluetooth.target                        firewalld.service                  NetworkManager-dispatcher.service  rhel-loadmodules.service      systemd-ask-password-console.path      systemd-rfkill@.service</span><br><span class="line">brandbot.path                          fstrim.service                    NetworkManager.service              rhel-readonly.service          systemd-ask-password-console.service    systemd-shutdownd.service</span><br><span class="line">brandbot.service                        fstrim.timer                      NetworkManager-wait-online.service  rpcbind.target                systemd-ask-password-plymouth.path      systemd-shutdownd.socket</span><br><span class="line">chrony-dnssrv@.service                  getty@.service                    network-online.target              rsyncd.service                systemd-ask-password-plymouth.service  systemd-suspend.service</span><br><span class="line">chrony-dnssrv@.timer                    getty.target                      network-online.target.wants        rsyncd@.service                systemd-ask-password-wall.path          systemd-sysctl.service</span><br><span class="line">chronyd.service                        graphical.target                  network-pre.target                  rsyncd.socket                  systemd-ask-password-wall.service      systemd-timedated.service</span><br><span class="line">chrony-wait.service                    graphical.target.wants            network.target                      rsyslog.service                systemd-backlight@.service              systemd-tmpfiles-clean.service</span><br><span class="line">console-getty.service                  halt-local.service                nss-lookup.target                  runlevel0.target              systemd-binfmt.service                  systemd-tmpfiles-clean.timer</span><br><span class="line">console-shell.service                  halt.target                        nss-user-lookup.target              runlevel1.target              systemd-bootchart.service              systemd-tmpfiles-setup-dev.service</span><br><span class="line">container-getty@.service                halt.target.wants                  paths.target                        runlevel1.target.wants        systemd-firstboot.service              systemd-tmpfiles-setup.service</span><br><span class="line">cpupower.service                        haveged.service                    plymouth-halt.service              runlevel2.target              systemd-fsck-root.service              systemd-udevd-control.socket</span><br><span class="line">crond.service                          hibernate.target                  plymouth-kexec.service              runlevel2.target.wants        systemd-fsck@.service                  systemd-udevd-kernel.socket</span><br><span class="line">cryptsetup-pre.target                  hybrid-sleep.target                plymouth-poweroff.service          runlevel3.target              systemd-halt.service                    systemd-udevd.service</span><br><span class="line">cryptsetup.target                      initrd-cleanup.service            plymouth-quit.service              runlevel3.target.wants        systemd-hibernate-resume@.service      systemd-udev-settle.service</span><br><span class="line">ctrl-alt-del.target                    initrd-fs.target                  plymouth-quit-wait.service          runlevel4.target              systemd-hibernate.service              systemd-udev-trigger.service</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">系统所有unit，分为以下类型:</span><br><span class="line">service    系统服务 </span><br><span class="line">target    多个unit组成的组</span><br><span class="line">device    硬件设备</span><br><span class="line">mount      文件系统挂载点</span><br><span class="line">automount  自动挂载点</span><br><span class="line">path      文件或路径</span><br><span class="line">scope      不是由systemd启动的外部进程</span><br><span class="line">slice      进程组</span><br><span class="line">snapshot  systemd快照</span><br><span class="line">socket    进程间通信套接字</span><br><span class="line">swap      swap文件</span><br><span class="line">timer      定时器</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>unit相关的命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-units            列出正在运行的unit</span><br><span class="line">systemctl list-units --all      列出所有，包括失败的或者inactive的</span><br><span class="line">systemctl list-units --all --state=inactive  列出inactive的unit</span><br><span class="line">systemctl list-units --type=service          列出状态为active的service</span><br><span class="line">systemct is-active crond.service            查看某个服务是否为active</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="10-27-target介绍"><a href="#10-27-target介绍" class="headerlink" title="10.27 target介绍"></a>10.27 target介绍</h1><ul>
-<li><p>系统为了方便管理用target来管理unit</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-unit-files --type=target        查看所有的target</span><br><span class="line">systemctl list-dependencies multi-user.target  查看指的定target下面有哪些unit（target下面还可以有target）</span><br><span class="line">systemctl get-default                          查看系统默认的target</span><br><span class="line">systemctl set-default multi-user.target</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>一个service属于一种类型的unit</p>
-</li>
-<li><p>多个unit组成了一个target</p>
-</li>
-<li><p>一个target里面包含了多个service</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/lib/systemd/system/sshd.service    看[install]部分</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><ol>
-<li>anacron <a href="http://blog.csdn.net/strikers1982/article/details/4787226" target="_blank" rel="noopener">http://blog.csdn.net/strikers1982/article/details/4787226</a></li>
-<li>xinetd服(默认机器没有安装这个服务，需要yum install xinetd安装） <a href="http://blog.sina.com.cn/s/blog_465bbe6b010000vi.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_465bbe6b010000vi.html</a></li>
-<li>systemd自定义启动脚本 <a href="http://www.jb51.net/article/100457.htm" target="_blank" rel="noopener">http://www.jb51.net/article/100457.htm</a></li>
-</ol>
-
-          
+          4.5/4.6 磁盘格式化1. mke2fs命令被用于创建磁盘分区上文件系统（格式化）
+123456789101112mke2fs -t ext4 -b 2048 -m 1 -L yule /dev/sdb1-t 指定磁盘格式  mke2fs目前不支持xfs格式-b 指定块block大小，默认值是4
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/4.5 - 4.9 磁盘格式化与挂载/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1382,7 +1187,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/11.18 - 11.21 LAMP架构-Apache用户认证，域名跳转，Apache访问日志/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/4.10 - 4.13 LVM学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1401,7 +1206,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/11.18 - 11.21 LAMP架构-Apache用户认证，域名跳转，Apache访问日志/" itemprop="url">11.18 - 11.21 LAMP架构-Apache用户认证，域名跳转，Apache访问日志</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/4.10 - 4.13 LVM学习/" itemprop="url">4.10 - 4.13 LVM学习</a></h1>
         
 
         <div class="post-meta">
@@ -1475,73 +1280,17 @@
       
         
           
-            <h1 id="11-18-Apache用户认证"><a href="#11-18-Apache用户认证" class="headerlink" title="11.18 Apache用户认证"></a>11.18 Apache用户认证</h1><blockquote>
-<p>经常上网的读者会遇到这种情况：访问一些网站的某些资源时，浏览器弹出一个对话框，要求输入用户名和密码来获取对资源的访问。<br>这就是用户认证的一种技术。用户认证是保护网络系统资源的第一道防线，它控制着所有登录并检查访问用户的合法性，其目标是仅<br>让合法用户以合法的权限访问网络系统的资源。基本的用户认证技术是“用户名＋密码”。</p>
-</blockquote>
-<p>注意： 本章使用浏览器进行检测的前提是在物理机hosts文件添加虚拟机IP和虚拟主机域名。</p>
-<h2 id="1-配置整个网站的用户认证"><a href="#1-配置整个网站的用户认证" class="headerlink" title="1. 配置整个网站的用户认证"></a>1. 配置整个网站的用户认证</h2><h3 id="1-1-编辑虚拟主机配置文件“httpd-vhosts-conf”"><a href="#1-1-编辑虚拟主机配置文件“httpd-vhosts-conf”" class="headerlink" title="1.1 编辑虚拟主机配置文件“httpd-vhosts.conf”"></a>1.1 编辑虚拟主机配置文件“httpd-vhosts.conf”</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/apache2.4/conf/extra/httpd-vhosts.conf</span><br><span class="line">……</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot &quot;/data/wwwroot/111.com&quot;</span><br><span class="line">    ServerName 111.com</span><br><span class="line">    ServerAlias www.example.com</span><br><span class="line">    &lt;Directory /data/wwwroot/111.com&gt;</span><br><span class="line">    #指定认证的目录</span><br><span class="line">        Allowoverride AuthConfig               #该行相当于打开用户认证的开关</span><br><span class="line">        AuthName &quot;111.com user auth&quot;     #自定义认证的名字，作用不大</span><br><span class="line">        AuthType Basic                              #认证类型，一般为basic</span><br><span class="line">        AuthUserFile /data/.htpasswd        #指定密码文件所在位置（需要手动添加）</span><br><span class="line">        require valid-user                           #设定需要认证的用户为“AuthUserFile”中定义的所有可用用户</span><br><span class="line">    &lt;/Directory&gt;</span><br><span class="line">    ErrorLog &quot;logs/111.com-error_log&quot;</span><br><span class="line">    CustomLog &quot;logs/111.com-access_log&quot; common</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2-创建“httpd-vhosts-conf”中指定的密码文件"><a href="#1-2-创建“httpd-vhosts-conf”中指定的密码文件" class="headerlink" title="1.2 创建“httpd-vhosts.conf”中指定的密码文件"></a>1.2 创建“httpd-vhosts.conf”中指定的密码文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# /usr/local/apache2.4/bin/htpasswd -c -m /data/.htpasswd zhouqun</span><br><span class="line"># 在“/data/.htpasswd”为用户zhouqun创建一个使用MD5算法加密的密码文件</span><br><span class="line">New password: </span><br><span class="line">Re-type new password: </span><br><span class="line">Adding password for user zhouqun</span><br><span class="line"></span><br><span class="line">[root@adailinux ~]# cat /data/.htpasswd</span><br><span class="line">zhouqun:$apr1$F7lSqIT0$ksTH0NhusdaJK.7sgj/</span><br></pre></td></tr></table></figure>
-
-<p>-c：为了创建文件以及第一个用户，文件存在或创建第二个用户时不需要使用<br>-m：表示密码使用MD5加密</p>
-<h3 id="1-3-配置完成后重新加载"><a href="#1-3-配置完成后重新加载" class="headerlink" title="1.3 配置完成后重新加载"></a>1.3 配置完成后重新加载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl -t</span><br><span class="line">Syntax OK</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl graceful</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4-测试"><a href="#1-4-测试" class="headerlink" title="1.4 测试"></a>1.4 测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# curl -x192.168.2.130:80 111.com -I</span><br><span class="line">HTTP/1.1 401 Unauthorized</span><br><span class="line">Date: Wed, 23 Aug 2017 00:32:50 GMT</span><br><span class="line">Server: Apache/2.4.27 (Unix) PHP/5.6.30</span><br><span class="line">WWW-Authenticate: Basic realm=&quot;111.com user auth&quot;</span><br><span class="line">Content-Type: text/html; charset=iso-8859-1</span><br><span class="line">- 此时提示状态码为“401”，说明当前所访问的内容需要进行用户认证。</span><br><span class="line"></span><br><span class="line">- 使用 用户名和密码 访问</span><br><span class="line">[root@host ~]# curl -x192.168.2.130:80 -uzhouqun:123456 111.com -I</span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Wed, 23 Aug 2017 00:34:26 GMT</span><br><span class="line">Server: Apache/2.4.27 (Unix) PHP/5.6.30</span><br><span class="line">X-Powered-By: PHP/5.6.30</span><br><span class="line">Content-Type: text/html; charset=UTF-8</span><br><span class="line">- 状态码“200”，即访问成功。</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>用浏览器测试</li>
-</ul>
-<h2 id="2-配置单个文件的用户认证"><a href="#2-配置单个文件的用户认证" class="headerlink" title="2. 配置单个文件的用户认证"></a>2. 配置单个文件的用户认证</h2><h3 id="2-1-编辑虚拟主机配置文件“httpd-vhosts-conf”"><a href="#2-1-编辑虚拟主机配置文件“httpd-vhosts-conf”" class="headerlink" title="2.1 编辑虚拟主机配置文件“httpd-vhosts.conf”"></a>2.1 编辑虚拟主机配置文件“httpd-vhosts.conf”</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/apache2.4/conf/extra/httpd-vhosts.conf</span><br><span class="line"></span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot &quot;/data/wwwroot/111.com&quot;</span><br><span class="line">    ServerName 111.com</span><br><span class="line">    ServerAlias www.example.com</span><br><span class="line">    #&lt;Directory /data/wwwroot/111.com&gt;   # 注释掉&lt; Directory &gt;，取消对目录设定的用户认证，更改为&lt; FilesMatch&gt;，即对文件设定用户认证</span><br><span class="line">&lt;FilesMatch admin.php&gt;          #因为是针对文件，所以使用&lt;FilesMatch&gt;，后面跟文件</span><br><span class="line">    AllowOverride AuthConfig    #表示开启认证</span><br><span class="line">    AuthName &quot;111.com user&quot;   #提示信息，可自定义</span><br><span class="line">    AuthType  Basic                   #认证类型，使用Basic即可</span><br><span class="line">    AuthUserFile  /data/wwwroot/.htpasswd       #认证密码文件位置</span><br><span class="line">    require valid-user                 #指定需要认证的用户为全部可用用户</span><br><span class="line">&lt;/FilesMatch&gt;</span><br><span class="line">    #&lt;/Directory&gt; </span><br><span class="line">    ErrorLog &quot;logs/111.com-error_log&quot;</span><br><span class="line">    CustomLog &quot;logs/111.com-access_log&quot; common</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-创建“httpd-vhosts-conf”中指定的密码文件"><a href="#2-2-创建“httpd-vhosts-conf”中指定的密码文件" class="headerlink" title="2.2 创建“httpd-vhosts.conf”中指定的密码文件"></a>2.2 创建“httpd-vhosts.conf”中指定的密码文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# /usr/local/apache2.4/bin/htpasswd  -m /data/wwwroot/.htpasswd  zhouqun</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-3-配置完成后重新加载"><a href="#2-3-配置完成后重新加载" class="headerlink" title="2.3 配置完成后重新加载"></a>2.3 配置完成后重新加载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl  -t</span><br><span class="line">Syntax OK</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl  graceful</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-4-测试"><a href="#2-4-测试" class="headerlink" title="2.4 测试"></a>2.4 测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# curl -x192.168.8.131:80  111.com </span><br><span class="line">welcome to 111.com  </span><br><span class="line"></span><br><span class="line">[root@host ~]# curl -x192.168.8.131:80  111.com/123.php -I</span><br><span class="line">HTTP/1.1 401 Unauthorized</span><br><span class="line">Date: Wed, 23 Aug 2017 00:38:12 GMT</span><br><span class="line">Server: Apache/2.4.27 (Unix) PHP/5.6.30</span><br><span class="line">WWW-Authenticate: Basic realm=&quot;111.com user auth&quot;</span><br><span class="line">Content-Type: text/html; charset=iso-8859-1</span><br><span class="line"></span><br><span class="line">- 此时可以自由访问“111.com”指定的目录，但是当访问目录下的“123.php”文件时会报错：401，即，需要进行用户认证。</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>使用 用户名和密码 访问</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# curl -x192.168.2.130:80  -uadai:123456 111.com/123.php </span><br><span class="line">welcom to 123file    </span><br><span class="line">成功！</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用浏览器 访问</p>
-</li>
-</ul>
-<h1 id="11-19-11-20-域名跳转"><a href="#11-19-11-20-域名跳转" class="headerlink" title="11.19/11.20 域名跳转"></a>11.19/11.20 域名跳转</h1><h2 id="1-域名跳转分类及区别"><a href="#1-域名跳转分类及区别" class="headerlink" title="1. 域名跳转分类及区别"></a>1. 域名跳转分类及区别</h2><h3 id="1-1-种类："><a href="#1-1-种类：" class="headerlink" title="1.1 种类："></a>1.1 种类：</h3><p>301表示永久跳转；302表示临时跳转。</p>
-<h3 id="1-2-区别："><a href="#1-2-区别：" class="headerlink" title="1.2 区别："></a>1.2 区别：</h3><ul>
-<li><p>使用效果不同</p>
-<ul>
-<li>302跳转是暂时的跳转，搜索引擎会抓取新的内容而保留旧的网址。因为服务器返回302代码，搜索引擎认为新的网址只是暂时的。</li>
-<li>301重定向是永久的重定向，搜索引擎在抓取新内容的同时也将旧的网址替换为重定向之后的网址。</li>
-</ul>
-</li>
-<li><p>SEO使用方式不同<br>在搜索引擎优化中302跳转被众多黑帽SEO优化人员追求，对网站进行恶意302跳转至非用户目标访问网站，因此搜索引擎对于网站的302跳转通常是比较不友好，所以要慎用302跳转！</p>
-</li>
-<li><p>SEO是什么？<br>SEO（Search Engine Optimization）搜索引擎优化，在了解搜索引擎自然排名机制的基础上，对网站进行内部及外部的调整优化，改进网站在搜索引擎中的关键词自然排名，获得更多流量，从而达成网站销售及品牌建设的预期目标。</p>
-</li>
-</ul>
-<h2 id="2-域名跳转的作用"><a href="#2-域名跳转的作用" class="headerlink" title="2. 域名跳转的作用"></a>2. 域名跳转的作用</h2><ul>
-<li>一个站点有多个域名会对SEO有影响，说白了就是百度搜索关键词的排名会收到影响，如果把多个域名全部跳转到指定的一个域名，这样以这个域名为中心，就可以吧权重集中在这个域名上，这样搜索关键词的排名也就靠前。</li>
-<li>如果之前的某个域名不再使用了，但是搜索引擎还保留着之前老域名的连接，这以为着用户可能会搜到我们的网站并且点击老域名，固需要把老域名做个跳转跳到新域名。</li>
-</ul>
-<h2 id="3-域名跳转配置"><a href="#3-域名跳转配置" class="headerlink" title="3. 域名跳转配置"></a>3. 域名跳转配置</h2><h3 id="3-1-配置虚拟主机配置文件：httpd-vhosts-conf"><a href="#3-1-配置虚拟主机配置文件：httpd-vhosts-conf" class="headerlink" title="3.1 配置虚拟主机配置文件：httpd-vhosts.conf"></a>3.1 配置虚拟主机配置文件：httpd-vhosts.conf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/apache2.4/conf/extra/httpd-vhosts.conf</span><br><span class="line">……</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot &quot;/data/wwwroot/111.com&quot;</span><br><span class="line">    ServerName 111.com</span><br><span class="line">    ServerAlias www.example.com</span><br><span class="line">    &lt;IfModule mod_rewrite.c&gt;                                             #需要mod_rewrite的支持</span><br><span class="line">        RewriteEngine on                                                      #开启rewrite功能</span><br><span class="line">        RewriteCond %&#123;HTTP_HOST&#125; !^111.com$               #Cond=condition，定义rewrite条件：所有非111.com的主机名（域名）</span><br><span class="line">        RewriteRule ^/(.*)$ http://111.com/$1 [R=301,L]        #定义rewrite规则：当满足上面条件时才执行当前规则，即跳转到111.com。</span><br><span class="line">    &lt;/IfModule&gt;</span><br><span class="line">    ErrorLog &quot;logs/111.com-error_log&quot;</span><br><span class="line">    CustomLog &quot;logs/111.com-access_log&quot; common</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-检查系统配置并重新加载"><a href="#3-2-检查系统配置并重新加载" class="headerlink" title="3.2 检查系统配置并重新加载"></a>3.2 检查系统配置并重新加载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl -t</span><br><span class="line">Syntax OK</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl graceful</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl -M           #检查Apache是否加载了虚拟主机配置中调用的rewrite模块</span><br><span class="line"></span><br><span class="line">- 如果没有调用到，需要编辑Apache配置文件 “httpd.conf”</span><br><span class="line">[root@host ~]# vim /usr/local/apache2.4/conf/httpd.conf  </span><br><span class="line">……</span><br><span class="line">LoadModule rewrite_module modules/mod_rewrite.so    #去掉注释符号“#”，加载rewrite模块。</span><br><span class="line">LoadModule php5_module        modules/libphp5.so</span><br><span class="line">#LoadModule php7_module        modules/libphp7.so</span><br><span class="line"></span><br><span class="line">- 检测</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl -t</span><br><span class="line">Syntax OK</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl graceful</span><br><span class="line">[root@host ~]#  /usr/local/apache2.4/bin/apachectl -M |grep rewrite</span><br><span class="line">rewrite_module (shared)</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-3-使用curl检测"><a href="#3-3-使用curl检测" class="headerlink" title="3.3 使用curl检测"></a>3.3 使用curl检测</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# curl -x192.168.2.130:80 www.example.com -I</span><br><span class="line">HTTP/1.1 301 Moved Permanently</span><br><span class="line">Date: Wed, 23 Aug 2017 00:44:37 GMT</span><br><span class="line">Server: Apache/2.4.27 (Unix) PHP/5.6.30</span><br><span class="line">Location: http://111.com/</span><br><span class="line">Content-Type: text/html; charset=iso-8859-1</span><br><span class="line"></span><br><span class="line">状态码为301，即设定了域名永久跳转!</span><br><span class="line">在浏览器进行检测时，访问“www.example.com”会直接跳转到“111.com”。</span><br></pre></td></tr></table></figure>
-
-<h1 id="11-21-Apache访问日志"><a href="#11-21-Apache访问日志" class="headerlink" title="11.21 Apache访问日志"></a>11.21 Apache访问日志</h1><p>访问日志记录用户的每一个请求</p>
-<h2 id="1-设置Apache访问日志格式"><a href="#1-设置Apache访问日志格式" class="headerlink" title="1. 设置Apache访问日志格式"></a>1. 设置Apache访问日志格式</h2><h3 id="1-1-Apache访问日志位置"><a href="#1-1-Apache访问日志位置" class="headerlink" title="1.1 Apache访问日志位置"></a>1.1 Apache访问日志位置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# ls /usr/local/apache2.4/logs</span><br><span class="line">111.com-access_log  abc.com-access_log  access_log  httpd.pid</span><br><span class="line">111.com-error_log  abc.com-error_log  error_log</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2-系统自带日志格式"><a href="#1-2-系统自带日志格式" class="headerlink" title="1.2 系统自带日志格式"></a>1.2 系统自带日志格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/apache2.4/conf/httpd.conf                 # 搜索LogFormat </span><br><span class="line">LogFormat &quot;%h %l %u %t \&quot;%r\&quot; %&gt;s %b \&quot;%&#123;Referer&#125;i\&quot; \&quot;%&#123;User-Agent&#125;i\&quot;&quot; combined</span><br><span class="line">    LogFormat &quot;%h %l %u %t \&quot;%r\&quot; %&gt;s %b&quot; common</span><br><span class="line"># h表示host来源IP，l表示login用户，u表示user用户密码，t表示time时间，r表示request（行为），s表示status状态码，b表示byte大小</span><br><span class="line"># user-agent：用户代理</span><br><span class="line"># referer：跳转到当前位置的上一个网址（即：提供当前IP的网站）</span><br></pre></td></tr></table></figure>
-
-<p>combinedio是combined的升级，一般我们使用combined格式就足够了。</p>
-<h3 id="1-3-设置访问日志格式"><a href="#1-3-设置访问日志格式" class="headerlink" title="1.3 设置访问日志格式"></a>1.3 设置访问日志格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/apache2.4/conf/extra/httpd-vhosts.conf</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot &quot;/data/wwwroot/111.com&quot;</span><br><span class="line">    ServerName 111.com</span><br><span class="line">    ServerAlias www.example.com</span><br><span class="line">    &lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">        RewriteEngine on</span><br><span class="line">        RewriteCond %&#123;HTTP_HOST&#125; !^111.com$</span><br><span class="line">        RewriteRule ^/(.*)$ http://111.com/$1 [R=301,L]</span><br><span class="line">    &lt;/IfModule&gt;</span><br><span class="line">    ErrorLog &quot;logs/111.com-error_log&quot;</span><br><span class="line">    CustomLog &quot;logs/111.com-access_log&quot; combined     # 将comom修改为combined即可</span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line"></span><br><span class="line">- 重新加载：</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl -t</span><br><span class="line">Syntax OK</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl graceful</span><br><span class="line"></span><br><span class="line">- 样式：</span><br><span class="line">[root@host ~]# cat /usr/local/apache2.4/logs/111.com-access_log</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><h2 id="apache虚拟主机开启php的短标签"><a href="#apache虚拟主机开启php的短标签" class="headerlink" title="apache虚拟主机开启php的短标签"></a>apache虚拟主机开启php的短标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/apache2.4/conf/extra/httpd-vhosts.conf</span><br><span class="line">php_admin_flag short_open_tag on    #这一行变为on就好了，默认是off的</span><br></pre></td></tr></table></figure>
-          
+          1. LVM简介
+LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM利用Linux内核的device-mapper来实现存储系统的虚拟化（系统分区独立于底层硬件）。
+通过LVM，你可以实现存储空间的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/4.10 - 4.13 LVM学习/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1588,7 +1337,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/11.22 - 11.24 LAMP架构-访问日志不记录静态文件，访问日志切割，静态元素过期时间/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/5.1 - 5.4 Vim命令入门01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1607,7 +1356,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/11.22 - 11.24 LAMP架构-访问日志不记录静态文件，访问日志切割，静态元素过期时间/" itemprop="url">11.22 - 11.24 LAMP架构-访问日志不记录静态文件，访问日志切割，静态元素过期时间</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/5.1 - 5.4 Vim命令入门01/" itemprop="url">5.1 - 5.4 Vim命令入门01</a></h1>
         
 
         <div class="post-meta">
@@ -1681,47 +1430,18 @@
       
         
           
-            <p>#11.22 访问日志不记录静态文件<br>网站大多元素为静态文件，如图片、css、js等，这些元素可以不用记录，没有意义。限制访问日志，让系统不记录静态文件，可以有效的减少无用的日志的空间占用。<br>把虚拟主机配置文件 “httpd-vhosts.conf” 改成如下： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/apache2.4/conf/extra/httpd-vhosts.conf</span><br><span class="line">......</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot &quot;/data/wwwroot/www.123.com&quot;</span><br><span class="line">    ServerName www.123.com</span><br><span class="line">    ServerAlias 123.com</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.gif$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.jpg$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.png$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.bmp$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.swf$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.js$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.css$&quot; img </span><br><span class="line">#以上为定义变量：将所有关于图片的请求定义为变量img</span><br><span class="line">    CustomLog &quot;logs/123.com-access_log&quot; combined env=!img</span><br><span class="line"># “env=!img”表示非img变量。本行命令的含义是：不记录关于变量img的请求日志。</span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line"></span><br><span class="line">配置完成后重新检测和加载</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl -t</span><br><span class="line">Syntax OK</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl graceful</span><br><span class="line"></span><br><span class="line">[root@host ~]# mkdir /data/wwwroot/www.123.com/images  #创建目录，并在这目录下上传一个图片</span><br><span class="line">[root@host ~]# curl -x127.0.0.1:80 -I 123.com/images/123.jpg </span><br><span class="line">[root@host ~]#tail /usr/local/apache2.4/logs/123.com-access_log  # 日志没有静态文件的记录了</span><br></pre></td></tr></table></figure>
+          5.1 vim介绍vi 和 vim 的区别vi 是早期版本，vim是后来改进版本。直观的是，vim编辑文件可以显示不同颜色，一般电脑都有vi，而vim有的没有，需要安装。
+12yum install vim-enhanced安装vim包的命令
 
-<p>#11.23 访问日志切割<br>日志一直记录总有一天会把整个磁盘占满，所以有必要让它自动切割，并删除老的日志文件<br>把虚拟主机配置文件改成如下： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/apache2.4/conf/extra/httpd-vhosts.conf</span><br><span class="line">......</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot &quot;/data/wwwroot/www.123.com&quot;</span><br><span class="line">    ServerName www.123.com</span><br><span class="line">    ServerAlias 123.com</span><br><span class="line">  SetEnvIf Request_URI &quot;.*\.gif$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.jpg$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.png$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.bmp$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.swf$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.js$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.css$&quot; img </span><br><span class="line">    CustomLog &quot;|/usr/local/apache2.4/bin/rotatelogs -l logs/123.com-access_%Y%m%d.log 86400&quot; combined env=!img</span><br><span class="line"># 使用rotatelogs工具，以系统时间为基准，每天切割一次日志，并且日志名字格式为“123.com-access_%Y%m%d.log”</span><br><span class="line"></span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line"></span><br><span class="line">配置完成后重新检测和加载</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl -t</span><br><span class="line">Syntax OK</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl graceful</span><br><span class="line"></span><br><span class="line">ls /usr/local/apache2.4/logs</span><br></pre></td></tr></table></figure>
-
-<p>注： rotatelogs是Apache切割日志的工具，语法如下：<br>Rotatelogs的用法：<br>rotatelogs [ -l ] logfile [ rotationtime [ offset ]] | [ filesizeM ]<br>选项：</p>
-<ul>
-<li>-l    使用本地时间代替GMT时间作为时间基准。注意：在一个改变GMT偏移量(比如夏令时)的环境中使用-l会导致不可预料的结果。</li>
-<li>logfile    它加上基准名就是日志文件名。如果logfile中包含”%”，则它会被视为用于strftime()的格式字符串；否则它会被自动加上以秒为单位的”.nnnnnnnnnn”后缀。这两种格式都表示新的日志开始使用的时间。</li>
-<li>rotationtime    日志文件滚动的以秒为单位的间隔时间。</li>
-<li>offset    相对于UTC的时差的分钟数。如果省略，则假定为”0”并使用UTC时间。比如，要指定UTC时差为”-5小时”的地区的当地时间，则此参数应为”-300”。</li>
-<li>filesizeM    指定以filesizeM文件大小滚动，而不是按照时间或时差滚动。</li>
-</ul>
-<p>每小时切割一次日志<br><code>CustomLog &quot;|/usr/local/apache2.4/bin/rotatelogs logs/access_%Y%m%d%H.log 3600&quot; combined</code></p>
-<p>#11.24 静态元素过期时间<br>浏览器访问网站的图片时会把静态的文件缓存在本地电脑里，这样下次再访问时就不用去远程下载了，<br>增加配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/apache2.4/conf/extra/httpd-vhosts.conf</span><br><span class="line">……</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot &quot;/data/wwwroot/111.com&quot;</span><br><span class="line">    ServerName 111.com</span><br><span class="line">    ServerAlias www.example.com</span><br><span class="line">    &lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">        RewriteEngine on</span><br><span class="line">        RewriteCond %&#123;HTTP_HOST&#125; !^111.com$</span><br><span class="line">        RewriteRule ^/(.*)$ http://111.com/$1 [R=301,L]</span><br><span class="line">    &lt;/IfModule&gt;</span><br><span class="line"></span><br><span class="line">&lt;IfModule mod_expires.c&gt;</span><br><span class="line">    ExpiresActive on  #打开该功能的开关 </span><br><span class="line">    ExpiresByType image/gif  &quot;access plus 1 days&quot;</span><br><span class="line">    ExpiresByType image/jpeg &quot;access plus 24 hours&quot;</span><br><span class="line">    ExpiresByType image/png &quot;access plus 24 hours&quot;</span><br><span class="line">    ExpiresByType text/css &quot;now plus 2 hour&quot;</span><br><span class="line">    ExpiresByType application/x-javascript &quot;now plus 2 hours&quot;</span><br><span class="line">    ExpiresByType application/javascript &quot;now plus 2 hours&quot;</span><br><span class="line">    ExpiresByType application/x-shockwave-flash &quot;now plus 2 hours&quot;</span><br><span class="line">    ExpiresDefault &quot;now plus 0 min&quot;    #以上是定义不同类型的文件缓存的时间</span><br><span class="line">&lt;/IfModule&gt;</span><br><span class="line">    ErrorLog &quot;logs/111.com-error_log&quot;</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.gif$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.jpg$&quot; img </span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.png$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.bmp$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.swf$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.js$&quot; img</span><br><span class="line">    SetEnvIf Request_URI &quot;.*\.css$&quot; img  </span><br><span class="line">    CustomLog &quot;|usr/local/apache2.4/bin/rotatelogs -l logs/111.com-access_%Y%m%d.log 86400&quot; combined env=!img</span><br><span class="line">#使用rotatelogs工具，以系统时间为基准，每天切割一次日志，并且日志名字格式为“111.com-access_%Y%m%d.log”。</span><br><span class="line"></span><br><span class="line">配置完成后重新检测和加载</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl -t</span><br><span class="line">Syntax OK</span><br><span class="line"></span><br><span class="line">检测Apache配置文件是否开启expire模块：  </span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl -M |grep expires</span><br><span class="line">未检测到expires模块，所以需要编辑Apache配置文件，加载expires模块</span><br><span class="line"></span><br><span class="line">配置Apache，加载expires模块</span><br><span class="line">[root@host ~]# vim /usr/local/apache2.4/conf/httpd.conf</span><br><span class="line">LoadModule expires_module modules/mod_expires.so</span><br><span class="line"></span><br><span class="line">加载配置文件：</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl -t</span><br><span class="line">Syntax OK</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl graceful</span><br><span class="line"></span><br><span class="line">检查模块是否开启：</span><br><span class="line">[root@host ~]# /usr/local/apache2.4/bin/apachectl -M |grep expires</span><br><span class="line">expires_module (shared)</span><br><span class="line"># 查找expires模块，并开启加载该模块的命令行（去掉#即可）。 </span><br><span class="line"></span><br><span class="line">再次检测</span><br><span class="line">[root@host ~]#  curl -x192.168.2.130:80 111.com/baidu.png -I</span><br></pre></td></tr></table></figure>
-
-<p>在配置文件添加mod_expires.c模块内容，其余不变。  </p>
-<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><h2 id="apache日志记录代理IP以及真实客户端IP"><a href="#apache日志记录代理IP以及真实客户端IP" class="headerlink" title="apache日志记录代理IP以及真实客户端IP"></a>apache日志记录代理IP以及真实客户端IP</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">默认情况下log日志格式为：</span><br><span class="line">LogFormat &quot;%h %l %u %t \&quot;%r\&quot; %&gt;s %b \&quot;%&#123;Referer&#125;i\&quot; \&quot;%&#123;User-Agent&#125;i\&quot;&quot; combined</span><br><span class="line">其中%h 是记录访问者的IP，如果在web的前端有一层代理，那么这个%h其实就是代理机器的IP，这不是我们想要的。在这种情况下，</span><br><span class="line">%&#123;X-FORWARDED-FOR&#125;i 字段会记录客户端真实的IP。所以log日志改为：</span><br><span class="line">LogFormat &quot;%h %&#123;X-FORWARDED-FOR&#125;i %l %u %t \&quot;%r\&quot; %&gt;s %b \&quot;%&#123;Referer&#125;i\&quot; \&quot;%&#123;User-Agent&#125;i\&quot;&quot; combined</span><br></pre></td></tr></table></figure>
-
-<h2 id="apache只记录指定URI的日志"><a href="#apache只记录指定URI的日志" class="headerlink" title="apache只记录指定URI的日志"></a>apache只记录指定URI的日志</h2><p>需求是，把类似请求 <a href="http://www.aaa.com/aaa/" target="_blank" rel="noopener">www.aaa.com/aaa/</a>… 这样的请求才记录日志。<br>在httpd.conf 或者 相关的虚拟主机配置文件中添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SetEnvIf Request_URI &quot;^/aaa/.*&quot; aaa-request</span><br><span class="line">CustomLog &quot;|/usr/local/apache/bin/rotatelogs -l /usr/local/apache/logs/aaa-access_%Y%m%d.log 86400&quot; combined env=aaa-request</span><br><span class="line">这样就可以了。这个原理和不记录图片等静态访问的日志是一样的。</span><br></pre></td></tr></table></figure>
-
-<p>##apache日志记录客户端请求的域名 </p>
-<p>正常情况下，根本就没有必要记录这一项，毕竟咱们大都根据虚拟主机来设置相应的访问日志，但也有个别的情况，比如<br>ServerName *.abc.com<br>这样泛解析的形式，所以有必要记录一下用户请求的域名到底是哪个。<br>而apache的LogFormat 中正好有一项值满足了这个需求。即 %V 这里是大写的V ,小写的v 记录的是咱们在虚拟主机中设置的ServerName ，这个的确是没有必要记录的。</p>
-<h2 id="apache-日志切割问题"><a href="#apache-日志切割问题" class="headerlink" title="apache 日志切割问题"></a>apache 日志切割问题</h2><p>apache的日志是可以自动切割的。<br>方法一： 使用 cronolog 为每一天建立一个新的日志</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CustomLog &quot;|bin/cronolog logs/access_%Y%m%d.log&quot; combined</span><br></pre></td></tr></table></figure>
-
-<p>也可以按小时</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CustomLog &quot;|bin/cronolog logs/access_%Y%m%d%h.log&quot; combined</span><br></pre></td></tr></table></figure>
-
-<p>方法二：使用 rotatelogs 每一天记录一个日志</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CustomLog &quot;|bin/rotatelogs -l logs/access_%Y%m%d.log 86400&quot; combined</span><br></pre></td></tr></table></figure>
-
-<p>每小时</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CustomLog &quot;|bin/rotatelogs -l logs/access_%Y%m%d%H.log 3600&quot; combined</span><br></pre></td></tr></table></figure>
-
-<p>再看apache rotatelogs语法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">rotatelogs [ -l ] logfile [ rotationtime [ offset ]] | [ filesizeM ]</span><br><span class="line"></span><br><span class="line">选项</span><br><span class="line">-l </span><br><span class="line">使用本地时间代替GMT时间作为时间基准。注意：在一个改变GMT偏移量(比如夏令时)的环境中使用-l会导致不可预料的结果。所以一定要加上-l 否则出现的日志时间和实际时间是相差8小时的。 </span><br><span class="line">logfile</span><br><span class="line">它加上基准名就是日志文件名。如果logfile中包含”%”，则它会被视为用于strftime()的格式字符串；否则它会被自动加上以秒为单位的”.nnnnnnnnnn”后缀。这两种格式都表示新的日志开始使用的时间。 </span><br><span class="line">rotationtime</span><br><span class="line">日志文件滚动的以秒为单位的间隔时间。 </span><br><span class="line">offset</span><br><span class="line">相对于UTC的时差的分钟数。如果省略，则假定为”0″并使用UTC时间。比如，要指定UTC时差为”-5小时”的地区的当地时间，则此参数应为”-300″。 </span><br><span class="line">filesizeM</span><br><span class="line">指定以filesizeM文件大小滚动，而不是按照时间或时差滚动。</span><br></pre></td></tr></table></figure>
-          
+2. vim和vi的一些用法12345vim 1.tx
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/5.1 - 5.4 Vim命令入门01/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1768,7 +1488,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/10.19 - 10.22 iptables学习03-firewalld的使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/10.16 - 10.18 iptables学习02-nat表应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1787,7 +1507,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/10.19 - 10.22 iptables学习03-firewalld的使用/" itemprop="url">10.19 - 10.22 iptables学习03-firewalld的使用</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/10.16 - 10.18 iptables学习02-nat表应用/" itemprop="url">10.16 - 10.18 iptables学习02-nat表应用</a></h1>
         
 
         <div class="post-meta">
@@ -1861,38 +1581,16 @@
       
         
           
-            <h1 id="10-19-iptables规则备份和恢复"><a href="#10-19-iptables规则备份和恢复" class="headerlink" title="10.19 iptables规则备份和恢复"></a>10.19 iptables规则备份和恢复</h1><ul>
-<li><p>保存和备份iptables规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables save  会把规则保存到/etc/sysconfig/iptables</span><br><span class="line">如果想要一开机就启动规则，最好把规则保存到配置文件中</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>有时候想把iptables规则备份其他文件中，比如到my.ipt文件中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables-save &gt; my.ipt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>清空iptables规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -F</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>恢复刚才备份的规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables-restore &lt; my.ipt</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="10-20-firewalld的9个zone"><a href="#10-20-firewalld的9个zone" class="headerlink" title="10.20 firewalld的9个zone"></a>10.20 firewalld的9个zone</h1><ul>
-<li><p>打开firewalld，禁掉iptables</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable iptables</span><br><span class="line">systemctl stop iptables</span><br><span class="line">systemctl enable firewalld</span><br><span class="line">systemctl start firewalld</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>firewalld自带规则，默认有9个zone</p>
-</li>
-<li><p>默认zone为public，每个zone好比一个规则集</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --get-zones          查看所有zone</span><br><span class="line">block dmz drop external home internal public trusted work</span><br><span class="line"></span><br><span class="line">block：拒绝所有外部连接，允许内部发起的连接</span><br><span class="line">dmz：和硬件防火墙一样，受限制的公共连接可以进入</span><br><span class="line">drop：丢弃接收到的所有网络数据包</span><br><span class="line">external：允许指定的外部连接</span><br><span class="line">home：用于家庭组网络，允许指定的外部连接</span><br><span class="line">internal：用于内部网络，允许指定的外部连接</span><br><span class="line">public：公共区域内使用，允许指定的外部连接</span><br><span class="line">trusted：信任所有网络连接</span><br><span class="line">work：用于工作区，允许指定的外部连接</span><br><span class="line"></span><br><span class="line">firewall-cmd --get-default-zone  查看默认zone</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="10-21-firewalld关于zone的操作"><a href="#10-21-firewalld关于zone的操作" class="headerlink" title="10.21 firewalld关于zone的操作"></a>10.21 firewalld关于zone的操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ls /usr/lib/firewalld/zones/                      查看zone的配置文件模板</span><br><span class="line">firewall-cmd --set-default-zone=work              设定默认zone</span><br><span class="line">firewall-cmd --get-zone-of-interface=ens33        查指定网卡</span><br><span class="line">firewall-cmd --zone=public --add-interface=lo    给指定网卡设置zone </span><br><span class="line">firewall-cmd --zone=dmz --change-interface=lo    针对网卡更改zone</span><br><span class="line">firewall-cmd --zone=dmz  --remove-interface=lo    针对网卡删除zone </span><br><span class="line">firewall-cmd --get-active-zones                  查看系统所有网卡所在的zone</span><br></pre></td></tr></table></figure>
-
-<h1 id="10-22-firewalld关于service的操作"><a href="#10-22-firewalld关于service的操作" class="headerlink" title="10.22 firewalld关于service的操作"></a>10.22 firewalld关于service的操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --get-services 查看所有的servies</span><br><span class="line">firewall-cmd --list-services //查看当前zone下有哪些service</span><br><span class="line">firewall-cmd --zone=work --list-services//查看work下有哪些service</span><br><span class="line">firewall-cmd --zone=public --add-service=http //把http增加到public的zone下面</span><br><span class="line">firewall-cmd --zone=public --remove-service=http//移除public的zone的http服务</span><br><span class="line">firewall-cmd --zone=public --add-service=http --permanent //更改配置文件，新增的service会得到保存，之后会在/etc/firewalld/zones目录下面生成配置文件</span><br><span class="line">ls /etc/firewalld/zones/</span><br><span class="line">ls /usr/lib/firewalld/services/ //查看service的配置文件模板</span><br></pre></td></tr></table></figure>
-
-
-          
+          10.16/10.17/10.18 iptables nat表应用nat表应用实验第一步 准备工作
+A机器两块网卡ens33(192.168.2.106)、再添加一块自定义网卡ens37(192.168.100.1)，添加到LAN内网区段（自定义名字，写什么无所谓），ens33可以上外网，ens37
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/10.16 - 10.18 iptables学习02-nat表应用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1939,7 +1637,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/11.6 - 11.9 LAMP架构-mariadb、apache httpd安装/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/5.5 - 5.7 Vim入门02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouqun">
@@ -1958,7 +1656,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux入门笔记/11.6 - 11.9 LAMP架构-mariadb、apache httpd安装/" itemprop="url">11.6 - 11.9 LAMP架构-mariadb、apache httpd安装</a></h1>
+                <a class="post-title-link" href="/linux入门笔记/5.5 - 5.7 Vim入门02/" itemprop="url">5.5 - 5.7 Vim入门02</a></h1>
         
 
         <div class="post-meta">
@@ -2032,29 +1730,16 @@
       
         
           
-            <p>[toc]</p>
-<h1 id="11-6-MariaDB安装"><a href="#11-6-MariaDB安装" class="headerlink" title="11.6 MariaDB安装"></a>11.6 MariaDB安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src    #进入制定目录</span><br><span class="line">wget https://downloads.mariadb.com/MariaDB/mariadb-10.2.6/bintar-linux-glibc_214-x86_64/mariadb-10.2.6-linux-glibc_214-x86_64.tar.gz  #到官网下载mariaDB二进制包</span><br><span class="line">tar zxvf mariadb-10.2.6-linux-glibc_214-x86_64.tar.gz    #将包解压到当前目录</span><br><span class="line">mv mariadb-10.2.6-linux-glibc_214-x86_64 /usr/local/mariadb  #将mariaDB的glibc文件移动到/usr/local/mariadb目录</span><br><span class="line">cd /usr/local/mariadb  #进入目录</span><br><span class="line">mkdir /data/</span><br><span class="line">useradd mysql  #添加mysql用户</span><br><span class="line">./scripts/mysql_install_db --user=mysql --basedir=/usr/local/mariadb --datadir=/data/mariadb  #执行mysql初始化命令</span><br><span class="line">/usr/local/mariadb//bin/mysqld: error while loading shared libraries: libaio.so.1: cannot open shared object file: No such file or directory #报错，缺少文件libaio</span><br><span class="line">yum list | grep libaio   #寻找libaio包，如下，一般我们缺少的包，安装devel或者deb的包就好</span><br><span class="line">libaio.i686                                0.3.109-13.el7              base    </span><br><span class="line">libaio.x86_64                              0.3.109-13.el7              base    </span><br><span class="line">libaio-devel.i686                          0.3.109-13.el7              base    </span><br><span class="line">libaio-devel.x86_64                        0.3.109-13.el7              base</span><br><span class="line">yum install libaio-devel.x86_64  #安装</span><br><span class="line">./scripts/mysql_install_db --user=mysql --basedir=/usr/local/mariadb  --datadir=/data/mariadb  #再次执行mysql初始化命令</span><br><span class="line">echo $?</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">cp support-files/my-small.cnf /usr/local/mariadb/my.cnf   #复制源配置文件到mariadb下面，在 [mysqld]里定义basedir</span><br><span class="line">和datadir，如果系统同时有mysql的话，可能或调用mysql的basedir和datadir</span><br><span class="line">vim /usr/local/mariadb/my.cnf </span><br><span class="line">  basedir=/usr/local/mariadb</span><br><span class="line">  datadir=/data/mariadb</span><br><span class="line">cp support-files/mysql.server /etc/init.d/mariadb              #复制mysql服务配置文件到mariadb下面，需要修改参数</span><br><span class="line">vim /etc/init.d/mariadb //定义basedir、datadir、conf以及启动参数 </span><br><span class="line">  basedir=/usr/local/mariadb</span><br><span class="line">  datadir=/data/mariadb</span><br><span class="line">  conf=$basedir/my.cnf</span><br><span class="line">...  ...</span><br><span class="line"></span><br><span class="line">case &quot;$mode&quot; in</span><br><span class="line">  &apos;start&apos;)</span><br><span class="line">    # Start daemon</span><br><span class="line"></span><br><span class="line">    # Safeguard (relative paths, core dumps..)</span><br><span class="line">    cd $basedir</span><br><span class="line"></span><br><span class="line">    echo $echo_n &quot;Starting MySQL&quot;</span><br><span class="line">    if test -x $bindir/mysqld_safe</span><br><span class="line">    then</span><br><span class="line">      # Give extra arguments to mysqld with the my.cnf file. This script</span><br><span class="line">      # may be overwritten at next upgrade.</span><br><span class="line">      $bindir/mysqld_safe --defaults-file=&quot;$conf&quot; --datadir=&quot;$datadir&quot; --pid-file=&quot;$mysqld_pid_file_path&quot; &quot;$@&quot; &amp;</span><br><span class="line">      wait_for_ready; return_value=$?</span><br><span class="line"></span><br><span class="line">/etc/init.d/mariadb start   #启动</span><br><span class="line">ps aux | grep mariadb     #确认下是否正常启动，YES</span><br><span class="line">root    11492  0.0  0.6 115388  3308 ?        S    12:45  0:00 /bin/sh /usr/local/mariadb/bin/mysqld_safe --defaults-file=/usr/local/mariadb/my.cnf --datadir=/data/mariadb --pid-file=/data/mariadb/joking.pid</span><br><span class="line">mysql    11611  0.0 10.8 1125112 56148 ?      Sl  12:45  0:00 /usr/local/mariadb/bin/mysqld --defaults-file=/usr/local/mariadb/my.cnf --basedir=/usr/local/mariadb --datadir=/data/mariadb --plugin-dir=/usr/local/mariadb/lib/plugin --user=mysql --log-error=/data/mariadb/joking.err --pid-file=/data/mariadb/joking.pid --socket=/tmp/mysql.sock --port=3306</span><br><span class="line">root    11770  0.0  0.4 112656  2260 pts/0    S+  12:54  0:00 grep --color=auto mariadb</span><br><span class="line"></span><br><span class="line">netstat -ltnp</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address          Foreign Address        State      PID/Program name    </span><br><span class="line">tcp        0      0 127.0.0.1:25            0.0.0.0:*              LISTEN      1895/master        </span><br><span class="line">tcp        0      0 0.0.0.0:28206          0.0.0.0:*              LISTEN      1083/sshd          </span><br><span class="line">tcp6      0      0 ::1:25                  :::*                    LISTEN      1895/master        </span><br><span class="line">tcp6      0      0 :::3306                :::*                    LISTEN      11611/mysqld        </span><br><span class="line">tcp6      0      0 :::28206                :::*                    LISTEN      1083/sshd</span><br></pre></td></tr></table></figure>
-
-<h1 id="11-7-11-8-11-9-Apache安装"><a href="#11-7-11-8-11-9-Apache安装" class="headerlink" title="11.7/11.8/11.9 Apache安装"></a>11.7/11.8/11.9 Apache安装</h1><p>Apache是一个基金会的名字，httpd才是我们要安装的软件包，早期它的名字就叫apache，现在主流版本是2.4<br>2.2和2.4的安装方法不同，涉及到依赖的APR通用函数库版本不同，我们的CentOS7自带的APR包是2.2的，而2.4的需要下载自己编译<br>Apache官网<a href="http://www.apache.org" target="_blank" rel="noopener">www.apache.org</a></p>
-<h2 id="1-先下载下列这些包到-usr-local-src"><a href="#1-先下载下列这些包到-usr-local-src" class="headerlink" title="1. 先下载下列这些包到  /usr/local/src/"></a>1. 先下载下列这些包到  /usr/local/src/</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/</span><br><span class="line">wget http://mirrors.cnnic.cn/apache/httpd/httpd-2.4.27.tar.gz      #httpd的二进制包</span><br><span class="line">wget http://mirrors.hust.edu.cn/apache/apr/apr-1.6.2.tar.gz         # APR库源码包</span><br><span class="line">wget http://mirrors.hust.edu.cn/apache/apr/apr-util-1.6.0.tar.gz   # APR-util库源码包</span><br><span class="line"># apr和apr-util是一个通用的函数库，它让httpd可以不关心底层的操作系统平台，可以很方便地移植（从linux移植到windows）</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-解压这些包"><a href="#2-解压这些包" class="headerlink" title="2. 解压这些包"></a>2. 解压这些包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf httpd-2.4.27.tar.gz </span><br><span class="line">tar zxvf apr-1.6.2.tar.gz  </span><br><span class="line">tar zxvf apr-util-1.6.0.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-安装APR"><a href="#3-安装APR" class="headerlink" title="3.安装APR"></a>3.安装APR</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/apr-1.6.2</span><br><span class="line">./configure --prefix=/usr/local/apr</span><br><span class="line">echo $?  #检查安装是否成功</span><br><span class="line">0             # 0表示OK</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">报错</span><br><span class="line">rm: cannot remove &apos;libtoolT&apos;: No such file or directory</span><br><span class="line">解决：编辑 configure文件，查找 $RM &quot;$cfgfile&quot; 这个地方，用#注释掉</span><br><span class="line">vim configure   </span><br><span class="line">/$RM &quot;$cfgfile        //查找这个，并用#注释掉</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-安装APR-util"><a href="#4-安装APR-util" class="headerlink" title="4. 安装APR-util"></a>4. 安装APR-util</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/apr-util-1.6.0</span><br><span class="line">./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr   # 这个需要制定依赖apr</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">报错</span><br><span class="line">xml/apr_xml.c:35:19: fatal error: expat.h: No such file or directory</span><br><span class="line">解决：安装expat库</span><br><span class="line">yum install expat-devel</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-安装httpd-2-4"><a href="#5-安装httpd-2-4" class="headerlink" title="5. 安装httpd 2.4"></a>5. 安装httpd 2.4</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/httpd-2.4.27</span><br><span class="line">./configure \         #这里的反斜杠是脱义字符，加上它我们可以把一行命令写成多行</span><br><span class="line">--prefix=/usr/local/apache2.4 \</span><br><span class="line">--with-apr=/usr/local/apr \</span><br><span class="line">--with-apr-util=/usr/local/apr-util \</span><br><span class="line">--enable-so \       #表示开启支持动态扩展模块，PHP还有Appache都支持以模块的形式存在</span><br><span class="line">--enable-mods-shared=most  #表示开启大多数模块</span><br><span class="line"></span><br><span class="line">#如果输出错误，说缺少pcre包的话</span><br><span class="line">yum list | grep pcre</span><br><span class="line">yum install -y pcre-devel.x86_64</span><br><span class="line"></span><br><span class="line">./configure \ --prefix=/usr/local/apache2.4  --with-apr=/usr/local/apr  --with-apr-util=/usr/local/apr-util  --enable-so  --enable-mods-shared=most     这句是错了</span><br><span class="line">./configure --prefix=/usr/local/apache2.4 --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --enable-so --enable-mods-shared=most</span><br><span class="line">echo $?    #确认上条命令是都OK</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-Apache相关文件和模块"><a href="#6-Apache相关文件和模块" class="headerlink" title="6. Apache相关文件和模块"></a>6. Apache相关文件和模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">[root@joking httpd-2.4.27]# cd /usr/local/apache2.4/</span><br><span class="line">[root@joking apache2.4]# ls</span><br><span class="line">bin  build  cgi-bin  conf  error  htdocs  icons  include  logs  man  manual  modules</span><br><span class="line">[root@joking apache2.4]# ls bin/httpd</span><br><span class="line">bin/httpd</span><br><span class="line">[root@joking apache2.4]# du -sh !$</span><br><span class="line">du -sh bin/httpd</span><br><span class="line">2.3M    bin/httpd</span><br><span class="line">[root@joking apache2.4]# ls conf/</span><br><span class="line">extra  httpd.conf  magic  mime.types  original</span><br><span class="line">[root@joking apache2.4]# ls htdocs/</span><br><span class="line">index.html</span><br><span class="line">[root@joking apache2.4]# ls logs/</span><br><span class="line">[root@joking apache2.4]# ls modules/</span><br><span class="line">httpd.exp            mod_authn_dbd.so        mod_authz_user.so    mod_deflate.so    mod_info.so                mod_negotiation.so    mod_proxy_scgi.so      mod_session_dbd.so      mod_substitute.so</span><br><span class="line">mod_access_compat.so  mod_authn_dbm.so        mod_autoindex.so      mod_dir.so        mod_lbmethod_bybusyness.so  mod_proxy_ajp.so      mod_proxy.so          mod_session.so          mod_unique_id.so</span><br><span class="line">mod_actions.so        mod_authn_file.so      mod_buffer.so        mod_dumpio.so      mod_lbmethod_byrequests.so  mod_proxy_balancer.so  mod_proxy_wstunnel.so  mod_setenvif.so          mod_unixd.so</span><br><span class="line">mod_alias.so          mod_authn_socache.so    mod_cache_disk.so    mod_env.so        mod_lbmethod_bytraffic.so  mod_proxy_connect.so  mod_ratelimit.so      mod_slotmem_shm.so      mod_userdir.so</span><br><span class="line">mod_allowmethods.so  mod_authz_core.so      mod_cache.so          mod_expires.so    mod_lbmethod_heartbeat.so  mod_proxy_express.so  mod_remoteip.so        mod_socache_dbm.so      mod_version.so</span><br><span class="line">mod_auth_basic.so    mod_authz_dbd.so        mod_cache_socache.so  mod_ext_filter.so  mod_log_config.so          mod_proxy_fcgi.so      mod_reqtimeout.so      mod_socache_memcache.so  mod_vhost_alias.so</span><br><span class="line">mod_auth_digest.so    mod_authz_dbm.so        mod_cgid.so          mod_file_cache.so  mod_log_debug.so            mod_proxy_fdpass.so    mod_request.so        mod_socache_shmcb.so    mod_watchdog.so</span><br><span class="line">mod_auth_form.so      mod_authz_groupfile.so  mod_dav_fs.so        mod_filter.so      mod_logio.so                mod_proxy_ftp.so      mod_rewrite.so        mod_speling.so</span><br><span class="line">mod_authn_anon.so    mod_authz_host.so      mod_dav.so            mod_headers.so    mod_macro.so                mod_proxy_hcheck.so    mod_sed.so            mod_ssl.so</span><br><span class="line">mod_authn_core.so    mod_authz_owner.so      mod_dbd.so            mod_include.so    mod_mime.so                mod_proxy_http.so      mod_session_cookie.so  mod_status.so</span><br><span class="line">[root@joking apache2.4]# du -sh modules/</span><br><span class="line">7.3M    modules/</span><br><span class="line">[root@joking apache2.4]# </span><br><span class="line">[root@joking apache2.4]# ls /usr/local/apache2.4/modules</span><br><span class="line">httpd.exp            mod_authn_dbd.so        mod_authz_user.so    mod_deflate.so    mod_info.so                mod_negotiation.so    mod_proxy_scgi.so      mod_session_dbd.so      mod_substitute.so</span><br><span class="line">mod_access_compat.so  mod_authn_dbm.so        mod_autoindex.so      mod_dir.so        mod_lbmethod_bybusyness.so  mod_proxy_ajp.so      mod_proxy.so          mod_session.so          mod_unique_id.so</span><br><span class="line">mod_actions.so        mod_authn_file.so      mod_buffer.so        mod_dumpio.so      mod_lbmethod_byrequests.so  mod_proxy_balancer.so  mod_proxy_wstunnel.so  mod_setenvif.so          mod_unixd.so</span><br><span class="line">mod_alias.so          mod_authn_socache.so    mod_cache_disk.so    mod_env.so        mod_lbmethod_bytraffic.so  mod_proxy_connect.so  mod_ratelimit.so      mod_slotmem_shm.so      mod_userdir.so</span><br><span class="line">mod_allowmethods.so  mod_authz_core.so      mod_cache.so          mod_expires.so    mod_lbmethod_heartbeat.so  mod_proxy_express.so  mod_remoteip.so        mod_socache_dbm.so      mod_version.so</span><br><span class="line">mod_auth_basic.so    mod_authz_dbd.so        mod_cache_socache.so  mod_ext_filter.so  mod_log_config.so          mod_proxy_fcgi.so      mod_reqtimeout.so      mod_socache_memcache.so  mod_vhost_alias.so</span><br><span class="line">mod_auth_digest.so    mod_authz_dbm.so        mod_cgid.so          mod_file_cache.so  mod_log_debug.so            mod_proxy_fdpass.so    mod_request.so        mod_socache_shmcb.so    mod_watchdog.so</span><br><span class="line">mod_auth_form.so      mod_authz_groupfile.so  mod_dav_fs.so        mod_filter.so      mod_logio.so                mod_proxy_ftp.so      mod_rewrite.so        mod_speling.so</span><br><span class="line">mod_authn_anon.so    mod_authz_host.so      mod_dav.so            mod_headers.so    mod_macro.so                mod_proxy_hcheck.so    mod_sed.so            mod_ssl.so</span><br><span class="line">mod_authn_core.so    mod_authz_owner.so      mod_dbd.so            mod_include.so    mod_mime.so                mod_proxy_http.so      mod_session_cookie.so  mod_status.so</span><br><span class="line">[root@joking apache2.4]# /usr/local/apache2.4/bin/httpd -M    #查看加载的模块</span><br><span class="line"># /usr/local/apache2.4/bin/apachectl -M   #同上，利用shell调用httpd</span><br><span class="line"></span><br><span class="line">AH00558: httpd: Could not reliably determine the server&apos;s fully qualified domain name, using 127.0.1.1. Set the &apos;ServerName&apos; directive globally to suppress this message</span><br><span class="line">Loaded Modules:</span><br><span class="line">core_module (static)</span><br><span class="line">so_module (static)</span><br><span class="line">http_module (static)</span><br><span class="line">mpm_event_module (static)</span><br><span class="line">authn_file_module (shared)</span><br><span class="line">authn_core_module (shared)</span><br><span class="line">authz_host_module (shared)</span><br><span class="line">authz_groupfile_module (shared)</span><br><span class="line">authz_user_module (shared)</span><br><span class="line">authz_core_module (shared)</span><br><span class="line">access_compat_module (shared)</span><br><span class="line">auth_basic_module (shared)</span><br><span class="line">reqtimeout_module (shared)</span><br><span class="line">filter_module (shared)</span><br><span class="line">mime_module (shared)</span><br><span class="line">log_config_module (shared)</span><br><span class="line">env_module (shared)</span><br><span class="line">headers_module (shared)</span><br><span class="line">setenvif_module (shared)</span><br><span class="line">version_module (shared)</span><br><span class="line">unixd_module (shared)</span><br><span class="line">status_module (shared)</span><br><span class="line">autoindex_module (shared)</span><br><span class="line">dir_module (shared)</span><br><span class="line">alias_module (shared)</span><br><span class="line"></span><br><span class="line">(static)    --原封模块</span><br><span class="line">(shared)  --扩展模块</span><br></pre></td></tr></table></figure>
-
-<h2 id="7-启动apache"><a href="#7-启动apache" class="headerlink" title="7. 启动apache"></a>7. 启动apache</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@joking apache2.4]# /usr/local/apache2.4/bin/apachectl start  #有提示，但并不是错误的</span><br><span class="line">AH00558: httpd: Could not reliably determine the server&apos;s fully qualified domain name, using host.localdomain. Set the &apos;ServerName&apos; directive globally to suppress this message</span><br><span class="line">[root@joking apache2.4]# ps aux | grep httpd</span><br><span class="line">root    27772  0.0  0.8  95520  4364 ?        Ss  10:15  0:00 /usr/local/apache2.4/bin/httpd -k start</span><br><span class="line">daemon  27773  0.0  0.8 382348  4416 ?        Sl  10:15  0:00 /usr/local/apache2.4/bin/httpd -k start</span><br><span class="line">daemon  27774  0.0  0.8 382348  4416 ?        Sl  10:15  0:00 /usr/local/apache2.4/bin/httpd -k start</span><br><span class="line">daemon  27775  0.0  0.8 382348  4416 ?        Sl  10:15  0:00 /usr/local/apache2.4/bin/httpd -k start</span><br><span class="line">root    27858  0.0  0.4 112656  2312 pts/0    R+  10:16  0:00 grep --color=auto httpd</span><br><span class="line">[root@joking apache2.4]# netstat -lntp   #查看端口</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address          Foreign Address        State      PID/Program name    </span><br><span class="line">tcp        0      0 127.0.0.1:25            0.0.0.0:*              LISTEN      1506/master        </span><br><span class="line">tcp        0      0 0.0.0.0:28206          0.0.0.0:*              LISTEN      1059/sshd          </span><br><span class="line">tcp6      0      0 ::1:25                  :::*                    LISTEN      1506/master        </span><br><span class="line">tcp6      0      0 :::3306                :::*                    LISTEN      2866/mysqld        </span><br><span class="line">tcp6      0      0 :::28206                :::*                    LISTEN      1059/sshd          </span><br><span class="line">tcp6      0      0 :::80                  :::*                    LISTEN      27772/httpd</span><br></pre></td></tr></table></figure>
-
-<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><h2 id="1-apache-dso"><a href="#1-apache-dso" class="headerlink" title="1. apache dso"></a>1. apache dso</h2><p><a href="https://yq.aliyun.com/articles/6298" target="_blank" rel="noopener">https://yq.aliyun.com/articles/6298</a></p>
-<h2 id="2-apache-apxs"><a href="#2-apache-apxs" class="headerlink" title="2. apache apxs"></a>2. apache apxs</h2><p><a href="http://man.chinaunix.net/newsoft/ApacheMenual_CN_2.2new/programs/apxs.html" target="_blank" rel="noopener">http://man.chinaunix.net/newsoft/ApacheMenual_CN_2.2new/programs/apxs.html</a></p>
-<h2 id="3-apache工作模式"><a href="#3-apache工作模式" class="headerlink" title="3. apache工作模式"></a>3. apache工作模式</h2><p><a href="http://www.cnblogs.com/fnng/archive/2012/11/20/2779977.html" target="_blank" rel="noopener">http://www.cnblogs.com/fnng/archive/2012/11/20/2779977.html</a></p>
-
-          
+          5.5 进入编辑模式1. 进入vim编辑模式vim命令后，输入 i 键，进入编辑模式（i, I, a, A, o,O,r,R都可以），按 Esc 键退出。
+2. 输入不同字母，进入编辑模式后的情况不同123456（1）按 i 键，此时光标在当前位置，并进入编辑模式（2）按 I 键，此时光标移动到当前
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux入门笔记/5.5 - 5.7 Vim入门02/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
