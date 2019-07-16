@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="#12.13 Nginx防盗链Nginx防盗链可结合日志管理一起配置，因为该配置也要使用location板块 1234567891011121314151617181920212223242526272829[root@host ~]# vim /usr/local/nginx/conf/vhost/test.com.conf……location ~* ^.+\.(gif|jpg|png|swf|">
+<meta name="description" content="12.13 Nginx防盗链Nginx防盗链可结合日志管理一起配置，因为该配置也要使用location板块 1234567891011121314151617181920212223242526272829[root@host ~]# vim /usr/local/nginx/conf/vhost/test.com.conf……location ~* ^.+\.(gif|jpg|png|swf|f">
 <meta name="keywords" content="nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="12.13 - 12.16 Nginx的防盗链、访问控制、解析php相关配置、代理">
+<meta property="og:title" content="Nginx的防盗链、访问控制、解析php相关配置、代理">
 <meta property="og:url" content="http://yoursite.com/linux入门笔记/12.13 - 12.16 Nginx的防盗链、访问控制、解析php相关配置、代理/index.html">
 <meta property="og:site_name" content="Joking的Linux世界">
-<meta property="og:description" content="#12.13 Nginx防盗链Nginx防盗链可结合日志管理一起配置，因为该配置也要使用location板块 1234567891011121314151617181920212223242526272829[root@host ~]# vim /usr/local/nginx/conf/vhost/test.com.conf……location ~* ^.+\.(gif|jpg|png|swf|">
+<meta property="og:description" content="12.13 Nginx防盗链Nginx防盗链可结合日志管理一起配置，因为该配置也要使用location板块 1234567891011121314151617181920212223242526272829[root@host ~]# vim /usr/local/nginx/conf/vhost/test.com.conf……location ~* ^.+\.(gif|jpg|png|swf|f">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-12T06:36:45.802Z">
+<meta property="og:updated_time" content="2019-07-16T07:13:12.934Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="12.13 - 12.16 Nginx的防盗链、访问控制、解析php相关配置、代理">
-<meta name="twitter:description" content="#12.13 Nginx防盗链Nginx防盗链可结合日志管理一起配置，因为该配置也要使用location板块 1234567891011121314151617181920212223242526272829[root@host ~]# vim /usr/local/nginx/conf/vhost/test.com.conf……location ~* ^.+\.(gif|jpg|png|swf|">
+<meta name="twitter:title" content="Nginx的防盗链、访问控制、解析php相关配置、代理">
+<meta name="twitter:description" content="12.13 Nginx防盗链Nginx防盗链可结合日志管理一起配置，因为该配置也要使用location板块 1234567891011121314151617181920212223242526272829[root@host ~]# vim /usr/local/nginx/conf/vhost/test.com.conf……location ~* ^.+\.(gif|jpg|png|swf|f">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>12.13 - 12.16 Nginx的防盗链、访问控制、解析php相关配置、代理 | Joking的Linux世界</title>
+  <title>Nginx的防盗链、访问控制、解析php相关配置、代理 | Joking的Linux世界</title>
   
 
 
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">12.13 - 12.16 Nginx的防盗链、访问控制、解析php相关配置、代理</h1>
+          <h1 class="post-title" itemprop="name headline">Nginx的防盗链、访问控制、解析php相关配置、代理</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T22:10:55+08:00">
+                2017-09-07
               </time>
             
 
@@ -376,11 +376,10 @@
       
 
       
-        <p>#12.13 Nginx防盗链<br>Nginx防盗链可结合日志管理一起配置，因为该配置也要使用location板块</p>
+        <h1 id="12-13-Nginx防盗链"><a href="#12-13-Nginx防盗链" class="headerlink" title="12.13 Nginx防盗链"></a>12.13 Nginx防盗链</h1><p>Nginx防盗链可结合日志管理一起配置，因为该配置也要使用location板块</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/nginx/conf/vhost/test.com.conf</span><br><span class="line">……</span><br><span class="line">location ~* ^.+\.(gif|jpg|png|swf|flv|rar|zip|doc|pdf|gz|bz2|jpeg|bmp|xls)$</span><br><span class="line">&#123;</span><br><span class="line">    expires 7d;</span><br><span class="line">    valid_referers none blocked server_names  *.test.com ;</span><br><span class="line">    #定义referer白名单</span><br><span class="line">    if ($invalid_referer) &#123;</span><br><span class="line">        return 403;</span><br><span class="line">    #if函数的意思是：如果不是白名单内的域名，返回值：403</span><br><span class="line">    &#125;</span><br><span class="line">    access_log off;</span><br><span class="line">&#125;</span><br><span class="line">……</span><br><span class="line"></span><br><span class="line">[root@host ~]# /usr/local/nginx/sbin/nginx -t</span><br><span class="line">nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful</span><br><span class="line">[root@host ~]# /usr/local/nginx/sbin/nginx -s reload</span><br><span class="line"></span><br><span class="line">检查</span><br><span class="line">[root@host ~]# curl -e &quot;http://www.baidu.com/1.txt&quot; -x127.0.0.1:80 -I test.com/baidu.png</span><br><span class="line">HTTP/1.1 403 Forbidden</span><br><span class="line">Server: nginx/1.12.1</span><br><span class="line">Date: Mon, 11 Sep 2017 11:25:47 GMT</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 169</span><br><span class="line">Connection: keep-alive</span><br><span class="line">访问被拒绝，防盗链生效</span><br></pre></td></tr></table></figure>
 
-<p>#12.14 Nginx访问控制</p>
-<p>只允许几个指定IP通过访问/admin/目录的请求</p>
+<h1 id="12-14-Nginx访问控制"><a href="#12-14-Nginx访问控制" class="headerlink" title="12.14 Nginx访问控制"></a>12.14 Nginx访问控制</h1><p>只允许几个指定IP通过访问/admin/目录的请求</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/nginx/conf/vhost/test.com.conf </span><br><span class="line">……</span><br><span class="line">location /admin/</span><br><span class="line">    &#123;</span><br><span class="line">#设置IP白名单</span><br><span class="line">    allow 192.168.8.132;</span><br><span class="line">    allow 127.0.0.1;</span><br><span class="line">    deny all;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@host ~]# /usr/local/nginx/sbin/nginx -t</span><br><span class="line">nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful</span><br><span class="line">[root@host ~]# /usr/local/nginx/sbin/nginx -s reload</span><br></pre></td></tr></table></figure>
 
 <p>创建目录</p>
@@ -392,15 +391,13 @@
 <p>访问控制</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#正则匹配</span><br><span class="line">location ~ .*(abc|image)/.*\.php$</span><br><span class="line">&#123;</span><br><span class="line">        deny all;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#user_agent限制</span><br><span class="line">if ($http_user_agent ~ &apos;Spider/3.0|YoudaoBot|Tomato&apos;)</span><br><span class="line">&#123;</span><br><span class="line">      return 403;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#deny all和return 403效果一样</span><br></pre></td></tr></table></figure>
 
-<p>#12.15 Nginx解析php相关配置<br>核心配置文件</p>
+<h1 id="12-15-Nginx解析php相关配置"><a href="#12-15-Nginx解析php相关配置" class="headerlink" title="12.15 Nginx解析php相关配置"></a>12.15 Nginx解析php相关配置</h1><p>核心配置文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/nginx/conf/vhost/test.com.conf</span><br><span class="line">……</span><br><span class="line">location ~ \.php$</span><br><span class="line">    &#123;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">#fastcgi_pass 127.0.0.1:9000</span><br><span class="line">        fastcgi_pass unix:/tmp/php-fcgi.sock;</span><br><span class="line">#fastcgi_pass 有两种监听格式，要保证Nginx和php-fpm中格式是一致的，否则会报502错误</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME /data/wwwroot/test.com$fastcgi_script_name;</span><br><span class="line">#fastcgi _param SCRIPT _FILENAME所在行的路径要和root路径一致</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p>#12.16 Nginx代理</p>
-<blockquote>
+<h1 id="12-16-Nginx代理"><a href="#12-16-Nginx代理" class="headerlink" title="12.16 Nginx代理"></a>12.16 Nginx代理</h1><blockquote>
 <p>在计算机网络中，反向代理是代理服务器的一种。它根据客户端的请求，从后端的服务器上获取资源，然后再将这些资源返回给客户端。与前向代理不同，前向代理作为一个媒介将互联网上获取的资源返回给相关联的客户端，而反向代理是在服务器端作为代理使用，而不是客户端。</p>
 </blockquote>
-<p>##Nginx作为反向代理的特点</p>
-<ul>
+<h2 id="Nginx作为反向代理的特点"><a href="#Nginx作为反向代理的特点" class="headerlink" title="Nginx作为反向代理的特点"></a>Nginx作为反向代理的特点</h2><ul>
 <li>接收用户请求是异步的，即先将用户请求全部接收下来，再一次性发送后后端web服务器，极大的减轻后端web服务器的压力；</li>
 </ul>
 <ul>
@@ -416,19 +413,15 @@
 <li><p>支持服务器检测。NGINX能够根据应用服务器处理页面返回的状态码、超时信息等检测服务器是否出现故障，并及时返回错误的请求重新提交到其它节点上。</p>
 </li>
 </ul>
-<p>##工作原理</p>
-<p>Nginx代理是在一台代理服务器中自定义一个域名，该域名指向一个IP，然后将用户的请求通过这台代理服务器访问指定的IP所对应的web服务器。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>Nginx代理是在一台代理服务器中自定义一个域名，该域名指向一个IP，然后将用户的请求通过这台代理服务器访问指定的IP所对应的web服务器。</p>
 <h2 id="进入虚拟主机目录"><a href="#进入虚拟主机目录" class="headerlink" title="进入虚拟主机目录"></a>进入虚拟主机目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# cd /usr/local/nginx/conf/vhost/</span><br></pre></td></tr></table></figure>
 
-<p>##创建代理服务器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@host vhost]# vim proxy.conf</span><br><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name ask.apelearn.com;</span><br><span class="line">#定义域名</span><br><span class="line">    location /</span><br><span class="line">    &#123;</span><br><span class="line">        proxy_pass      http://121.201.9.155/;</span><br><span class="line">#指定被代理（被访问）的IP（web服务器IP）</span><br><span class="line">        proxy_set_header Host  $host;</span><br><span class="line">#$host指的是代理服务器的servername（也是被代理IP的域名）</span><br><span class="line">        proxy_set_header X-Real-IP      $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">设置好以后，就可以访问aminglinux论坛了</span><br></pre></td></tr></table></figure>
+<h2 id="创建代理服务器"><a href="#创建代理服务器" class="headerlink" title="创建代理服务器"></a>创建代理服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@host vhost]# vim proxy.conf</span><br><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name ask.apelearn.com;</span><br><span class="line">#定义域名</span><br><span class="line">    location /</span><br><span class="line">    &#123;</span><br><span class="line">        proxy_pass      http://121.201.9.155/;</span><br><span class="line">#指定被代理（被访问）的IP（web服务器IP）</span><br><span class="line">        proxy_set_header Host  $host;</span><br><span class="line">#$host指的是代理服务器的servername（也是被代理IP的域名）</span><br><span class="line">        proxy_set_header X-Real-IP      $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">设置好以后，就可以访问aminglinux论坛了</span><br></pre></td></tr></table></figure>
 
-<p>##检测验证</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#之前</span><br><span class="line">[root@host vhost]# curl -x127.0.0.1:80 ask.apelearn.com/robots.txt</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;&lt;title&gt;404 Not Found&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body bgcolor=&quot;white&quot;&gt;</span><br><span class="line">&lt;center&gt;&lt;h1&gt;404 Not Found&lt;/h1&gt;&lt;/center&gt;</span><br><span class="line">&lt;hr&gt;&lt;center&gt;nginx/1.12.1&lt;/center&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">#之后</span><br><span class="line">[root@host vhost]# /usr/local/nginx/sbin/nginx -t</span><br><span class="line">nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful</span><br><span class="line">[root@host vhost]# /usr/local/nginx/sbin/nginx -s reload</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@host vhost]# curl -x127.0.0.1:80 ask.apelearn.com/robots.txt</span><br><span class="line">#</span><br><span class="line"># robots.txt for MiWen</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">User-agent: *</span><br><span class="line"></span><br><span class="line">Disallow: /?/admin/</span><br><span class="line">Disallow: /?/people/</span><br><span class="line">Disallow: /?/question/</span><br><span class="line">Disallow: /account/</span><br><span class="line">Disallow: /app/</span><br><span class="line">Disallow: /cache/</span><br></pre></td></tr></table></figure>
+<h2 id="检测验证"><a href="#检测验证" class="headerlink" title="检测验证"></a>检测验证</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#之前</span><br><span class="line">[root@host vhost]# curl -x127.0.0.1:80 ask.apelearn.com/robots.txt</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;&lt;title&gt;404 Not Found&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body bgcolor=&quot;white&quot;&gt;</span><br><span class="line">&lt;center&gt;&lt;h1&gt;404 Not Found&lt;/h1&gt;&lt;/center&gt;</span><br><span class="line">&lt;hr&gt;&lt;center&gt;nginx/1.12.1&lt;/center&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">#之后</span><br><span class="line">[root@host vhost]# /usr/local/nginx/sbin/nginx -t</span><br><span class="line">nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful</span><br><span class="line">[root@host vhost]# /usr/local/nginx/sbin/nginx -s reload</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@host vhost]# curl -x127.0.0.1:80 ask.apelearn.com/robots.txt</span><br><span class="line">#</span><br><span class="line"># robots.txt for MiWen</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">User-agent: *</span><br><span class="line"></span><br><span class="line">Disallow: /?/admin/</span><br><span class="line">Disallow: /?/people/</span><br><span class="line">Disallow: /?/question/</span><br><span class="line">Disallow: /account/</span><br><span class="line">Disallow: /app/</span><br><span class="line">Disallow: /cache/</span><br></pre></td></tr></table></figure>
 
-<p>#扩展</p>
-<p>##502问题汇总<br><a href="http://ask.apelearn.com/question/9109" target="_blank" rel="noopener">http://ask.apelearn.com/question/9109</a></p>
-<p>##location优先级<br><a href="http://blog.lishiming.net/?p=100" target="_blank" rel="noopener">http://blog.lishiming.net/?p=100</a></p>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><h2 id="502问题汇总"><a href="#502问题汇总" class="headerlink" title="502问题汇总"></a>502问题汇总</h2><p><a href="http://ask.apelearn.com/question/9109" target="_blank" rel="noopener">http://ask.apelearn.com/question/9109</a></p>
+<h2 id="location优先级"><a href="#location优先级" class="headerlink" title="location优先级"></a>location优先级</h2><p><a href="http://blog.lishiming.net/?p=100" target="_blank" rel="noopener">http://blog.lishiming.net/?p=100</a></p>
 
       
     </div>
@@ -459,8 +452,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/linux入门笔记/12.21 - 12.24 php-fpm的pool、php-fpm慢执行日志、open_basedir、php-fpm进程管理/" rel="next" title="12.21 - 12.24 php-fpm的pool、php-fpm慢执行日志、open_basedir、php-fpm进程管理">
-                <i class="fa fa-chevron-left"></i> 12.21 - 12.24 php-fpm的pool、php-fpm慢执行日志、open_basedir、php-fpm进程管理
+              <a href="/linux入门笔记/12.10 - 12.12 Nginx访问日志、Nginx日志切割、静态文件不记录日志和过期时间/" rel="next" title="Nginx访问日志、Nginx日志切割、静态文件不记录日志和过期时间">
+                <i class="fa fa-chevron-left"></i> Nginx访问日志、Nginx日志切割、静态文件不记录日志和过期时间
               </a>
             
           </div>
@@ -469,8 +462,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/linux入门笔记/12.10 - 12.12 Nginx访问日志、Nginx日志切割、静态文件不记录日志和过期时间/" rel="prev" title="12.10 - 12.12 Nginx访问日志、Nginx日志切割、静态文件不记录日志和过期时间">
-                12.10 - 12.12 Nginx访问日志、Nginx日志切割、静态文件不记录日志和过期时间 <i class="fa fa-chevron-right"></i>
+              <a href="/linux入门笔记/12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl/" rel="prev" title="Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl">
+                Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -610,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#进入虚拟主机目录"><span class="nav-number">1.</span> <span class="nav-text">进入虚拟主机目录</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#12-13-Nginx防盗链"><span class="nav-number">1.</span> <span class="nav-text">12.13 Nginx防盗链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-14-Nginx访问控制"><span class="nav-number">2.</span> <span class="nav-text">12.14 Nginx访问控制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-15-Nginx解析php相关配置"><span class="nav-number">3.</span> <span class="nav-text">12.15 Nginx解析php相关配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-16-Nginx代理"><span class="nav-number">4.</span> <span class="nav-text">12.16 Nginx代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx作为反向代理的特点"><span class="nav-number">4.1.</span> <span class="nav-text">Nginx作为反向代理的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">4.2.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进入虚拟主机目录"><span class="nav-number">4.3.</span> <span class="nav-text">进入虚拟主机目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建代理服务器"><span class="nav-number">4.4.</span> <span class="nav-text">创建代理服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检测验证"><span class="nav-number">4.5.</span> <span class="nav-text">检测验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展"><span class="nav-number">5.</span> <span class="nav-text">扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#502问题汇总"><span class="nav-number">5.1.</span> <span class="nav-text">502问题汇总</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#location优先级"><span class="nav-number">5.2.</span> <span class="nav-text">location优先级</span></a></li></ol></li></ol></div>
             
 
           </div>

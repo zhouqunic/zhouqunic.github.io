@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="#14.4 exportfs命令  exportfs 命令用来管理当前NFS共享的文件系统列表。  ##常用参数-a 全部挂载或者全部卸载-r 重新挂载-u 卸载某一个目录-v 显示共享目录 1exportfs -arv    //服务端更改配置文件后，不重启服务，直接执行该命令就可以使更改后的配置文件生效。  ##以下操作在服务端上 12345[root@localhost ~]# vim /e">
+<meta name="description" content="14.4 exportfs命令 exportfs 命令用来管理当前NFS共享的文件系统列表。  常用参数-a 全部挂载或者全部卸载-r 重新挂载-u 卸载某一个目录-v 显示共享目录 1exportfs -arv    //服务端更改配置文件后，不重启服务，直接执行该命令就可以使更改后的配置文件生效。  以下操作在服务端上12345[root@localhost ~]# vim /etc/expo">
 <meta name="keywords" content="NFS,FTP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="14.4 - 15.2 NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp">
+<meta property="og:title" content="NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp">
 <meta property="og:url" content="http://yoursite.com/linux入门笔记/14.4 - 15.2 NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp/index.html">
 <meta property="og:site_name" content="Joking的Linux世界">
-<meta property="og:description" content="#14.4 exportfs命令  exportfs 命令用来管理当前NFS共享的文件系统列表。  ##常用参数-a 全部挂载或者全部卸载-r 重新挂载-u 卸载某一个目录-v 显示共享目录 1exportfs -arv    //服务端更改配置文件后，不重启服务，直接执行该命令就可以使更改后的配置文件生效。  ##以下操作在服务端上 12345[root@localhost ~]# vim /e">
+<meta property="og:description" content="14.4 exportfs命令 exportfs 命令用来管理当前NFS共享的文件系统列表。  常用参数-a 全部挂载或者全部卸载-r 重新挂载-u 卸载某一个目录-v 显示共享目录 1exportfs -arv    //服务端更改配置文件后，不重启服务，直接执行该命令就可以使更改后的配置文件生效。  以下操作在服务端上12345[root@localhost ~]# vim /etc/expo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-12T06:47:58.387Z">
+<meta property="og:updated_time" content="2019-07-16T06:57:08.416Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="14.4 - 15.2 NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp">
-<meta name="twitter:description" content="#14.4 exportfs命令  exportfs 命令用来管理当前NFS共享的文件系统列表。  ##常用参数-a 全部挂载或者全部卸载-r 重新挂载-u 卸载某一个目录-v 显示共享目录 1exportfs -arv    //服务端更改配置文件后，不重启服务，直接执行该命令就可以使更改后的配置文件生效。  ##以下操作在服务端上 12345[root@localhost ~]# vim /e">
+<meta name="twitter:title" content="NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp">
+<meta name="twitter:description" content="14.4 exportfs命令 exportfs 命令用来管理当前NFS共享的文件系统列表。  常用参数-a 全部挂载或者全部卸载-r 重新挂载-u 卸载某一个目录-v 显示共享目录 1exportfs -arv    //服务端更改配置文件后，不重启服务，直接执行该命令就可以使更改后的配置文件生效。  以下操作在服务端上12345[root@localhost ~]# vim /etc/expo">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>14.4 - 15.2 NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp | Joking的Linux世界</title>
+  <title>NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp | Joking的Linux世界</title>
   
 
 
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">14.4 - 15.2 NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp</h1>
+          <h1 class="post-title" itemprop="name headline">NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-18T23:53:40+08:00">
+                2017-09-18
               </time>
             
 
@@ -376,26 +376,22 @@
       
 
       
-        <p>#14.4 exportfs命令</p>
-<blockquote>
+        <h1 id="14-4-exportfs命令"><a href="#14-4-exportfs命令" class="headerlink" title="14.4 exportfs命令"></a>14.4 exportfs命令</h1><blockquote>
 <p>exportfs 命令用来管理当前NFS共享的文件系统列表。</p>
 </blockquote>
-<p>##常用参数<br>-a 全部挂载或者全部卸载<br>-r 重新挂载<br>-u 卸载某一个目录<br>-v 显示共享目录</p>
+<h2 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h2><p>-a 全部挂载或者全部卸载<br>-r 重新挂载<br>-u 卸载某一个目录<br>-v 显示共享目录</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exportfs -arv    //服务端更改配置文件后，不重启服务，直接执行该命令就可以使更改后的配置文件生效。</span><br></pre></td></tr></table></figure>
 
-<p>##以下操作在服务端上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim /etc/exports    //增加</span><br><span class="line">/tmp/ 192.168.2.0/24(rw,sync,no_root_squash)</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# exportfs -arv    //不用重启nfs服务，配置文件就会生效</span><br><span class="line">#在重启nfs服务之前，需要先把所有挂载点卸载，否则将发生严重的程序错误，甚至会拖垮系统。</span><br></pre></td></tr></table></figure>
+<h2 id="以下操作在服务端上"><a href="#以下操作在服务端上" class="headerlink" title="以下操作在服务端上"></a>以下操作在服务端上</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim /etc/exports    //增加</span><br><span class="line">/tmp/ 192.168.2.0/24(rw,sync,no_root_squash)</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# exportfs -arv    //不用重启nfs服务，配置文件就会生效</span><br><span class="line">#在重启nfs服务之前，需要先把所有挂载点卸载，否则将发生严重的程序错误，甚至会拖垮系统。</span><br></pre></td></tr></table></figure>
 
-<p>#14.5 NFS客户端问题</p>
-<p>##NFS4版本在centos6中应用存在如下问题：<br>客户端挂载共享目录后，不管是root用户还是普通用户，创建的新文件的属主、数组都为nobody。</p>
-<p>##解决方案<br>方法1：只在客户端进行挂载时加上选项-o nfsvers=3</p>
+<h1 id="14-5-NFS客户端问题"><a href="#14-5-NFS客户端问题" class="headerlink" title="14.5 NFS客户端问题"></a>14.5 NFS客户端问题</h1><p>##NFS4版本在centos6中应用存在如下问题：<br>客户端挂载共享目录后，不管是root用户还是普通用户，创建的新文件的属主、数组都为nobody。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>方法1：只在客户端进行挂载时加上选项-o nfsvers=3</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# monunt -t nfs -o nfsvers=3 192.168.2.130:/tmp/ /mnt/</span><br></pre></td></tr></table></figure>
 
 <p>方法2：修改客户端和服务端的配置文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/idmapd.conf</span><br><span class="line">#把配置文件中的“Domain = local.domain.com”改为“Domain = xxx.com”（此处xxx.com是自己随意定义），然后重启rpcidmapd服务（在centos7中直接重启rpcbind服务）</span><br></pre></td></tr></table></figure>
 
-<p>#15.1 FTP介绍</p>
-<blockquote>
+<h1 id="15-1-FTP介绍"><a href="#15-1-FTP介绍" class="headerlink" title="15.1 FTP介绍"></a>15.1 FTP介绍</h1><blockquote>
 <p>FTP 是File Transfer Protocol（文件传输协议）的英文简称，而中文简称为“文传协议”。用于Internet上的控制文件的双向传输。同时，它也是一个应用程序（Application）。基于不同的操作系统有不同的FTP应用程序，而所有这些应用程序都遵守同一种协议以传输文件。在FTP的使用当中，用户经常遇到两个概念：”下载”（Download）和”上传”（Upload）。”下载”文件就是从远程主机拷贝文件至自己的计算机上；”上传”文件就是将文件从自己的计算机中拷贝至远程主机上。用Internet语言来说，用户可通过客户机程序向（从）远程主机上传（下载）文件。</p>
 </blockquote>
 <ul>
@@ -403,36 +399,27 @@
 <li>FTP的主要作用就是让用户连接一个远程计算机（这些计算机上运行着FTP服务器程序），并查看远程计算机中的文件，然后把文件从远程计算机复制到本地计算机，或把本地计算机的文件传送到远程计算机。</li>
 <li>小公司用的多，大企业不用FTP，因为不安全</li>
 </ul>
-<p>#15.2/15.3 使用vsftpd搭建ftp</p>
-<p>##安装vsftpd工具<br>centos上自带vsftpd</p>
+<h1 id="15-2-15-3-使用vsftpd搭建ftp"><a href="#15-2-15-3-使用vsftpd搭建ftp" class="headerlink" title="15.2/15.3 使用vsftpd搭建ftp"></a>15.2/15.3 使用vsftpd搭建ftp</h1><h2 id="安装vsftpd工具"><a href="#安装vsftpd工具" class="headerlink" title="安装vsftpd工具"></a>安装vsftpd工具</h2><p>centos上自带vsftpd</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# yum install -y vsftpd</span><br></pre></td></tr></table></figure>
 
-<p>##创建用户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# useradd -s /sbin/nologin virftp</span><br><span class="line">#创建一个vsftpd服务的普通用户进行传输数据，避免使用root用户导致安全问题。</span><br></pre></td></tr></table></figure>
+<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# useradd -s /sbin/nologin virftp</span><br><span class="line">#创建一个vsftpd服务的普通用户进行传输数据，避免使用root用户导致安全问题。</span><br></pre></td></tr></table></figure>
 
-<p>##配置虚拟用户密码文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /etc/vsftpd/vsftpd_login   //内容如下,奇数行为用户名，偶数行为密码，多个用户就写多行</span><br><span class="line">testuser1</span><br><span class="line">123456</span><br><span class="line"></span><br><span class="line">[root@host ~]# chmod 600 /etc/vsftpd/vsftpd_login   //更改文件的权限</span><br></pre></td></tr></table></figure>
+<h2 id="配置虚拟用户密码文件"><a href="#配置虚拟用户密码文件" class="headerlink" title="配置虚拟用户密码文件"></a>配置虚拟用户密码文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /etc/vsftpd/vsftpd_login   //内容如下,奇数行为用户名，偶数行为密码，多个用户就写多行</span><br><span class="line">testuser1</span><br><span class="line">123456</span><br><span class="line"></span><br><span class="line">[root@host ~]# chmod 600 /etc/vsftpd/vsftpd_login   //更改文件的权限</span><br></pre></td></tr></table></figure>
 
-<p>##密码转换<br>将密码转换成二进制文件，使电脑可以识别</p>
+<h2 id="密码转换"><a href="#密码转换" class="headerlink" title="密码转换"></a>密码转换</h2><p>将密码转换成二进制文件，使电脑可以识别</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# db_load -T -t hash -f /etc/vsftpd/vsftpd_login /etc/vsftpd/vsftpd_login.db</span><br></pre></td></tr></table></figure>
 
-<p>##配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# mkdir /etc/vsftpd/vsftpd_user_conf    //创建存放目录</span><br><span class="line"></span><br><span class="line">[root@host ~]# cd /etc/vsftpd/vsftpd_user_conf    </span><br><span class="line"></span><br><span class="line">[root@host vsftpd_user_conf]# vim testuser1     //指定虚拟用户的 配置文件，虚拟用户配置文件和虚拟用户名称需要保持一致。</span><br><span class="line">local_root=/home/virftp/testuser1</span><br><span class="line">#定义虚拟用户家目录</span><br><span class="line">anonymous_enable=NO</span><br><span class="line">#是否允许匿名用户登录</span><br><span class="line">write_enable=YES</span><br><span class="line">#是否可写</span><br><span class="line">local_umask=022</span><br><span class="line">#定义创建新文件时的默认权限</span><br><span class="line">anon_upload_enable=NO</span><br><span class="line">#是否允许匿名用户上传文件</span><br><span class="line">anon_mkdir_write_enable=NO</span><br><span class="line">#是否允许匿名用户创建目录文件</span><br><span class="line">idle_session_timeout=600</span><br><span class="line">#空闲用户保留时间</span><br><span class="line">data_connection_timeout=120</span><br><span class="line">#数据传输超时时间</span><br><span class="line">max_client=10</span><br><span class="line">#客户端最大连接数量</span><br></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# mkdir /etc/vsftpd/vsftpd_user_conf    //创建存放目录</span><br><span class="line"></span><br><span class="line">[root@host ~]# cd /etc/vsftpd/vsftpd_user_conf    </span><br><span class="line"></span><br><span class="line">[root@host vsftpd_user_conf]# vim testuser1     //指定虚拟用户的 配置文件，虚拟用户配置文件和虚拟用户名称需要保持一致。</span><br><span class="line">local_root=/home/virftp/testuser1</span><br><span class="line">#定义虚拟用户家目录</span><br><span class="line">anonymous_enable=NO</span><br><span class="line">#是否允许匿名用户登录</span><br><span class="line">write_enable=YES</span><br><span class="line">#是否可写</span><br><span class="line">local_umask=022</span><br><span class="line">#定义创建新文件时的默认权限</span><br><span class="line">anon_upload_enable=NO</span><br><span class="line">#是否允许匿名用户上传文件</span><br><span class="line">anon_mkdir_write_enable=NO</span><br><span class="line">#是否允许匿名用户创建目录文件</span><br><span class="line">idle_session_timeout=600</span><br><span class="line">#空闲用户保留时间</span><br><span class="line">data_connection_timeout=120</span><br><span class="line">#数据传输超时时间</span><br><span class="line">max_client=10</span><br><span class="line">#客户端最大连接数量</span><br></pre></td></tr></table></figure>
 
-<p>##创建虚拟用户家目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host vsftpd_user_conf]# mkdir /home/virftp/testuser1</span><br><span class="line"></span><br><span class="line">创建一个文件：</span><br><span class="line">[root@host vsftpd_user_conf]# touch /home/virftp/testuser1/123.txt</span><br><span class="line">[root@host vsftpd_user_conf]# chown -R virftp:virftp /home/virftp</span><br></pre></td></tr></table></figure>
+<h2 id="创建虚拟用户家目录"><a href="#创建虚拟用户家目录" class="headerlink" title="创建虚拟用户家目录"></a>创建虚拟用户家目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host vsftpd_user_conf]# mkdir /home/virftp/testuser1</span><br><span class="line"></span><br><span class="line">创建一个文件：</span><br><span class="line">[root@host vsftpd_user_conf]# touch /home/virftp/testuser1/123.txt</span><br><span class="line">[root@host vsftpd_user_conf]# chown -R virftp:virftp /home/virftp</span><br></pre></td></tr></table></figure>
 
-<p>##虚拟用户密码匹配</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host vsftpd_user_conf]# vim /etc/pam.d/vsftpd    //添加这两行内容，用于指定用户的密码文件位置</span><br><span class="line">#%PAM-1.0</span><br><span class="line">auth sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd_login</span><br><span class="line">account sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd_login</span><br></pre></td></tr></table></figure>
+<h2 id="虚拟用户密码匹配"><a href="#虚拟用户密码匹配" class="headerlink" title="虚拟用户密码匹配"></a>虚拟用户密码匹配</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host vsftpd_user_conf]# vim /etc/pam.d/vsftpd    //添加这两行内容，用于指定用户的密码文件位置</span><br><span class="line">#%PAM-1.0</span><br><span class="line">auth sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd_login</span><br><span class="line">account sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd_login</span><br></pre></td></tr></table></figure>
 
-<p>##编辑vsftpd主配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host vsftpd_user_conf]# vim /etc/vsftpd/vsftpd.conf</span><br><span class="line">……</span><br><span class="line">anonymous_enable=NO</span><br><span class="line">anon_upload_enable=NO</span><br><span class="line">anon_mkdir_write_enable=NO</span><br><span class="line">……</span><br><span class="line"></span><br><span class="line">在文件内容最后添加如下内容：  </span><br><span class="line">chroot_local_user=YES</span><br><span class="line">guest_enable=YES</span><br><span class="line">guest_username=virftp</span><br><span class="line">#开启虚拟用户和系统用户的映射</span><br><span class="line">virtual_use_local_privs=YES</span><br><span class="line">#使用虚拟用户</span><br><span class="line">user_config_dir=/etc/vsftpd_user_conf</span><br><span class="line">allow_writeable_chroot=YES</span><br></pre></td></tr></table></figure>
+<h2 id="编辑vsftpd主配置文件"><a href="#编辑vsftpd主配置文件" class="headerlink" title="编辑vsftpd主配置文件"></a>编辑vsftpd主配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host vsftpd_user_conf]# vim /etc/vsftpd/vsftpd.conf</span><br><span class="line">……</span><br><span class="line">anonymous_enable=NO</span><br><span class="line">anon_upload_enable=NO</span><br><span class="line">anon_mkdir_write_enable=NO</span><br><span class="line">……</span><br><span class="line"></span><br><span class="line">在文件内容最后添加如下内容：  </span><br><span class="line">chroot_local_user=YES</span><br><span class="line">guest_enable=YES</span><br><span class="line">guest_username=virftp</span><br><span class="line">#开启虚拟用户和系统用户的映射</span><br><span class="line">virtual_use_local_privs=YES</span><br><span class="line">#使用虚拟用户</span><br><span class="line">user_config_dir=/etc/vsftpd_user_conf</span><br><span class="line">allow_writeable_chroot=YES</span><br></pre></td></tr></table></figure>
 
-<p>##启动FTP服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@host vsftpd_user_conf]# systemctl start vsftpd</span><br><span class="line"></span><br><span class="line">[root@host vsftpd_user_conf]# ps aux |grep vsftpd</span><br><span class="line">root      3671  0.0  0.0  52708  564 ?        Ss  18:40  0:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf</span><br><span class="line">[root@host vsftpd_user_conf]# netstat -lntp</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address          Foreign Address        State      PID/Program name</span><br><span class="line">tcp6      0      0 :::21                  :::*                    LISTEN      3671/vsftpd</span><br></pre></td></tr></table></figure>
+<h2 id="启动FTP服务"><a href="#启动FTP服务" class="headerlink" title="启动FTP服务"></a>启动FTP服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@host vsftpd_user_conf]# systemctl start vsftpd</span><br><span class="line"></span><br><span class="line">[root@host vsftpd_user_conf]# ps aux |grep vsftpd</span><br><span class="line">root      3671  0.0  0.0  52708  564 ?        Ss  18:40  0:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf</span><br><span class="line">[root@host vsftpd_user_conf]# netstat -lntp</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address          Foreign Address        State      PID/Program name</span><br><span class="line">tcp6      0      0 :::21                  :::*                    LISTEN      3671/vsftpd</span><br></pre></td></tr></table></figure>
 
-<p>##测试</p>
-<ul>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ul>
 <li>在Windows系统进行测试，需要安装filezilla软件。</li>
 <li>在Linux中测试，安装lftp工具。</li>
 </ul>
@@ -473,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/linux入门笔记/16.1-16.3 Tomcat介绍、安装jdk、安装Tomcat/" rel="next" title="16.1-16.3 Tomcat介绍、安装jdk、安装Tomcat">
-                <i class="fa fa-chevron-left"></i> 16.1-16.3 Tomcat介绍、安装jdk、安装Tomcat
+              <a href="/linux入门笔记/14.1 - 14.3 NFS的介绍、服务端安装配置、配置选项/" rel="next" title="NFS的介绍、服务端安装配置、配置选项">
+                <i class="fa fa-chevron-left"></i> NFS的介绍、服务端安装配置、配置选项
               </a>
             
           </div>
@@ -483,8 +470,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/linux入门笔记/16.4-16.8 配置Tomcat监听80端口、配置Tomcat虚拟主机、Tomcat日志/" rel="prev" title="16.4-16.8 配置Tomcat监听80端口、配置Tomcat虚拟主机、Tomcat日志">
-                16.4-16.8 配置Tomcat监听80端口、配置Tomcat虚拟主机、Tomcat日志 <i class="fa fa-chevron-right"></i>
+              <a href="/linux入门笔记/15.3 samba服务配置/" rel="prev" title="Samba服务配置">
+                Samba服务配置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -537,8 +524,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -605,6 +601,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#14-4-exportfs命令"><span class="nav-number">1.</span> <span class="nav-text">14.4 exportfs命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用参数"><span class="nav-number">1.1.</span> <span class="nav-text">常用参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以下操作在服务端上"><span class="nav-number">1.2.</span> <span class="nav-text">以下操作在服务端上</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-5-NFS客户端问题"><span class="nav-number">2.</span> <span class="nav-text">14.5 NFS客户端问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">2.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-1-FTP介绍"><span class="nav-number">3.</span> <span class="nav-text">15.1 FTP介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-2-15-3-使用vsftpd搭建ftp"><span class="nav-number">4.</span> <span class="nav-text">15.2/15.3 使用vsftpd搭建ftp</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装vsftpd工具"><span class="nav-number">4.1.</span> <span class="nav-text">安装vsftpd工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建用户"><span class="nav-number">4.2.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置虚拟用户密码文件"><span class="nav-number">4.3.</span> <span class="nav-text">配置虚拟用户密码文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码转换"><span class="nav-number">4.4.</span> <span class="nav-text">密码转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">4.5.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建虚拟用户家目录"><span class="nav-number">4.6.</span> <span class="nav-text">创建虚拟用户家目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟用户密码匹配"><span class="nav-number">4.7.</span> <span class="nav-text">虚拟用户密码匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑vsftpd主配置文件"><span class="nav-number">4.8.</span> <span class="nav-text">编辑vsftpd主配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动FTP服务"><span class="nav-number">4.9.</span> <span class="nav-text">启动FTP服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">4.10.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

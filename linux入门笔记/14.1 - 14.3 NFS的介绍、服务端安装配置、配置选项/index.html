@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="#14.1 NFS介绍  NFS（Network File System）即网络文件系统，是FreeBSD支持的文件系统中的一种，它允许网络中的计算机之间通过TCP/IP网络共享资源。在NFS的应用中，本地NFS的客户端应用可以透明地读写位于远端NFS服务器上的文件，就像访问本地文件一样。   NFS是Network File System的缩写 NFS最早由Sun公司开发，分2,3,4三个版本，">
+<meta name="description" content="14.1 NFS介绍 NFS（Network File System）即网络文件系统，是FreeBSD支持的文件系统中的一种，它允许网络中的计算机之间通过TCP/IP网络共享资源。在NFS的应用中，本地NFS的客户端应用可以透明地读写位于远端NFS服务器上的文件，就像访问本地文件一样。   NFS是Network File System的缩写 NFS最早由Sun公司开发，分2,3,4三个版本，2和">
 <meta name="keywords" content="NFS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="14.1 - 14.3 NFS的介绍、服务端安装配置、配置选项">
+<meta property="og:title" content="NFS的介绍、服务端安装配置、配置选项">
 <meta property="og:url" content="http://yoursite.com/linux入门笔记/14.1 - 14.3 NFS的介绍、服务端安装配置、配置选项/index.html">
 <meta property="og:site_name" content="Joking的Linux世界">
-<meta property="og:description" content="#14.1 NFS介绍  NFS（Network File System）即网络文件系统，是FreeBSD支持的文件系统中的一种，它允许网络中的计算机之间通过TCP/IP网络共享资源。在NFS的应用中，本地NFS的客户端应用可以透明地读写位于远端NFS服务器上的文件，就像访问本地文件一样。   NFS是Network File System的缩写 NFS最早由Sun公司开发，分2,3,4三个版本，">
+<meta property="og:description" content="14.1 NFS介绍 NFS（Network File System）即网络文件系统，是FreeBSD支持的文件系统中的一种，它允许网络中的计算机之间通过TCP/IP网络共享资源。在NFS的应用中，本地NFS的客户端应用可以透明地读写位于远端NFS服务器上的文件，就像访问本地文件一样。   NFS是Network File System的缩写 NFS最早由Sun公司开发，分2,3,4三个版本，2和">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-12T06:47:02.913Z">
+<meta property="og:updated_time" content="2019-07-16T06:55:55.850Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="14.1 - 14.3 NFS的介绍、服务端安装配置、配置选项">
-<meta name="twitter:description" content="#14.1 NFS介绍  NFS（Network File System）即网络文件系统，是FreeBSD支持的文件系统中的一种，它允许网络中的计算机之间通过TCP/IP网络共享资源。在NFS的应用中，本地NFS的客户端应用可以透明地读写位于远端NFS服务器上的文件，就像访问本地文件一样。   NFS是Network File System的缩写 NFS最早由Sun公司开发，分2,3,4三个版本，">
+<meta name="twitter:title" content="NFS的介绍、服务端安装配置、配置选项">
+<meta name="twitter:description" content="14.1 NFS介绍 NFS（Network File System）即网络文件系统，是FreeBSD支持的文件系统中的一种，它允许网络中的计算机之间通过TCP/IP网络共享资源。在NFS的应用中，本地NFS的客户端应用可以透明地读写位于远端NFS服务器上的文件，就像访问本地文件一样。   NFS是Network File System的缩写 NFS最早由Sun公司开发，分2,3,4三个版本，2和">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>14.1 - 14.3 NFS的介绍、服务端安装配置、配置选项 | Joking的Linux世界</title>
+  <title>NFS的介绍、服务端安装配置、配置选项 | Joking的Linux世界</title>
   
 
 
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">14.1 - 14.3 NFS的介绍、服务端安装配置、配置选项</h1>
+          <h1 class="post-title" itemprop="name headline">NFS的介绍、服务端安装配置、配置选项</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-18T21:05:40+08:00">
+                2017-09-18
               </time>
             
 
@@ -376,8 +376,7 @@
       
 
       
-        <p>#14.1 NFS介绍</p>
-<blockquote>
+        <h1 id="14-1-NFS介绍"><a href="#14-1-NFS介绍" class="headerlink" title="14.1 NFS介绍"></a>14.1 NFS介绍</h1><blockquote>
 <p>NFS（Network File System）即网络文件系统，是FreeBSD支持的文件系统中的一种，它允许网络中的计算机之间通过TCP/IP网络共享资源。在NFS的应用中，本地NFS的客户端应用可以透明地读写位于远端NFS服务器上的文件，就像访问本地文件一样。</p>
 </blockquote>
 <ul>
@@ -386,38 +385,28 @@
 <li>NFS数据传输基于RPC协议，RPC为Remote Procedure Call的简写。</li>
 <li>NFS应用场景是：A,B,C三台机器上需要保证被访问到的文件是一样的，A共享数据出来，B和C分别去挂载A共享的数据目录，从而B和C访问到的数据和A上的一致</li>
 </ul>
-<p>#14.2 NFS服务端安装配置</p>
-<p>准备两台虚拟机，一台作为服务端，一台作为客户端。</p>
-<p>##服务端(IP：192.168.2.130)</p>
-<p>###安装NFS工具</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum install -y nfs-utils rpcbind</span><br></pre></td></tr></table></figure>
+<h1 id="14-2-NFS服务端安装配置"><a href="#14-2-NFS服务端安装配置" class="headerlink" title="14.2 NFS服务端安装配置"></a>14.2 NFS服务端安装配置</h1><p>准备两台虚拟机，一台作为服务端，一台作为客户端。</p>
+<h2 id="服务端-IP：192-168-2-130"><a href="#服务端-IP：192-168-2-130" class="headerlink" title="服务端(IP：192.168.2.130)"></a>服务端(IP：192.168.2.130)</h2><h3 id="安装NFS工具"><a href="#安装NFS工具" class="headerlink" title="安装NFS工具"></a>安装NFS工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum install -y nfs-utils rpcbind</span><br></pre></td></tr></table></figure>
 
-<p>###配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim /etc/exports</span><br><span class="line">/home/nfstestdir 192.168.2.0/24(rw,sync,all_squash,anonuid=1000,anongid=1000)</span><br><span class="line">#指定要进行分享的目录；指定要共享该目录的机器</span><br><span class="line"></span><br><span class="line">创建要分享的目录并设置好权限：</span><br><span class="line">[root@localhost ~]# mkdir /home/nfstestdir</span><br><span class="line">[root@localhost ~]# chmod 777 /home/nfstestdir</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim /etc/exports</span><br><span class="line">/home/nfstestdir 192.168.2.0/24(rw,sync,all_squash,anonuid=1000,anongid=1000)</span><br><span class="line">#指定要进行分享的目录；指定要共享该目录的机器</span><br><span class="line"></span><br><span class="line">创建要分享的目录并设置好权限：</span><br><span class="line">[root@localhost ~]# mkdir /home/nfstestdir</span><br><span class="line">[root@localhost ~]# chmod 777 /home/nfstestdir</span><br></pre></td></tr></table></figure>
 
-<p>###启动NFS服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl start nfs</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# systemctl enable nfs   //把NFS服务加入开机启动项</span><br><span class="line">#NFS服务的后台服务进程为rpcbind服务（在服务端进程名称为systemd），默认的监听端口是111</span><br></pre></td></tr></table></figure>
+<h3 id="启动NFS服务"><a href="#启动NFS服务" class="headerlink" title="启动NFS服务"></a>启动NFS服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl start nfs</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# systemctl enable nfs   //把NFS服务加入开机启动项</span><br><span class="line">#NFS服务的后台服务进程为rpcbind服务（在服务端进程名称为systemd），默认的监听端口是111</span><br></pre></td></tr></table></figure>
 
-<p>##客户端（IP：192.168.2.131）</p>
-<p>###安装NFS工具</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# yum install -y nfs-utils</span><br></pre></td></tr></table></figure>
+<h2 id="客户端（IP：192-168-2-131）"><a href="#客户端（IP：192-168-2-131）" class="headerlink" title="客户端（IP：192.168.2.131）"></a>客户端（IP：192.168.2.131）</h2><h3 id="安装NFS工具-1"><a href="#安装NFS工具-1" class="headerlink" title="安装NFS工具"></a>安装NFS工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# yum install -y nfs-utils</span><br></pre></td></tr></table></figure>
 
-<p>###检查<br>检查客户端是否有权限访问服务端文件</p>
+<h3 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h3><p>检查客户端是否有权限访问服务端文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# showmount -e 192.168.2.130</span><br><span class="line">clnt_create: RPC: Port mapper failure - Unable to receive: errno 113 (No route to host)  //报错，无法连接到服务器</span><br><span class="line"></span><br><span class="line">解决办法</span><br><span class="line">1. 检查服务端rpcbind服务是否开启，111端口是否在监视</span><br><span class="line">2. 如果服务端rpcbind服务已经开启，那么一般都是防火墙的原因，关闭服务端和客户端firewalld和SELinux防火墙</span><br><span class="line"></span><br><span class="line">关闭防火墙后，再次检查</span><br><span class="line">[root@host ~]# showmount -e 192.168.2.130</span><br><span class="line">Export list for 192.168.2.130:</span><br><span class="line">/home/nfstestdir 192.168.2.0/24</span><br><span class="line">#检查链接OK，通过</span><br></pre></td></tr></table></figure>
 
-<p>###挂载客户端</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# mount -t nfs 192.168.2.130:/home/nfstestdir /mnt/</span><br><span class="line"></span><br><span class="line">[root@host ~]# df -h</span><br><span class="line">文件系统                                     容量  已用  可用 已用% 挂载点</span><br><span class="line">192.168.2.130:/home/nfstestdir  18G  7.5G  11G  42% /mnt</span><br></pre></td></tr></table></figure>
+<h3 id="挂载客户端"><a href="#挂载客户端" class="headerlink" title="挂载客户端"></a>挂载客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# mount -t nfs 192.168.2.130:/home/nfstestdir /mnt/</span><br><span class="line"></span><br><span class="line">[root@host ~]# df -h</span><br><span class="line">文件系统                                     容量  已用  可用 已用% 挂载点</span><br><span class="line">192.168.2.130:/home/nfstestdir  18G  7.5G  11G  42% /mnt</span><br></pre></td></tr></table></figure>
 
-<p>###测试<br>在客户端挂载目录，创建一个文件</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>在客户端挂载目录，创建一个文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# cd /mnt/</span><br><span class="line">[root@host mnt]# ll</span><br><span class="line">总用量 0</span><br><span class="line">-rw-r--r-- 1 mysql mysql 0 9月  18 22:50 test000</span><br></pre></td></tr></table></figure>
 
 <p>查看服务端的共享目录，是否同步了该文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ll /home/nfstestdir/</span><br><span class="line">总用量 0</span><br><span class="line">-rw-r--r-- 1 mysql mysql 0 9月  18 22:50 test000</span><br></pre></td></tr></table></figure>
 
 <p>表示同步成功，实现了跨服务器的共享。</p>
-<p>#14.3 NFS配置选项</p>
-<p>##服务端</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root[@localhost ~]# vim /etc/exports</span><br><span class="line">/home/nfstestdir 192.168.2.0/24(rw,sync,all_squash,anonuid=1000,anongid=1000)</span><br><span class="line">#&#123;rw 读写</span><br><span class="line">ro 只读</span><br><span class="line">sync 同步模式，内存数据实时写入磁盘</span><br><span class="line">async 非同步模式</span><br><span class="line">no_root_squash 客户端挂载NFS共享目录后，root用户不受约束，权限很大</span><br><span class="line">root_squash 与上面选项相对，客户端上的root用户收到约束，被限定成某个普通用户</span><br><span class="line">all_squash 客户端上所有用户在使用NFS共享目录时都被限定为一个普通用户</span><br><span class="line">anonuid/anongid 和上面几个选项搭配使用，定义被限定用户的uid和gid&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="14-3-NFS配置选项"><a href="#14-3-NFS配置选项" class="headerlink" title="14.3 NFS配置选项"></a>14.3 NFS配置选项</h1><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root[@localhost ~]# vim /etc/exports</span><br><span class="line">/home/nfstestdir 192.168.2.0/24(rw,sync,all_squash,anonuid=1000,anongid=1000)</span><br><span class="line">#&#123;rw 读写</span><br><span class="line">ro 只读</span><br><span class="line">sync 同步模式，内存数据实时写入磁盘</span><br><span class="line">async 非同步模式</span><br><span class="line">no_root_squash 客户端挂载NFS共享目录后，root用户不受约束，权限很大</span><br><span class="line">root_squash 与上面选项相对，客户端上的root用户收到约束，被限定成某个普通用户</span><br><span class="line">all_squash 客户端上所有用户在使用NFS共享目录时都被限定为一个普通用户</span><br><span class="line">anonuid/anongid 和上面几个选项搭配使用，定义被限定用户的uid和gid&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="固定NFS启动端口，便于iptables设置"><a href="#固定NFS启动端口，便于iptables设置" class="headerlink" title="固定NFS启动端口，便于iptables设置"></a>固定NFS启动端口，便于iptables设置</h2><p>NFS 的防火墙特别难设定规则，为什么呢？因为除了固定的port 111, 2049 之外， 还有很多不固定的端口是由rpc.mountd, rpc.rquotad 等服务所开启的。因此我们需要在/etc/sysconfig/nfs 指定特定的端口，这样每次启动nfs 时，相关服务启动的端口就会固定，如此一来， 我们就能够设定正确的防火墙了！</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[root@nfs-01 ~]# rpcinfo -p localhost</span><br><span class="line">   program vers proto port service</span><br><span class="line">    100000 4 tcp 111 portmapper</span><br><span class="line">    100000 3 tcp 111 portmapper</span><br><span class="line">    100000 2 tcp 111 portmapper</span><br><span class="line">    100000 4 udp 111 portmapper</span><br><span class="line">    100000 3 udp 111 portmapper</span><br><span class="line">    100000 2 udp 111 portmapper</span><br><span class="line">    100024 1 udp 43265 status</span><br><span class="line">    100024 1 tcp 50310 status</span><br><span class="line">    100005 1 udp 20048 mountd</span><br><span class="line">    100005 1 tcp 20048 mountd</span><br><span class="line">    100005 2 udp 20048 mountd</span><br><span class="line">    100005 2 tcp 20048 mountd</span><br><span class="line">    100005 3 udp 20048 mountd</span><br><span class="line">    100005 3 tcp 20048 mountd</span><br><span class="line">    100003 3 tcp 2049 nfs</span><br><span class="line">    100003 4 tcp 2049 nfs</span><br><span class="line">    100227 3 tcp 2049 nfs_acl</span><br><span class="line">    100003 3 udp 2049 nfs</span><br><span class="line">    100003 4 udp 2049 nfs</span><br><span class="line">    100227 3 udp 2049 nfs_acl</span><br><span class="line">    100021 1 udp 46936 nlockmgr</span><br><span class="line">    100021 3 udp 46936 nlockmgr</span><br><span class="line">    100021 4 udp 46936 nlockmgr</span><br><span class="line">    100021 1 tcp 43528 nlockmgr</span><br><span class="line">    100021 3 tcp 43528 nlockmgr</span><br><span class="line">    100021 4 tcp 43528 nlockmgr</span><br></pre></td></tr></table></figure>
@@ -468,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/linux入门笔记/16.4-16.8 配置Tomcat监听80端口、配置Tomcat虚拟主机、Tomcat日志/" rel="next" title="16.4-16.8 配置Tomcat监听80端口、配置Tomcat虚拟主机、Tomcat日志">
-                <i class="fa fa-chevron-left"></i> 16.4-16.8 配置Tomcat监听80端口、配置Tomcat虚拟主机、Tomcat日志
+              <a href="/linux入门笔记/13.4 - 13.6 mysql用户管理、常用sql语句、mysql数据库备份恢复/" rel="next" title="Mysql用户管理、常用sql语句、mysql数据库备份恢复">
+                <i class="fa fa-chevron-left"></i> Mysql用户管理、常用sql语句、mysql数据库备份恢复
               </a>
             
           </div>
@@ -478,8 +467,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/linux入门笔记/13.1 - 13.3 设置更改root密码、连接mysql、mysql常用命令/" rel="prev" title="13.1 - 13.3 设置更改root密码、连接mysql、mysql常用命令">
-                13.1 - 13.3 设置更改root密码、连接mysql、mysql常用命令 <i class="fa fa-chevron-right"></i>
+              <a href="/linux入门笔记/14.4 - 15.2 NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp/" rel="prev" title="NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp">
+                NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -619,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#固定NFS启动端口，便于iptables设置"><span class="nav-number">1.</span> <span class="nav-text">固定NFS启动端口，便于iptables设置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#14-1-NFS介绍"><span class="nav-number">1.</span> <span class="nav-text">14.1 NFS介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-2-NFS服务端安装配置"><span class="nav-number">2.</span> <span class="nav-text">14.2 NFS服务端安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端-IP：192-168-2-130"><span class="nav-number">2.1.</span> <span class="nav-text">服务端(IP：192.168.2.130)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装NFS工具"><span class="nav-number">2.1.1.</span> <span class="nav-text">安装NFS工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.1.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动NFS服务"><span class="nav-number">2.1.3.</span> <span class="nav-text">启动NFS服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端（IP：192-168-2-131）"><span class="nav-number">2.2.</span> <span class="nav-text">客户端（IP：192.168.2.131）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装NFS工具-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">安装NFS工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查"><span class="nav-number">2.2.2.</span> <span class="nav-text">检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载客户端"><span class="nav-number">2.2.3.</span> <span class="nav-text">挂载客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">2.2.4.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-3-NFS配置选项"><span class="nav-number">3.</span> <span class="nav-text">14.3 NFS配置选项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端"><span class="nav-number">3.1.</span> <span class="nav-text">服务端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#固定NFS启动端口，便于iptables设置"><span class="nav-number">3.2.</span> <span class="nav-text">固定NFS启动端口，便于iptables设置</span></a></li></ol></li></ol></div>
             
 
           </div>

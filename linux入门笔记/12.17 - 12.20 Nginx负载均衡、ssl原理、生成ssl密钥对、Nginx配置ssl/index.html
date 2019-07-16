@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="#12.17 Nginx负载均衡Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。 ##负载均衡配置 ###配置参数 1234567891011121314151617181920212223[root@host ~]# vim /usr/local/nginx/conf">
+<meta name="description" content="12.17 Nginx负载均衡Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。 负载均衡配置配置参数1234567891011121314151617181920212223[root@host ~]# vim /usr/local/nginx/conf/vhost/l">
 <meta name="keywords" content="nginx,ssl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl">
+<meta property="og:title" content="Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl">
 <meta property="og:url" content="http://yoursite.com/linux入门笔记/12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl/index.html">
 <meta property="og:site_name" content="Joking的Linux世界">
-<meta property="og:description" content="#12.17 Nginx负载均衡Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。 ##负载均衡配置 ###配置参数 1234567891011121314151617181920212223[root@host ~]# vim /usr/local/nginx/conf">
+<meta property="og:description" content="12.17 Nginx负载均衡Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。 负载均衡配置配置参数1234567891011121314151617181920212223[root@host ~]# vim /usr/local/nginx/conf/vhost/l">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-12T06:37:43.055Z">
+<meta property="og:updated_time" content="2019-07-16T07:14:46.228Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl">
-<meta name="twitter:description" content="#12.17 Nginx负载均衡Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。 ##负载均衡配置 ###配置参数 1234567891011121314151617181920212223[root@host ~]# vim /usr/local/nginx/conf">
+<meta name="twitter:title" content="Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl">
+<meta name="twitter:description" content="12.17 Nginx负载均衡Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。 负载均衡配置配置参数1234567891011121314151617181920212223[root@host ~]# vim /usr/local/nginx/conf/vhost/l">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl | Joking的Linux世界</title>
+  <title>Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl | Joking的Linux世界</title>
   
 
 
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">12.17 - 12.20 Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl</h1>
+          <h1 class="post-title" itemprop="name headline">Nginx负载均衡、ssl原理、生成ssl密钥对、Nginx配置ssl</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-12T20:33:29+08:00">
+                2017-09-12
               </time>
             
 
@@ -376,40 +376,33 @@
       
 
       
-        <p>#12.17 Nginx负载均衡<br>Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。</p>
-<p>##负载均衡配置</p>
-<p>###配置参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/nginx/conf/vhost/load.conf</span><br><span class="line">upstream qq</span><br><span class="line">#自定义域名</span><br><span class="line">&#123;</span><br><span class="line">    ip_hash;</span><br><span class="line">#目的是为了保证同一个用户始终保持在同一台机器上</span><br><span class="line">#还有就是为了当域名指向多个IP时，保证每个用户始终解析到同一IP</span><br><span class="line">    server 61.135.157.156:80;</span><br><span class="line">    server 125.39.240.113:80;</span><br><span class="line">#指定web服务器的IP</span><br><span class="line">&#125;</span><br><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name www.qq.com;</span><br><span class="line">    location /</span><br><span class="line">    &#123;</span><br><span class="line">        proxy_pass      http://qq;</span><br><span class="line">        proxy_set_header Host  $host;</span><br><span class="line">        proxy_set_header X-Real-IP      $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="12-17-Nginx负载均衡"><a href="#12-17-Nginx负载均衡" class="headerlink" title="12.17 Nginx负载均衡"></a>12.17 Nginx负载均衡</h1><p>Nginx负载均衡就是指 当代理服务器将自定义的域名解析到多个指定IP时，通过upstream模块来保证用户可以通过代理服务器正常访问各个IP（反向代理多台服务器就是负载均衡）。</p>
+<h2 id="负载均衡配置"><a href="#负载均衡配置" class="headerlink" title="负载均衡配置"></a>负载均衡配置</h2><h3 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# vim /usr/local/nginx/conf/vhost/load.conf</span><br><span class="line">upstream qq</span><br><span class="line">#自定义域名</span><br><span class="line">&#123;</span><br><span class="line">    ip_hash;</span><br><span class="line">#目的是为了保证同一个用户始终保持在同一台机器上</span><br><span class="line">#还有就是为了当域名指向多个IP时，保证每个用户始终解析到同一IP</span><br><span class="line">    server 61.135.157.156:80;</span><br><span class="line">    server 125.39.240.113:80;</span><br><span class="line">#指定web服务器的IP</span><br><span class="line">&#125;</span><br><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name www.qq.com;</span><br><span class="line">    location /</span><br><span class="line">    &#123;</span><br><span class="line">        proxy_pass      http://qq;</span><br><span class="line">        proxy_set_header Host  $host;</span><br><span class="line">        proxy_set_header X-Real-IP      $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>###检测</p>
-<p>代理前</p>
+<h3 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h3><p>代理前</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# curl -x127.0.0.1:80 www.qq.com </span><br><span class="line">This is the default directory.</span><br><span class="line"></span><br><span class="line">#没使用代理时，会直接解析到默认的虚拟主机。</span><br></pre></td></tr></table></figure>
 
 <p>代理后</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# /usr/local/nginx/sbin/nginx -t</span><br><span class="line">nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful</span><br><span class="line">[root@host ~]# /usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">[root@host ~]# curl -x127.0.0.1:80 www.qq.com</span><br><span class="line">……</span><br><span class="line">#使用代理后，会解析到代理服务器所指向的IP的网页代码</span><br></pre></td></tr></table></figure>
 
-<p>##dig命令</p>
-<p>dig命令是常用域名的解析工具，可以寻找域名的全部IP。</p>
+<h2 id="dig命令"><a href="#dig命令" class="headerlink" title="dig命令"></a>dig命令</h2><p>dig命令是常用域名的解析工具，可以寻找域名的全部IP。</p>
 <p>如果服务器中没有安装命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# yum install -y bind-utils</span><br></pre></td></tr></table></figure>
 
 <p>解析qq网站的全部IP</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# dig www.qq.com</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">www.qq.com.        138    IN    A    61.135.157.156</span><br><span class="line">www.qq.com.        138    IN    A    125.39.240.113</span><br><span class="line"></span><br><span class="line">;; Query time: 12 msec</span><br><span class="line">;; SERVER: 119.29.29.29#53(119.29.29.29)</span><br><span class="line">;; WHEN: 二 9月 12 22:44:23 CST 2017</span><br><span class="line">;; MSG SIZE  rcvd: 61</span><br></pre></td></tr></table></figure>
 
-<p>#12.18 ssl原理</p>
-<blockquote>
+<h1 id="12-18-ssl原理"><a href="#12-18-ssl原理" class="headerlink" title="12.18 ssl原理"></a>12.18 ssl原理</h1><blockquote>
 <p>SSL(Secure Sockets Layer 安全套接层)协议,及其继任者TLS（Transport Layer Security传输层安全）协议，是为网络通信提供安全及数据完整性的一种安全协议。</p>
 </blockquote>
-<p>##http、https、tcp</p>
-<ul>
+<h2 id="http、https、tcp"><a href="#http、https、tcp" class="headerlink" title="http、https、tcp"></a>http、https、tcp</h2><ul>
 <li>HTTP超文本传输协议（HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。</li>
 <li>HTTPS(全称:Hyper Text Transfer Protocol over Secure Socket Layer)，简单讲是HTTP的安全加密版。</li>
 <li>HTTP默认的端口号为80，HTTPS的端口号为443。</li>
 <li>TCP(Transmission Control Protocol 传输控制协议)是一种面向连接的、可靠的、基于字节流的传输层通信协议。默认监听80端口。</li>
 <li>http是应用层协议， tcp是传输层。 http使用tcp传输文本数据； http只是定义了tcp数据的解析方式</li>
 </ul>
-<p>##SSL工作流程</p>
-<ul>
+<h2 id="SSL工作流程"><a href="#SSL工作流程" class="headerlink" title="SSL工作流程"></a>SSL工作流程</h2><ul>
 <li>浏览器发送一个https的请求给服务器；</li>
 <li>服务器要有一套数字证书，可以自己制作（后面的操作就是阿铭自己制作的证书），也可以向组织申请，区别就是自己颁发的证书需要客户端验证通过，才可以继续访问，而使用受信任的公司申请的证书则不会弹出&gt;提示页面，这套证书其实就是一对公钥和私钥；</li>
 <li>服务器会把公钥传输给客户端；</li>
@@ -419,23 +412,16 @@
 <li>服务器把加密后的数据传输给客户端；</li>
 <li>客户端收到数据后，再用自己的私钥也就是那个随机字符串解密；</li>
 </ul>
-<p>#12.19 生成ssl密钥对</p>
-<p>##SSL工作流程</p>
-<p>如果虚拟机中没有此工具，手动安装：</p>
+<h1 id="12-19-生成ssl密钥对"><a href="#12-19-生成ssl密钥对" class="headerlink" title="12.19 生成ssl密钥对"></a>12.19 生成ssl密钥对</h1><h2 id="SSL工作流程-1"><a href="#SSL工作流程-1" class="headerlink" title="SSL工作流程"></a>SSL工作流程</h2><p>如果虚拟机中没有此工具，手动安装：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# yum install -y openssl</span><br></pre></td></tr></table></figure>
 
-<p>##SSL证书就是一对公钥和私钥。</p>
-<p>###创建私钥</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# cd /usr/local/nginx/conf/</span><br><span class="line"></span><br><span class="line">[root@host conf]# openssl genrsa -des3 -out tmp.key 2048  //生成SSL密钥</span><br><span class="line">Generating RSA private key, 2048 bit long modulus</span><br><span class="line">....................................................................................+++</span><br><span class="line">...............................................................+++</span><br><span class="line">e is 65537 (0x10001)</span><br><span class="line">Enter pass phrase for tmp.key:</span><br><span class="line">Verifying - Enter pass phrase for tmp.key:   //密钥需要我们设置密码，一般我们都不需要再设置密码，所以要转换一下key，取消密码</span><br><span class="line"></span><br><span class="line">[root@host conf]# openssl rsa -in tmp.key -out host.key  //转换一下key，将tmp.key 转换为没密码的host.key</span><br><span class="line"></span><br><span class="line">Enter pass phrase for tmp.key:</span><br><span class="line">writing RSA key</span><br><span class="line"></span><br><span class="line">[root@host conf]# rm -f tmp.key  //删除tmp.key</span><br></pre></td></tr></table></figure>
+<h2 id="SSL证书就是一对公钥和私钥。"><a href="#SSL证书就是一对公钥和私钥。" class="headerlink" title="SSL证书就是一对公钥和私钥。"></a>SSL证书就是一对公钥和私钥。</h2><h3 id="创建私钥"><a href="#创建私钥" class="headerlink" title="创建私钥"></a>创建私钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# cd /usr/local/nginx/conf/</span><br><span class="line"></span><br><span class="line">[root@host conf]# openssl genrsa -des3 -out tmp.key 2048  //生成SSL密钥</span><br><span class="line">Generating RSA private key, 2048 bit long modulus</span><br><span class="line">....................................................................................+++</span><br><span class="line">...............................................................+++</span><br><span class="line">e is 65537 (0x10001)</span><br><span class="line">Enter pass phrase for tmp.key:</span><br><span class="line">Verifying - Enter pass phrase for tmp.key:   //密钥需要我们设置密码，一般我们都不需要再设置密码，所以要转换一下key，取消密码</span><br><span class="line"></span><br><span class="line">[root@host conf]# openssl rsa -in tmp.key -out host.key  //转换一下key，将tmp.key 转换为没密码的host.key</span><br><span class="line"></span><br><span class="line">Enter pass phrase for tmp.key:</span><br><span class="line">writing RSA key</span><br><span class="line"></span><br><span class="line">[root@host conf]# rm -f tmp.key  //删除tmp.key</span><br></pre></td></tr></table></figure>
 
-<p>##自己生成证书</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# openssl req -new -key host.key -out host.csr   //自己生成证书请求文件，需要拿这个私钥一起生成证书</span><br><span class="line">You are about to be asked to enter information that will be incorporated</span><br><span class="line">into your certificate request.</span><br><span class="line">What you are about to enter is what is called a Distinguished Name or a DN.</span><br><span class="line">There are quite a few fields but you can leave some blank</span><br><span class="line">For some fields there will be a default value,</span><br><span class="line">If you enter &apos;.&apos;, the field will be left blank.</span><br><span class="line">-----</span><br><span class="line">Country Name (2 letter code) [XX]:11</span><br><span class="line">State or Province Name (full name) []:BeiJing</span><br><span class="line">Locality Name (eg, city) [Default City]:BeiJing</span><br><span class="line">Organization Name (eg, company) [Default Company Ltd]:BeiJing</span><br><span class="line">Organizational Unit Name (eg, section) []:BeiJing</span><br><span class="line">Common Name (eg, your name or your server&apos;s hostname) []:host</span><br><span class="line">Email Address []:zhouqunic@qq.com</span><br><span class="line">#以上是配置证书信息，因为是自己颁发给自己的证书，就随意瞎填或者干脆Enter跳过，如果是正式应用在自己的网站上，最好规范填写。</span><br><span class="line"></span><br><span class="line">Please enter the following &apos;extra&apos; attributes</span><br><span class="line">to be sent with your certificate request</span><br><span class="line">A challenge password []:123456</span><br><span class="line">An optional company name []:123456</span><br></pre></td></tr></table></figure>
+<h2 id="自己生成证书"><a href="#自己生成证书" class="headerlink" title="自己生成证书"></a>自己生成证书</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# openssl req -new -key host.key -out host.csr   //自己生成证书请求文件，需要拿这个私钥一起生成证书</span><br><span class="line">You are about to be asked to enter information that will be incorporated</span><br><span class="line">into your certificate request.</span><br><span class="line">What you are about to enter is what is called a Distinguished Name or a DN.</span><br><span class="line">There are quite a few fields but you can leave some blank</span><br><span class="line">For some fields there will be a default value,</span><br><span class="line">If you enter &apos;.&apos;, the field will be left blank.</span><br><span class="line">-----</span><br><span class="line">Country Name (2 letter code) [XX]:11</span><br><span class="line">State or Province Name (full name) []:BeiJing</span><br><span class="line">Locality Name (eg, city) [Default City]:BeiJing</span><br><span class="line">Organization Name (eg, company) [Default Company Ltd]:BeiJing</span><br><span class="line">Organizational Unit Name (eg, section) []:BeiJing</span><br><span class="line">Common Name (eg, your name or your server&apos;s hostname) []:host</span><br><span class="line">Email Address []:zhouqunic@qq.com</span><br><span class="line">#以上是配置证书信息，因为是自己颁发给自己的证书，就随意瞎填或者干脆Enter跳过，如果是正式应用在自己的网站上，最好规范填写。</span><br><span class="line"></span><br><span class="line">Please enter the following &apos;extra&apos; attributes</span><br><span class="line">to be sent with your certificate request</span><br><span class="line">A challenge password []:123456</span><br><span class="line">An optional company name []:123456</span><br></pre></td></tr></table></figure>
 
-<p>创建公钥：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# openssl x509 -req -days 365 -in host.csr -signkey host.key -out host.crt  //这里的aminglinux.crt为公钥</span><br><span class="line"></span><br><span class="line">Signature ok</span><br><span class="line">subject=/C=11/ST=BeiJing/L=BeiJing/O=BeiJing/OU=BeiJing/CN=host/emailAddress=zhouqunic@qq.com</span><br><span class="line">Getting Private key</span><br></pre></td></tr></table></figure>
+<h2 id="创建公钥："><a href="#创建公钥：" class="headerlink" title="创建公钥："></a>创建公钥：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# openssl x509 -req -days 365 -in host.csr -signkey host.key -out host.crt  //这里的aminglinux.crt为公钥</span><br><span class="line"></span><br><span class="line">Signature ok</span><br><span class="line">subject=/C=11/ST=BeiJing/L=BeiJing/O=BeiJing/OU=BeiJing/CN=host/emailAddress=zhouqunic@qq.com</span><br><span class="line">Getting Private key</span><br></pre></td></tr></table></figure>
 
-<p>#12.20 Nginx配置ssl</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# cd vhost/</span><br><span class="line"></span><br><span class="line">[root@host vhost]# vim ssl.conf</span><br><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    listen 443;</span><br><span class="line">    server_name zhouqun.com;</span><br><span class="line">    index index.html index.php;</span><br><span class="line">    root /data/wwwroot/zhouquncom;</span><br><span class="line">    ssl on;      //开启ssl</span><br><span class="line">    ssl_certificate host.crt;     //配置公钥</span><br><span class="line">    ssl_certificate_key host.key;        //配置私钥</span><br><span class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;      ///配置协议</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[root@host vhost]# mkdir /data/wwwroot/zhouqun.com</span><br></pre></td></tr></table></figure>
+<h1 id="12-20-Nginx配置ssl"><a href="#12-20-Nginx配置ssl" class="headerlink" title="12.20 Nginx配置ssl"></a>12.20 Nginx配置ssl</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# cd vhost/</span><br><span class="line"></span><br><span class="line">[root@host vhost]# vim ssl.conf</span><br><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    listen 443;</span><br><span class="line">    server_name zhouqun.com;</span><br><span class="line">    index index.html index.php;</span><br><span class="line">    root /data/wwwroot/zhouquncom;</span><br><span class="line">    ssl on;      //开启ssl</span><br><span class="line">    ssl_certificate host.crt;     //配置公钥</span><br><span class="line">    ssl_certificate_key host.key;        //配置私钥</span><br><span class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;      ///配置协议</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[root@host vhost]# mkdir /data/wwwroot/zhouqun.com</span><br></pre></td></tr></table></figure>
 
 <p>检测</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@host conf]# /usr/local/nginx/sbin/nginx -t</span><br><span class="line">nginx: [emerg] unknown directive &quot;ssl&quot; in /usr/local/nginx/conf/vhost/ssl.conf:7       //报错了</span><br><span class="line">nginx: configuration file /usr/local/nginx/conf/nginx.conf test failed</span><br></pre></td></tr></table></figure>
@@ -452,9 +438,8 @@
 
 <p>因为该证书是自己创建的，没有符合https组织的规范，不能被正确识别，如果换上正规的证书，就没问题了。</p>
 <p>所以，如果要使用浏览器检测，那么进行该测试之前，需要更改Windows的hosts文件，不然就会证书出错的。</p>
-<p>#扩展 </p>
-<p>##针对请求的uri来代理<br><a href="http://ask.apelearn.com/question/1049" target="_blank" rel="noopener">http://ask.apelearn.com/question/1049</a></p>
-<p>##根据访问的目录来区分后端的web<br><a href="http://ask.apelearn.com/question/920" target="_blank" rel="noopener">http://ask.apelearn.com/question/920</a></p>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><h2 id="针对请求的uri来代理"><a href="#针对请求的uri来代理" class="headerlink" title="针对请求的uri来代理"></a>针对请求的uri来代理</h2><p><a href="http://ask.apelearn.com/question/1049" target="_blank" rel="noopener">http://ask.apelearn.com/question/1049</a></p>
+<h2 id="根据访问的目录来区分后端的web"><a href="#根据访问的目录来区分后端的web" class="headerlink" title="根据访问的目录来区分后端的web"></a>根据访问的目录来区分后端的web</h2><p><a href="http://ask.apelearn.com/question/920" target="_blank" rel="noopener">http://ask.apelearn.com/question/920</a></p>
 
       
     </div>
@@ -487,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/linux入门笔记/13.4 - 13.6 mysql用户管理、常用sql语句、mysql数据库备份恢复/" rel="next" title="13.4 - 13.6 mysql用户管理、常用sql语句、mysql数据库备份恢复">
-                <i class="fa fa-chevron-left"></i> 13.4 - 13.6 mysql用户管理、常用sql语句、mysql数据库备份恢复
+              <a href="/linux入门笔记/12.13 - 12.16 Nginx的防盗链、访问控制、解析php相关配置、代理/" rel="next" title="Nginx的防盗链、访问控制、解析php相关配置、代理">
+                <i class="fa fa-chevron-left"></i> Nginx的防盗链、访问控制、解析php相关配置、代理
               </a>
             
           </div>
@@ -497,8 +482,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/linux入门笔记/11.6 - 11.9 LAMP架构-mariadb、apache httpd安装/" rel="prev" title="11.6 - 11.9 LAMP架构-mariadb、apache httpd安装">
-                11.6 - 11.9 LAMP架构-mariadb、apache httpd安装 <i class="fa fa-chevron-right"></i>
+              <a href="/linux入门笔记/12.21 - 12.24 php-fpm的pool、php-fpm慢执行日志、open_basedir、php-fpm进程管理/" rel="prev" title="php-fpm的pool、php-fpm慢执行日志、open_basedir、php-fpm进程管理">
+                php-fpm的pool、php-fpm慢执行日志、open_basedir、php-fpm进程管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -551,8 +536,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -619,6 +613,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#12-17-Nginx负载均衡"><span class="nav-number">1.</span> <span class="nav-text">12.17 Nginx负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡配置"><span class="nav-number">1.1.</span> <span class="nav-text">负载均衡配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置参数"><span class="nav-number">1.1.1.</span> <span class="nav-text">配置参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测"><span class="nav-number">1.1.2.</span> <span class="nav-text">检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dig命令"><span class="nav-number">1.2.</span> <span class="nav-text">dig命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-18-ssl原理"><span class="nav-number">2.</span> <span class="nav-text">12.18 ssl原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#http、https、tcp"><span class="nav-number">2.1.</span> <span class="nav-text">http、https、tcp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL工作流程"><span class="nav-number">2.2.</span> <span class="nav-text">SSL工作流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-19-生成ssl密钥对"><span class="nav-number">3.</span> <span class="nav-text">12.19 生成ssl密钥对</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL工作流程-1"><span class="nav-number">3.1.</span> <span class="nav-text">SSL工作流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL证书就是一对公钥和私钥。"><span class="nav-number">3.2.</span> <span class="nav-text">SSL证书就是一对公钥和私钥。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建私钥"><span class="nav-number">3.2.1.</span> <span class="nav-text">创建私钥</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自己生成证书"><span class="nav-number">3.3.</span> <span class="nav-text">自己生成证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建公钥："><span class="nav-number">3.4.</span> <span class="nav-text">创建公钥：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-20-Nginx配置ssl"><span class="nav-number">4.</span> <span class="nav-text">12.20 Nginx配置ssl</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展"><span class="nav-number">5.</span> <span class="nav-text">扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#针对请求的uri来代理"><span class="nav-number">5.1.</span> <span class="nav-text">针对请求的uri来代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据访问的目录来区分后端的web"><span class="nav-number">5.2.</span> <span class="nav-text">根据访问的目录来区分后端的web</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

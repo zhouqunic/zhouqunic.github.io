@@ -84,14 +84,14 @@
 <meta name="description" content="17.1 MySQL主从介绍MySQL主从又叫做Replication、AB复制。简单讲就是A和B两台机器做主从后，在A上写数据，另外一台B也会跟着写数据，两者数据实时同步的。也就是说，当你在A机器写入一个表，再次查看B机器也会同步一个表。 MySQL主从是基于binlog的，主上须开启binlog才能进行主从。主从过程大致有3个步骤：  主将更改操作记录到binlog里。 从将主的binlog事">
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="17.1-17.5 MySQL主从配置">
+<meta property="og:title" content="MySQL主从配置">
 <meta property="og:url" content="http://yoursite.com/linux入门笔记/17.1-17.5 MySQL主从配置/index.html">
 <meta property="og:site_name" content="Joking的Linux世界">
 <meta property="og:description" content="17.1 MySQL主从介绍MySQL主从又叫做Replication、AB复制。简单讲就是A和B两台机器做主从后，在A上写数据，另外一台B也会跟着写数据，两者数据实时同步的。也就是说，当你在A机器写入一个表，再次查看B机器也会同步一个表。 MySQL主从是基于binlog的，主上须开启binlog才能进行主从。主从过程大致有3个步骤：  主将更改操作记录到binlog里。 从将主的binlog事">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-12T06:56:31.035Z">
+<meta property="og:updated_time" content="2019-07-16T06:47:23.650Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="17.1-17.5 MySQL主从配置">
+<meta name="twitter:title" content="MySQL主从配置">
 <meta name="twitter:description" content="17.1 MySQL主从介绍MySQL主从又叫做Replication、AB复制。简单讲就是A和B两台机器做主从后，在A上写数据，另外一台B也会跟着写数据，两者数据实时同步的。也就是说，当你在A机器写入一个表，再次查看B机器也会同步一个表。 MySQL主从是基于binlog的，主上须开启binlog才能进行主从。主从过程大致有3个步骤：  主将更改操作记录到binlog里。 从将主的binlog事">
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>17.1-17.5 MySQL主从配置 | Joking的Linux世界</title>
+  <title>MySQL主从配置 | Joking的Linux世界</title>
   
 
 
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">17.1-17.5 MySQL主从配置</h1>
+          <h1 class="post-title" itemprop="name headline">MySQL主从配置</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-10T10:02:22+08:00">
+                2017-10-10
               </time>
             
 
@@ -383,7 +383,7 @@
 <li>从将主的binlog事件(sql语句)同步到从本机上并记录在relaylog里。</li>
 <li>从根据relaylog里面的sql语句按顺序执行 主上有一个log dump线程，用来和从的I/O线程传递binlog 从上有两个线程，其中I/O线程用来同步主的binlog并生成relaylog，另外一个SQL线程用来把relaylog里面的sql语句落地。</li>
 </ul>
-<h3 id="主从原理图："><a href="#主从原理图：" class="headerlink" title="主从原理图："></a>主从原理图：</h3><p>Master：主mysql<br>Slave：备mysql</p>
+<p>Master：主mysql<br>Slave：备mysql</p>
 <blockquote>
 <p>当有数据写进主mysql中的时候，就出自动生成一个log dump thread，记录到如上讲的binlog中，然后从数据库就会和主mysql有个线程进行交互，从服务器就会读取binlog日志到Slave，然后再次生成一个relay log（中继日志），然后再次和从服务器中的SQL thread线程进程交互执行。</p>
 </blockquote>
@@ -520,8 +520,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/linux入门笔记/2.1-2.2 系统目录结构/" rel="next" title="3.1 - 3.3 用户文件及管理">
-                <i class="fa fa-chevron-left"></i> 3.1 - 3.3 用户文件及管理
+              <a href="/linux入门笔记/16.4-16.8 配置Tomcat监听80端口、配置Tomcat虚拟主机、Tomcat日志/" rel="next" title="配置Tomcat监听80端口、配置Tomcat虚拟主机、Tomcat日志">
+                <i class="fa fa-chevron-left"></i> 配置Tomcat监听80端口、配置Tomcat虚拟主机、Tomcat日志
               </a>
             
           </div>
@@ -530,8 +530,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/linux入门笔记/20.1 - 20.4 shell脚本结构和执行、变量、date命令/" rel="prev" title="20.1 - 20.4 shell脚本结构和执行、变量、date命令">
-                20.1 - 20.4 shell脚本结构和执行、变量、date命令 <i class="fa fa-chevron-right"></i>
+              <a href="/linux入门笔记/18.1-18.5 集群介绍、keepalived介绍和配置高可用集群/" rel="prev" title="Linux集群介绍、keepalived介绍和配置高可用集群">
+                Linux集群介绍、keepalived介绍和配置高可用集群 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -671,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#17-1-MySQL主从介绍"><span class="nav-number">1.</span> <span class="nav-text">17.1 MySQL主从介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL主从是基于binlog的，主上须开启binlog才能进行主从。"><span class="nav-number">1.1.</span> <span class="nav-text">MySQL主从是基于binlog的，主上须开启binlog才能进行主从。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主从原理图："><span class="nav-number">1.2.</span> <span class="nav-text">主从原理图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主从的作用"><span class="nav-number">1.3.</span> <span class="nav-text">主从的作用;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-数据的备份；"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.数据的备份；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-负载均衡；"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 负载均衡；</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-2-准备工作"><span class="nav-number">2.</span> <span class="nav-text">17.2 准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-3-配置主"><span class="nav-number">3.</span> <span class="nav-text">17.3 配置主</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-4-配置从"><span class="nav-number">4.</span> <span class="nav-text">17.4 配置从</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑从MySQL的配置文件添加如下参数："><span class="nav-number">4.1.</span> <span class="nav-text">编辑从MySQL的配置文件添加如下参数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将主中备份的数据发送到从中"><span class="nav-number">4.2.</span> <span class="nav-text">将主中备份的数据发送到从中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置MySQL"><span class="nav-number">4.3.</span> <span class="nav-text">配置MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对应的MySQL库"><span class="nav-number">4.4.</span> <span class="nav-text">创建对应的MySQL库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#恢复数据库"><span class="nav-number">4.5.</span> <span class="nav-text">恢复数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置从服务器"><span class="nav-number">4.6.</span> <span class="nav-text">配置从服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#到主服务器解开锁表"><span class="nav-number">4.7.</span> <span class="nav-text">到主服务器解开锁表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数介绍"><span class="nav-number">4.8.</span> <span class="nav-text">参数介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始测试"><span class="nav-number">4.9.</span> <span class="nav-text">开始测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主操作"><span class="nav-number">4.9.1.</span> <span class="nav-text">主操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从操作，查看相同数据情况"><span class="nav-number">4.9.2.</span> <span class="nav-text">从操作，查看相同数据情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主上，尝试往yuntai01库导入内容"><span class="nav-number">4.9.3.</span> <span class="nav-text">主上，尝试往yuntai01库导入内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#再次去从上查看"><span class="nav-number">4.9.4.</span> <span class="nav-text">再次去从上查看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主上删除表格plugin"><span class="nav-number">4.9.5.</span> <span class="nav-text">主上删除表格plugin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从上查看表格plugin"><span class="nav-number">4.9.6.</span> <span class="nav-text">从上查看表格plugin</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#千万别在从server上面删除任何数据，一旦删除也就意味着数据不是一致的，主从就失败了！"><span class="nav-number">5.</span> <span class="nav-text">千万别在从server上面删除任何数据，一旦删除也就意味着数据不是一致的，主从就失败了！</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如果主从这么失败了，如何再次恢复呢？"><span class="nav-number">5.1.</span> <span class="nav-text">如果主从这么失败了，如何再次恢复呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体思路"><span class="nav-number">5.2.</span> <span class="nav-text">具体思路</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#17-1-MySQL主从介绍"><span class="nav-number">1.</span> <span class="nav-text">17.1 MySQL主从介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL主从是基于binlog的，主上须开启binlog才能进行主从。"><span class="nav-number">1.1.</span> <span class="nav-text">MySQL主从是基于binlog的，主上须开启binlog才能进行主从。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主从的作用"><span class="nav-number">1.2.</span> <span class="nav-text">主从的作用;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-数据的备份；"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.数据的备份；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-负载均衡；"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 负载均衡；</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-2-准备工作"><span class="nav-number">2.</span> <span class="nav-text">17.2 准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-3-配置主"><span class="nav-number">3.</span> <span class="nav-text">17.3 配置主</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-4-配置从"><span class="nav-number">4.</span> <span class="nav-text">17.4 配置从</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑从MySQL的配置文件添加如下参数："><span class="nav-number">4.1.</span> <span class="nav-text">编辑从MySQL的配置文件添加如下参数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将主中备份的数据发送到从中"><span class="nav-number">4.2.</span> <span class="nav-text">将主中备份的数据发送到从中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置MySQL"><span class="nav-number">4.3.</span> <span class="nav-text">配置MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对应的MySQL库"><span class="nav-number">4.4.</span> <span class="nav-text">创建对应的MySQL库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#恢复数据库"><span class="nav-number">4.5.</span> <span class="nav-text">恢复数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置从服务器"><span class="nav-number">4.6.</span> <span class="nav-text">配置从服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#到主服务器解开锁表"><span class="nav-number">4.7.</span> <span class="nav-text">到主服务器解开锁表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数介绍"><span class="nav-number">4.8.</span> <span class="nav-text">参数介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始测试"><span class="nav-number">4.9.</span> <span class="nav-text">开始测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主操作"><span class="nav-number">4.9.1.</span> <span class="nav-text">主操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从操作，查看相同数据情况"><span class="nav-number">4.9.2.</span> <span class="nav-text">从操作，查看相同数据情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主上，尝试往yuntai01库导入内容"><span class="nav-number">4.9.3.</span> <span class="nav-text">主上，尝试往yuntai01库导入内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#再次去从上查看"><span class="nav-number">4.9.4.</span> <span class="nav-text">再次去从上查看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主上删除表格plugin"><span class="nav-number">4.9.5.</span> <span class="nav-text">主上删除表格plugin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从上查看表格plugin"><span class="nav-number">4.9.6.</span> <span class="nav-text">从上查看表格plugin</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#千万别在从server上面删除任何数据，一旦删除也就意味着数据不是一致的，主从就失败了！"><span class="nav-number">5.</span> <span class="nav-text">千万别在从server上面删除任何数据，一旦删除也就意味着数据不是一致的，主从就失败了！</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如果主从这么失败了，如何再次恢复呢？"><span class="nav-number">5.1.</span> <span class="nav-text">如果主从这么失败了，如何再次恢复呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体思路"><span class="nav-number">5.2.</span> <span class="nav-text">具体思路</span></a></li></ol></li></ol></div>
             
 
           </div>

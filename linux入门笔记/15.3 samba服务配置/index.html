@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="samba,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Samba介绍这套 SMB软件能够让同一局域网内的 Unix 与 window 互相的分享数据！ 安装Samba1234567yum install -y samba samba-client samba-common或 yum -y install samba*Samba-common：这个套件则主要提供了 SAMBA 的主要设定档(smb.conf) 、 smb.conf 语法检验的测试程序">
+<meta name="keywords" content="samba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Samba服务配置">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/15.3 samba服务配置/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="Samba介绍这套 SMB软件能够让同一局域网内的 Unix 与 window 互相的分享数据！ 安装Samba1234567yum install -y samba samba-client samba-common或 yum -y install samba*Samba-common：这个套件则主要提供了 SAMBA 的主要设定档(smb.conf) 、 smb.conf 语法检验的测试程序">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-16T07:00:13.897Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Samba服务配置">
+<meta name="twitter:description" content="Samba介绍这套 SMB软件能够让同一局域网内的 Unix 与 window 互相的分享数据！ 安装Samba1234567yum install -y samba samba-client samba-common或 yum -y install samba*Samba-common：这个套件则主要提供了 SAMBA 的主要设定档(smb.conf) 、 smb.conf 语法检验的测试程序">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/15.3 samba服务配置/">
+
+
+
+
+
+  <title>Samba服务配置 | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/15.3 samba服务配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Samba服务配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-19T00:49:12+08:00">
+                2017-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Samba介绍"><a href="#Samba介绍" class="headerlink" title="Samba介绍"></a>Samba介绍</h1><p>这套 SMB软件能够让同一局域网内的 Unix 与 window 互相的分享数据！</p>
+<h1 id="安装Samba"><a href="#安装Samba" class="headerlink" title="安装Samba"></a>安装Samba</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install -y samba samba-client samba-common或 yum -y install samba*</span><br><span class="line"></span><br><span class="line">Samba-common：这个套件则主要提供了 SAMBA 的主要设定档(smb.conf) 、 smb.conf 语法检验的测试程序 ( testparm )等等。</span><br><span class="line"></span><br><span class="line">samba：这个套件主要包含了 SAMBA 的主要 daemon档案 ( smbd 及 nmbd )、 SAMBA 的文件档 ( document )、以及其它与 SAMBA 相关的logrotate 设定文件及开机预设选项档案等。</span><br><span class="line"></span><br><span class="line">samba-client：这个套件则提供了当 Linux 做为SAMBA Client 端时，所需要的工具指令，例如挂载 SAMBA 档案格式的执行档 smbmount等等。</span><br></pre></td></tr></table></figure>
+
+<p>==标注：Samab服务开启之前需要关闭两个服务，iptables防火墙（如果你熟悉可以不关闭，放行smb的端口即可，SAMBA服务TCP端口139,445 UDP端口 137,138）；selinux服务。==</p>
+<h1 id="samba软件结构"><a href="#samba软件结构" class="headerlink" title="samba软件结构"></a>samba软件结构</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/etc/samba/smb.conf #samba服务的主要配置文件</span><br><span class="line"></span><br><span class="line">/etc/samba/lmhosts #samba服务的域名设定，主要设置IP地址对应的域名，类似linux系统的/etc/hosts</span><br><span class="line"></span><br><span class="line">/etc/samba/smbusers #samba服务设置samba虚拟用户的配置文件</span><br><span class="line"></span><br><span class="line">/var/log/samba #samab服务存放日志文件</span><br><span class="line"></span><br><span class="line">/var/lib/samba/private/&#123;passdb.tdb,secrets.tdb&#125; #存放samba的用户账号和密码数据库文档</span><br></pre></td></tr></table></figure>
+
+<h1 id="不需要账号密码访问的共享-security-share"><a href="#不需要账号密码访问的共享-security-share" class="headerlink" title="不需要账号密码访问的共享(security = share )"></a>不需要账号密码访问的共享(security = share )</h1><blockquote>
+<p>smb.conf配置文件分为两大类，一个全局设置参数，一个是文件共享设置参数</p>
+</blockquote>
+<ul>
+<li><p>查看共享文件权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@test src]# ls -ld /usr/local/src</span><br><span class="line">drwxr--r--. 3 root root 137 2月 4 17:03 /usr/local/src</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分配共享文件最大权限(window用户可以创建或上传文件到共享目录)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@test src]# chmod 777 /usr/local/src</span><br><span class="line">[root@test src]# ls -ld /usr/local/src</span><br><span class="line">drwxrwxrwx. 3 root root 122 2月 4 16:36 /usr/local/src</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置smb.conf配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line"></span><br><span class="line">workgroup = WORKGROUP #设置主机工作组</span><br><span class="line">server string = Samba Server Version %v #samba服务注释</span><br><span class="line">log level = 1 #设置日志文件安全级别为1</span><br><span class="line">log file = /var/log/samba/%m #设置日志文件名称，%m以IP地址为名称</span><br><span class="line">max log size = 50 #设置日志文件最大容量50KB，0表示不限制</span><br><span class="line">security = share #以share验证方式访问</span><br><span class="line">passdb backend = tdbsam #定义用户后台类型</span><br><span class="line">load printers = no #关闭打印共享功能</span><br><span class="line">cups options = raw #打印机选项</span><br><span class="line"></span><br><span class="line">[usershare]</span><br><span class="line">comment = Home Directories #共享文件描述</span><br><span class="line">path = /usr/local/src #共享路径</span><br><span class="line">browseable = yes #共享文件可以浏览</span><br><span class="line">writable = yes #共享文件可写</span><br><span class="line">guest ok = yes #允许guest用户访问</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查smb.conf配置文件是否有语法错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@test src]# testparm //如果报以下错</span><br><span class="line">Load smb config files from /etc/samba/smb.conf</span><br><span class="line">rlimit_max: increasing rlimit_max (1024) to minimum Windows limit (16384)</span><br><span class="line">WARNING: Ignoring invalid value &apos;share&apos; for parameter &apos;security&apos;</span><br><span class="line">Error loading services.</span><br><span class="line">--------------------------------------------</span><br><span class="line">解决方法:</span><br><span class="line">smb.conf配置文件参数需要做调整</span><br><span class="line"></span><br><span class="line">原来：</span><br><span class="line"></span><br><span class="line">security = share</span><br><span class="line"></span><br><span class="line">替换成:</span><br><span class="line"></span><br><span class="line">security = user</span><br><span class="line"></span><br><span class="line">map to guest = Bad User</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动samba服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@test src]# systemctl start smb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看samba端口，TCP端口139,445 UDP端口 137,138</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@test src]# netstat -tlnp | grep mbd</span><br><span class="line">tcp 0 0 0.0.0.0:139 0.0.0.0:* LISTEN 3030/smbd           </span><br><span class="line">tcp 0 0 0.0.0.0:445 0.0.0.0:* LISTEN 3030/smbd           </span><br><span class="line">tcp6 0 0 :::139 :::* LISTEN 3030/smbd           </span><br><span class="line">tcp6 0 0 :::445 :::* LISTEN 3030/smbd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试</p>
+</li>
+</ul>
+<p>Windows系统操作：</p>
+<p>在win系统打开运行输入 \\[samba server IP] 直接访问，不需要输入任何用户和密码</p>
+<ul>
+<li>在windows上访问，发现可以登陆到samba服务器并且能够看到共享文件夹，但是无法进入该文件夹<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">解决方法：</span><br><span class="line"># chcon -t samba_share_t /usr/local/src //执行一下该命令即可</span><br><span class="line"># systemctl restart smb</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="需要输入账号和密码访问的共享-security-user"><a href="#需要输入账号和密码访问的共享-security-user" class="headerlink" title="需要输入账号和密码访问的共享(security = user)"></a>需要输入账号和密码访问的共享(security = user)</h1><blockquote>
+<p>创建samba用户之前必须先创建系统用户，系统用户和samba用户名一样，但密码可以设置成不一样</p>
+</blockquote>
+<ul>
+<li><p>创建系统用户test01</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@test ~]# useradd test01</span><br><span class="line">[root@test ~]# passwd test01 //系统用户密码:666</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把系统用户test01添加为samba用户并设置samba用户登录密码,并且把用户信息写入smbpasswd文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@test ~]# pdbedit -a -u test01 //samba用户密码:123</span><br><span class="line">[root@test ~]# ll /etc/samba/smbpasswd </span><br><span class="line">-rw-------. 1 root root 103 2月 5 00:20 /etc/samba/smbpasswd</span><br><span class="line">[root@test ~]# cat !$</span><br><span class="line">cat /etc/samba/smbpasswd</span><br><span class="line">test01:1000:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:F0873F3268072C7B1150B15670291137:[U ]:LCT-5C58665C:</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列出Samba用户列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@test ~]# pdbedit -L</span><br><span class="line">test01:1001:</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除samba服务中的某个用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># smbpasswd -x 用户名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置smb.conf配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># See smb.conf.example for a more detailed config file or</span><br><span class="line"># read the smb.conf manpage.</span><br><span class="line"># Run &apos;testparm&apos; to verify the config is correct after</span><br><span class="line"># you modified it.</span><br><span class="line"></span><br><span class="line">[global]</span><br><span class="line">        workgroup = WORKGROUP</span><br><span class="line">        security = user</span><br><span class="line">        server string = Samba Server Version %v</span><br><span class="line">        log level = 1</span><br><span class="line">        passdb backend = smbpasswd //改用smbpasswd方式认证</span><br><span class="line">        log file = /var/log/samba/%m</span><br><span class="line">        max log size = 50</span><br><span class="line">        load printers = no</span><br><span class="line">        cups options = raw</span><br><span class="line">        encrypt passwords = yes</span><br><span class="line">        smb passwd file = /etc/samba/smbpasswd //密码文件路径</span><br><span class="line">[worker]</span><br><span class="line">        comment = test page</span><br><span class="line">        path = /usr/local/src</span><br><span class="line">        browseable = yes</span><br><span class="line">        writable = yes</span><br><span class="line">        valid users = test01 //允许test01用户登录,多个用户用逗号分隔</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动samba</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># systemctl start smb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试</p>
+</li>
+</ul>
+<p>Windows系统操作：</p>
+<p>在win系统打开运行输入 \\[samba server IP] 直接访问，需要输入用户和smb密码登录</p>
+<h1 id="linux客户端挂载samba共享目录"><a href="#linux客户端挂载samba共享目录" class="headerlink" title="linux客户端挂载samba共享目录"></a>linux客户端挂载samba共享目录</h1><ul>
+<li><p>需要注意的是挂载端也需要安装cifs相关的文件系统包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@test ~]# yum install cifs*</span><br><span class="line">[root@test ~]# mount -t cifs -o username=job01 //192.168.187.130/worker /mnt //因为samba只限job01用户登录,所以指定用户即可,密码:888</span><br><span class="line">Password for job01@//192.168.187.130/worker: ***</span><br><span class="line">[root@test ~]# ll /mnt</span><br><span class="line">总用量 960</span><br><span class="line">drwxrwxrwx. 9 test01 test01 0 1月 26 21:17 nginx-1.12.1</span><br><span class="line">-rwxrwxrwx. 1 root root 981093 1月 26 21:15 nginx-1.12.1.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Linux开机自动挂载samba共享</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@test ~]# vim /etc/fstab</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line"># /etc/fstab</span><br><span class="line"># Created by anaconda on Sun Jan 27 04:33:03 2019</span><br><span class="line">#</span><br><span class="line"># Accessible filesystems, by reference, are maintained under &apos;/dev/disk&apos;</span><br><span class="line"># See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info</span><br><span class="line">#</span><br><span class="line">UUID=1a362d06-090d-40af-9a33-25398fb4eee2 / xfs defaults 0 0</span><br><span class="line">UUID=1dfcee31-8661-4d6b-8913-24ecc2a810d4 /boot xfs defaults 0 0</span><br><span class="line">UUID=3438d7c6-f830-4b41-bbed-8f7d5bebb271 swap swap defaults 0 0</span><br><span class="line">//192.168.187.130/worker /mnt cifs credentials=/etc/samba/cred.passwd 0 0 //新增这一条规则</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增密码文件,重启验证一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@test ~]# vim /etc/samba/cred.passwd</span><br><span class="line">username=job01</span><br><span class="line">password=888</span><br><span class="line">chmod og=-- /etc/samba/cred.passwd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果采用免密码登录的方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">然后客户端挂载的时候需要注意，比如：# mount -t cifs //192.168.187.130/usershare /mnt </span><br><span class="line">Password for root@//172.18.201.6/mysql_data:</span><br><span class="line"></span><br><span class="line">还是会出现让输入密码的交互模式，你一回车就会挂载上了。有没有办法去掉这个输出呢？再加一个password参数就ok了。</span><br><span class="line"></span><br><span class="line"># mount -t cifs -o password //192.168.187.130/usershare /mnt</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="Linux挂载windows共享"><a href="#Linux挂载windows共享" class="headerlink" title="Linux挂载windows共享"></a>Linux挂载windows共享</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@test ~]# mount -o username=administrator //192.168.1.3/linux /mnt</span><br><span class="line">Password for administrator@//192.168.1.3/linux: ******</span><br><span class="line">[root@test ~]# ls /mnt</span><br><span class="line">[300dpi高清版]Python基础教程(第2版)_HD.pdf mongo-1.6.16.tgz</span><br><span class="line">apache-tomcat-8.5.20.tar.gz mongodb-1.3.0.tgz</span><br><span class="line">apr-1.5.2.tar.gz mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz</span><br><span class="line">apr-util-1.5.4.tar.gz nc-1.84-24.el6.x86_64.rpm</span><br><span class="line">baidu-nolimit_v1.0.1.crx nginx-1.12.1.tar.gz</span><br><span class="line">CentOS-7-x86_64-DVD-1611.iso openfire_4_2_3.tar.gz</span><br><span class="line">centos-7-x86_64-minimal.tar.gz oracle 11gR2部署DG文档</span><br><span class="line">extundelete-0.2.4.tar.bz2 php-5.6.30.tar.gz</span><br><span class="line">FileZilla3271 phpredis-develop.zip</span><br><span class="line">friends-网络 redis-4.0.1.tar.gz</span><br><span class="line">httpd-2.4.27.tar.gz ruby-2.2.3.tar.gz</span><br><span class="line">jdk-8u144-linux-x64.tar.gz shell+ABS.pdf</span><br><span class="line">kernel-debuginfo-3.10.0-514.el7.x86_64.rpm 帮助文档(群友提供)</span><br><span class="line">kernel-debuginfo-common-x86_64-3.10.0-514.el7.x86_64.rpm 黑客入门全程图解.pdf</span><br><span class="line">kernel-devel-3.10.0-514.el7.x86_64.rpm 计算机电子书</span><br><span class="line">Linux Shell编程艺术.pdf 课程PPT</span><br><span class="line">mariadb-10.2.6-linux-glibc_214-x86_64.tar.gz 压缩原理</span><br><span class="line">memcache-2.2.3.tgz</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/samba/" rel="tag"># samba</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/14.4 - 15.2 NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp/" rel="next" title="NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp">
+                <i class="fa fa-chevron-left"></i> NFS的exportfs命令和客户端问题、FTP介绍、使用vsftpd搭建ftp
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/16.1-16.3 Tomcat介绍、安装jdk、安装Tomcat/" rel="prev" title="Tomcat介绍、安装jdk、安装Tomcat">
+                Tomcat介绍、安装jdk、安装Tomcat <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Samba介绍"><span class="nav-number">1.</span> <span class="nav-text">Samba介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Samba"><span class="nav-number">2.</span> <span class="nav-text">安装Samba</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#samba软件结构"><span class="nav-number">3.</span> <span class="nav-text">samba软件结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不需要账号密码访问的共享-security-share"><span class="nav-number">4.</span> <span class="nav-text">不需要账号密码访问的共享(security = share )</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#需要输入账号和密码访问的共享-security-user"><span class="nav-number">5.</span> <span class="nav-text">需要输入账号和密码访问的共享(security = user)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux客户端挂载samba共享目录"><span class="nav-number">6.</span> <span class="nav-text">linux客户端挂载samba共享目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux挂载windows共享"><span class="nav-number">7.</span> <span class="nav-text">Linux挂载windows共享</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

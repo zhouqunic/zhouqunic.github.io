@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="[toc] ##20.23/20.24/20.25 告警系统邮件引擎 mail.sh内容  1234567891011121314151617181920212223242526272829  log=$1t_s=`date +%s`t_s2=`date -d &amp;quot;2 hours ago&amp;quot; +%s`if [ ! -f /tmp/$log ]then    echo $t_s2 &amp;">
+<meta name="description" content="20.23/20.24/20.25 告警系统邮件引擎创建发邮件的脚本——mail.pymail.sh内容  123456789101112131415161718192021222324252627282930313233343536373839404142434445[root@localhost mail]# pwd/usr/local/sbin/mon/mail[root@localhost">
 <meta name="keywords" content="shell告警系统脚本">
 <meta property="og:type" content="article">
-<meta property="og:title" content="20.23-20.26 告警系统邮件引擎、运行告警系统">
+<meta property="og:title" content="告警系统邮件引擎、运行告警系统">
 <meta property="og:url" content="http://yoursite.com/linux入门笔记/20.23-20.26 告警系统邮件引擎、运行告警系统/index.html">
 <meta property="og:site_name" content="Joking的Linux世界">
-<meta property="og:description" content="[toc] ##20.23/20.24/20.25 告警系统邮件引擎 mail.sh内容  1234567891011121314151617181920212223242526272829  log=$1t_s=`date +%s`t_s2=`date -d &amp;quot;2 hours ago&amp;quot; +%s`if [ ! -f /tmp/$log ]then    echo $t_s2 &amp;">
+<meta property="og:description" content="20.23/20.24/20.25 告警系统邮件引擎创建发邮件的脚本——mail.pymail.sh内容  123456789101112131415161718192021222324252627282930313233343536373839404142434445[root@localhost mail]# pwd/usr/local/sbin/mon/mail[root@localhost">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-12T07:21:40.919Z">
+<meta property="og:updated_time" content="2019-07-16T08:16:48.068Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="20.23-20.26 告警系统邮件引擎、运行告警系统">
-<meta name="twitter:description" content="[toc] ##20.23/20.24/20.25 告警系统邮件引擎 mail.sh内容  1234567891011121314151617181920212223242526272829  log=$1t_s=`date +%s`t_s2=`date -d &amp;quot;2 hours ago&amp;quot; +%s`if [ ! -f /tmp/$log ]then    echo $t_s2 &amp;">
+<meta name="twitter:title" content="告警系统邮件引擎、运行告警系统">
+<meta name="twitter:description" content="20.23/20.24/20.25 告警系统邮件引擎创建发邮件的脚本——mail.pymail.sh内容  123456789101112131415161718192021222324252627282930313233343536373839404142434445[root@localhost mail]# pwd/usr/local/sbin/mon/mail[root@localhost">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>20.23-20.26 告警系统邮件引擎、运行告警系统 | Joking的Linux世界</title>
+  <title>告警系统邮件引擎、运行告警系统 | Joking的Linux世界</title>
   
 
 
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">20.23-20.26 告警系统邮件引擎、运行告警系统</h1>
+          <h1 class="post-title" itemprop="name headline">告警系统邮件引擎、运行告警系统</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T12:49:11+08:00">
-                2017-08-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-24T11:08:32+08:00">
+                2017-10-24
               </time>
             
 
@@ -376,13 +376,13 @@
       
 
       
-        <p>[toc]</p>
-<p>##20.23/20.24/20.25 告警系统邮件引擎</p>
-<p>mail.sh内容 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">  log=$1</span><br><span class="line">t_s=`date +%s`</span><br><span class="line">t_s2=`date -d &quot;2 hours ago&quot; +%s`</span><br><span class="line">if [ ! -f /tmp/$log ]</span><br><span class="line">then</span><br><span class="line">    echo $t_s2 &gt; /tmp/$log</span><br><span class="line">fi</span><br><span class="line">t_s2=`tail -1 /tmp/$log|awk &apos;&#123;print $1&#125;&apos;`</span><br><span class="line">echo $t_s&gt;&gt;/tmp/$log</span><br><span class="line">v=$[$t_s-$t_s2]</span><br><span class="line">echo $v</span><br><span class="line">if [ $v -gt 3600 ]</span><br><span class="line">then</span><br><span class="line">    ./mail.py  $1  $2  $3</span><br><span class="line">    echo &quot;0&quot; &gt; /tmp/$log.txt</span><br><span class="line">else</span><br><span class="line">    if [ ! -f /tmp/$log.txt ]</span><br><span class="line">    then</span><br><span class="line">        echo &quot;0&quot; &gt; /tmp/$log.txt</span><br><span class="line">    fi</span><br><span class="line">    nu=`cat /tmp/$log.txt`</span><br><span class="line">    nu2=$[$nu+1]</span><br><span class="line">    echo $nu2&gt;/tmp/$log.txt</span><br><span class="line">    if [ $nu2 -gt 10 ]</span><br><span class="line">    then</span><br><span class="line">        ./mail.py  $1 &quot;trouble continue 10 min $2&quot; &quot;$3&quot;</span><br><span class="line">        echo &quot;0&quot; &gt; /tmp/$log.txt</span><br><span class="line">    fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+        <h2 id="20-23-20-24-20-25-告警系统邮件引擎"><a href="#20-23-20-24-20-25-告警系统邮件引擎" class="headerlink" title="20.23/20.24/20.25 告警系统邮件引擎"></a>20.23/20.24/20.25 告警系统邮件引擎</h2><h3 id="创建发邮件的脚本——mail-py"><a href="#创建发邮件的脚本——mail-py" class="headerlink" title="创建发邮件的脚本——mail.py"></a>创建发邮件的脚本——mail.py</h3><p>mail.sh内容 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost mail]# pwd</span><br><span class="line">/usr/local/sbin/mon/mail</span><br><span class="line"></span><br><span class="line">[root@localhost mail]# vim mail.py</span><br><span class="line">#!/usr/bin/env python</span><br><span class="line">#-*- coding: UTF-8 -*-</span><br><span class="line">import os,sys</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(&apos;utf8&apos;)</span><br><span class="line">import getopt</span><br><span class="line">import smtplib</span><br><span class="line">from email.MIMEText import MIMEText</span><br><span class="line">from email.MIMEMultipart import MIMEMultipart</span><br><span class="line">from  subprocess import *</span><br><span class="line">def sendqqmail(username,password,mailfrom,mailto,subject,content):</span><br><span class="line">    gserver = &apos;smtp.163.com&apos;</span><br><span class="line">    gport = 25</span><br><span class="line">    try:</span><br><span class="line">        msg = MIMEText(unicode(content).encode(&apos;utf-8&apos;))</span><br><span class="line">        msg[&apos;from&apos;] = mailfrom</span><br><span class="line">        msg[&apos;to&apos;] = mailto</span><br><span class="line">        msg[&apos;Reply-To&apos;] = mailfrom</span><br><span class="line">        msg[&apos;Subject&apos;] = subject</span><br><span class="line">        smtp = smtplib.SMTP(gserver, gport)</span><br><span class="line">        smtp.set_debuglevel(0)</span><br><span class="line">        smtp.ehlo()</span><br><span class="line">        smtp.login(username,password)</span><br><span class="line">        smtp.sendmail(mailfrom, mailto, msg.as_string())</span><br><span class="line">        smtp.close()</span><br><span class="line">    except Exception,err:</span><br><span class="line">        print &quot;Send mail failed. Error: %s&quot; % err</span><br><span class="line">def main():</span><br><span class="line">    to=sys.argv[1]</span><br><span class="line">    subject=sys.argv[2]</span><br><span class="line">    content=sys.argv[3]</span><br><span class="line">##定义QQ邮箱的账号和密码，你需要修改成你自己的账号和密码（请不要把真实的用户名和密码放到网上</span><br><span class="line">公开，否则你会死的很惨）</span><br><span class="line">    sendqqmail(&apos;asdgsfsdl@163.com&apos;,&apos;sdfsd2.&apos;,&apos;asdgsfsdl@163.com&apos;,to,subject,content)</span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#####脚本使用说明######</span><br><span class="line">#1. 首先定义好脚本中的邮箱账号和密码</span><br><span class="line">#2. 脚本执行命令为：python mail.py 目标邮箱 &quot;邮件主题&quot; &quot;邮件内容&quot;</span><br></pre></td></tr></table></figure>
 
-<p>##20.26 运行告警系统<br>略</p>
+<h3 id="创建邮件引擎的配置文件"><a href="#创建邮件引擎的配置文件" class="headerlink" title="创建邮件引擎的配置文件"></a>创建邮件引擎的配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#本脚本用于做告警收敛</span><br><span class="line">#Written by Adai</span><br><span class="line">log=$1</span><br><span class="line">t_s=`date +%s`</span><br><span class="line">#时间戳1</span><br><span class="line">t_s2=`date -d &quot;2 hours ago&quot; +%s`</span><br><span class="line">#时间戳2（两个小时之前的时间）</span><br><span class="line">#定义该时间戳的目的是保证第一次执行该脚本时v大于一小时</span><br><span class="line">#保证第一次执行的时候能报警</span><br><span class="line">#因为只有发生故障的时候才会执行该脚本，所以第一次执行必须要报警</span><br><span class="line">if [ ! -f /tmp/$log ]</span><br><span class="line">then</span><br><span class="line">    echo $t_s2 &gt; /tmp/$log</span><br><span class="line">fi</span><br><span class="line">#创建记录时间戳的日志文件</span><br><span class="line">t_s2=`tail -1 /tmp/$log|awk &apos;&#123;print $1&#125;&apos;`</span><br><span class="line">echo $t_s&gt;&gt;/tmp/$log</span><br><span class="line">v=$[$t_s-$t_s2]</span><br><span class="line">#两个时间戳的间隔时间</span><br><span class="line">echo $v</span><br><span class="line">#计时器：</span><br><span class="line">if [ $v -gt 3600 ]</span><br><span class="line">then</span><br><span class="line">#如果时间间隔大于1小时，则启动报警系统</span><br><span class="line">    ./mail.py  $1  $2  $3</span><br><span class="line">    echo &quot;0&quot; &gt; /tmp/$log.txt</span><br><span class="line">#$log.txt为计数器文件：</span><br><span class="line">else</span><br><span class="line">    if [ ! -f /tmp/$log.txt ]</span><br><span class="line">    then</span><br><span class="line">        echo &quot;0&quot; &gt; /tmp/$log.txt</span><br><span class="line">    fi</span><br><span class="line">#查看计数器文件中的数字</span><br><span class="line">    nu=`cat /tmp/$log.txt`</span><br><span class="line">    nu2=$[$nu+1]</span><br><span class="line">    echo $nu2&gt;/tmp/$log.txt</span><br><span class="line">#重置$log.txt数值</span><br><span class="line">    if [ $nu2 -gt 10 ]</span><br><span class="line">    then</span><br><span class="line">#告警收敛：该故障持续十分钟，开始报警</span><br><span class="line">         ./mail.py  $1 &quot;trouble continue 10 min $2&quot; &quot;$3&quot;</span><br><span class="line">         echo &quot;0&quot; &gt; /tmp/$log.txt</span><br><span class="line">#告警结束后重新开始计数</span><br><span class="line">    fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
+<h2 id="20-26-运行告警系统"><a href="#20-26-运行告警系统" class="headerlink" title="20.26 运行告警系统"></a>20.26 运行告警系统</h2><p>执行告警系统，将告警任务写入计划任务中，每分钟执行一次。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost mail]# crontab -e</span><br><span class="line">* * * * * cd /usr/local/sbin/mon/bin; bash main.sh</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -412,8 +412,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/linux入门笔记/20.10-20.15 for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本/" rel="next" title="20.10-20.15 for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本">
-                <i class="fa fa-chevron-left"></i> 20.10-20.15 for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本
+              <a href="/linux入门笔记/20.19-20.22 告警系统需求分析、告警系统主脚本、配置文件、监控项目/" rel="next" title="告警系统需求分析、告警系统主脚本、配置文件、监控项目">
+                <i class="fa fa-chevron-left"></i> 告警系统需求分析、告警系统主脚本、配置文件、监控项目
               </a>
             
           </div>
@@ -421,10 +421,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/linux入门笔记/20.16-20.18 shell中的函数、数组/" rel="prev" title="20.16-20.17 shell中的函数、数组">
-                20.16-20.17 shell中的函数、数组 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -476,8 +472,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -544,6 +549,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#20-23-20-24-20-25-告警系统邮件引擎"><span class="nav-number">1.</span> <span class="nav-text">20.23/20.24/20.25 告警系统邮件引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建发邮件的脚本——mail-py"><span class="nav-number">1.1.</span> <span class="nav-text">创建发邮件的脚本——mail.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建邮件引擎的配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">创建邮件引擎的配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-26-运行告警系统"><span class="nav-number">2.</span> <span class="nav-text">20.26 运行告警系统</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
