@@ -41,11 +41,11 @@
   </entry>
   
   <entry>
-    <title>Mongodb 备份(mongodump)脚本</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/Mongo%20%E5%A4%87%E4%BB%BD(mongodump)%E8%84%9A%E6%9C%AC/"/>
-    <id>http://yoursite.com/linux入门笔记/Mongo 备份(mongodump)脚本/</id>
+    <title>Mongodb备份脚本</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/Mongo%E5%A4%87%E4%BB%BD%E8%84%9A%E6%9C%AC/"/>
+    <id>http://yoursite.com/linux入门笔记/Mongo备份脚本/</id>
     <published>2018-08-22T16:00:00.000Z</published>
-    <updated>2019-08-09T17:04:57.562Z</updated>
+    <updated>2019-08-09T17:28:15.243Z</updated>
     
     <summary type="html">
     
@@ -59,6 +59,8 @@
     
       <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
     
+    
+      <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
     
       <category term="mongodb" scheme="http://yoursite.com/tags/mongodb/"/>
     

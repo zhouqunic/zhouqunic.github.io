@@ -12,13 +12,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Mongodb 备份(mongodump)脚本]]></title>
-    <url>%2Flinux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2FMongo%20%E5%A4%87%E4%BB%BD(mongodump)%E8%84%9A%E6%9C%AC%2F</url>
+    <title><![CDATA[Mongodb备份脚本]]></title>
+    <url>%2Flinux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2FMongo%E5%A4%87%E4%BB%BD%E8%84%9A%E6%9C%AC%2F</url>
     <content type="text"><![CDATA[脚本如下 12345678910111213141516171819202122232425262728293031#!/bin/sh #备份Mongo 数据库：PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/binecho &quot;1.初始化。。。。。&quot;export PATH bakDir=&quot;/data_backup/mongodb_bak/h77&quot;dbName=&quot;数据库名称&quot;fileName=$dbName&quot;`date +%Y%m%d`.tar&quot;timeStr=&quot;`date +%Y%m%d`&quot;realDbBakDir=$bakDir/$timeStrif [ ! -x &quot;$bakDir&quot; ];thenmkdir $bakDirficd $bakdirecho &quot;备份的数据库为:&quot; $dbNameecho &quot;备份目录为：&quot; $bakDirecho $dbName &quot;数据库备份文件目录为：&quot; $realDbBakDirecho &quot;2.备份开始：&quot;mongodump -h 127.0.0.1:27017 -u &apos;数据库账号&apos; -p &apos;数据库密码&apos; -d $dbName -o $realDbBakDirecho &quot;3.备份结束，开始打包&quot;for((i=1;i&lt;10;i++)) do echo &quot;当前等待时间&quot; $i &quot;秒&quot; sleep 1 doneecho &quot;备份文件：&quot; $realDbBakDir/$dbName/$fileNametar -czvf $realDbBakDir/$fileName $realDbBakDir/$dbName/echo &quot;4.打包完成,开始scp上传&quot;#scp $realDbBakDir/$fileName root@h121:$bakDirecho &quot;5.上传成功&quot;echo &quot;备份成功日志`date`&quot; &gt;&gt; bak.log]]></content>
       <categories>
         <category>linux入门笔记</category>
       </categories>
       <tags>
+        <tag>shell</tag>
         <tag>mongodb</tag>
       </tags>
   </entry>
