@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mongodb,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="[toc]  Mongodb是一种非关系数据库(NoSQL)，非关系型数据库的产生就是为了解决大数据量、高扩展性、高性能、灵活数据模型、高可用性。MongoDB官方已经不建议使用主从模式了，替代方案是采用副本集的模式。主从模式其实就是一个单副本的应用，没有很好的扩展性和容错性，而Mongodb副本集具有多个副本保证了容错性，就算一个副本挂掉了还有很多副本存在，主节点挂掉后，整个集群内会实现自动切换">
+<meta name="keywords" content="mongodb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB副本集(一主两从)读写分离、故障转移功能环境部署记录">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/MongoDB副本集(一主两从)读写分离、故障转移功能环境部署记录/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="[toc]  Mongodb是一种非关系数据库(NoSQL)，非关系型数据库的产生就是为了解决大数据量、高扩展性、高性能、灵活数据模型、高可用性。MongoDB官方已经不建议使用主从模式了，替代方案是采用副本集的模式。主从模式其实就是一个单副本的应用，没有很好的扩展性和容错性，而Mongodb副本集具有多个副本保证了容错性，就算一个副本挂掉了还有很多副本存在，主节点挂掉后，整个集群内会实现自动切换">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-04T09:33:15.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MongoDB副本集(一主两从)读写分离、故障转移功能环境部署记录">
+<meta name="twitter:description" content="[toc]  Mongodb是一种非关系数据库(NoSQL)，非关系型数据库的产生就是为了解决大数据量、高扩展性、高性能、灵活数据模型、高可用性。MongoDB官方已经不建议使用主从模式了，替代方案是采用副本集的模式。主从模式其实就是一个单副本的应用，没有很好的扩展性和容错性，而Mongodb副本集具有多个副本保证了容错性，就算一个副本挂掉了还有很多副本存在，主节点挂掉后，整个集群内会实现自动切换">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/MongoDB副本集(一主两从)读写分离、故障转移功能环境部署记录/">
+
+
+
+
+
+  <title>MongoDB副本集(一主两从)读写分离、故障转移功能环境部署记录 | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/MongoDB副本集(一主两从)读写分离、故障转移功能环境部署记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MongoDB副本集(一主两从)读写分离、故障转移功能环境部署记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T00:00:00+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<blockquote>
+<p>Mongodb是一种非关系数据库(NoSQL)，非关系型数据库的产生就是为了解决大数据量、高扩展性、高性能、灵活数据模型、高可用性。MongoDB官方已经不建议使用主从模式了，替代方案是采用副本集的模式。主从模式其实就是一个单副本的应用，没有很好的扩展性和容错性，而Mongodb副本集具有多个副本保证了容错性，就算一个副本挂掉了还有很多副本存在，主节点挂掉后，整个集群内会实现自动切换。</p>
+</blockquote>
+<h1 id="Mongodb副本集的工作原理"><a href="#Mongodb副本集的工作原理" class="headerlink" title="Mongodb副本集的工作原理"></a>Mongodb副本集的工作原理</h1><ul>
+<li>客户端连接到整个Mongodb副本集，不关心具体哪一台节点机是否挂掉。主节点机负责整个副本集的读写，副本集定期同步数据备份，一但主节点挂掉，副本节点就会选举一个新的主服务器，这一切对于应用服务器不需要关心。副本集中的副本节点在主节点挂掉后通过心跳机制检测到后，就会在集群内发起主节点的选举机制，自动选举一位新的主服务器。</li>
+<li>看起来Mongodb副本集很牛X的样子，下面就演示下副本集环境部署过程，官方推荐的Mongodb副本集机器数量为至少3个节点，这里我就选择三个节点，一个主节点，两个从节点，暂不使用仲裁节点。</li>
+</ul>
+<h1 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">ip地址 主机名 角色</span><br><span class="line">172.16.60.205 mongodb-master01 副本集主节点</span><br><span class="line">172.16.60.206 mongodb-slave01 副本集副本节点</span><br><span class="line">172.16.60.207 mongodb-slave02 副本集副本节点</span><br><span class="line"> </span><br><span class="line">三个节点机均设置好各自的主机名，并如下设置好hosts绑定</span><br><span class="line">[root@mongodb-master01 ~]# cat /etc/hosts</span><br><span class="line">............</span><br><span class="line">172.16.60.205 mongodb-master01</span><br><span class="line">172.16.60.206 mongodb-slave01</span><br><span class="line">172.16.60.207 mongodb-slave02</span><br><span class="line"> </span><br><span class="line">三个节点机均关闭selinux，为了测试方便，将iptables也关闭</span><br><span class="line">[root@mongodb-master01 ~]# setenforce 0</span><br><span class="line">[root@mongodb-master01 ~]# cat /etc/sysconfig/selinux</span><br><span class="line">...........</span><br><span class="line">SELINUX=disabled</span><br><span class="line"> </span><br><span class="line">[root@mongodb-master01 ~]# iptables -F</span><br><span class="line">[root@mongodb-master01 ~]# /etc/init.d/iptables stop</span><br><span class="line">[root@mongodb-master01 ~]# /etc/init.d/iptables stop</span><br><span class="line">iptables: Setting chains to policy ACCEPT: filter [ OK ]</span><br><span class="line">iptables: Flushing firewall rules: [ OK ]</span><br><span class="line">iptables: Unloading modules: [ OK ]</span><br></pre></td></tr></table></figure>
+
+<h1 id="二、Mongodb安装、副本集配置"><a href="#二、Mongodb安装、副本集配置" class="headerlink" title="二、Mongodb安装、副本集配置"></a>二、Mongodb安装、副本集配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br></pre></td><td class="code"><pre><span class="line">1) 在三个节点机上建立mongodb副本集测试文件夹，用于存放整个副本集文件</span><br><span class="line">[root@mongodb-master01 ~]# mkdir -p /data/mongodb/data/replset/</span><br><span class="line"> </span><br><span class="line">2）在三个节点机上安装mongodb</span><br><span class="line">下载地址：https://www.mongodb.org/dl/linux/x86_64-rhel62</span><br><span class="line"> </span><br><span class="line">[root@mongodb-master01 ~]# wget http://downloads.mongodb.org/linux/mongodb-linux-x86_64-rhel62-v3.6-latest.tgz</span><br><span class="line">[root@mongodb-master01 ~]# tar -zvxf mongodb-linux-x86_64-rhel62-v3.6-latest.tgz</span><br><span class="line"> </span><br><span class="line">3）分别在每个节点机上启动mongodb（启动时指明--bind_ip地址，默认是127.0.0.1，需要改成本机ip，否则远程连接时失败）</span><br><span class="line">[root@mongodb-master01 ~]# mv mongodb-linux-x86_64-rhel62-3.6.11-rc0-2-g2151d1d219 /usr/local/mongodb</span><br><span class="line">[root@mongodb-master01 ~]# nohup /usr/local/mongodb/bin/mongod -dbpath /data/mongodb/data/replset -replSet repset --bind_ip=172.16.60.205 --port=27017 &amp;</span><br><span class="line"> </span><br><span class="line">[root@mongodb-master01 ~]# ps -ef|grep mongodb</span><br><span class="line">root 7729 6977 1 15:10 pts/1 00:00:01 /usr/local/mongodb/bin/mongod -dbpath /data/mongodb/data/replset -replSet repset</span><br><span class="line">root 7780 6977 0 15:11 pts/1 00:00:00 grep mongodb</span><br><span class="line"> </span><br><span class="line">[root@mongodb-master01 ~]# lsof -i:27017</span><br><span class="line">COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">mongod 7729 root 10u IPv4 6554476 0t0 TCP localhost:27017 (LISTEN)</span><br><span class="line"> </span><br><span class="line">4）初始化副本集</span><br><span class="line">在三个节点中的任意一个节点机上操作（比如在172.16.60.205节点机）</span><br><span class="line"> </span><br><span class="line">登陆mongodb</span><br><span class="line">[root@mongodb-master01 ~]# /usr/local/mongodb/bin/mongo 172.16.60.205:27017</span><br><span class="line">.........</span><br><span class="line">#使用admin数据库</span><br><span class="line">&gt; use admin</span><br><span class="line">switched to db admin</span><br><span class="line"> </span><br><span class="line">#定义副本集配置变量，这里的 _id:”repset” 和上面命令参数“ –replSet repset” 要保持一样。</span><br><span class="line">&gt; config = &#123; _id:&quot;repset&quot;, members:[&#123;_id:0,host:&quot;172.16.60.205:27017&quot;&#125;,&#123;_id:1,host:&quot;172.16.60.206:27017&quot;&#125;,&#123;_id:2,host:&quot;172.16.60.207:27017&quot;&#125;]&#125;</span><br><span class="line">&#123;</span><br><span class="line">        &quot;_id&quot; : &quot;repset&quot;,</span><br><span class="line">        &quot;members&quot; : [</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 0,</span><br><span class="line">                        &quot;host&quot; : &quot;172.16.60.205:27017&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 1,</span><br><span class="line">                        &quot;host&quot; : &quot;172.16.60.206:27017&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 2,</span><br><span class="line">                        &quot;host&quot; : &quot;172.16.60.207:27017&quot;</span><br><span class="line">                &#125;</span><br><span class="line">        ]</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">#初始化副本集配置</span><br><span class="line">&gt; rs.initiate(config);</span><br><span class="line">&#123;</span><br><span class="line">        &quot;ok&quot; : 1,</span><br><span class="line">        &quot;operationTime&quot; : Timestamp(1551166191, 1),</span><br><span class="line">        &quot;$clusterTime&quot; : &#123;</span><br><span class="line">                &quot;clusterTime&quot; : Timestamp(1551166191, 1),</span><br><span class="line">                &quot;signature&quot; : &#123;</span><br><span class="line">                        &quot;hash&quot; : BinData(0,&quot;AAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;),</span><br><span class="line">                        &quot;keyId&quot; : NumberLong(0)</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">#查看集群节点的状态</span><br><span class="line">repset:SECONDARY&gt; rs.status();</span><br><span class="line">&#123;</span><br><span class="line">        &quot;set&quot; : &quot;repset&quot;,</span><br><span class="line">        &quot;date&quot; : ISODate(&quot;2019-02-26T07:31:07.766Z&quot;),</span><br><span class="line">        &quot;myState&quot; : 1,</span><br><span class="line">        &quot;term&quot; : NumberLong(1),</span><br><span class="line">        &quot;syncingTo&quot; : &quot;&quot;,</span><br><span class="line">        &quot;syncSourceHost&quot; : &quot;&quot;,</span><br><span class="line">        &quot;syncSourceId&quot; : -1,</span><br><span class="line">        &quot;heartbeatIntervalMillis&quot; : NumberLong(2000),</span><br><span class="line">        &quot;optimes&quot; : &#123;</span><br><span class="line">                &quot;lastCommittedOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551166263, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(1)</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;readConcernMajorityOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551166263, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(1)</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;appliedOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551166263, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(1)</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;durableOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551166263, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(1)</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;members&quot; : [</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 0,</span><br><span class="line">                        &quot;name&quot; : &quot;172.16.60.205:27017&quot;,</span><br><span class="line">                        &quot;health&quot; : 1,</span><br><span class="line">                        &quot;state&quot; : 1,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;PRIMARY&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 270,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551166263, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;2019-02-26T07:31:03Z&quot;),</span><br><span class="line">                        &quot;syncingTo&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncSourceHost&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncSourceId&quot; : -1,</span><br><span class="line">                        &quot;infoMessage&quot; : &quot;could not find member to sync from&quot;,</span><br><span class="line">                        &quot;electionTime&quot; : Timestamp(1551166202, 1),</span><br><span class="line">                        &quot;electionDate&quot; : ISODate(&quot;2019-02-26T07:30:02Z&quot;),</span><br><span class="line">                        &quot;configVersion&quot; : 1,</span><br><span class="line">                        &quot;self&quot; : true,</span><br><span class="line">                        &quot;lastHeartbeatMessage&quot; : &quot;&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 1,</span><br><span class="line">                        &quot;name&quot; : &quot;172.16.60.206:27017&quot;,</span><br><span class="line">                        &quot;health&quot; : 1,</span><br><span class="line">                        &quot;state&quot; : 2,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;SECONDARY&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 76,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551166263, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDurable&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551166263, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;2019-02-26T07:31:03Z&quot;),</span><br><span class="line">                        &quot;optimeDurableDate&quot; : ISODate(&quot;2019-02-26T07:31:03Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeat&quot; : ISODate(&quot;2019-02-26T07:31:06.590Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2019-02-26T07:31:06.852Z&quot;),</span><br><span class="line">                        &quot;pingMs&quot; : NumberLong(0),</span><br><span class="line">                        &quot;lastHeartbeatMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncingTo&quot; : &quot;172.16.60.205:27017&quot;,</span><br><span class="line">                        &quot;syncSourceHost&quot; : &quot;172.16.60.205:27017&quot;,</span><br><span class="line">                        &quot;syncSourceId&quot; : 0,</span><br><span class="line">                        &quot;infoMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;configVersion&quot; : 1</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 2,</span><br><span class="line">                        &quot;name&quot; : &quot;172.16.60.207:27017&quot;,</span><br><span class="line">                        &quot;health&quot; : 1,</span><br><span class="line">                        &quot;state&quot; : 2,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;SECONDARY&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 76,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551166263, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDurable&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551166263, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;2019-02-26T07:31:03Z&quot;),</span><br><span class="line">                        &quot;optimeDurableDate&quot; : ISODate(&quot;2019-02-26T07:31:03Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeat&quot; : ISODate(&quot;2019-02-26T07:31:06.589Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2019-02-26T07:31:06.958Z&quot;),</span><br><span class="line">                        &quot;pingMs&quot; : NumberLong(0),</span><br><span class="line">                        &quot;lastHeartbeatMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncingTo&quot; : &quot;172.16.60.205:27017&quot;,</span><br><span class="line">                        &quot;syncSourceHost&quot; : &quot;172.16.60.205:27017&quot;,</span><br><span class="line">                        &quot;syncSourceId&quot; : 0,</span><br><span class="line">                        &quot;infoMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;configVersion&quot; : 1</span><br><span class="line">                &#125;</span><br><span class="line">        ],</span><br><span class="line">        &quot;ok&quot; : 1,</span><br><span class="line">        &quot;operationTime&quot; : Timestamp(1551166263, 1),</span><br><span class="line">        &quot;$clusterTime&quot; : &#123;</span><br><span class="line">                &quot;clusterTime&quot; : Timestamp(1551166263, 1),</span><br><span class="line">                &quot;signature&quot; : &#123;</span><br><span class="line">                        &quot;hash&quot; : BinData(0,&quot;AAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;),</span><br><span class="line">                        &quot;keyId&quot; : NumberLong(0)</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">如上信息表明：</span><br><span class="line">副本集配置成功后，172.16.60.205为主节点PRIMARY，172.16.60.206/207为副本节点SECONDARY。</span><br><span class="line">health：1 1表明状态是正常，0表明异常</span><br><span class="line">state:1 值小的是primary节点、值大的是secondary节点</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、测试Mongodb副本集数据复制功能"><a href="#三、测试Mongodb副本集数据复制功能" class="headerlink" title="三、测试Mongodb副本集数据复制功能"></a>三、测试Mongodb副本集数据复制功能</h1><p>&lt;mongodb默认是从主节点读写数据的，副本节点上不允许读，需要设置副本节点可以读&gt;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">1）在主节点172.16.60.205上连接到终端</span><br><span class="line">[root@mongodb-master01 ~]# /usr/local/mongodb/bin/mongo 172.16.60.205:27017</span><br><span class="line">................</span><br><span class="line">#建立test 数据库</span><br><span class="line">repset:PRIMARY&gt; use test;</span><br><span class="line">switched to db test</span><br><span class="line"> </span><br><span class="line">#往testdb表插入测试数据</span><br><span class="line">repset:PRIMARY&gt; db.testdb.insert(&#123;&quot;test1&quot;:&quot;testval1&quot;&#125;)</span><br><span class="line">WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</span><br><span class="line"> </span><br><span class="line">2）在副本节点172.16.60.206、172.16.60.207上连接到mongodb查看数据是否复制过来。</span><br><span class="line">这里在172.16.60.206副本节点上进行查看</span><br><span class="line">[root@mongodb-slave01 ~]# /usr/local/mongodb/bin/mongo 172.16.60.206:27017</span><br><span class="line">................</span><br><span class="line">repset:SECONDARY&gt; use test;</span><br><span class="line">switched to db test</span><br><span class="line">repset:SECONDARY&gt; show tables;</span><br><span class="line">2019-02-26T15:37:46.446+0800 E QUERY [thread1] Error: listCollections failed: &#123;</span><br><span class="line">        &quot;operationTime&quot; : Timestamp(1551166663, 1),</span><br><span class="line">        &quot;ok&quot; : 0,</span><br><span class="line">        &quot;errmsg&quot; : &quot;not master and slaveOk=false&quot;,</span><br><span class="line">        &quot;code&quot; : 13435,</span><br><span class="line">        &quot;codeName&quot; : &quot;NotMasterNoSlaveOk&quot;,</span><br><span class="line">        &quot;$clusterTime&quot; : &#123;</span><br><span class="line">                &quot;clusterTime&quot; : Timestamp(1551166663, 1),</span><br><span class="line">                &quot;signature&quot; : &#123;</span><br><span class="line">                        &quot;hash&quot; : BinData(0,&quot;AAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;),</span><br><span class="line">                        &quot;keyId&quot; : NumberLong(0)</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125; :</span><br><span class="line">_getErrorWithCode@src/mongo/shell/utils.js:25:13</span><br><span class="line">DB.prototype._getCollectionInfosCommand@src/mongo/shell/db.js:941:1</span><br><span class="line">DB.prototype.getCollectionInfos@src/mongo/shell/db.js:953:19</span><br><span class="line">DB.prototype.getCollectionNames@src/mongo/shell/db.js:964:16</span><br><span class="line">shellHelper.show@src/mongo/shell/utils.js:853:9</span><br><span class="line">shellHelper@src/mongo/shell/utils.js:750:15</span><br><span class="line">@(shellhelp2):1:1</span><br><span class="line"> </span><br><span class="line">上面出现了报错！</span><br><span class="line">这是因为mongodb默认是从主节点读写数据的，副本节点上不允许读，需要设置副本节点可以读</span><br><span class="line">repset:SECONDARY&gt; db.getMongo().setSlaveOk();</span><br><span class="line">repset:SECONDARY&gt; db.testdb.find();</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5c74ec9267d8c3d06506449b&quot;), &quot;test1&quot; : &quot;testval1&quot; &#125;</span><br><span class="line">repset:SECONDARY&gt; show tables;</span><br><span class="line">testdb</span><br><span class="line"> </span><br><span class="line">如上发现已经在副本节点上发现了测试数据，即已经从主节点复制过来了。</span><br><span class="line">（在另一个副本节点172.16.60.207也如上操作即可）</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、测试副本集故障转移功能"><a href="#四、测试副本集故障转移功能" class="headerlink" title="四、测试副本集故障转移功能"></a>四、测试副本集故障转移功能</h1><p>先停掉主节点172.16.60.205，查看mongodb副本集状态，可以看到经过一系列的投票选择操作，172.16.60.206当选主节点，172.16.60.207从172.16.60.206同步数据过来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br></pre></td><td class="code"><pre><span class="line">1）停掉原来的主节点172.16.60.205的mongodb，模拟故障</span><br><span class="line">[root@mongodb-master01 ~]# ps -ef|grep mongodb|grep -v grep|awk &apos;&#123;print $2&#125;&apos;|xargs kill -9</span><br><span class="line">[root@mongodb-master01 ~]# lsof -i:27017</span><br><span class="line">[root@mongodb-master01 ~]#</span><br><span class="line"> </span><br><span class="line">2）接着登录到另外两个正常的从节点172.16.60.206、172.16.60.207中的任意一个节点的mongodb，查看副本集状态</span><br><span class="line">[root@mongodb-slave01 ~]# /usr/local/mongodb/bin/mongo 172.16.60.206:27017</span><br><span class="line">.................</span><br><span class="line">repset:PRIMARY&gt; rs.status();</span><br><span class="line">&#123;</span><br><span class="line">        &quot;set&quot; : &quot;repset&quot;,</span><br><span class="line">        &quot;date&quot; : ISODate(&quot;2019-02-26T08:06:02.996Z&quot;),</span><br><span class="line">        &quot;myState&quot; : 1,</span><br><span class="line">        &quot;term&quot; : NumberLong(2),</span><br><span class="line">        &quot;syncingTo&quot; : &quot;&quot;,</span><br><span class="line">        &quot;syncSourceHost&quot; : &quot;&quot;,</span><br><span class="line">        &quot;syncSourceId&quot; : -1,</span><br><span class="line">        &quot;heartbeatIntervalMillis&quot; : NumberLong(2000),</span><br><span class="line">        &quot;optimes&quot; : &#123;</span><br><span class="line">                &quot;lastCommittedOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551168359, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(2)</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;readConcernMajorityOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551168359, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(2)</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;appliedOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551168359, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(2)</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;durableOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551168359, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(2)</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;members&quot; : [</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 0,</span><br><span class="line">                        &quot;name&quot; : &quot;172.16.60.205:27017&quot;,</span><br><span class="line">                        &quot;health&quot; : 0,</span><br><span class="line">                        &quot;state&quot; : 8,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;(not reachable/healthy)&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 0,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(0, 0),</span><br><span class="line">                                &quot;t&quot; : NumberLong(-1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDurable&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(0, 0),</span><br><span class="line">                                &quot;t&quot; : NumberLong(-1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;1970-01-01T00:00:00Z&quot;),</span><br><span class="line">                        &quot;optimeDurableDate&quot; : ISODate(&quot;1970-01-01T00:00:00Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeat&quot; : ISODate(&quot;2019-02-26T08:06:02.917Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2019-02-26T08:03:37.492Z&quot;),</span><br><span class="line">                        &quot;pingMs&quot; : NumberLong(0),</span><br><span class="line">                        &quot;lastHeartbeatMessage&quot; : &quot;Connection refused&quot;,</span><br><span class="line">                        &quot;syncingTo&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncSourceHost&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncSourceId&quot; : -1,</span><br><span class="line">                        &quot;infoMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;configVersion&quot; : -1</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 1,</span><br><span class="line">                        &quot;name&quot; : &quot;172.16.60.206:27017&quot;,</span><br><span class="line">                        &quot;health&quot; : 1,</span><br><span class="line">                        &quot;state&quot; : 1,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;PRIMARY&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 2246,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551168359, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(2)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;2019-02-26T08:05:59Z&quot;),</span><br><span class="line">                        &quot;syncingTo&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncSourceHost&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncSourceId&quot; : -1,</span><br><span class="line">                        &quot;infoMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;electionTime&quot; : Timestamp(1551168228, 1),</span><br><span class="line">                        &quot;electionDate&quot; : ISODate(&quot;2019-02-26T08:03:48Z&quot;),</span><br><span class="line">                        &quot;configVersion&quot; : 1,</span><br><span class="line">                        &quot;self&quot; : true,</span><br><span class="line">                        &quot;lastHeartbeatMessage&quot; : &quot;&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 2,</span><br><span class="line">                        &quot;name&quot; : &quot;172.16.60.207:27017&quot;,</span><br><span class="line">                        &quot;health&quot; : 1,</span><br><span class="line">                        &quot;state&quot; : 2,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;SECONDARY&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 2169,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551168359, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(2)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDurable&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551168359, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(2)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;2019-02-26T08:05:59Z&quot;),</span><br><span class="line">                        &quot;optimeDurableDate&quot; : ISODate(&quot;2019-02-26T08:05:59Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeat&quot; : ISODate(&quot;2019-02-26T08:06:02.861Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2019-02-26T08:06:02.991Z&quot;),</span><br><span class="line">                        &quot;pingMs&quot; : NumberLong(0),</span><br><span class="line">                        &quot;lastHeartbeatMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncingTo&quot; : &quot;172.16.60.206:27017&quot;,</span><br><span class="line">                        &quot;syncSourceHost&quot; : &quot;172.16.60.206:27017&quot;,</span><br><span class="line">                        &quot;syncSourceId&quot; : 1,</span><br><span class="line">                        &quot;infoMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;configVersion&quot; : 1</span><br><span class="line">                &#125;</span><br><span class="line">        ],</span><br><span class="line">        &quot;ok&quot; : 1,</span><br><span class="line">        &quot;operationTime&quot; : Timestamp(1551168359, 1),</span><br><span class="line">        &quot;$clusterTime&quot; : &#123;</span><br><span class="line">                &quot;clusterTime&quot; : Timestamp(1551168359, 1),</span><br><span class="line">                &quot;signature&quot; : &#123;</span><br><span class="line">                        &quot;hash&quot; : BinData(0,&quot;AAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;),</span><br><span class="line">                        &quot;keyId&quot; : NumberLong(0)</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">发现当原来的主节点172.16.60.205宕掉后，经过选举，原来的从节点172.16.60.206被推举为新的主节点。</span><br><span class="line"> </span><br><span class="line">3）现在在172.16.60.206新主节点上创建测试数据</span><br><span class="line">repset:PRIMARY&gt; use kevin;</span><br><span class="line">switched to db kevin</span><br><span class="line">repset:PRIMARY&gt; db.kevin.insert(&#123;&quot;shibo&quot;:&quot;hahaha&quot;&#125;)</span><br><span class="line">WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</span><br><span class="line"> </span><br><span class="line">4）另一个从节点172.16.60.207上登录mongodb查看</span><br><span class="line">[root@mongodb-slave02 ~]# /usr/local/mongodb/bin/mongo 172.16.60.207:27017</span><br><span class="line">................</span><br><span class="line">repset:SECONDARY&gt; use kevin;</span><br><span class="line">switched to db kevin</span><br><span class="line">repset:SECONDARY&gt; db.getMongo().setSlaveOk();</span><br><span class="line">repset:SECONDARY&gt; show tables;</span><br><span class="line">kevin</span><br><span class="line">repset:SECONDARY&gt; db.kevin.find();</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5c74f42bb0b339ed6eb68e9c&quot;), &quot;shibo&quot; : &quot;hahaha&quot; &#125;</span><br><span class="line"> </span><br><span class="line">发现从节点172.16.60.207可以同步新的主节点172.16.60.206的数据</span><br><span class="line"> </span><br><span class="line">5）再重新启动原来的主节点172.16.60.205的mongodb</span><br><span class="line">[root@mongodb-master01 ~]# nohup /usr/local/mongodb/bin/mongod -dbpath /data/mongodb/data/replset -replSet repset --bind_ip=172.16.60.205 --port=27017 &amp;</span><br><span class="line"> </span><br><span class="line">mongod 9162 root 49u IPv4 6561201 0t0 TCP mongodb-master01:55236-&gt;mongodb-slave01:27017 (ESTABLISHED)</span><br><span class="line">[root@mongodb-master01 ~]# ps -ef|grep mongodb</span><br><span class="line">root 9162 6977 4 16:14 pts/1 00:00:01 /usr/local/mongodb/bin/mongod -dbpath /data/mongodb/data/replset -replSet repset --bind_ip=172.16.60.205 --port=27017</span><br><span class="line">root 9244 6977 0 16:14 pts/1 00:00:00 grep mongodb</span><br><span class="line"> </span><br><span class="line">再次登录到三个节点中的任意一个的mongodb，查看副本集状态</span><br><span class="line">[root@mongodb-master01 ~]# /usr/local/mongodb/bin/mongo 172.16.60.205:27017</span><br><span class="line">....................</span><br><span class="line">repset:SECONDARY&gt; rs.status();</span><br><span class="line">&#123;</span><br><span class="line">        &quot;set&quot; : &quot;repset&quot;,</span><br><span class="line">        &quot;date&quot; : ISODate(&quot;2019-02-26T08:16:11.741Z&quot;),</span><br><span class="line">        &quot;myState&quot; : 2,</span><br><span class="line">        &quot;term&quot; : NumberLong(2),</span><br><span class="line">        &quot;syncingTo&quot; : &quot;172.16.60.206:27017&quot;,</span><br><span class="line">        &quot;syncSourceHost&quot; : &quot;172.16.60.206:27017&quot;,</span><br><span class="line">        &quot;syncSourceId&quot; : 1,</span><br><span class="line">        &quot;heartbeatIntervalMillis&quot; : NumberLong(2000),</span><br><span class="line">        &quot;optimes&quot; : &#123;</span><br><span class="line">                &quot;lastCommittedOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551168969, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(2)</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;readConcernMajorityOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551168969, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(2)</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;appliedOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551168969, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(2)</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;durableOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1551168969, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(2)</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;members&quot; : [</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 0,</span><br><span class="line">                        &quot;name&quot; : &quot;172.16.60.205:27017&quot;,</span><br><span class="line">                        &quot;health&quot; : 1,</span><br><span class="line">                        &quot;state&quot; : 2,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;SECONDARY&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 129,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551168969, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(2)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;2019-02-26T08:16:09Z&quot;),</span><br><span class="line">                        &quot;syncingTo&quot; : &quot;172.16.60.206:27017&quot;,</span><br><span class="line">                        &quot;syncSourceHost&quot; : &quot;172.16.60.206:27017&quot;,</span><br><span class="line">                        &quot;syncSourceId&quot; : 1,</span><br><span class="line">                        &quot;infoMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;configVersion&quot; : 1,</span><br><span class="line">                        &quot;self&quot; : true,</span><br><span class="line">                        &quot;lastHeartbeatMessage&quot; : &quot;&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 1,</span><br><span class="line">                        &quot;name&quot; : &quot;172.16.60.206:27017&quot;,</span><br><span class="line">                        &quot;health&quot; : 1,</span><br><span class="line">                        &quot;state&quot; : 1,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;PRIMARY&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 127,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551168969, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(2)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDurable&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551168969, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(2)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;2019-02-26T08:16:09Z&quot;),</span><br><span class="line">                        &quot;optimeDurableDate&quot; : ISODate(&quot;2019-02-26T08:16:09Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeat&quot; : ISODate(&quot;2019-02-26T08:16:10.990Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2019-02-26T08:16:11.518Z&quot;),</span><br><span class="line">                        &quot;pingMs&quot; : NumberLong(0),</span><br><span class="line">                        &quot;lastHeartbeatMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncingTo&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncSourceHost&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncSourceId&quot; : -1,</span><br><span class="line">                        &quot;infoMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;electionTime&quot; : Timestamp(1551168228, 1),</span><br><span class="line">                        &quot;electionDate&quot; : ISODate(&quot;2019-02-26T08:03:48Z&quot;),</span><br><span class="line">                        &quot;configVersion&quot; : 1</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 2,</span><br><span class="line">                        &quot;name&quot; : &quot;172.16.60.207:27017&quot;,</span><br><span class="line">                        &quot;health&quot; : 1,</span><br><span class="line">                        &quot;state&quot; : 2,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;SECONDARY&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 127,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551168969, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(2)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDurable&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1551168969, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(2)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;2019-02-26T08:16:09Z&quot;),</span><br><span class="line">                        &quot;optimeDurableDate&quot; : ISODate(&quot;2019-02-26T08:16:09Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeat&quot; : ISODate(&quot;2019-02-26T08:16:10.990Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2019-02-26T08:16:11.655Z&quot;),</span><br><span class="line">                        &quot;pingMs&quot; : NumberLong(0),</span><br><span class="line">                        &quot;lastHeartbeatMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;syncingTo&quot; : &quot;172.16.60.206:27017&quot;,</span><br><span class="line">                        &quot;syncSourceHost&quot; : &quot;172.16.60.206:27017&quot;,</span><br><span class="line">                        &quot;syncSourceId&quot; : 1,</span><br><span class="line">                        &quot;infoMessage&quot; : &quot;&quot;,</span><br><span class="line">                        &quot;configVersion&quot; : 1</span><br><span class="line">                &#125;</span><br><span class="line">        ],</span><br><span class="line">        &quot;ok&quot; : 1,</span><br><span class="line">        &quot;operationTime&quot; : Timestamp(1551168969, 1),</span><br><span class="line">        &quot;$clusterTime&quot; : &#123;</span><br><span class="line">                &quot;clusterTime&quot; : Timestamp(1551168969, 1),</span><br><span class="line">                &quot;signature&quot; : &#123;</span><br><span class="line">                        &quot;hash&quot; : BinData(0,&quot;AAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;),</span><br><span class="line">                        &quot;keyId&quot; : NumberLong(0)</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">发现原来的主节点172.16.60.205在故障恢复后，变成了新的主节点172.16.60.206的从节点</span><br></pre></td></tr></table></figure>
+
+<h1 id="五、Mongodb读写分离"><a href="#五、Mongodb读写分离" class="headerlink" title="五、Mongodb读写分离"></a>五、Mongodb读写分离</h1><p>目前来看。Mongodb副本集可以完美支持故障转移。至于主节点的读写压力过大如何解决？常见的解决方案是读写分离。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">一般情况下，常规写操作来说并没有读操作多，所以在Mongodb副本集中，一台主节点负责写操作，两台副本节点负责读操作。</span><br><span class="line">1）设置读写分离需要先在副本节点SECONDARY 设置 setSlaveOk。</span><br><span class="line">2）在程序中设置副本节点负责读操作，如下代码：&lt;br&gt;</span><br><span class="line">public class TestMongoDBReplSetReadSplit &#123;</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">try &#123;</span><br><span class="line">List&lt;ServerAddress&gt; addresses = new ArrayList&lt;ServerAddress&gt;();</span><br><span class="line">ServerAddress address1 = new ServerAddress(&quot;172.16.60.205&quot; , 27017);</span><br><span class="line">ServerAddress address2 = new ServerAddress(&quot;172.16.60.206&quot; , 27017);</span><br><span class="line">ServerAddress address3 = new ServerAddress(&quot;172.16.60.207&quot; , 27017);</span><br><span class="line">addresses.add(address1);</span><br><span class="line">addresses.add(address2);</span><br><span class="line">addresses.add(address3);</span><br><span class="line">MongoClient client = new MongoClient(addresses);</span><br><span class="line">DB db = client.getDB( &quot;test&quot; );</span><br><span class="line">DBCollection coll = db.getCollection( &quot;testdb&quot; );</span><br><span class="line">BasicDBObject object = new BasicDBObject();</span><br><span class="line">object.append( &quot;test2&quot; , &quot;testval2&quot; );</span><br><span class="line"> </span><br><span class="line">//读操作从副本节点读取</span><br><span class="line">ReadPreference preference = ReadPreference. secondary();</span><br><span class="line">DBObject dbObject = coll.findOne(object, null , preference);</span><br><span class="line">System. out .println(dbObject);</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="六、参数解析"><a href="#六、参数解析" class="headerlink" title="六、参数解析"></a>六、参数解析</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">读参数除了secondary一共还有五个参数：primary、primaryPreferred、secondary、secondaryPreferred、nearest。</span><br><span class="line">primary：默认参数，只从主节点上进行读取操作；</span><br><span class="line">primaryPreferred：大部分从主节点上读取数据,只有主节点不可用时从secondary节点读取数据。</span><br><span class="line">secondary：只从secondary节点上进行读取操作，存在的问题是secondary节点的数据会比primary节点数据“旧”。</span><br><span class="line">secondaryPreferred：优先从secondary节点进行读取操作，secondary节点不可用时从主节点读取数据；</span><br><span class="line">nearest：不管是主节点、secondary节点，从网络延迟最低的节点上读取数据。</span><br></pre></td></tr></table></figure>
+
+<p>读写分离做好后，就可以进行数据分流，减轻压力，解决了”主节点的读写压力过大如何解决？”这个问题。</p>
+<h1 id="七、仲裁节点介绍"><a href="#七、仲裁节点介绍" class="headerlink" title="七、仲裁节点介绍"></a>七、仲裁节点介绍</h1><p>不过当副本节点增多时，主节点的复制压力会加大有什么办法解决吗？基于这个问题，Mongodb已有了相应的解决方案 - 引用仲裁节点：<br>在Mongodb副本集中，仲裁节点不存储数据，只是负责故障转移的群体投票，这样就少了数据复制的压力。看起来想的很周到啊，其实不只是主节点、副本节点、仲裁节点，还有Secondary-Only、Hidden、Delayed、Non-Voting，其中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Secondary-Only：不能成为primary节点，只能作为secondary副本节点，防止一些性能不高的节点成为主节点。</span><br><span class="line">Hidden：这类节点是不能够被客户端制定IP引用，也不能被设置为主节点，但是可以投票，一般用于备份数据。</span><br><span class="line">Delayed：可以指定一个时间延迟从primary节点同步数据。主要用于备份数据，如果实时同步，误删除数据马上同步到从节点，恢复又恢复不了。</span><br><span class="line">Non-Voting：没有选举权的secondary节点，纯粹的备份数据节点。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mongodb/" rel="tag"># mongodb</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/Redis哨兵模式（sentinel）部署记录/" rel="next" title="Redis哨兵模式（sentinel）部署记录">
+                <i class="fa fa-chevron-left"></i> Redis哨兵模式（sentinel）部署记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/new post/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mongodb副本集的工作原理"><span class="nav-number">1.</span> <span class="nav-text">Mongodb副本集的工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、环境准备"><span class="nav-number">2.</span> <span class="nav-text">一、环境准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Mongodb安装、副本集配置"><span class="nav-number">3.</span> <span class="nav-text">二、Mongodb安装、副本集配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、测试Mongodb副本集数据复制功能"><span class="nav-number">4.</span> <span class="nav-text">三、测试Mongodb副本集数据复制功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、测试副本集故障转移功能"><span class="nav-number">5.</span> <span class="nav-text">四、测试副本集故障转移功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、Mongodb读写分离"><span class="nav-number">6.</span> <span class="nav-text">五、Mongodb读写分离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、参数解析"><span class="nav-number">7.</span> <span class="nav-text">六、参数解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七、仲裁节点介绍"><span class="nav-number">8.</span> <span class="nav-text">七、仲裁节点介绍</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

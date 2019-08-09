@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ansible,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="ansible安装包和管理服务yum 安装包的用法12345678910[root@ansible ~]# ansible-doc -s yum- name: Manages packages with the `yum&amp;apos; package manager  yum:conf_file      # yum的配置文件disable_gpg_check      # 关闭gpg_checkd">
+<meta name="keywords" content="ansible">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="ansible安装包和管理服务yum 安装包的用法12345678910[root@ansible ~]# ansible-doc -s yum- name: Manages packages with the `yum&amp;apos; package manager  yum:conf_file      # yum的配置文件disable_gpg_check      # 关闭gpg_checkd">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-04T09:54:53.742Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers">
+<meta name="twitter:description" content="ansible安装包和管理服务yum 安装包的用法12345678910[root@ansible ~]# ansible-doc -s yum- name: Manages packages with the `yum&amp;apos; package manager  yum:conf_file      # yum的配置文件disable_gpg_check      # 关闭gpg_checkd">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers/">
+
+
+
+
+
+  <title>Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T00:00:00+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ansible安装包和管理服务"><a href="#ansible安装包和管理服务" class="headerlink" title="ansible安装包和管理服务"></a>ansible安装包和管理服务</h1><h2 id="yum-安装包的用法"><a href="#yum-安装包的用法" class="headerlink" title="yum 安装包的用法"></a>yum 安装包的用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# ansible-doc -s yum</span><br><span class="line">- name: Manages packages with the `yum&apos; package manager</span><br><span class="line">  yum:</span><br><span class="line">conf_file      # yum的配置文件</span><br><span class="line">disable_gpg_check      # 关闭gpg_check</span><br><span class="line">disablerepo      # 不启用某个源</span><br><span class="line">enablerepo      # 启用某个源</span><br><span class="line">list         # Various (non-idempotent) commands for usage with `/usr/bin/ansible&apos; and `not&apos; playbooks. See examples.</span><br><span class="line">name   # 要进行操作的软件包的名字，也可以传递一个url或者一个本地的rpm包的路径</span><br><span class="line">state    # 状态（installted ,present&lt;安装&gt;，latest&lt;安装&gt;，absent&lt;删除&gt;）</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ol>
+<li>我们来给web组安装一个软件包 ntp：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# ansible web -m yum -a &apos;name=ntp state=latest&apos;</span><br><span class="line">其他略</span><br><span class="line">nginx | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true,</span><br><span class="line">    &quot;msg&quot;: &quot;&quot;,</span><br><span class="line">    &quot;rc&quot;: 0,</span><br><span class="line">    &quot;results&quot;: [</span><br><span class="line">        &quot;Loaded plugins: fastestmirror\nLoading mirror speeds from cached hostfile\n * base: mirrors.cn99.com\n * epel: ftp.cuhk.edu.hk\n * extras: mirrors.163.com\n * updates: mirrors.163.com\nResolving Dependencies\n--&gt; Running transaction check\n---&gt; Package ntp.x86_64 0:4.2.6p5-25.el7.centos.2 will be installed\n--&gt; Processing Dependency: ntpdate = 4.2.6p5-25.el7.centos.2 for package: ntp-4.2.6p5-25.el7.centos.2.x86_64\n--&gt; Processing Dependency: libopts.so.25()(64bit) for package: ntp-4.2.6p5-25.el7.centos.2.x86_64\n--&gt; Running transaction check\n---&gt; Package autogen-libopts.x86_64 0:5.18-5.el7 will be installed\n---&gt; Package ntpdate.x86_64 0:4.2.6p5-25.el7.centos.2 will be installed\n--&gt; Finished Dependency Resolution\n\nDependencies Resolved\n\n================================================================================\n Package Arch Version Repository\n Size\n================================================================================\nInstalling:\n ntp x86_64 4.2.6p5-25.el7.centos.2 base 547 k\nInstalling for dependencies:\n autogen-libopts x86_64 5.18-5.el7 base 66 k\n ntpdate x86_64 4.2.6p5-25.el7.centos.2 base 86 k\n\nTransaction Summary\n================================================================================\nInstall 1 Package (+2 Dependent packages)\n\nTotal download size: 699 k\nInstalled size: 1.6 M\nDownloading packages:\n--------------------------------------------------------------------------------\nTotal 1.0 MB/s | 699 kB 00:00 \nRunning transaction check\nRunning transaction test\nTransaction test succeeded\nRunning transaction\n Installing : autogen-libopts-5.18-5.el7.x86_64 1/3 \n Installing : ntpdate-4.2.6p5-25.el7.centos.2.x86_64 2/3 \n Installing : ntp-4.2.6p5-25.el7.centos.2.x86_64 3/3 \n Verifying : ntp-4.2.6p5-25.el7.centos.2.x86_64 1/3 \n Verifying : ntpdate-4.2.6p5-25.el7.centos.2.x86_64 2/3 \n Verifying : autogen-libopts-5.18-5.el7.x86_64 3/3 \n\nInstalled:\n ntp.x86_64 0:4.2.6p5-25.el7.centos.2 \n\nDependency Installed:\n autogen-libopts.x86_64 0:5.18-5.el7 ntpdate.x86_64 0:4.2.6p5-25.el7.centos.2 \n\nComplete!\n&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>然后利用该包对远程主机进行时间同步：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# ansible web -m shell -a &quot;ntpdate ntp.ubuntu.com&quot;</span><br><span class="line">nginx | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">13 Apr 16:40:16 ntpdate[1951]: adjust time server 91.189.94.4 offset 0.003532 sec</span><br><span class="line"></span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">13 Apr 16:40:17 ntpdate[2031]: adjust time server 91.189.89.199 offset 0.011645 sec</span><br><span class="line"></span><br><span class="line">tomcat | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">13 Apr 16:40:21 ntpdate[1952]: adjust time server 91.189.94.4 offset 0.004127 sec</span><br></pre></td></tr></table></figure>
+
+<p>卸载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# ansible web -m yum -a &apos;name=ntp state=absent&apos;</span><br><span class="line">tomcat | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true,</span><br><span class="line">    &quot;msg&quot;: &quot;&quot;,</span><br><span class="line">    &quot;rc&quot;: 0,</span><br><span class="line">    &quot;results&quot;: [</span><br><span class="line">        &quot;已加载插件：fastestmirror\n正在解决依赖关系\n--&gt; 正在检查事务\n---&gt; 软件包 ntp.x86_64.0.4.2.6p5-25.el7.centos.2 将被 删除\n--&gt; 解决依赖关系完成\n\n依赖关系解决\n\n================================================================================\n Package 架构 版本 源 大小\n================================================================================\n正在删除:\n ntp x86_64 4.2.6p5-25.el7.centos.2 @base 1.4 M\n\n事务概要\n================================================================================\n移除 1 软件包\n\n安装大小：1.4 M\nDownloading packages:\nRunning transaction check\nRunning transaction test\nTransaction test succeeded\nRunning transaction\n 正在删除 : ntp-4.2.6p5-25.el7.centos.2.x86_64 1/1 \n 验证中 : ntp-4.2.6p5-25.el7.centos.2.x86_64 1/1 \n\n删除:\n ntp.x86_64 0:4.2.6p5-25.el7.centos.2 \n\n完毕！\n&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">下略</span><br></pre></td></tr></table></figure>
+
+<h2 id="service模块"><a href="#service模块" class="headerlink" title="service模块"></a>service模块</h2><p>service 模块，作用于一些服务，比如对某些服务器的启动、重启、停止、重载等的管理。先来看下用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# ansible-doc -s service</span><br><span class="line">- name: Manage services.</span><br><span class="line">action: service</span><br><span class="line"></span><br><span class="line">arguments      # 给命令行提供一些选项</span><br><span class="line">enabled          # 是否开机启动 yes|no</span><br><span class="line">name              # 必选项，服务名称</span><br><span class="line">pattern             # 定义一个模式，如果通过status指令来查看服务的状态时，没有响应，就会通过ps指令在进程中根据该模式进行查找，如果匹配到，则认为该服务依然在运行</span><br><span class="line">runlevel          # 运行级别</span><br><span class="line">sleep              # 如果执行了restarted，在则stop和start之间沉睡几秒钟</span><br><span class="line">state              # 对当前服务执行启动，停止、重启、重新加载等操作（started,stopped,restarted,reloaded）</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><ol>
+<li>启动lamp 上的apache 服务，并设置为随机启动：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# ansible web -m service -a &apos;name=httpd state=started enabled=yes&apos;</span><br><span class="line">nginx | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true,</span><br><span class="line">    &quot;enabled&quot;: true,</span><br><span class="line">    &quot;name&quot;: &quot;httpd&quot;,</span><br><span class="line">    &quot;state&quot;: &quot;started&quot;,</span><br><span class="line">    &quot;status&quot;: &#123;</span><br><span class="line">下略</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>远程验证启动：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# ansible web -m raw -a &apos;ps axu|grep httpd |grep -v grep&apos;</span><br><span class="line">tomcat | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">root 2445 0.0 0.2 226240 5160 ? Ss 16:53 0:00 /usr/sbin/httpd -DFOREGROUND</span><br><span class="line">apache 2446 0.0 0.1 226240 3028 ? S 16:53 0:00 /usr/sbin/httpd -DFOREGROUND</span><br><span class="line">apache 2447 0.0 0.1 226240 3028 ? S 16:53 0:00 /usr/sbin/httpd -DFOREGROUND</span><br><span class="line">apache 2448 0.0 0.1 226240 3028 ? S 16:53 0:00 /usr/sbin/httpd -DFOREGROUND</span><br><span class="line">apache 2449 0.0 0.1 226240 3028 ? S 16:53 0:00 /usr/sbin/httpd -DFOREGROUND</span><br><span class="line">apache 2450 0.0 0.1 226240 3028 ? S 16:53 0:00 /usr/sbin/httpd -DFOREGROUND</span><br><span class="line">Shared connection to tomcat closed.</span><br></pre></td></tr></table></figure>
+
+<p>同时验证是否随机启动:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# ansible web -m raw -a &apos;systemctl list-unit-files |grep httpd&apos;</span><br><span class="line">nginx | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">httpd.service enabled</span><br><span class="line">Shared connection to nginx closed.</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line">[root@ansible ~]# ansible web -m raw -a &quot;chkconfig --list&quot;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">注：该输出结果只显示 SysV 服务，并不包含</span><br><span class="line">原生 systemd 服务。SysV 配置数据</span><br><span class="line">可能被原生 systemd 配置覆盖。</span><br><span class="line"></span><br><span class="line">      要列出 systemd 服务，请执行 &apos;systemctl list-unit-files&apos;。</span><br><span class="line">      查看在具体 target 启用的服务请执行</span><br><span class="line">      &apos;systemctl list-dependencies [target]&apos;。</span><br><span class="line"></span><br><span class="line">netconsole 0:关	1:关	2:关	3:关	4:关	5:关	6:关</span><br><span class="line">network 0:关	1:关	2:开	3:开	4:开	5:开	6:关</span><br><span class="line">Shared connection to nfs closed.</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>重启网络服务器，但只启动网卡eno16777736，并且重启时间间隔3s:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# ansible web -m service -a &apos;name=network state=restarted sleep=3 arguments=ens33&apos;</span><br><span class="line">nginx | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true,</span><br><span class="line">    &quot;name&quot;: &quot;network&quot;,</span><br><span class="line">    &quot;state&quot;: &quot;started&quot;,</span><br><span class="line">    &quot;status&quot;: &#123;</span><br><span class="line">下略</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="使用ansible-playbook"><a href="#使用ansible-playbook" class="headerlink" title="使用ansible playbook"></a>使用ansible playbook</h1><blockquote>
+<p>Ansible的playbook相当于把模块写入到配置文件里面，方便管理。</p>
+</blockquote>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# vim /etc/ansible/test.yml</span><br><span class="line">注意格式</span><br><span class="line">---              // 三横杠</span><br><span class="line">- hosts: nfs             //主机群</span><br><span class="line">  remote_user: root      //用户</span><br><span class="line">  tasks:                         //任务组</span><br><span class="line">    - name: test_playbook            //任务名称</span><br><span class="line">      shell: touch /tmp/yuntai.txt     //shell模块</span><br><span class="line"></span><br><span class="line">[root@ansible ~]# ansible-playbook /etc/ansible/test.yml         //执行playbook</span><br><span class="line">PLAY [nfs] **********************************************************************************************************************************************************************************</span><br><span class="line">TASK [Gathering Facts] **********************************************************************************************************************************************************************</span><br><span class="line">ok: [nfs]</span><br><span class="line">TASK [test_playbook] ************************************************************************************************************************************************************************</span><br><span class="line"> [WARNING]: Consider using the file module with state=touch rather than running touch. If you need to use command because file is insufficient you can add warn=False to this command task</span><br><span class="line">or set command_warnings=False in ansible.cfg to get rid of this message.</span><br><span class="line">changed: [nfs]</span><br><span class="line">PLAY RECAP **********************************************************************************************************************************************************************************</span><br><span class="line">nfs : ok=2 changed=1 unreachable=0 failed=0</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明:</strong></p>
+<ul>
+<li>第一行需要有三个杠，hosts参数指定了对哪些主机进行参作，如果是多台机器可以用逗号作为分隔，也可以使用主机组，在/etc/ansible/hosts里定义； </li>
+<li>user参数指定了使用什么用户登录远程主机操作；</li>
+<li>tasks指定了一个任务，其下面的name参数同样是对任务的描述，在执行过程中会打印出来，shell是ansible模块名字</li>
+</ul>
+<h1 id="playbook里的变量"><a href="#playbook里的变量" class="headerlink" title="playbook里的变量"></a>playbook里的变量</h1><p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# vim /etc/ansible/create_user.yml</span><br><span class="line">注意格式</span><br><span class="line">---</span><br><span class="line"> - name: create_user</span><br><span class="line">   hosts: nfs</span><br><span class="line">   user: root</span><br><span class="line">   gather_facts: false</span><br><span class="line">   vars:</span><br><span class="line">     - user: &quot;test&quot;</span><br><span class="line">   tasks:</span><br><span class="line">     - name: create user</span><br><span class="line">       user: name=&quot;&#123;&#123; user &#125;&#125;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@ansible ~]# ansible-playbook /etc/ansible/create_user.yml    //执行</span><br><span class="line">PLAY [create_user] **************************************************************************************************************************************************************************</span><br><span class="line">TASK [create user] **************************************************************************************************************************************************************************</span><br><span class="line">changed: [nfs]</span><br><span class="line">PLAY RECAP **********************************************************************************************************************************************************************************</span><br><span class="line">nfs : ok=1 changed=1 unreachable=0 failed=0</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明：</strong></p>
+<ul>
+<li>name参数对该playbook实现的功能做一个概述，后面执行过程中，会打印 name变量的值 ，可以省略；</li>
+<li>gather_facts参数指定了在以下任务部分执行前，是否先执行setup模块获取主机相关信息，这在后面的task会使用到setup获取的信息时用到；</li>
+<li>vars参数，指定了变量，这里指字一个user变量，其值为test ，需要注意的是，变量值一定要用引号引住；</li>
+<li>user提定了调用user模块，name是user模块里的一个参数，而增加的用户名字调用了上面user变量的值。</li>
+</ul>
+<h1 id="playbook里的循环"><a href="#playbook里的循环" class="headerlink" title="playbook里的循环"></a>playbook里的循环</h1><p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# vim /etc/ansible/while.yml</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"> - hosts: nfs</span><br><span class="line">   user: root</span><br><span class="line">   tasks:</span><br><span class="line">     - name: change files&apos; mode</span><br><span class="line">       file: path=/tmp/&#123;&#123; item &#125;&#125;   state=touch   mode=600       </span><br><span class="line">       with_items:      //注意item后面加s，这是变量的循环用法</span><br><span class="line">         - 1.txt             //注意 - 后面要加空格</span><br><span class="line">         - 2.txt</span><br><span class="line">         - 3.txt</span><br><span class="line"></span><br><span class="line">[root@ansible ~]# ansible-playbook /etc/ansible/while.yml     //执行</span><br><span class="line">PLAY [nfs] **********************************************************************************************************************************************************************************</span><br><span class="line"></span><br><span class="line">TASK [Gathering Facts] **********************************************************************************************************************************************************************</span><br><span class="line">ok: [nfs]     //Gathering Facts表示获取对应服务器的信息，当时控制多台服务器的时候，会变得很慢，我们可以使用 gather_facts: false 来关掉，可以参考上一例子。</span><br><span class="line"></span><br><span class="line">TASK [change files&apos; mode] *******************************************************************************************************************************************************************</span><br><span class="line">changed: [nfs] =&gt; (item=1.txt)</span><br><span class="line">changed: [nfs] =&gt; (item=2.txt)</span><br><span class="line">changed: [nfs] =&gt; (item=3.txt)</span><br><span class="line"></span><br><span class="line">PLAY RECAP **********************************************************************************************************************************************************************************</span><br><span class="line">nfs : ok=2 changed=1 unreachable=0 failed=0</span><br></pre></td></tr></table></figure>
+
+<h1 id="playbook里的条件判断"><a href="#playbook里的条件判断" class="headerlink" title="playbook里的条件判断"></a>playbook里的条件判断</h1><p>实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# vim /etc/ansible/when.yml</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"> - hosts: nfs</span><br><span class="line">   user: root</span><br><span class="line">   gather_facts: True     //获取nfs机器的信息，其实默认不写，也可以</span><br><span class="line">   tasks:</span><br><span class="line">     - name: use when</span><br><span class="line">       shell: touch /tmp/when.txt</span><br><span class="line">       when: ansible_ens33.ipv4.address == &quot;192.168.122.133&quot;</span><br><span class="line"></span><br><span class="line">[root@ansible ~]# ansible-playbook /etc/ansible/when.yml</span><br><span class="line">PLAY [nfs] **********************************************************************************************************************************************************************************</span><br><span class="line">TASK [Gathering Facts] **********************************************************************************************************************************************************************</span><br><span class="line">ok: [nfs]</span><br><span class="line">TASK [use when] *****************************************************************************************************************************************************************************</span><br><span class="line"> [WARNING]: Consider using the file module with state=touch rather than running touch. If you need to use command because file is insufficient you can add warn=False to this command task</span><br><span class="line">or set command_warnings=False in ansible.cfg to get rid of this message.</span><br><span class="line">changed: [nfs]</span><br><span class="line">PLAY RECAP **********************************************************************************************************************************************************************************</span><br><span class="line">nfs : ok=2 changed=1 unreachable=0 failed=0</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明：</strong><br>ansible nfs -m setup 可以查看到所有的facter信息</p>
+<h1 id="playbook中的handlers"><a href="#playbook中的handlers" class="headerlink" title="playbook中的handlers"></a>playbook中的handlers</h1><p>playbook中的handlers相当于shell中的 &amp;&amp;，上一个命令<strong>运行成功后</strong>，接着运行handlers。常用场景：执行task之后，服务器发生变化之后要执行的一些操作，比如我们修改了配置文件后，需要重启一下服务。</p>
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# vim /etc/ansible/handlers.yml</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"> - hosts: nfs</span><br><span class="line">   user: root</span><br><span class="line">   tasks:</span><br><span class="line">     - name: use handlers</span><br><span class="line">       copy: src=/tmp/test.txt dest=/tmp/110.txt</span><br><span class="line">       notify: test handlers</span><br><span class="line">   handlers:</span><br><span class="line">     - name: test handlers</span><br><span class="line">       shell: echo &quot;handlers tested OK&quot; &gt;&gt; test.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@ansible ~]# ansible-playbook /etc/ansible/handlers.yml</span><br><span class="line">PLAY [nfs] **********************************************************************************************************************************************************************************</span><br><span class="line">TASK [Gathering Facts] **********************************************************************************************************************************************************************</span><br><span class="line">ok: [nfs]</span><br><span class="line">TASK [use handlers] *************************************************************************************************************************************************************************</span><br><span class="line">changed: [nfs]</span><br><span class="line">RUNNING HANDLER [test handlers] *************************************************************************************************************************************************************</span><br><span class="line">changed: [nfs]</span><br><span class="line">PLAY RECAP **********************************************************************************************************************************************************************************</span><br><span class="line">nfs : ok=3 changed=2 unreachable=0 failed=0</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明：</strong></p>
+<ul>
+<li>只有copy模块真正执行后，才会去调用下面的handlers相关的操作。</li>
+<li>也就是说如果1.txt和2.txt内容是一样的，并不会去执行handlers里面的shell相关命令。 </li>
+<li>这种比较适合配置文件发生更改后，重启服务的操作。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ansible/" rel="tag"># ansible</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划/" rel="next" title="Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划">
+                <i class="fa fa-chevron-left"></i> Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/linux自动部署jar包，注册系统服务（基于Centos7）/" rel="prev" title="linux自动部署jar包，注册系统服务（基于Centos7）">
+                linux自动部署jar包，注册系统服务（基于Centos7） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ansible安装包和管理服务"><span class="nav-number">1.</span> <span class="nav-text">ansible安装包和管理服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#yum-安装包的用法"><span class="nav-number">1.1.</span> <span class="nav-text">yum 安装包的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">1.2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#service模块"><span class="nav-number">1.3.</span> <span class="nav-text">service模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例-1"><span class="nav-number">1.4.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用ansible-playbook"><span class="nav-number">2.</span> <span class="nav-text">使用ansible playbook</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#playbook里的变量"><span class="nav-number">3.</span> <span class="nav-text">playbook里的变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#playbook里的循环"><span class="nav-number">4.</span> <span class="nav-text">playbook里的循环</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#playbook里的条件判断"><span class="nav-number">5.</span> <span class="nav-text">playbook里的条件判断</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#playbook中的handlers"><span class="nav-number">6.</span> <span class="nav-text">playbook中的handlers</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

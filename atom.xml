@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-29T08:34:05.100Z</updated>
+  <updated>2019-08-04T09:35:49.238Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux下的Mongodb部署应用梳理</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/Linux%E4%B8%8B%E7%9A%84Mongodb%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8%E6%A2%B3%E7%90%86/"/>
+    <id>http://yoursite.com/linux入门笔记/Linux下的Mongodb部署应用梳理/</id>
+    <published>2018-08-23T16:00:00.000Z</published>
+    <updated>2019-08-04T09:35:49.238Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;[toc]&lt;/p&gt;
+&lt;h1 id=&quot;一、Mongodb简介&quot;&gt;&lt;a href=&quot;#一、Mongodb简介&quot; class=&quot;headerlink&quot; title=&quot;一、Mongodb简介&quot;&gt;&lt;/a&gt;一、Mongodb简介&lt;/h1&gt;&lt;figure class=&quot;highlight
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="mongodb" scheme="http://yoursite.com/tags/mongodb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mongodb 备份(mongodump)脚本</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/Mongo%20%E5%A4%87%E4%BB%BD(mongodump)%E8%84%9A%E6%9C%AC/"/>
+    <id>http://yoursite.com/linux入门笔记/Mongo 备份(mongodump)脚本/</id>
+    <published>2018-08-22T16:00:00.000Z</published>
+    <updated>2019-08-09T17:04:57.562Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;脚本如下&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="mongodb" scheme="http://yoursite.com/tags/mongodb/"/>
+    
+  </entry>
   
   <entry>
     <title></title>
@@ -29,6 +77,154 @@
     
       <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
     
+    
+  </entry>
+  
+  <entry>
+    <title>MongoDB副本集(一主两从)读写分离、故障转移功能环境部署记录</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/MongoDB%E5%89%AF%E6%9C%AC%E9%9B%86(%E4%B8%80%E4%B8%BB%E4%B8%A4%E4%BB%8E)%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E3%80%81%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB%E5%8A%9F%E8%83%BD%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/linux入门笔记/MongoDB副本集(一主两从)读写分离、故障转移功能环境部署记录/</id>
+    <published>2018-01-21T16:00:00.000Z</published>
+    <updated>2019-08-04T09:33:15.821Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;[toc]&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Mongodb是一种非关系数据库(NoSQL)，非关系型数据库的产生就是为了解决大数据量、高扩展性、高性能、灵活数据模型、高可用性。MongoDB官方已经不建议使用主从模式了，替代方案是采用副本集的模式。主从模式其实就是一
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="mongodb" scheme="http://yoursite.com/tags/mongodb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis哨兵模式（sentinel）部署记录</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/Redis%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F%EF%BC%88sentinel%EF%BC%89%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/linux入门笔记/Redis哨兵模式（sentinel）部署记录/</id>
+    <published>2018-01-19T16:00:00.000Z</published>
+    <updated>2019-08-04T09:29:47.708Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;[toc]&lt;/p&gt;
+&lt;h1 id=&quot;1-redis主从复制的大致过程：&quot;&gt;&lt;a href=&quot;#1-redis主从复制的大致过程：&quot; class=&quot;headerlink&quot; title=&quot;1.redis主从复制的大致过程：&quot;&gt;&lt;/a&gt;1.redis主从复制的大致过程：&lt;/h1&gt;
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+    
+      <category term="sentinel" scheme="http://yoursite.com/tags/sentinel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis日常操作命令小结</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/Redis%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/"/>
+    <id>http://yoursite.com/linux入门笔记/Redis日常操作命令小结/</id>
+    <published>2018-01-17T16:00:00.000Z</published>
+    <updated>2019-08-04T09:16:35.289Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Redis缓存服务是运维工作中比较常见的一种维护工作，下面就redis日常操作命令在此做一简单小结，以备查用：&lt;/p&gt;
+&lt;h1 id=&quot;1-连接redis服务命令&quot;&gt;&lt;a href=&quot;#1-连接redis服务命令&quot; class=&quot;headerlink&quot; title=&quot;1.连
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/Tomcat%20%E9%87%8D%E5%90%AF%E8%84%9A%E6%9C%AC/"/>
+    <id>http://yoursite.com/linux入门笔记/Tomcat 重启脚本/</id>
+    <published>2018-01-09T16:00:00.000Z</published>
+    <updated>2019-07-29T08:46:25.711Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Tomcat的启动、停止、重启脚本，方便部署，不多说，上菜&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="tomcat" scheme="http://yoursite.com/tags/tomcat/"/>
+    
+      <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/Jetty%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%20%20%E5%A4%9A%E5%AE%9E%E4%BE%8B/"/>
+    <id>http://yoursite.com/linux入门笔记/Jetty的安装与配置  多实例/</id>
+    <published>2018-01-08T16:00:00.000Z</published>
+    <updated>2019-07-29T08:44:31.123Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-安装jdk&quot;&gt;&lt;a href=&quot;#1-安装jdk&quot; class=&quot;headerlink&quot; title=&quot;1 安装jdk&quot;&gt;&lt;/a&gt;1 安装jdk&lt;/h1&gt;&lt;p&gt;因为Tomcat的安装需要jdk里面的一些包的支持，所以先安装jdk。我们先到sun公司的jdk官网
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="jetty" scheme="http://yoursite.com/tags/jetty/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mysql中kill掉所有锁表的进程</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/mysql%E4%B8%ADkill%E6%8E%89%E6%89%80%E6%9C%89%E9%94%81%E8%A1%A8%E7%9A%84%E8%BF%9B%E7%A8%8B/"/>
+    <id>http://yoursite.com/linux入门笔记/mysql中kill掉所有锁表的进程/</id>
+    <published>2018-01-08T16:00:00.000Z</published>
+    <updated>2019-07-29T08:39:29.211Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;3点钟刚睡下, 4点多, 同事打电话告诉我用户数据库挂掉了. 我起床看一下进程列表.&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/s
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
     
   </entry>
   
@@ -52,6 +248,54 @@
     
     
       <category term="jar" scheme="http://yoursite.com/tags/jar/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/Ansible%E5%AD%A6%E4%B9%A0(2)-%E5%AE%89%E8%A3%85%E5%8C%85%E5%92%8C%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E3%80%81playbook%E4%BB%A5%E5%8F%8A%E5%85%B6%E5%8F%98%E9%87%8F%E3%80%81%E5%BE%AA%E7%8E%AF%E3%80%81%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E3%80%81handlers/"/>
+    <id>http://yoursite.com/linux入门笔记/Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers/</id>
+    <published>2017-11-05T16:00:00.000Z</published>
+    <updated>2019-08-04T09:54:53.742Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;ansible安装包和管理服务&quot;&gt;&lt;a href=&quot;#ansible安装包和管理服务&quot; class=&quot;headerlink&quot; title=&quot;ansible安装包和管理服务&quot;&gt;&lt;/a&gt;ansible安装包和管理服务&lt;/h1&gt;&lt;h2 id=&quot;yum-安装包的用法&quot;&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="ansible" scheme="http://yoursite.com/tags/ansible/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划</title>
+    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/Ansible%E5%AD%A6%E4%B9%A0(1)-%E4%BB%8B%E7%BB%8D%E3%80%81%E5%AE%89%E8%A3%85%E3%80%81%E8%BF%9C%E7%A8%8B%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E3%80%81%E8%BF%9C%E7%A8%8B%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E3%80%81%E7%AE%A1%E7%90%86%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92/"/>
+    <id>http://yoursite.com/linux入门笔记/Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划/</id>
+    <published>2017-11-04T16:00:00.000Z</published>
+    <updated>2019-08-04T09:52:12.365Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;ansible介绍&quot;&gt;&lt;a href=&quot;#ansible介绍&quot; class=&quot;headerlink&quot; title=&quot;ansible介绍&quot;&gt;&lt;/a&gt;ansible介绍&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;不需要安装客户端，通过sshd去通信&lt;/li&gt;
+&lt;li&gt;基于模块工作，模
+      
+    
+    </summary>
+    
+      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="ansible" scheme="http://yoursite.com/tags/ansible/"/>
     
   </entry>
   
@@ -128,11 +372,11 @@
   </entry>
   
   <entry>
-    <title>代码管理平台介绍和svn的安装和使用</title>
+    <title>SVN的安装和使用</title>
     <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/22.1-22.4%20%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E4%BB%8B%E7%BB%8D%E5%92%8Csvn%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
     <id>http://yoursite.com/linux入门笔记/22.1-22.4 代码管理平台介绍和svn的安装和使用/</id>
     <published>2017-10-31T16:00:00.000Z</published>
-    <updated>2019-07-29T08:28:21.978Z</updated>
+    <updated>2019-07-29T08:48:23.711Z</updated>
     
     <summary type="html">
     
@@ -175,11 +419,11 @@
   </entry>
   
   <entry>
-    <title>21.13-21.17 redis常用操作、操作键值、安全设置</title>
+    <title>Redis常用操作、操作键值、安全设置</title>
     <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/21.13-21.17%20redis%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E3%80%81%E6%93%8D%E4%BD%9C%E9%94%AE%E5%80%BC%E3%80%81%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/"/>
     <id>http://yoursite.com/linux入门笔记/21.13-21.17 redis常用操作、操作键值、安全设置/</id>
     <published>2017-10-28T16:00:00.000Z</published>
-    <updated>2019-07-29T08:27:10.032Z</updated>
+    <updated>2019-08-09T17:02:09.668Z</updated>
     
     <summary type="html">
     
@@ -243,255 +487,6 @@
     
     
       <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>memcached命令行、数据导出和导入、存储sessions</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/21.5-21.8%20memcached%E5%91%BD%E4%BB%A4%E8%A1%8C%E3%80%81%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA%E5%92%8C%E5%AF%BC%E5%85%A5%E3%80%81%E5%AD%98%E5%82%A8sessions/"/>
-    <id>http://yoursite.com/linux入门笔记/21.5-21.8 memcached命令行、数据导出和导入、存储sessions/</id>
-    <published>2017-10-26T16:00:00.000Z</published>
-    <updated>2019-07-29T08:26:36.467Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;21-5-memcached命令行&quot;&gt;&lt;a href=&quot;#21-5-memcached命令行&quot; class=&quot;headerlink&quot; title=&quot;21.5 memcached命令行&quot;&gt;&lt;/a&gt;21.5 memcached命令行&lt;/h1&gt;&lt;p&gt;Memcached类
-      
-    
-    </summary>
-    
-      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="memcached" scheme="http://yoursite.com/tags/memcached/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NoSQL和memcached介绍</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/21.1-21.4%20NoSQL%E5%92%8Cmemcached%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://yoursite.com/linux入门笔记/21.1-21.4 NoSQL和memcached介绍/</id>
-    <published>2017-10-25T16:00:00.000Z</published>
-    <updated>2019-07-29T08:26:35.071Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;21-1-nosql介绍&quot;&gt;&lt;a href=&quot;#21-1-nosql介绍&quot; class=&quot;headerlink&quot; title=&quot;21.1 nosql介绍&quot;&gt;&lt;/a&gt;21.1 nosql介绍&lt;/h2&gt;&lt;h3 id=&quot;1-什么是NoSQL？&quot;&gt;&lt;a href=&quot;#1-
-      
-    
-    </summary>
-    
-      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="nosql" scheme="http://yoursite.com/tags/nosql/"/>
-    
-      <category term="memcached" scheme="http://yoursite.com/tags/memcached/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>告警系统邮件引擎、运行告警系统</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/20.23-20.26%20%E5%91%8A%E8%AD%A6%E7%B3%BB%E7%BB%9F%E9%82%AE%E4%BB%B6%E5%BC%95%E6%93%8E%E3%80%81%E8%BF%90%E8%A1%8C%E5%91%8A%E8%AD%A6%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://yoursite.com/linux入门笔记/20.23-20.26 告警系统邮件引擎、运行告警系统/</id>
-    <published>2017-10-24T15:08:32.000Z</published>
-    <updated>2019-07-29T08:22:59.584Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;20-23-20-24-20-25-告警系统邮件引擎&quot;&gt;&lt;a href=&quot;#20-23-20-24-20-25-告警系统邮件引擎&quot; class=&quot;headerlink&quot; title=&quot;20.23/20.24/20.25 告警系统邮件引擎&quot;&gt;&lt;/a&gt;20.23/20
-      
-    
-    </summary>
-    
-      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="shell告警系统脚本" scheme="http://yoursite.com/tags/shell%E5%91%8A%E8%AD%A6%E7%B3%BB%E7%BB%9F%E8%84%9A%E6%9C%AC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>告警系统需求分析、告警系统主脚本、配置文件、监控项目</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/20.19-20.22%20%E5%91%8A%E8%AD%A6%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E3%80%81%E5%91%8A%E8%AD%A6%E7%B3%BB%E7%BB%9F%E4%B8%BB%E8%84%9A%E6%9C%AC%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%91%E6%8E%A7%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://yoursite.com/linux入门笔记/20.19-20.22 告警系统需求分析、告警系统主脚本、配置文件、监控项目/</id>
-    <published>2017-10-24T13:38:53.000Z</published>
-    <updated>2019-07-29T08:22:39.631Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;20-19-告警系统需求分析&quot;&gt;&lt;a href=&quot;#20-19-告警系统需求分析&quot; class=&quot;headerlink&quot; title=&quot;20.19 告警系统需求分析&quot;&gt;&lt;/a&gt;20.19 告警系统需求分析&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;需求：使用shell定制各
-      
-    
-    </summary>
-    
-      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="shel告警系统脚本" scheme="http://yoursite.com/tags/shel%E5%91%8A%E8%AD%A6%E7%B3%BB%E7%BB%9F%E8%84%9A%E6%9C%AC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>shell中的函数、数组</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/20.16-20.18%20shell%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E3%80%81%E6%95%B0%E7%BB%84/"/>
-    <id>http://yoursite.com/linux入门笔记/20.16-20.18 shell中的函数、数组/</id>
-    <published>2017-10-22T02:39:07.000Z</published>
-    <updated>2019-07-29T08:21:49.655Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;20-16-20-17-shell中的函数、数组&quot;&gt;&lt;a href=&quot;#20-16-20-17-shell中的函数、数组&quot; class=&quot;headerlink&quot; title=&quot;20.16/20.17 shell中的函数、数组&quot;&gt;&lt;/a&gt;20.16/20.17 sh
-      
-    
-    </summary>
-    
-      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="函数" scheme="http://yoursite.com/tags/%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>shell脚本中的if逻辑判断、文件目录属性判断、if特殊用法、case判断</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/20.5%20-%2020.9%20shell%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%9A%84if%E9%80%BB%E8%BE%91%E5%88%A4%E6%96%AD%E3%80%81%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%B1%9E%E6%80%A7%E5%88%A4%E6%96%AD%E3%80%81if%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95%E3%80%81case%E5%88%A4%E6%96%AD/"/>
-    <id>http://yoursite.com/linux入门笔记/20.5 - 20.9 shell脚本中的if逻辑判断、文件目录属性判断、if特殊用法、case判断/</id>
-    <published>2017-10-18T15:37:56.000Z</published>
-    <updated>2019-07-29T08:21:05.141Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;20-5-shell脚本中的if逻辑判断&quot;&gt;&lt;a href=&quot;#20-5-shell脚本中的if逻辑判断&quot; class=&quot;headerlink&quot; title=&quot;20.5 shell脚本中的if逻辑判断&quot;&gt;&lt;/a&gt;20.5 shell脚本中的if逻辑判断&lt;/h2&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="if" scheme="http://yoursite.com/tags/if/"/>
-    
-      <category term="case" scheme="http://yoursite.com/tags/case/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/20.10-20.15%20for%E5%BE%AA%E7%8E%AF%E3%80%81while%E5%BE%AA%E7%8E%AF%E3%80%81break%E8%B7%B3%E5%87%BA%E5%BE%AA%E7%8E%AF%E3%80%81continue%E7%BB%93%E6%9D%9F%E6%9C%AC%E6%AC%A1%E5%BE%AA%E7%8E%AF%E3%80%81exit%E9%80%80%E5%87%BA%E6%95%B4%E4%B8%AA%E8%84%9A%E6%9C%AC/"/>
-    <id>http://yoursite.com/linux入门笔记/20.10-20.15 for循环、while循环、break跳出循环、continue结束本次循环、exit退出整个脚本/</id>
-    <published>2017-10-18T14:18:28.000Z</published>
-    <updated>2019-07-29T08:21:27.808Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;20-10-for循环&quot;&gt;&lt;a href=&quot;#20-10-for循环&quot; class=&quot;headerlink&quot; title=&quot;20.10 for循环&quot;&gt;&lt;/a&gt;20.10 for循环&lt;/h2&gt;&lt;h3 id=&quot;语法：&quot;&gt;&lt;a href=&quot;#语法：&quot; class=&quot;he
-      
-    
-    </summary>
-    
-      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="for" scheme="http://yoursite.com/tags/for/"/>
-    
-      <category term="break" scheme="http://yoursite.com/tags/break/"/>
-    
-      <category term="continue" scheme="http://yoursite.com/tags/continue/"/>
-    
-      <category term="exit" scheme="http://yoursite.com/tags/exit/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>shell脚本结构和执行、变量、date命令</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/20.1%20-%2020.4%20shell%E8%84%9A%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E6%89%A7%E8%A1%8C%E3%80%81%E5%8F%98%E9%87%8F%E3%80%81date%E5%91%BD%E4%BB%A4/"/>
-    <id>http://yoursite.com/linux入门笔记/20.1 - 20.4 shell脚本结构和执行、变量、date命令/</id>
-    <published>2017-10-17T16:39:26.000Z</published>
-    <updated>2019-07-29T08:20:45.185Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;#20.1 shell脚本介绍&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;shell是一种脚本语言&lt;/li&gt;
-&lt;li&gt;可以使用逻辑判断、循环等语法&lt;/li&gt;
-&lt;li&gt;可以自定义函数&lt;/li&gt;
-&lt;li&gt;shell是系统命令的集合&lt;/li&gt;
-&lt;li&gt;shell脚本可以实现自动化运维，能大大增加
-      
-    
-    </summary>
-    
-      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="date" scheme="http://yoursite.com/tags/date/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zabbix添加自定义监控项目、配置邮件告警、测试告警</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/19.12-19.16%20Zabbix%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7%E9%A1%B9%E7%9B%AE%E3%80%81%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E5%91%8A%E8%AD%A6%E3%80%81%E6%B5%8B%E8%AF%95%E5%91%8A%E8%AD%A6%E3%80%81%E4%B8%8D%E5%8F%91%E9%82%AE%E4%BB%B6%E7%9A%84%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"/>
-    <id>http://yoursite.com/linux入门笔记/19.12-19.16 Zabbix添加自定义监控项目、配置邮件告警、测试告警、不发邮件的问题处理/</id>
-    <published>2017-10-16T15:25:34.000Z</published>
-    <updated>2019-07-29T08:20:21.289Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;19-12-添加自定义监控项目&quot;&gt;&lt;a href=&quot;#19-12-添加自定义监控项目&quot; class=&quot;headerlink&quot; title=&quot;19.12 添加自定义监控项目&quot;&gt;&lt;/a&gt;19.12 添加自定义监控项目&lt;/h1&gt;&lt;p&gt;该配置的用途是监控模板中没有的监控项
-      
-    
-    </summary>
-    
-      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="zabbix" scheme="http://yoursite.com/tags/zabbix/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zabbix主动模式和被动模式、添加监控主机、添加自定义模板、处理图形中的乱码、自动发现</title>
-    <link href="http://yoursite.com/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/19.7-19.11%20Zabbix%E4%B8%BB%E5%8A%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8F%E3%80%81%E6%B7%BB%E5%8A%A0%E7%9B%91%E6%8E%A7%E4%B8%BB%E6%9C%BA%E3%80%81%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E3%80%81%E5%A4%84%E7%90%86%E5%9B%BE%E5%BD%A2%E4%B8%AD%E7%9A%84%E4%B9%B1%E7%A0%81%E3%80%81%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/"/>
-    <id>http://yoursite.com/linux入门笔记/19.7-19.11 Zabbix主动模式和被动模式、添加监控主机、添加自定义模板、处理图形中的乱码、自动发现/</id>
-    <published>2017-10-15T03:14:05.000Z</published>
-    <updated>2019-07-29T08:19:21.615Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;19-7-主动模式和被动模式&quot;&gt;&lt;a href=&quot;#19-7-主动模式和被动模式&quot; class=&quot;headerlink&quot; title=&quot;19.7 主动模式和被动模式&quot;&gt;&lt;/a&gt;19.7 主动模式和被动模式&lt;/h1&gt;&lt;p&gt;主动模式和被动模式所针对的对象是客户端。&lt;b
-      
-    
-    </summary>
-    
-      <category term="linux入门笔记" scheme="http://yoursite.com/categories/linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="zabbix" scheme="http://yoursite.com/tags/zabbix/"/>
     
   </entry>
   

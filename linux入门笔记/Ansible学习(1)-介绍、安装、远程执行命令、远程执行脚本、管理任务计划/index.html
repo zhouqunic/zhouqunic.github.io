@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ansible,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joking的Linux世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="ansible介绍 不需要安装客户端，通过sshd去通信 基于模块工作，模块可以由任何语言开发 不仅支持命令行使用模块，也支持编写yaml格式的playbook，易于编写和阅读 安装十分简单，centos上可直接yum安装 有提供UI（浏览器图形化）www.ansible.com/tower，收费的 官方文档 http://docs.ansible.com/ansible/latest/index">
+<meta name="keywords" content="ansible">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划">
+<meta property="og:url" content="http://yoursite.com/linux入门笔记/Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划/index.html">
+<meta property="og:site_name" content="Joking的Linux世界">
+<meta property="og:description" content="ansible介绍 不需要安装客户端，通过sshd去通信 基于模块工作，模块可以由任何语言开发 不仅支持命令行使用模块，也支持编写yaml格式的playbook，易于编写和阅读 安装十分简单，centos上可直接yum安装 有提供UI（浏览器图形化）www.ansible.com/tower，收费的 官方文档 http://docs.ansible.com/ansible/latest/index">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-04T09:52:12.365Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划">
+<meta name="twitter:description" content="ansible介绍 不需要安装客户端，通过sshd去通信 基于模块工作，模块可以由任何语言开发 不仅支持命令行使用模块，也支持编写yaml格式的playbook，易于编写和阅读 安装十分简单，centos上可直接yum安装 有提供UI（浏览器图形化）www.ansible.com/tower，收费的 官方文档 http://docs.ansible.com/ansible/latest/index">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/linux入门笔记/Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划/">
+
+
+
+
+
+  <title>Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划 | Joking的Linux世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joking的Linux世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">念念不忘，必有回响</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux入门笔记/Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhouqun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joking的Linux世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ansible学习(1)-介绍、安装、远程执行命令、远程执行脚本、管理任务计划</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-05T00:00:00+08:00">
+                2017-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux入门笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">linux入门笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ansible介绍"><a href="#ansible介绍" class="headerlink" title="ansible介绍"></a>ansible介绍</h1><ul>
+<li>不需要安装客户端，通过sshd去通信</li>
+<li>基于模块工作，模块可以由任何语言开发</li>
+<li>不仅支持命令行使用模块，也支持编写yaml格式的playbook，易于编写和阅读</li>
+<li>安装十分简单，centos上可直接yum安装</li>
+<li>有提供UI（浏览器图形化）<a href="http://www.ansible.com/tower，收费的" target="_blank" rel="noopener">www.ansible.com/tower，收费的</a></li>
+<li>官方文档 <a href="http://docs.ansible.com/ansible/latest/index.html" target="_blank" rel="noopener">http://docs.ansible.com/ansible/latest/index.html</a></li>
+<li>ansible已经被redhat公司收购，它在github上是一个非常受欢迎的开源软件，github地址<a href="https://github.com/ansible/ansible" target="_blank" rel="noopener">https://github.com/ansible/ansible</a></li>
+</ul>
+<h1 id="ansible安装"><a href="#ansible安装" class="headerlink" title="ansible安装"></a>ansible安装</h1><p>系统环境:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# cat /etc/redhat-release &amp;&amp; uname -r &amp;&amp; ifconfig ens33 |grep inet |grep -v &apos;inet6&apos; &amp;&amp; hostname</span><br><span class="line">CentOS Linux release 7.4.1708 (Core) </span><br><span class="line">3.10.0-693.el7.x86_64</span><br><span class="line">        inet 192.168.122.136 netmask 255.255.255.0 broadcast 192.168.122.255</span><br><span class="line">ansible</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1. 安装centos 7扩展源（因为ansible 默认不被centos 收录，所以想要使用这个工具我们还得安装扩展源）</span><br><span class="line">[root@ansible ~]# yum -y install epel-release</span><br><span class="line"></span><br><span class="line">2. 安装ansible,同时建议安装上sshpass （ansible 安装方法有两种，推荐采用yum 安装）:</span><br><span class="line">[root@ansible ~]# yum -y install epel-release</span><br><span class="line">另一种是采用python 的模块pip 安装。</span><br><span class="line"></span><br><span class="line">3. 安装完成，查看下版本（验证下ansible 是否能正常工作）：</span><br><span class="line">[root@ansible ~]# ansible --version</span><br><span class="line">ansible 2.5.0</span><br><span class="line">  config file = /etc/ansible/ansible.cfg</span><br><span class="line">  configured module search path = [u&apos;/root/.ansible/plugins/modules&apos;, u&apos;/usr/share/ansible/plugins/modules&apos;]</span><br><span class="line">  ansible python module location = /usr/lib/python2.7/site-packages/ansible</span><br><span class="line">  executable location = /usr/bin/ansible</span><br><span class="line">  python version = 2.7.5 (default, Aug  4 2017, 00:39:18) [GCC 4.8.5 20150623 (Red Hat 4.8.5-16)]</span><br><span class="line">ansible的可执行文件在  /usr/bin/ansible 下。</span><br><span class="line"></span><br><span class="line">主机群管理文件在/etc/ansible 目录下</span><br><span class="line">[root@ansible ~]# find / -name hosts</span><br><span class="line">/etc/hosts</span><br><span class="line">/etc/ansible/hosts       //ansible主机群管理文件</span><br><span class="line"></span><br><span class="line">4. 配置Ansible管理节点和主机的连接，生成密钥对</span><br><span class="line">[root@ansible ~]# ssh-keygen -t rsa -P &apos;&apos;</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/root/.ssh/id_rsa): </span><br><span class="line">Your identification has been saved in /root/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /root/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:JBkopXlNY0507b2FYatW2iX5H8Mrn08oZWK+WkEzeu8 root@ansible</span><br><span class="line">The key&apos;s randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|   ..oB ..       |</span><br><span class="line">|  .o.* =  . o    |</span><br><span class="line">|  o.. = .. o+=   |</span><br><span class="line">|   .   o  .oBoo  |</span><br><span class="line">|        S .==*+  |</span><br><span class="line">|          ++o*.= |</span><br><span class="line">|         .  + o.=|</span><br><span class="line">|           . = oo|</span><br><span class="line">|          ... Eoo|</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line">​</span><br><span class="line">[root@ansible ~]# cat /root/.ssh/id_rsa.pub</span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWIGxEIw8HAXwL8v42Z6JkMM2ViNtO6yu3YIsRNjuzn47NkOyAo554xux+zXwqNAVkGGcN7LB4JVFsIXi6l/sLokCNaYDmDSGO47qeGGVvemPmdcP3X+pDmzVT4CNqXqKVSbJgTGkdks/f5NszYfEAEYKtAa8TckmuImnTVUClH7CLPuCNS61E4LZdigBGJAUkCuY88ewMs+DjQ0IOImCbGNOdsfCZF0zL1VTXvgKeXzYJdb3PUc9LA4+dQT0DY7YxEheVhouiwqKsrUoJA/Wih+mzAsIOm3fANnTAS4uWpGAGiLmcfsbgza0HeSvHM7ZWZFYV+sFMbVnY27TIDvhf root@ansible</span><br><span class="line">​</span><br><span class="line"></span><br><span class="line">5. 编辑ansible 主配置文件，配置要推送密钥的主机（下面以主机名为配置，是因为在/etc/hosts 里面有配置相应的解析）</span><br><span class="line">[root@ansible ~]# vim /etc/hosts   </span><br><span class="line">​</span><br><span class="line">192.168.122.133 nfs</span><br><span class="line">192.168.122.134 tomcat</span><br><span class="line">192.168.122.135 nginx</span><br><span class="line">​</span><br><span class="line">[root@ansible ~]# vim /etc/ansible/hosts   //配置主机群</span><br><span class="line">​</span><br><span class="line">[root@ansible ~]# egrep -v &apos;^$|#&apos; /etc/ansible/hosts</span><br><span class="line">[web]</span><br><span class="line">nfs </span><br><span class="line">tomcat </span><br><span class="line">nginx</span><br><span class="line"></span><br><span class="line">6. 测试推送密钥</span><br><span class="line">[root@ansible ~]# ansible all -m authorized_key -a &quot;user=root key=&apos;&#123;&#123; lookup(&apos;file&apos;, &apos;/root/.ssh/id_rsa.pub&apos;)&#125;&#125;&apos; path=&apos;/root/.ssh/authorized_keys&apos; manage_dir=no&quot; --ask-pass -c paramiko</span><br><span class="line">SSH password: </span><br><span class="line">​</span><br><span class="line">paramiko: The authenticity of host &apos;192.168.122.134&apos; can&apos;t be established.</span><br><span class="line">The ssh-rsa key fingerprint is 7f2734582f66765d3b560c8e79c932f2.</span><br><span class="line">Are you sure you want to continue connecting (yes/no)?</span><br><span class="line">192.168.122.133 | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: false, </span><br><span class="line">    &quot;comment&quot;: null, </span><br><span class="line">    &quot;exclusive&quot;: false, </span><br><span class="line">    &quot;gid&quot;: 0, </span><br><span class="line">    &quot;group&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;key&quot;: &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWIGxEIw8HAXwL8v42Z6JkMM2ViNtO6yu3YIsRNjuzn47NkOyAo554xux+zXwqNAVkGGcN7LB4JVFsIXi6l/sLokCNaYDmDSGO47qeGGVvemPmdcP3X+pDmzVT4CNqXqKVSbJgTGkdks/f5NszYfEAEYKtAa8TckmuImnTVUClH7CLPuCNS61E4LZdigBGJAUkCuY88ewMs+DjQ0IOImCbGNOdsfCZF0zL1VTXvgKeXzYJdb3PUc9LA4+dQT0DY7YxEheVhouiwqKsrUoJA/Wih+mzAsIOm3fANnTAS4uWpGAGiLmcfsbgza0HeSvHM7ZWZFYV+sFMbVnY27TIDvhf root@ansible&quot;, </span><br><span class="line">    &quot;key_options&quot;: null, </span><br><span class="line">    &quot;keyfile&quot;: &quot;/root/.ssh/authorized_keys&quot;, </span><br><span class="line">    &quot;manage_dir&quot;: false, </span><br><span class="line">    &quot;mode&quot;: &quot;0600&quot;, </span><br><span class="line">    &quot;owner&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;path&quot;: &quot;/root/.ssh/authorized_keys&quot;, </span><br><span class="line">    &quot;size&quot;: 394, </span><br><span class="line">    &quot;state&quot;: &quot;file&quot;, </span><br><span class="line">    &quot;uid&quot;: 0, </span><br><span class="line">    &quot;unique&quot;: false, </span><br><span class="line">    &quot;user&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;validate_certs&quot;: true</span><br><span class="line">&#125;</span><br><span class="line">​</span><br><span class="line">​</span><br><span class="line">paramiko: The authenticity of host &apos;192.168.122.135&apos; can&apos;t be established.</span><br><span class="line">The ssh-rsa key fingerprint is 7f2734582f66765d3b560c8e79c932f2.</span><br><span class="line">Are you sure you want to continue connecting (yes/no)?</span><br><span class="line">yes</span><br><span class="line">​</span><br><span class="line">192.168.122.134 | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;comment&quot;: null, </span><br><span class="line">    &quot;exclusive&quot;: false, </span><br><span class="line">    &quot;gid&quot;: 0, </span><br><span class="line">    &quot;group&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;key&quot;: &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWIGxEIw8HAXwL8v42Z6JkMM2ViNtO6yu3YIsRNjuzn47NkOyAo554xux+zXwqNAVkGGcN7LB4JVFsIXi6l/sLokCNaYDmDSGO47qeGGVvemPmdcP3X+pDmzVT4CNqXqKVSbJgTGkdks/f5NszYfEAEYKtAa8TckmuImnTVUClH7CLPuCNS61E4LZdigBGJAUkCuY88ewMs+DjQ0IOImCbGNOdsfCZF0zL1VTXvgKeXzYJdb3PUc9LA4+dQT0DY7YxEheVhouiwqKsrUoJA/Wih+mzAsIOm3fANnTAS4uWpGAGiLmcfsbgza0HeSvHM7ZWZFYV+sFMbVnY27TIDvhf root@ansible&quot;, </span><br><span class="line">    &quot;key_options&quot;: null, </span><br><span class="line">    &quot;keyfile&quot;: &quot;/root/.ssh/authorized_keys&quot;, </span><br><span class="line">    &quot;manage_dir&quot;: false, </span><br><span class="line">    &quot;mode&quot;: &quot;0600&quot;, </span><br><span class="line">    &quot;owner&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;path&quot;: &quot;/root/.ssh/authorized_keys&quot;, </span><br><span class="line">    &quot;size&quot;: 394, </span><br><span class="line">    &quot;state&quot;: &quot;file&quot;, </span><br><span class="line">    &quot;uid&quot;: 0, </span><br><span class="line">    &quot;unique&quot;: false, </span><br><span class="line">    &quot;user&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;validate_certs&quot;: true</span><br><span class="line">&#125;</span><br><span class="line">​</span><br><span class="line">192.168.122.135 | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;comment&quot;: null, </span><br><span class="line">    &quot;exclusive&quot;: false, </span><br><span class="line">    &quot;gid&quot;: 0, </span><br><span class="line">    &quot;group&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;key&quot;: &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWIGxEIw8HAXwL8v42Z6JkMM2ViNtO6yu3YIsRNjuzn47NkOyAo554xux+zXwqNAVkGGcN7LB4JVFsIXi6l/sLokCNaYDmDSGO47qeGGVvemPmdcP3X+pDmzVT4CNqXqKVSbJgTGkdks/f5NszYfEAEYKtAa8TckmuImnTVUClH7CLPuCNS61E4LZdigBGJAUkCuY88ewMs+DjQ0IOImCbGNOdsfCZF0zL1VTXvgKeXzYJdb3PUc9LA4+dQT0DY7YxEheVhouiwqKsrUoJA/Wih+mzAsIOm3fANnTAS4uWpGAGiLmcfsbgza0HeSvHM7ZWZFYV+sFMbVnY27TIDvhf root@ansible&quot;, </span><br><span class="line">    &quot;key_options&quot;: null, </span><br><span class="line">    &quot;keyfile&quot;: &quot;/root/.ssh/authorized_keys&quot;, </span><br><span class="line">    &quot;manage_dir&quot;: false, </span><br><span class="line">    &quot;mode&quot;: &quot;0600&quot;, </span><br><span class="line">    &quot;owner&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;path&quot;: &quot;/root/.ssh/authorized_keys&quot;, </span><br><span class="line">    &quot;size&quot;: 394, </span><br><span class="line">    &quot;state&quot;: &quot;file&quot;, </span><br><span class="line">    &quot;uid&quot;: 0, </span><br><span class="line">    &quot;unique&quot;: false, </span><br><span class="line">    &quot;user&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;validate_certs&quot;: true</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">7. 测试免密登录</span><br><span class="line">[root@ansible ~]# ssh root@192.168.122.133</span><br><span class="line">Last login: Fri Apr 13 12:13:44 2018 from 192.168.122.136</span><br><span class="line">[root@nfs ~]# exit</span><br><span class="line">登出</span><br><span class="line">Connection to 192.168.122.133 closed.</span><br><span class="line">[root@ansible ~]# ssh root@192.168.122.134</span><br><span class="line">Last login: Fri Apr 13 12:13:48 2018 from 192.168.122.136</span><br><span class="line">[root@tomcat ~]# exit</span><br><span class="line">登出</span><br><span class="line">Connection to 192.168.122.134 closed.</span><br><span class="line">[root@ansible ~]# ssh root@192.168.122.135</span><br><span class="line">Last login: Fri Apr 13 12:13:52 2018 from 192.168.122.136</span><br><span class="line">[root@nginx ~]# exit</span><br><span class="line">登出</span><br><span class="line">Connection to 192.168.122.135 closed.</span><br></pre></td></tr></table></figure>
+
+<h1 id="ansible远程执行命令"><a href="#ansible远程执行命令" class="headerlink" title="ansible远程执行命令"></a>ansible远程执行命令</h1><h2 id="command模块"><a href="#command模块" class="headerlink" title="command模块"></a>command模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# ansible-doc -s command</span><br><span class="line">- name: Executes a command on a remote node</span><br><span class="line">  command:</span><br><span class="line">      chdir:                 # Change into this directory before running the command. 在执行命令前，先切换到指定的目录内</span><br><span class="line">      creates:               # 判断一个文件是否存在，假如判断成立（即文件存在），则后面的命令不执行；判断不成立，后面的命令执行</span><br><span class="line">      free_form:             # (required) The command module takes a free form command to run.  There is no parameter actually named &apos;free form&apos;. See the examples!</span><br><span class="line">      removes:               # 判断一个文件是否存在，假如判断不成立（即该文件不存在），则该选项（后面的命令）不执行。该参数正好与creates 参数相反</span><br><span class="line">      stdin:                 # Set the stdin of the command directly to the specified value.</span><br><span class="line">      warn:                  # If command_warnings are on in ansible.cfg, do not warn about this particular line if set to `no&apos;.</span><br><span class="line"></span><br><span class="line">报错信息解决</span><br><span class="line">错误： &quot;msg&quot;: &quot;Aborting, target uses selinux but python bindings (libselinux-python) aren&apos;t installed!&quot;</span><br><span class="line">解决： yum install -y libselinux-python</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">简单命令测试</span><br><span class="line">语法：ansible &lt;host-pattern&gt; [-f forks] [-m module_name] [-a args]</span><br><span class="line">-f 启动多个个主机执行任务    -m 要使用的模块 -a 模块特有的参数</span><br><span class="line"></span><br><span class="line">[root@ansible ~]# ansible nfs -m command -a &apos;hostname&apos;  //nfs一台机器</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">nfs</span><br><span class="line">​</span><br><span class="line">[root@ansible ~]# ansible all -m command -a &apos;hostname&apos;   //all所有机器</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">nfs</span><br><span class="line">​</span><br><span class="line">nginx | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">nginx</span><br><span class="line">​</span><br><span class="line">tomcat | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">tomcat</span><br><span class="line">​</span><br><span class="line">[root@ansible ~]# ansible web -m command -a &apos;hostname&apos;   //web，hosts中定义的组</span><br><span class="line">nginx | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">nginx</span><br><span class="line">​</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">nfs</span><br><span class="line">​</span><br><span class="line">tomcat | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">tomcat</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">1. 使用 creates 参数，判断一个文件是否存在，存在的话，就跳过后面的执行命令：</span><br><span class="line">[root@ansible ~]# ansible nfs -m command -a &apos;creates=/tmp/linux.txt ls -l /etc/passwd&apos;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">skipped, since /tmp/linuser.txt exists</span><br><span class="line">如果存在的话，就执行后面命令：</span><br><span class="line">[root@ansible ~]# ansible nfs -m command -a &apos;creates=/tmp/linux.txt ls -l /etc/passwd&apos;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">-rw-r--r-- 1 root root 1074 4月  11 23:10 /etc/passwd</span><br><span class="line"></span><br><span class="line">2. 使用chdir 参数，压缩/tmp 目录下的某个文件</span><br><span class="line">[root@ansible ~]# ansible nfs -m command -a &apos;chdir=/tmp/ tar zcf tmp.tar.gz linux.txt&apos;</span><br><span class="line">​</span><br><span class="line">[root@ansible ~]# ansible nfs -m command -a &apos;ls -la /tmp/&apos;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">总用量 8</span><br><span class="line">-rw-r--r--   1 root root  117 4月  13 14:41 tmp.tar.gz</span><br><span class="line">查看压缩的文件</span><br><span class="line">[root@ansible ~]# ansible nfs -m command -a &apos;chdir=/tmp/ tar tvf tmp.tar.gz&apos;</span><br><span class="line">​</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">-rw-r--r-- root/root         0 2018-04-13 14:38 linux.txt</span><br><span class="line"></span><br><span class="line">3. 使用removes 参数，来判断一个不存在的文件，看看后面的命令是否执行（和creats参数相反）：</span><br><span class="line">[root@ansible ~]# ansible nfs -m command -a &apos;removes=/tmp/linux.com /sbin/reboot&apos;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">skipped, since /tmp/linux.com does not exist</span><br></pre></td></tr></table></figure>
+
+<h2 id="shell模块和raw模块"><a href="#shell模块和raw模块" class="headerlink" title="shell模块和raw模块"></a>shell模块和raw模块</h2><p>shell 及raw 模块的用法基本同command 模块。只不过，command 模块不支持管道命令的执行而已。这里就不再去看shell 及 raw 模块的用法了。直接用实例说明：</p>
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1. 使用shell 模块查看nfs中远程主机是否有这个用户：</span><br><span class="line">[root@ansible ~]# ansible nfs -m shell -a &apos;cat /etc/passwd|grep www&apos;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">www:x:666:1000::/home/www:/sbin/nologin</span><br><span class="line"></span><br><span class="line">2. 使用raw模块</span><br><span class="line">[root@ansible ~]# ansible nfs -m raw -a &apos;cat /etc/passwd|grep www&apos;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">www:x:666:1000::/home/www:/sbin/nologin</span><br><span class="line">Shared connection to nfs closed.</span><br><span class="line"></span><br><span class="line">3. 使用command模块就报错</span><br><span class="line">[root@ansible ~]# ansible nfs -m command -a &apos;cat /etc/passwd|grep www&apos;</span><br><span class="line">nfs | FAILED | rc=1 &gt;&gt;</span><br><span class="line">cat: /etc/passwd|grep: 没有那个文件或目录</span><br><span class="line">cat: www: 没有那个文件或目录non-zero return code</span><br><span class="line"></span><br><span class="line">**注释：** raw很多地方和shell类似，更多的地方建议使用shell和command模块。但是如果是使用老版本python，需要用到raw，又或者是客户端是路由器，因为没有安装python模块，那就需要使用raw模块了</span><br></pre></td></tr></table></figure>
+
+<h1 id="ansible拷贝文件或目录"><a href="#ansible拷贝文件或目录" class="headerlink" title="ansible拷贝文件或目录"></a>ansible拷贝文件或目录</h1><h2 id="copy模块"><a href="#copy模块" class="headerlink" title="copy模块"></a>copy模块</h2><p>copy 模块的作用就是把本地文件复制到远程主机群，进行统一部署。先来看下基本用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@Lib96 ~]# ansible-doc -s copy</span><br><span class="line">- name: Copies files to remote locations.</span><br><span class="line">action: copy</span><br><span class="line">backup                 # 用于复制时，是否备份远程主机上的目标文件</span><br><span class="line">content                # 用于替代 ‘src’ ，可以直接设定指定文件的值</span><br><span class="line">dest                   # 必选项，要将源文件复制到远程主机的绝对路径，如果源文件是一个目录，那么远程路径也必须是一个目录</span><br><span class="line">directory_mode         # 递归设定目录的权限，默认为系统默认权限</span><br><span class="line">force                  # 强制覆盖。如果目标主机包含该文件，但内容不同，如果设置为yes,则强制覆盖；如果设置为no，则只有当目录主机的目录位置不存在该文件时，才复制。默认为yes</span><br><span class="line">group                  # 定义文件/目录的所属组</span><br><span class="line">mode                   # 定义文件/目录的权限</span><br><span class="line">owner                  # 定义文件/目录的所属主</span><br><span class="line">src                    # 要复制到远程主机的文件在本地的地址，可以是绝对路径，也可以是相对路径。如果路径是一个目录，它将递归复制。在这种情况下，如果路径使用 &apos;/&apos; 结尾，则只复制目录里的                          内容，如果没有使用 &apos;/&apos; 来结尾，则包含目录在内的整个内容全部复制。</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">1. 现在本地新建一个文件：</span><br><span class="line">[root@ansible ~]# echo &quot;Just a test&quot; &gt; /tmp/test.txt</span><br><span class="line">将该文件复制到远程服务器上</span><br><span class="line">[root@ansible ~]# ansible web -m copy -a &quot;src=/tmp/test.txt dest=/tmp/ owner=root group=root mode=0744&quot;</span><br><span class="line">tomcat | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;checksum&quot;: &quot;e35f4016914f81d2221eb2363fd5045329e02302&quot;, </span><br><span class="line">    &quot;dest&quot;: &quot;/tmp/test.txt&quot;, </span><br><span class="line">    &quot;gid&quot;: 0, </span><br><span class="line">    &quot;group&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;md5sum&quot;: &quot;d22b51de9cf60e6abd3fa269946e8b77&quot;, </span><br><span class="line">    &quot;mode&quot;: &quot;0744&quot;, </span><br><span class="line">    &quot;owner&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;size&quot;: 12, </span><br><span class="line">    &quot;src&quot;: &quot;/root/.ansible/tmp/ansible-tmp-1523603476.36-140086183660608/source&quot;, </span><br><span class="line">    &quot;state&quot;: &quot;file&quot;, </span><br><span class="line">    &quot;uid&quot;: 0</span><br><span class="line">&#125;</span><br><span class="line">下略</span><br><span class="line">查看文件是否存在</span><br><span class="line">[root@ansible ~]# ansible web -m shell -a &apos;ls -lh  /tmp/|grep test&apos;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">-rwxr--r-- 1 root root  12 4月  13 15:11 test.txt</span><br><span class="line">​</span><br><span class="line">nginx | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">-rwxr--r-- 1 root root 12 4月  13 15:11 test.txt</span><br><span class="line">​</span><br><span class="line">tomcat | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">-rwxr--r-- 1 root root 12 4月  13 15:11 test.txt</span><br><span class="line"></span><br><span class="line">2. 在该文件中增加一点内容</span><br><span class="line">[root@ansible ~]# echo &quot;add a word +1&quot; &gt;&gt; /tmp/test.txt </span><br><span class="line">[root@ansible ~]# cat !$</span><br><span class="line">cat /tmp/test.txt</span><br><span class="line">Just a test</span><br><span class="line">add a word +1</span><br><span class="line">使用backup 参数复制到远程主机，同时修改其属性</span><br><span class="line">[root@ansible ~]# ansible nfs -m copy -a &apos;src=/tmp/test.txt dest=/tmp/test.txt owner=root group=root mode=700 backup=yes&apos;</span><br><span class="line">nfs | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;backup_file&quot;: &quot;/tmp/test.txt.4430.2018-04-13@15:26:21~&quot;, </span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;checksum&quot;: &quot;cd3c59bfb26e5e2ce10a2b05dad8fb6233aa2b8c&quot;, </span><br><span class="line">    &quot;dest&quot;: &quot;/tmp/test.txt&quot;, </span><br><span class="line">    &quot;gid&quot;: 0, </span><br><span class="line">    &quot;group&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;md5sum&quot;: &quot;6944c59411744cf901975e7604985a5a&quot;, </span><br><span class="line">    &quot;mode&quot;: &quot;0700&quot;, </span><br><span class="line">    &quot;owner&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;size&quot;: 26, </span><br><span class="line">    &quot;src&quot;: &quot;/root/.ansible/tmp/ansible-tmp-1523604381.09-76462614226208/source&quot;, </span><br><span class="line">    &quot;state&quot;: &quot;file&quot;, </span><br><span class="line">    &quot;uid&quot;: 0</span><br><span class="line">&#125;</span><br><span class="line">查看远程主机/tmp/ 下的文件，看是否多出了一个关于test.txt 的文件：</span><br><span class="line">[root@ansible ~]# ansible nfs -m shell  -a  &apos;ls -lh /tmp/test*&apos;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">-rwx------ 1 root root 26 4月  13 15:26 /tmp/test.txt</span><br><span class="line">-rwxr--r-- 1 root root 12 4月  13 15:11 /tmp/test.txt.4430.2018-04-13@15:26:21~</span><br><span class="line">查看备份文件的内容：</span><br><span class="line">[root@ansible ~]# ansible nfs -m shell  -a  &apos;cat /tmp/test.txt.4430.2018-04-13@15:26:21~&apos;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">Just a test</span><br><span class="line">查看后来复制过去的文件内容:</span><br><span class="line">[root@ansible ~]# ansible nfs -m shell  -a  &apos;cat /tmp/test.txt&apos;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">Just a test</span><br><span class="line">add a word +1</span><br></pre></td></tr></table></figure>
+
+<h1 id="ansible远程执行脚本"><a href="#ansible远程执行脚本" class="headerlink" title="ansible远程执行脚本"></a>ansible远程执行脚本</h1><p>写一个脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# vim /tmp/1.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">echo `date` &gt; /tmp/test.txt</span><br><span class="line"></span><br><span class="line">把脚本分发到各机器上</span><br><span class="line">[root@ansible ~]# ansible web -m copy -a &quot;src=/tmp/1.sh dest=/tmp/1.sh mode=0755&quot;</span><br><span class="line">nginx | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;checksum&quot;: &quot;cd7875b47b8f0a7c6792d8608b2515555c08a11b&quot;, </span><br><span class="line">    &quot;dest&quot;: &quot;/tmp/1.sh&quot;, </span><br><span class="line">    &quot;gid&quot;: 0, </span><br><span class="line">    &quot;group&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;md5sum&quot;: &quot;f1fab3831917e274299249d13ce708e6&quot;, </span><br><span class="line">    &quot;mode&quot;: &quot;0755&quot;, </span><br><span class="line">    &quot;owner&quot;: &quot;root&quot;, </span><br><span class="line">    &quot;size&quot;: 40, </span><br><span class="line">    &quot;src&quot;: &quot;/root/.ansible/tmp/ansible-tmp-1523605164.47-276652441982060/source&quot;, </span><br><span class="line">    &quot;state&quot;: &quot;file&quot;, </span><br><span class="line">    &quot;uid&quot;: 0</span><br><span class="line">&#125;</span><br><span class="line">下略</span><br><span class="line"></span><br><span class="line">批量执行</span><br><span class="line">[root@ansible ~]# ansible web -m shell -a &quot;/tmp/1.sh&quot;</span><br><span class="line">nginx | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">​</span><br><span class="line">tomcat | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">​</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line"></span><br><span class="line">检查结果</span><br><span class="line">[root@ansible ~]# ansible web -m shell -a &quot;cat /tmp/test.txt&quot;</span><br><span class="line">tomcat | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">2017年 10月 13日 星期五 15:40:18 CST</span><br><span class="line">​</span><br><span class="line">nginx | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">2017年 10月 13日 星期五 15:40:18 CST</span><br><span class="line">​</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">2017年 10月 13日 星期五 15:40:18 CST</span><br></pre></td></tr></table></figure>
+
+<h1 id="ansible管理任务计划"><a href="#ansible管理任务计划" class="headerlink" title="ansible管理任务计划"></a>ansible管理任务计划</h1><p>##cron 模块<br>cron 模块，其实就是调用了远程主机的cron 服务，来执行一些计划内的事情。先来看下该模块的用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]# ansible-doc -s cron</span><br><span class="line">- name: Manage cron.d and crontab entries</span><br><span class="line">  cron:</span><br><span class="line">      backup:                # 在对远程主机上的原计划任务修改之前做备份（也就是先备份再修改）</span><br><span class="line">      cron_file:             # 如果指定该选项，则用该文件替换远程主机上的cron.d目录下的用户的任务计划</span><br><span class="line">      day:                   # 天（1-31，*，*/2, ……）</span><br><span class="line">      disabled:              # If the job should be disabled (commented out) in the crontab. Only has effect if `state=present&apos;.</span><br><span class="line">      env:                   # If set, manages a crontab&apos;s environment variable. New variables are added on top of crontab. &quot;name&quot; and &quot;value&quot; parameters are the name and the value of</span><br><span class="line">                               environment variable.</span><br><span class="line">      hour:                  # 小时( 0-23, *, */2, ……）</span><br><span class="line">      insertafter:           # Used with `state=present&apos; and `env&apos;. If specified, the environment variable will be inserted after the declaration of specified environment variable.</span><br><span class="line">      insertbefore:          # Used with `state=present&apos; and `env&apos;. If specified, the environment variable will be inserted before the declaration of specified environment variable.</span><br><span class="line">      job:                   # T要执行的任务，依赖于state=present</span><br><span class="line">      minute:                # 分钟（0-59，*，*/2，……）</span><br><span class="line">      month:                 # 月（1-12，*，*/2，……）</span><br><span class="line">      name:                  # 该任务的描述</span><br><span class="line">      reboot:                # 用于需要重启后运行的任务</span><br><span class="line">      special_time:          #指定什么时候执行，参数：reboot,yearly,annually,monthly,weekly,daily,hourly</span><br><span class="line">      state:                 # 确认该任务计划是创建还是删除</span><br><span class="line">      user:                  # 用哪个身份执行</span><br><span class="line">      weekday:               #周（0-7，*，……）</span><br></pre></td></tr></table></figure>
+
+<p>实例 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">1. 给nfs主机创建一个计划任务，每天凌晨2点以root 身份重启下系统</span><br><span class="line">[root@ansible ~]# ansible nfs -m cron -a &quot;name=&apos;reboot system&apos; hour=2 user=root job=&apos;/sbin/reboot&apos;&quot;</span><br><span class="line">nfs | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;envs&quot;: [], </span><br><span class="line">    &quot;jobs&quot;: [</span><br><span class="line">        &quot;reboot system&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">查看下生成的计划任务：</span><br><span class="line">[root@ansible ~]# ansible nfs -m shell -a &quot;crontab -l&quot;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">#Ansible: reboot system</span><br><span class="line">* 2 * * * /sbin/reboot</span><br><span class="line"></span><br><span class="line">2. 以系统用户root,每30分钟同步一次web 组中所有主机的时间:</span><br><span class="line">[root@ansible ~]# ansible web -m cron -a &quot;name=&apos;rsync system time&apos; minute=*/30 user=root job=&apos;/usr/sbin/ntpdate time-a.nist.gov&apos;&quot;</span><br><span class="line">nfs | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;envs&quot;: [], </span><br><span class="line">    &quot;jobs&quot;: [</span><br><span class="line">        &quot;reboot system&quot;, </span><br><span class="line">        &quot;rsync system time&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">nginx | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;envs&quot;: [], </span><br><span class="line">    &quot;jobs&quot;: [</span><br><span class="line">        &quot;rsync system time&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">tomcat | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;envs&quot;: [], </span><br><span class="line">    &quot;jobs&quot;: [</span><br><span class="line">        &quot;rsync system time&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">查看：</span><br><span class="line">[root@ansible ~]# ansible web -m shell -a &quot;crontab -l&quot;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">#Ansible: reboot system</span><br><span class="line">* 2 * * * /sbin/reboot</span><br><span class="line">#Ansible: rsync system time</span><br><span class="line">*/30 * * * * /usr/sbin/ntpdate time-a.nist.gov</span><br><span class="line">​</span><br><span class="line">tomcat | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">#Ansible: rsync system time</span><br><span class="line">*/30 * * * * /usr/sbin/ntpdate time-a.nist.gov</span><br><span class="line">​</span><br><span class="line">nginx | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">#Ansible: rsync system time</span><br><span class="line">*/30 * * * * /usr/sbin/ntpdate time-a.nist.gov</span><br><span class="line"></span><br><span class="line">3. 删除第一步在nfs上创建的重启系统的计划任务，之前加了name参数的，删除的时候要加上，不然删除会失败：</span><br><span class="line">[root@ansible ~]# ansible nfs -m cron -a &quot;name=&apos;reboot system&apos; hour=2 user=root job=&apos;/sbin/reboot&apos; state=absent&quot;</span><br><span class="line">nfs | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;envs&quot;: [], </span><br><span class="line">    &quot;jobs&quot;: [</span><br><span class="line">        &quot;rsync system time&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">当然，也可以使用cron 的name删除，这样会少写很多</span><br><span class="line">[root@ansible ~]# ansible nfs -m cron  -a &quot;name=&apos;reboot system&apos; state=absent&quot;</span><br><span class="line">nfs | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;envs&quot;: [], </span><br><span class="line">    &quot;jobs&quot;: [</span><br><span class="line">        &quot;rsync system time&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">查看</span><br><span class="line">[root@ansible ~]# ansible nfs -m shell -a &quot;crontab -l&quot;</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">#Ansible: rsync system time</span><br><span class="line">*/30 * * * * /usr/sbin/ntpdate time-a.nist.gov</span><br><span class="line"></span><br><span class="line">4. 每次重启系统的时候，输出一个reboot system:</span><br><span class="line">[root@ansible ~]# ansible web -m cron -a &quot;name=&apos;echo reboot after system reboot&apos; special_time=reboot job=&apos;echo reboot system&apos;&quot;</span><br><span class="line">nfs | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;envs&quot;: [], </span><br><span class="line">    &quot;jobs&quot;: [</span><br><span class="line">        &quot;rsync system time&quot;, </span><br><span class="line">        &quot;echo reboot after system reboot&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">tomcat | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;envs&quot;: [], </span><br><span class="line">    &quot;jobs&quot;: [</span><br><span class="line">        &quot;rsync system time&quot;, </span><br><span class="line">        &quot;echo reboot after system reboot&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">nginx | SUCCESS =&gt; &#123;</span><br><span class="line">    &quot;changed&quot;: true, </span><br><span class="line">    &quot;envs&quot;: [], </span><br><span class="line">    &quot;jobs&quot;: [</span><br><span class="line">        &quot;rsync system time&quot;, </span><br><span class="line">        &quot;echo reboot after system reboot&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">查看</span><br><span class="line">[root@ansible ~]# ansible web -m shell -a &quot;crontab -l&quot;</span><br><span class="line">tomcat | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">#Ansible: rsync system time</span><br><span class="line">*/30 * * * * /usr/sbin/ntpdate time-a.nist.gov</span><br><span class="line">#Ansible: echo reboot after system reboot</span><br><span class="line">@reboot echo reboot system</span><br><span class="line">​</span><br><span class="line">nginx | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">#Ansible: rsync system time</span><br><span class="line">*/30 * * * * /usr/sbin/ntpdate time-a.nist.gov</span><br><span class="line">#Ansible: echo reboot after system reboot</span><br><span class="line">@reboot echo reboot system</span><br><span class="line">​</span><br><span class="line">nfs | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">#Ansible: rsync system time</span><br><span class="line">*/30 * * * * /usr/sbin/ntpdate time-a.nist.gov</span><br><span class="line">#Ansible: echo reboot after system reboot</span><br><span class="line">@reboot echo reboot system</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ansible/" rel="tag"># ansible</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux入门笔记/22.13-22.17 搭建git服务器、安装gitlab、使用gitlab、gitlab备份和恢复/" rel="next" title="搭建git服务器、安装gitlab、使用gitlab、gitlab备份和恢复">
+                <i class="fa fa-chevron-left"></i> 搭建git服务器、安装gitlab、使用gitlab、gitlab备份和恢复
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux入门笔记/Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers/" rel="prev" title="Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers">
+                Ansible学习(2)-安装包和管理服务、playbook以及其变量、循环、条件判断、handlers <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhouqun</p>
+              <p class="site-description motion-element" itemprop="description">个人Linux学习和工作记录的小地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ansible介绍"><span class="nav-number">1.</span> <span class="nav-text">ansible介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ansible安装"><span class="nav-number">2.</span> <span class="nav-text">ansible安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ansible远程执行命令"><span class="nav-number">3.</span> <span class="nav-text">ansible远程执行命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#command模块"><span class="nav-number">3.1.</span> <span class="nav-text">command模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell模块和raw模块"><span class="nav-number">3.2.</span> <span class="nav-text">shell模块和raw模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ansible拷贝文件或目录"><span class="nav-number">4.</span> <span class="nav-text">ansible拷贝文件或目录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#copy模块"><span class="nav-number">4.1.</span> <span class="nav-text">copy模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ansible远程执行脚本"><span class="nav-number">5.</span> <span class="nav-text">ansible远程执行脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ansible管理任务计划"><span class="nav-number">6.</span> <span class="nav-text">ansible管理任务计划</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouqun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
